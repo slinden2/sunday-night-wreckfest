@@ -3,4 +3,4 @@ dotenv.config();
 
 const PORT: number | undefined = Number(process.env.PORT);
 
-export { PORT };
+export default { PORT };
