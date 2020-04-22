@@ -1,0 +1,33 @@
+{
+  "name": "snw-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "tsc": "tsc",
+    "start": "cross-env NODE_ENV=production node build/server.js",
+    "dev": "cross-env NODE_ENV=development ts-node-dev server.ts",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "lint": "eslint --ext .ts"
+  },
+  "author": "Samu Linden",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^13.13.2",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "jest": "^25.4.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
