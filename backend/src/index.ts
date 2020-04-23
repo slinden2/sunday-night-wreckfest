@@ -7,9 +7,12 @@ import logger from "./utils/logger";
 
 import { calendarRoute } from "./routes/";
 
+import middleware from "./utils/middleware";
+
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(middleware.requestLogger);
 
 app.use("/api/calendar", calendarRoute);
 
