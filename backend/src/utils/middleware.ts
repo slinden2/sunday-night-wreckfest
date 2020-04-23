@@ -11,6 +11,27 @@ const requestLogger = (
   next();
 };
 
+const unknownEndpoint = (
+  _request: express.Request,
+  response: express.Response
+) => {
+  response.status(404).send({ error: "Unknown endpoint" });
+};
+
+const errorHandler = (
+  error: Error,
+  _request: express.Request,
+  response: express.Response,
+  next: express.NextFunction
+) => {
+  if (error.name === "DataIntegrityError") {
+    response.status(500).send({ error: error.message });
+  }
+  next(error);
+};
+
 export default {
   requestLogger,
+  unknownEndpoint,
+  errorHandler,
 };

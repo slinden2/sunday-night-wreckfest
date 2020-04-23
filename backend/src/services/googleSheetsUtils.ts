@@ -1,3 +1,5 @@
+import { DataIntegrityError } from "../utils/errors";
+
 export interface RaceCalendarEvent {
   eventId: string;
   isReady: boolean;
@@ -14,7 +16,7 @@ const isString = (param: any): param is string => {
 
 const parseEventId = (eventId: string): string => {
   if (!eventId || !isString(eventId) || eventId.length !== 4) {
-    throw new Error("Invalid or missing eventId: " + eventId);
+    throw new DataIntegrityError("Invalid or missing eventId: " + eventId);
   }
 
   return eventId;
@@ -30,7 +32,7 @@ const parseNumericBoolean = (param: number, field: string): boolean => {
     !isNumber(param) ||
     (Number(param) !== 0 && Number(param) !== 1)
   ) {
-    throw new Error(`Invalid or missing ${field}: ${param}`);
+    throw new DataIntegrityError(`Invalid or missing ${field}: ${param}`);
   }
 
   return Boolean(Number(param));
@@ -42,7 +44,9 @@ const isDate = (date: string): boolean => {
 
 const parseDate = (date: string): string => {
   if (!date || !isString) {
-    throw new Error("Date is not a string or it is missing date: " + date);
+    throw new DataIntegrityError(
+      "Date is not a string or it is missing date: " + date
+    );
   }
 
   const newDate = date
@@ -58,7 +62,9 @@ const parseDate = (date: string): string => {
     .join("-");
 
   if (!isDate(newDate)) {
-    throw new Error("Incorrect date format. Must be DD-MM-YYY: " + date);
+    throw new DataIntegrityError(
+      "Incorrect date format. Must be DD-MM-YYY: " + date
+    );
   }
 
   return newDate;
@@ -66,7 +72,7 @@ const parseDate = (date: string): string => {
 
 const parseString = (str: string, field: string): string => {
   if (!str || !isString(str)) {
-    throw new Error(`Invalid or missing ${field}: ${str}`);
+    throw new DataIntegrityError(`Invalid or missing ${field}: ${str}`);
   }
 
   return str;
@@ -74,7 +80,7 @@ const parseString = (str: string, field: string): string => {
 
 const parseLaps = (laps: number, field: string): number => {
   if (!laps || !isNumber(laps)) {
-    throw new Error(`Invalid or missing ${field}: ${laps}`);
+    throw new DataIntegrityError(`Invalid or missing ${field}: ${laps}`);
   }
 
   return laps;
