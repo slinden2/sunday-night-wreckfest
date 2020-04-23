@@ -33,9 +33,6 @@ const parseNumericBoolean = (param: number, field: string): boolean => {
     throw new Error(`Invalid or missing ${field}: ${param}`);
   }
 
-  console.log(param);
-  console.log(Boolean(Number(param)));
-
   return Boolean(Number(param));
 };
 
