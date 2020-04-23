@@ -10,11 +10,11 @@ export interface RaceCalendarEvent {
   raceLaps: number;
 }
 
-const isString = (param: any): param is string => {
+export const isString = (param: any): param is string => {
   return typeof param === "string" || param instanceof String;
 };
 
-const parseEventId = (eventId: string): string => {
+export const parseEventId = (eventId: string): string => {
   if (!eventId || !isString(eventId) || eventId.length !== 4) {
     throw new DataIntegrityError("Invalid or missing eventId: " + eventId);
   }
@@ -22,11 +22,11 @@ const parseEventId = (eventId: string): string => {
   return eventId;
 };
 
-const isNumber = (param: any): param is number => {
-  return !isNaN(Number(param));
+export const isNumber = (param: any): param is number => {
+  return !isNaN(Number(param)) && typeof param !== "boolean";
 };
 
-const parseNumericBoolean = (param: number, field: string): boolean => {
+export const parseNumericBoolean = (param: string, field: string): boolean => {
   if (
     !param ||
     !isNumber(param) ||
@@ -38,11 +38,11 @@ const parseNumericBoolean = (param: number, field: string): boolean => {
   return Boolean(Number(param));
 };
 
-const isDate = (date: string): boolean => {
+export const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
 
-const parseDate = (date: string): string => {
+export const parseDate = (date: string): string => {
   if (!date || !isString) {
     throw new DataIntegrityError(
       "Date is not a string or it is missing date: " + date
@@ -61,7 +61,14 @@ const parseDate = (date: string): string => {
     .reverse()
     .join("-");
 
-  if (!isDate(newDate)) {
+  const [year, month, days] = newDate.split("-");
+
+  if (
+    !isDate(newDate) ||
+    year.length !== 4 ||
+    month.length !== 2 ||
+    days.length !== 2
+  ) {
     throw new DataIntegrityError(
       "Incorrect date format. Must be DD-MM-YYY: " + date
     );
@@ -70,7 +77,7 @@ const parseDate = (date: string): string => {
   return newDate;
 };
 
-const parseString = (str: string, field: string): string => {
+export const parseString = (str: any, field: string): string => {
   if (!str || !isString(str)) {
     throw new DataIntegrityError(`Invalid or missing ${field}: ${str}`);
   }
@@ -78,12 +85,12 @@ const parseString = (str: string, field: string): string => {
   return str;
 };
 
-const parseLaps = (laps: number, field: string): number => {
+export const parseLaps = (laps: any, field: string): number => {
   if (!laps || !isNumber(laps)) {
     throw new DataIntegrityError(`Invalid or missing ${field}: ${laps}`);
   }
 
-  return laps;
+  return Number(laps);
 };
 
 export const toRaceCalendarEvents = (
