@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ["<rootDir>/src"],
+  roots: ["<rootDir>/src", "<rootDir>/__mocks__"],
   modulePathIgnorePatterns: ["<rootDir>/src/build/"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
