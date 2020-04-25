@@ -1,7 +1,7 @@
 import app from "../app";
 import supertest from "supertest";
 import { googleSheetsService } from "../services/";
-import { RaceCalendarEvent } from "../services/googleSheetsUtils";
+import { RaceCalendarEvent } from "../services/getRaceCalendarUtils";
 
 const api = supertest(app);
 

@@ -8,7 +8,7 @@ import {
   parseString,
   parseLaps,
   toRaceCalendarEvents,
-} from "./googleSheetsUtils";
+} from "./getRaceCalendarUtils";
 import { DataIntegrityError } from "../utils/errors";
 
 describe("googleSheetsUtils", () => {

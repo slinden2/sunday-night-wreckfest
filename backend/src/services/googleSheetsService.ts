@@ -1,7 +1,10 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 import config from "../config";
-import { toRaceCalendarEvents, RaceCalendarEvent } from "./googleSheetsUtils";
+import {
+  toRaceCalendarEvents,
+  RaceCalendarEvent,
+} from "./getRaceCalendarUtils";
 
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
@@ -10,10 +13,15 @@ export const getDocument = async () => {
   return doc;
 };
 
-export const getRaceCalendar = async (): Promise<RaceCalendarEvent[]> => {
+export const getSheetRows = async (id: number) => {
   const doc = await getDocument();
-  const sheet = doc.sheetsById[0];
-  const rawRows = await sheet.getRows();
+  const sheet = doc.sheetsById[id];
+  const rows = await sheet.getRows();
+  return rows;
+};
+
+export const getRaceCalendar = async (): Promise<RaceCalendarEvent[]> => {
+  const rawRows = await getSheetRows(0);
   const raceCalendarEvents = toRaceCalendarEvents(rawRows);
   return raceCalendarEvents;
 };
