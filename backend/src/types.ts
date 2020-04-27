@@ -8,15 +8,6 @@ export enum EventType {
   Season = "Season",
 }
 
-export interface IHeatPositions {
-  heat1: number;
-  heat2: number;
-  heat3: number;
-  heat4: number;
-  heat5: number;
-  heat6?: number;
-}
-
 export interface IBaseDriverRaceData {
   driverId: string;
   driverName: string;
@@ -28,5 +19,6 @@ export interface IBaseDriverRaceData {
 export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   qTime: string;
   group: RaceGroup;
-  racePositions: IHeatPositions;
+  heatPositions: Array<number>;
+  heatPoints?: Array<number>;
 }

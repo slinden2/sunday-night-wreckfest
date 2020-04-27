@@ -1,13 +1,14 @@
 import {
   isNumeric,
   parseDriverId,
-  parseRacePosition,
+  parseHeatPositions,
   parseGroup,
   isLapTime,
   parseLapTime,
   toDriverRaceDetails,
 } from "./getDriverRaceDetailsUtils";
 import { DataIntegrityError } from "../utils/errors";
+import { IDriverSeasonRaceData, RaceGroup } from "../types";
 
 describe("getDriverRaceDetailsUtils", () => {
   describe("isNumeric", () => {
@@ -52,12 +53,14 @@ describe("getDriverRaceDetailsUtils", () => {
       expect(() => parseGroup(5)).toThrow(DataIntegrityError);
     });
   });
-  describe("parseRacePosition", () => {
+  describe("parseHeatPositions", () => {
     it("should return 5 with '5'", () => {
-      expect(parseRacePosition("5")).toEqual(5);
+      expect(parseHeatPositions(["5", "5"])).toEqual([5, 5]);
     });
     it("should throw with 'lol'", () => {
-      expect(() => parseRacePosition("lol")).toThrow(DataIntegrityError);
+      expect(() => parseHeatPositions(["lol", "5"])).toThrow(
+        DataIntegrityError
+      );
     });
   });
   describe("isLapTime", () => {
@@ -113,7 +116,7 @@ describe("getDriverRaceDetailsUtils", () => {
         posHeat5: "6",
       },
     ];
-    const resArr = [
+    const resArr: IDriverSeasonRaceData[] = [
       {
         driverId: "0001",
         driverName: "Test Driver",
@@ -121,15 +124,8 @@ describe("getDriverRaceDetailsUtils", () => {
         isReady: true,
         isProcessed: true,
         qTime: "01:01,500",
-        group: "A",
-        racePositions: {
-          heat1: 1,
-          heat2: 2,
-          heat3: 3,
-          heat4: 4,
-          heat5: 5,
-          heat6: undefined,
-        },
+        group: RaceGroup.A,
+        heatPositions: [1, 2, 3, 4, 5],
       },
       {
         driverId: "0002",
@@ -138,15 +134,8 @@ describe("getDriverRaceDetailsUtils", () => {
         isReady: true,
         isProcessed: true,
         qTime: "01:00,500",
-        group: "A",
-        racePositions: {
-          heat1: 2,
-          heat2: 3,
-          heat3: 4,
-          heat4: 5,
-          heat5: 6,
-          heat6: undefined,
-        },
+        group: RaceGroup.A,
+        heatPositions: [2, 3, 4, 5, 6],
       },
     ];
 

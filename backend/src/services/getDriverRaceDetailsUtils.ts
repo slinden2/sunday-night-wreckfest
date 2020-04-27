@@ -50,19 +50,29 @@ export const parseGroup = (group: any): RaceGroup => {
   return group;
 };
 
-export const parseRacePosition = (position: any): number => {
-  if (!position || !isNumber(position)) {
-    throw new DataIntegrityError("Invalid or missing position: " + position);
-  }
+export const parseHeatPositions = (positions: Array<any>): Array<number> => {
+  positions.forEach(pos => {
+    if (!isNumber(pos)) {
+      throw new DataIntegrityError("Invalid position: " + pos);
+    }
+  });
 
-  return Number(position);
+  return positions.map(pos => Number(pos));
+};
+
+export const getHeatPositions = (driverData: any): Array<any> => {
+  const posArr: Array<any> = [];
+  Object.getOwnPropertyNames(driverData).forEach((prop: string) => {
+    if (prop.startsWith("pos")) {
+      driverData[prop] && posArr.push(driverData[prop]);
+    }
+  });
+  return posArr;
 };
 
 export const toIDriverSeasonRaceData = (
   driverData: any
 ): IDriverSeasonRaceData => {
-  const hasHeat6 = driverData.posHeat6 ? true : false;
-
   return {
     driverId: parseDriverId(driverData.driverId),
     driverName: parseString(driverData.driverName, "driverName"),
@@ -71,14 +81,7 @@ export const toIDriverSeasonRaceData = (
     isProcessed: parseNumericBoolean(driverData.isProcessed, "isProcessed"),
     qTime: parseLapTime(driverData.qTime),
     group: parseGroup(driverData.group),
-    racePositions: {
-      heat1: parseRacePosition(driverData.posHeat1),
-      heat2: parseRacePosition(driverData.posHeat2),
-      heat3: parseRacePosition(driverData.posHeat3),
-      heat4: parseRacePosition(driverData.posHeat4),
-      heat5: parseRacePosition(driverData.posHeat5),
-      heat6: hasHeat6 ? parseRacePosition(driverData.posHeat6) : undefined,
-    },
+    heatPositions: parseHeatPositions(getHeatPositions(driverData)),
   };
 };
 
@@ -98,4 +101,3 @@ export const toDriverRaceDetails = (
 
   return cleanRows;
 };
-
