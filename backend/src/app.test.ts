@@ -11,4 +11,14 @@ describe("GET / - Server working", () => {
     const res = await api.get("/ping").expect(200);
     expect(res.text).toEqual("pong");
   });
+  it("should respond with 200 with /api/calendar", async () => {
+    const res = await api.get("/api/calendar", () => {
+      expect(res.status).toEqual(200);
+    });
+  });
+  it("should return 404 when sending a GET to /fake-ping", async done => {
+    const res = await api.get("/fake-ping");
+    expect(res.status).toEqual(404);
+    done();
+  });
 });

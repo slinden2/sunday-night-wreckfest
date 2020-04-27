@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "test") {
 
 app.use("/api/calendar", calendarRoute);
 
-app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
+app.use(middleware.unknownEndpoint);
 
 export default app;
