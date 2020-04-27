@@ -5,11 +5,11 @@ import {
   parseGroup,
   isLapTime,
   parseLapTime,
-  toRaceDetails,
-} from "./getRaceDetailsUtils";
+  toDriverRaceDetails,
+} from "./getDriverRaceDetailsUtils";
 import { DataIntegrityError } from "../utils/errors";
 
-describe("getRaceDetailsUtils", () => {
+describe("getDriverRaceDetailsUtils", () => {
   describe("isNumeric", () => {
     it("should return true with 4", () => {
       expect(isNumeric("4")).toBeTruthy();
@@ -82,7 +82,7 @@ describe("getRaceDetailsUtils", () => {
       expect(() => parseLapTime("1:01,500")).toThrow(DataIntegrityError);
     });
   });
-  describe("toRaceDetails", () => {
+  describe("toDriverRaceDetails", () => {
     const testArr = [
       {
         driverId: "0001",
@@ -150,7 +150,7 @@ describe("getRaceDetailsUtils", () => {
       },
     ];
 
-    toRaceDetails("0401", testArr).forEach((details, i) => {
+    toDriverRaceDetails("0401", testArr).forEach((details, i) => {
       expect(details).toEqual(expect.objectContaining(resArr[i]));
     });
   });
