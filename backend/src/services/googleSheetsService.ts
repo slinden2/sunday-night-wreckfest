@@ -5,6 +5,7 @@ import {
   toRaceCalendarEvents,
   RaceCalendarEvent,
 } from "./getRaceCalendarUtils";
+import { toRaceDetails, IDriverSeasonRaceData } from "./getRaceDetailsUtils";
 
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
@@ -24,6 +25,14 @@ export const getRaceCalendar = async (): Promise<RaceCalendarEvent[]> => {
   const rawRows = await getSheetRows(0);
   const raceCalendarEvents = toRaceCalendarEvents(rawRows);
   return raceCalendarEvents;
+};
+
+export const getRaceDetails = async (
+  id: string
+): Promise<IDriverSeasonRaceData[]> => {
+  const rawRows = await getSheetRows(1495986400);
+  const raceDetails = toRaceDetails(id, rawRows);
+  return raceDetails;
 };
 
 export default {
