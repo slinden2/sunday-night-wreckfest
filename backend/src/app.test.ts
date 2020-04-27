@@ -11,8 +11,8 @@ describe("GET / - Server working", () => {
     const res = await api.get("/ping").expect(200);
     expect(res.text).toEqual("pong");
   });
-  it("should respond with 200 with /api/calendar", async () => {
-    const res = await api.get("/api/calendar", () => {
+  it("should respond with 200 with /api/races", async () => {
+    const res = await api.get("/api/races", () => {
       expect(res.status).toEqual(200);
     });
   });

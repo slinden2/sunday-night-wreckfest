@@ -1,6 +1,6 @@
 import app from "../app";
 import supertest from "supertest";
-import { googleSheetsService } from "../services/";
+import { googleSheetsService } from "../services";
 import { RaceCalendarEvent } from "../services/getRaceCalendarUtils";
 
 const api = supertest(app);
@@ -26,7 +26,7 @@ const mockData: RaceCalendarEvent[] = [
   },
 ];
 
-describe("GET /api/calendar", () => {
+describe("GET /api/races", () => {
   let mockGoogleSheetService: jest.SpyInstance;
 
   beforeAll(() => {
@@ -46,20 +46,20 @@ describe("GET /api/calendar", () => {
 
   it("should return json", async () => {
     await api
-      .get("/api/calendar")
+      .get("/api/races")
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
   it("calls getRaceCalendar from googleSheetService", async () => {
-    await api.get("/api/calendar").expect(200);
+    await api.get("/api/races").expect(200);
     expect(mockGoogleSheetService).toHaveBeenCalled;
   });
   it("should return 2 races", async () => {
-    const res = await api.get("/api/calendar");
+    const res = await api.get("/api/races");
     expect(res.body).toHaveLength(2);
   });
   it("should return the mockData", async () => {
-    const res = await api.get("/api/calendar");
+    const res = await api.get("/api/races");
     expect(res.body).toEqual(expect.arrayContaining(mockData));
   });
 });

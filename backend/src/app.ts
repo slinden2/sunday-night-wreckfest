@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import "source-map-support/register";
 
-import { calendarRoute } from "./routes/";
+import { raceRoute } from "./routes/";
 
 import middleware from "./utils/middleware";
 
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "test") {
   });
 }
 
-app.use("/api/calendar", calendarRoute);
+app.use("/api/races", raceRoute);
 
 app.use(middleware.errorHandler);
 app.use(middleware.unknownEndpoint);

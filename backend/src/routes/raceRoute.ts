@@ -12,4 +12,15 @@ router.get("/", async (_req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    console.log(req.params);
+    typeof res;
+    res.send(200);
+    typeof res;
+  } catch (err) {
+    return next(err);
+  }
+});
+
 export default router;
