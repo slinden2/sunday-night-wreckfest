@@ -28,7 +28,7 @@ export const getRaceCalendar = async (): Promise<RaceCalendarEvent[]> => {
   return raceCalendarEvents;
 };
 
-export const getRaceDetails = async (
+export const getDriverRaceDetails = async (
   id: string
 ): Promise<IDriverSeasonRaceData[]> => {
   const rawRows = await getSheetRows(1495986400);
