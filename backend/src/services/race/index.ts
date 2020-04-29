@@ -22,8 +22,11 @@ class Race {
   }
 
   private _generatePointsPerHeat(): void {
-    this.raceData.forEach(driver => {
-      driver.heatPoints = driver.heatPositions.map(pos => heatPoints[pos]);
+    this.raceData = this.raceData.map(driver => {
+      return {
+        ...driver,
+        heatPoints: driver.heatPositions.map(pos => heatPoints[pos]),
+      };
     });
   }
 
@@ -53,31 +56,34 @@ class Race {
   }
 
   private _sortGroupData(): void {
-    this.dataPerRaceGroup.forEach(groupData => {
-      groupData.sort(this._sortByPoints);
-    });
+    this.dataPerRaceGroup = this.dataPerRaceGroup.map(groupData =>
+      groupData.sort(this._sortByPoints)
+    );
   }
 
   private _calculateSeasonPoints(): void {
     const mergedArray: IDriverSeasonRaceData[] = [];
     this.orderedRaceData = mergedArray.concat(...this.dataPerRaceGroup);
 
-    let firstOfB: boolean = false;
-    let firstOfC: boolean = false;
-    this.orderedRaceData.forEach((driver, i) => {
-      driver.seasonPoints = seasonPoints[i];
+    let firstOfB = false;
+    let firstOfC = false;
+
+    this.orderedRaceData = this.orderedRaceData.map((driver, i) => {
+      driver = { ...driver, seasonPoints: seasonPoints[i] };
 
       // first of group B gets 2 extra points
-      if (!firstOfB && driver.group === RaceGroup.B) {
+      if (!firstOfB && driver.group === RaceGroup.B && driver.seasonPoints) {
         driver.seasonPoints += 2;
         firstOfB = true;
       }
 
       // first of group C gets 1 extra points
-      if (!firstOfC && driver.group === RaceGroup.C) {
+      if (!firstOfC && driver.group === RaceGroup.C && driver.seasonPoints) {
         driver.seasonPoints += 1;
         firstOfC = true;
       }
+
+      return driver;
     });
   }
 
