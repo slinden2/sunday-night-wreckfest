@@ -14,10 +14,8 @@ router.get("/", async (_req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    console.log(req.params);
-    typeof res;
-    res.send(200);
-    typeof res;
+    const raceData = await googleSheetsService.getRaceData(req.params.id);
+    return res.status(200).json(raceData);
   } catch (err) {
     return next(err);
   }
