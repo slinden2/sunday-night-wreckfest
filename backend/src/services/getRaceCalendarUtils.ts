@@ -10,6 +10,7 @@ export interface RaceCalendarEvent {
   eventId: string;
   isReady: boolean;
   isCompleted: boolean;
+  isProcessed: boolean;
   date: string;
   trackName: string;
   qLaps: number;
@@ -81,6 +82,7 @@ export const toRaceCalendarEvents = (
       eventId: parseEventId(row.eventId),
       isReady: parseNumericBoolean(row.isReady, "isReady"),
       isCompleted: parseNumericBoolean(row.isCompleted, "isCompleted"),
+      isProcessed: parseNumericBoolean(row.isProcessed, "isProcessed"),
       date: parseDate(row.date),
       trackName: parseString(row.trackName, "trackName"),
       qLaps: parseLaps(row.qLaps, "qLaps"),
