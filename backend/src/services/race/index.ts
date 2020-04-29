@@ -9,20 +9,18 @@ import { heatPoints, seasonPoints } from "./points";
 import { DataIntegrityError } from "../../utils/errors";
 
 class Race {
-  raceData: IDriverSeasonRaceData[];
-  dataPerRaceGroup: Array<IDriverSeasonRaceData[]> = [];
-  orderedRaceData: IDriverSeasonRaceData[] = [];
+  rawData: IDriverSeasonRaceData[];
 
   constructor(raceData: IDriverSeasonRaceData[]) {
-    this.raceData = raceData;
-    this._generatePointsPerHeat();
-    this._partitionDrivers();
-    this._sortGroupData();
-    this._calculateSeasonPoints();
+    this.rawData = raceData;
   }
 
-  private _generatePointsPerHeat(): void {
-    this.raceData = this.raceData.map(driver => {
+  /* 
+  Adds heatPoints array prop for all drivers. The array consists of
+  number of points per heat.
+  */
+  private _getRaceDataWithPointsPerHeat(): IDriverSeasonRaceData[] {
+    return this.rawData.map(driver => {
       return {
         ...driver,
         heatPoints: driver.heatPositions.map(pos => heatPoints[pos]),
@@ -30,18 +28,30 @@ class Race {
     });
   }
 
-  private _partitionDrivers(): void {
+  /* 
+  Partition rawData array of drivers into array of arrays by group.
+  For example, if there are two groups A and B, the first nested 
+  array shall contain the drivers of group A and the second of group B.
+  */
+  private _partitionDrivers(
+    raceData: IDriverSeasonRaceData[]
+  ): Array<IDriverSeasonRaceData[]> {
     const raceGroups = Array.from(
-      new Set(this.raceData.map(driver => driver.group))
+      new Set(raceData.map(driver => driver.group))
     );
 
+    const dataPerRaceGroup: Array<IDriverSeasonRaceData[]> = [];
+
     raceGroups.forEach(rg => {
-      this.dataPerRaceGroup.push(
-        this.raceData.filter(driver => driver.group === rg)
-      );
+      dataPerRaceGroup.push(raceData.filter(driver => driver.group === rg));
     });
+
+    return dataPerRaceGroup;
   }
 
+  /* 
+  Sort drivers by the total of heatPoints.
+  */
   private _sortByPoints(a: IDriverSeasonRaceData, b: IDriverSeasonRaceData) {
     const aPoints = a.heatPoints?.reduce((acc, cur) => acc + cur);
     const bPoints = b.heatPoints?.reduce((acc, cur) => acc + cur);
@@ -55,20 +65,27 @@ class Race {
     return bPoints - aPoints;
   }
 
-  private _sortGroupData(): void {
-    this.dataPerRaceGroup = this.dataPerRaceGroup.map(groupData =>
-      groupData.sort(this._sortByPoints)
-    );
+  /* 
+  Sort the driver _within_ their group (array) by sum of heatPoints.
+  */
+  private _sortGroupData(raceData: Array<IDriverSeasonRaceData[]>) {
+    return raceData.map(groupData => groupData.sort(this._sortByPoints));
   }
 
-  private _calculateSeasonPoints(): void {
+  /* 
+  Merge the group arrays together and add season points for all drivers
+  based on their array index. The drivers must be sorted before this.
+  */
+  private _addSeasonPoints(
+    raceData: Array<IDriverSeasonRaceData[]>
+  ): IDriverSeasonRaceData[] {
     const mergedArray: IDriverSeasonRaceData[] = [];
-    this.orderedRaceData = mergedArray.concat(...this.dataPerRaceGroup);
+    const mergedRaceData = mergedArray.concat(...raceData);
 
     let firstOfB = false;
     let firstOfC = false;
 
-    this.orderedRaceData = this.orderedRaceData.map((driver, i) => {
+    return mergedRaceData.map((driver, i) => {
       driver = { ...driver, seasonPoints: seasonPoints[i] };
 
       // first of group B gets 2 extra points
@@ -87,8 +104,16 @@ class Race {
     });
   }
 
+  private _generateRaceDataWithPoints(): IDriverSeasonRaceData[] {
+    const raceDataWithHeatPoints = this._getRaceDataWithPointsPerHeat();
+    const groupedRaceData = this._partitionDrivers(raceDataWithHeatPoints);
+    const sortedGroupedRaceData = this._sortGroupData(groupedRaceData);
+    const finalRaceData = this._addSeasonPoints(sortedGroupedRaceData);
+    return finalRaceData;
+  }
+
   get getRaceData() {
-    return this.orderedRaceData;
+    return this._generateRaceDataWithPoints();
   }
 }
 
