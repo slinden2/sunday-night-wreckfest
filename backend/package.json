@@ -14,7 +14,8 @@
     "view:coverage": "serve coverage/lcov-report",
     "clean": "RD /S /Q coverage src\\build",
     "lint": "eslint --ext .ts",
-    "ga": "ts-node src/services/googleSheetsService.ts"
+    "ga": "ts-node src/services/googleSheetsService.ts",
+    "jest:clear_cache": "jest --clearCache"
   },
   "author": "Samu Linden",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.2",
+    "@types/node-cron": "^2.0.3",
     "@types/source-map-support": "^0.5.1",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
@@ -43,6 +45,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "google-spreadsheet": "^3.0.11"
+    "google-spreadsheet": "^3.0.11",
+    "node-cron": "^2.0.3"
   }
 }

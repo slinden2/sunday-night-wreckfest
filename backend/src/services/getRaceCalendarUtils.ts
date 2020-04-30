@@ -11,6 +11,7 @@ export interface RaceCalendarEvent {
   isReady: boolean;
   isCompleted: boolean;
   isProcessed: boolean;
+  hasPowerLimit: boolean;
   date: string;
   trackName: string;
   qLaps: number;
@@ -83,6 +84,7 @@ export const toRaceCalendarEvents = (
       isReady: parseNumericBoolean(row.isReady, "isReady"),
       isCompleted: parseNumericBoolean(row.isCompleted, "isCompleted"),
       isProcessed: parseNumericBoolean(row.isProcessed, "isProcessed"),
+      hasPowerLimit: parseNumericBoolean(row.hasPowerLimit, "hasPowerLimit"),
       date: parseDate(row.date),
       trackName: parseString(row.trackName, "trackName"),
       qLaps: parseLaps(row.qLaps, "qLaps"),
