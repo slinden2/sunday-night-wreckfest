@@ -65,12 +65,12 @@ export const parseString = (str: any, field: string): string => {
   return str;
 };
 
-export const parseNumber = (laps: any, field: string): number => {
-  if (!laps || !isNumber(laps)) {
-    throw new DataIntegrityError(`Invalid or missing ${field}: ${laps}`);
+export const parseNumber = (num: any, field: string): number => {
+  if (!num || !isNumber(num)) {
+    throw new DataIntegrityError(`Invalid or missing ${field}: ${num}`);
   }
 
-  return Number(laps);
+  return Number(num);
 };
 
 export const toRaceCalendarEvents = (
