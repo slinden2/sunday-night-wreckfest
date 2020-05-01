@@ -2,7 +2,7 @@ import {
   isDate,
   parseDate,
   parseString,
-  parseLaps,
+  parseNumber,
   toRaceCalendarEvents,
 } from "./getRaceCalendarUtils";
 import { DataIntegrityError } from "../utils/errors";
@@ -52,7 +52,7 @@ describe("getRaceCalendarUtils", () => {
       expect(parseString("test", "test")).toEqual("test");
     });
   });
-  describe("parseLaps", () => {
+  describe("parseNumber", () => {
     const testArr = [
       { type: "boolean", value: true },
       { type: "string", value: "string" },
@@ -61,14 +61,14 @@ describe("getRaceCalendarUtils", () => {
 
     testArr.forEach(testCase => {
       it(`should throw an error with a non number param (${testCase.type})`, () => {
-        expect(() => parseLaps(testCase.value, "test")).toThrow(
+        expect(() => parseNumber(testCase.value, "test")).toThrow(
           DataIntegrityError
         );
       });
     });
 
     it("should return a number with a numeric string", () => {
-      expect(parseLaps("123", "test")).toEqual(123);
+      expect(parseNumber("123", "test")).toEqual(123);
     });
   });
   describe("toRaceCalendarEvents", () => {

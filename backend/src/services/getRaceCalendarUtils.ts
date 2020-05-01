@@ -65,7 +65,7 @@ export const parseString = (str: any, field: string): string => {
   return str;
 };
 
-export const parseLaps = (laps: any, field: string): number => {
+export const parseNumber = (laps: any, field: string): number => {
   if (!laps || !isNumber(laps)) {
     throw new DataIntegrityError(`Invalid or missing ${field}: ${laps}`);
   }
@@ -87,8 +87,8 @@ export const toRaceCalendarEvents = (
       hasPowerLimit: parseNumericBoolean(row.hasPowerLimit, "hasPowerLimit"),
       date: parseDate(row.date),
       trackName: parseString(row.trackName, "trackName"),
-      qLaps: parseLaps(row.qLaps, "qLaps"),
-      raceLaps: parseLaps(row.raceLaps, "raceLaps"),
+      qLaps: parseNumber(row.qLaps, "qLaps"),
+      raceLaps: parseNumber(row.raceLaps, "raceLaps"),
     };
 
     cleanRows.push(event);
