@@ -76,7 +76,7 @@ export const toIDriverSeasonRaceData = (
   return {
     driverId: parseDriverId(driverData.driverId),
     driverName: parseString(driverData.driverName, "driverName"),
-    eventId: parseEventId(driverData.eventId),
+    eventId: parseEventId(driverData.eventId, "eventId"),
     isReady: parseNumericBoolean(driverData.isReady, "isReady"),
     isProcessed: parseNumericBoolean(driverData.isProcessed, "isProcessed"),
     qTime: parseLapTime(driverData.qTime),

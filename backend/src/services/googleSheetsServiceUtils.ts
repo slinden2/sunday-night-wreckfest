@@ -8,9 +8,9 @@ export const isString = (param: any): param is string => {
   return typeof param === "string" || param instanceof String;
 };
 
-export const parseEventId = (eventId: string): string => {
+export const parseEventId = (eventId: string, type: string): string => {
   if (!eventId || !isString(eventId) || eventId.length !== 4) {
-    throw new DataIntegrityError("Invalid or missing eventId: " + eventId);
+    throw new DataIntegrityError(`Invalid or missing ${type}: ${eventId}`);
   }
 
   return eventId;

@@ -49,7 +49,7 @@ export const updateRow = (
 };
 
 export const getSeasonId = (eventId: string) => {
-  const parsedEventId = parseEventId(eventId);
+  const parsedEventId = parseEventId(eventId, "eventId");
   return parsedEventId.substr(0, 2) + "00";
 };
 

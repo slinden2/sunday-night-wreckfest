@@ -80,7 +80,7 @@ export const toRaceCalendarEvents = (
 
   rawRows.forEach((row: any) => {
     const event: RaceCalendarEvent = {
-      eventId: parseEventId(row.eventId),
+      eventId: parseEventId(row.eventId, "eventId"),
       isReady: parseNumericBoolean(row.isReady, "isReady"),
       isCompleted: parseNumericBoolean(row.isCompleted, "isCompleted"),
       isProcessed: parseNumericBoolean(row.isProcessed, "isProcessed"),

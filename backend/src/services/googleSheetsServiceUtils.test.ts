@@ -23,10 +23,12 @@ describe("googleSheetsServiceUtils", () => {
   });
   describe("parseEventId", () => {
     it("should throw an error with longer than 4 char string", () => {
-      expect(() => parseEventId("12345")).toThrow(DataIntegrityError);
+      expect(() => parseEventId("12345", "eventId")).toThrow(
+        DataIntegrityError
+      );
     });
     it("should throw an error with shorter than 4 char string", () => {
-      expect(() => parseEventId("123")).toThrow(DataIntegrityError);
+      expect(() => parseEventId("123", "eventId")).toThrow(DataIntegrityError);
     });
   });
   describe("isNumber", () => {
