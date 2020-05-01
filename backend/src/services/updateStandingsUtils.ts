@@ -1,3 +1,10 @@
+/* 
+Updating functionality for standings sheet of the snw-db.
+
+This is a Typescript file, but the language is not used
+in the best possible way as the google-spreadsheet has no types.
+*/
+
 import { IDriverSeasonRaceData } from "../types";
 import { getSheetRows, getDocument } from "./googleSheetsService";
 
