@@ -1,34 +1,9 @@
 import app from "../app";
 import supertest from "supertest";
 import { googleSheetsService } from "../services";
-import { RaceCalendarEvent } from "../services/getRaceCalendarUtils";
+import { toPromise, getRaceCalendarReturn } from "../utils/mockData";
 
 const api = supertest(app);
-
-const mockData: RaceCalendarEvent[] = [
-  {
-    eventId: "0401",
-    isReady: true,
-    isCompleted: true,
-    isProcessed: true,
-    hasPowerLimit: true,
-    date: "20200101",
-    trackName: "Test Track",
-    qLaps: 5,
-    raceLaps: 4,
-  },
-  {
-    eventId: "0402",
-    isReady: true,
-    isCompleted: true,
-    isProcessed: true,
-    hasPowerLimit: true,
-    date: "20200101",
-    trackName: "Test Track",
-    qLaps: 5,
-    raceLaps: 4,
-  },
-];
 
 describe("GET /api/races", () => {
   let mockGoogleSheetService: jest.SpyInstance;
@@ -36,12 +11,7 @@ describe("GET /api/races", () => {
   beforeAll(() => {
     mockGoogleSheetService = jest
       .spyOn(googleSheetsService, "getRaceCalendar")
-      .mockImplementation(
-        () =>
-          new Promise((resolve, _reject) => {
-            resolve(mockData);
-          })
-      );
+      .mockImplementation(() => toPromise(getRaceCalendarReturn));
   });
 
   afterAll(() => {
@@ -64,6 +34,6 @@ describe("GET /api/races", () => {
   });
   it("should return the mockData", async () => {
     const res = await api.get("/api/races");
-    expect(res.body).toEqual(expect.arrayContaining(mockData));
+    expect(res.body).toEqual(expect.arrayContaining(getRaceCalendarReturn));
   });
 });

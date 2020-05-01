@@ -8,7 +8,7 @@ import {
   toDriverRaceDetails,
 } from "./getDriverRaceDetailsUtils";
 import { DataIntegrityError } from "../utils/errors";
-import { IDriverSeasonRaceData, RaceGroup } from "../types";
+import { getRaceDataInput, getRaceDataReturn } from "../utils/mockData";
 
 describe("getDriverRaceDetailsUtils", () => {
   describe("isNumeric", () => {
@@ -86,61 +86,8 @@ describe("getDriverRaceDetailsUtils", () => {
     });
   });
   describe("toDriverRaceDetails", () => {
-    const testArr = [
-      {
-        driverId: "0001",
-        driverName: "Test Driver",
-        eventId: "0401",
-        isReady: "1",
-        isProcessed: "1",
-        qTime: "01:01,500",
-        group: "A",
-        posHeat1: "1",
-        posHeat2: "2",
-        posHeat3: "3",
-        posHeat4: "4",
-        posHeat5: "5",
-      },
-      {
-        driverId: "0002",
-        driverName: "Test Driver2",
-        eventId: "0401",
-        isReady: "1",
-        isProcessed: "1",
-        qTime: "01:00,500",
-        group: "A",
-        posHeat1: "2",
-        posHeat2: "3",
-        posHeat3: "4",
-        posHeat4: "5",
-        posHeat5: "6",
-      },
-    ];
-    const resArr: IDriverSeasonRaceData[] = [
-      {
-        driverId: "0001",
-        driverName: "Test Driver",
-        eventId: "0401",
-        isReady: true,
-        isProcessed: true,
-        qTime: "01:01,500",
-        group: RaceGroup.A,
-        heatPositions: [1, 2, 3, 4, 5],
-      },
-      {
-        driverId: "0002",
-        driverName: "Test Driver2",
-        eventId: "0401",
-        isReady: true,
-        isProcessed: true,
-        qTime: "01:00,500",
-        group: RaceGroup.A,
-        heatPositions: [2, 3, 4, 5, 6],
-      },
-    ];
-
-    toDriverRaceDetails("0401", testArr).forEach((details, i) => {
-      expect(details).toEqual(expect.objectContaining(resArr[i]));
+    toDriverRaceDetails("0401", getRaceDataInput).forEach((details, i) => {
+      expect(details).toEqual(expect.objectContaining(getRaceDataReturn[i]));
     });
   });
 });
