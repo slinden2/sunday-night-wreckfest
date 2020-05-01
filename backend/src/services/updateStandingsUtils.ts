@@ -7,6 +7,7 @@ in the best possible way as the google-spreadsheet has no types.
 
 import { IDriverSeasonRaceData } from "../types";
 import { getSheetRows, getDocument } from "./googleSheetsService";
+import { parseEventId } from "./googleSheetsServiceUtils";
 
 export const getStandingsSheet = async () => {
   const doc = await getDocument();
@@ -48,7 +49,8 @@ export const updateRow = (
 };
 
 export const getSeasonId = (eventId: string) => {
-  return eventId.substr(0, 2) + "00";
+  const parsedEventId = parseEventId(eventId);
+  return parsedEventId.substr(0, 2) + "00";
 };
 
 export const getDriverRow = (
@@ -97,12 +99,14 @@ export const addRaceToStandings = async (
     rowsToUpdate.push(updatedDriverRow.save());
   }
 
-  if (newRows.length) {
-    await standings.sheet.addRows(newRows);
-  }
+  if (process.env.NODE_ENV !== "test") {
+    if (newRows.length) {
+      await standings.sheet.addRows(newRows);
+    }
 
-  if (rowsToUpdate.length) {
-    await Promise.all(rowsToUpdate);
+    if (rowsToUpdate.length) {
+      await Promise.all(rowsToUpdate);
+    }
   }
 };
 

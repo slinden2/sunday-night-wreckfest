@@ -84,3 +84,88 @@ export const getRaceDataReturn: IDriverSeasonRaceData[] = [
     heatPositions: [2, 3, 4, 5, 6],
   },
 ];
+
+export const getDriverRowInput = [
+  {
+    driverId: "0001",
+    seasonId: "0400",
+  },
+  {
+    driverId: "0002",
+    seasonId: "0400",
+  },
+  {
+    driverId: "0001",
+    seasonId: "0500",
+  },
+];
+
+export const updateRowDriverRow = {
+  seasonId: "0400",
+  driverId: "0022",
+  driverName: "Escobar",
+  racesDriven: "1",
+  points: "28",
+  powerLimit: "",
+  eventIds: "0401",
+};
+
+export const updateRowDriverRowErr = {
+  seasonId: "0400",
+  driverId: "0022",
+  driverName: "Escobar",
+  racesDriven: "1",
+  points: "28",
+  powerLimit: "",
+  eventIds: "0401;0402",
+};
+
+export const updateRowDriver: IDriverSeasonRaceData = {
+  driverId: "0022",
+  driverName: "Escobar",
+  eventId: "0402",
+  isReady: true,
+  isProcessed: false,
+  qTime: "00:59,579",
+  group: RaceGroup.B,
+  heatPositions: [9, 9, 9, 7, 9],
+  heatPoints: [30, 30, 30, 40, 30],
+  seasonPoints: 22,
+};
+
+export const updateRowReturn = {
+  seasonId: "0400",
+  driverId: "0022",
+  driverName: "Escobar",
+  racesDriven: 2,
+  points: 50,
+  powerLimit: "",
+  eventIds: "0401;0402",
+};
+
+export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [
+  {
+    driverId: "0001",
+    driverName: "Test Driver",
+    eventId: "0401",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:59,579",
+    group: RaceGroup.B,
+    heatPositions: [9, 9, 9, 7, 9],
+    heatPoints: [30, 30, 30, 40, 30],
+    seasonPoints: 22,
+  },
+  {
+    driverId: "0001",
+    driverName: "Test Driver",
+    eventId: "0401",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:59,579",
+    group: RaceGroup.B,
+    heatPositions: [9, 9, 9, 7, 9],
+    heatPoints: [30, 30, 30, 40, 30],
+    seasonPoints: 22,
+  },
+];
