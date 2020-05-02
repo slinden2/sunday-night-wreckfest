@@ -5,17 +5,9 @@ This is a Typescript file, but the language is not used
 in the best possible way as the google-spreadsheet has no types.
 */
 
-import { IDriverSeasonRaceData } from "../types";
-import { getSheetRows, getDocument } from "./googleSheetsService";
-import { parseEventId } from "./googleSheetsServiceUtils";
-
-export const getStandingsSheet = async () => {
-  const doc = await getDocument();
-  const standingsSheet = doc.sheetsById[1733156042];
-  const standingsRows = await getSheetRows(1733156042);
-
-  return { sheet: standingsSheet, rows: standingsRows };
-};
+import { IDriverSeasonRaceData } from "../../types";
+import { parseEventId } from "../helpers";
+import { getSheetAndRows } from "../googleSheetsUtils";
 
 export const updateRow = (
   driverRow: any,
@@ -69,7 +61,7 @@ export const addRaceToStandings = async (
     hasPowerLimit: boolean;
   }
 ): Promise<void> => {
-  const standings = await getStandingsSheet();
+  const standings = await getSheetAndRows("standings");
 
   const newRows: any[] = [];
   const rowsToUpdate: any[] = [];
@@ -111,7 +103,7 @@ export const addRaceToStandings = async (
 };
 
 export const updatePowerLimit = async () => {
-  const standings = await getStandingsSheet();
+  const standings = await getSheetAndRows("standings");
   const rowsOrdered = [...standings.rows].sort(
     (a, b) => Number(b.points) - Number(a.points)
   );

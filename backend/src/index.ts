@@ -4,7 +4,7 @@ import cron from "node-cron";
 
 import config from "./config";
 import logger from "./utils/logger";
-import { googleSheetsService } from "./services";
+import { standingsService } from "./services";
 
 const server = http.createServer(app);
 
@@ -13,6 +13,6 @@ server.listen(config.PORT, () => {
 
   // Check for updates every 15 minutes and update standings
   cron.schedule("*/15 * * * *", async () => {
-    await googleSheetsService.updateStandings();
+    await standingsService.updateStandings();
   });
 });

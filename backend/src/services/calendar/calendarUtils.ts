@@ -4,7 +4,7 @@ import {
   parseEventId,
   isNumber,
   parseNumericBoolean,
-} from "../googleSheetsServiceUtils";
+} from "../helpers";
 import { RaceCalendarEvent } from "../../types";
 
 export const isDate = (date: string): boolean => {

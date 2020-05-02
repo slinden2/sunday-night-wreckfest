@@ -3,10 +3,10 @@ import {
   parseEventId,
   isNumber,
   parseNumericBoolean,
-} from "./googleSheetsServiceUtils";
+} from "./helpers";
 import { DataIntegrityError } from "../utils/errors";
 
-describe("googleSheetsServiceUtils", () => {
+describe("helpers", () => {
   describe("isString", () => {
     it("should return true with an empty string", () => {
       expect(isString("")).toBeTruthy();

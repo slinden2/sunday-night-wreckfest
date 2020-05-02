@@ -1,4 +1,3 @@
-import * as gsService from "./googleSheetsService";
 import {
   toPromise,
   getDriverRowInput,
@@ -7,46 +6,16 @@ import {
   updateRowDriver,
   updateRowReturn,
   addRaceToStandingsRaceData,
-} from "../utils/mockData";
+} from "../../utils/mockData";
 import {
-  getStandingsSheet,
   getSeasonId,
   getDriverRow,
   updateRow,
   addRaceToStandings,
 } from "./updateStandingsUtils";
-import { DataIntegrityError } from "../utils/errors";
+import { DataIntegrityError } from "../../utils/errors";
 
 describe("updateStandingsUtils", () => {
-  describe("getStandingsSheet", () => {
-    let getDocumentSpy: any;
-    let getSheetRowsSpy: any;
-
-    beforeAll(() => {
-      getDocumentSpy = jest
-        .spyOn(gsService, "getDocument")
-        .mockImplementation(() =>
-          toPromise({ sheetsById: { 1733156042: "mock" } })
-        );
-
-      getSheetRowsSpy = jest
-        .spyOn(gsService, "getSheetRows")
-        .mockImplementation(() => toPromise("mock"));
-    });
-
-    afterAll(() => {
-      jest.clearAllMocks();
-    });
-
-    it("should return an object containing sheet and rows props", async () => {
-      const data = await getStandingsSheet();
-      expect(getDocumentSpy).toHaveBeenCalled();
-      expect(getSheetRowsSpy).toHaveBeenCalled();
-      expect(data).toEqual(
-        expect.objectContaining({ sheet: "mock", rows: "mock" })
-      );
-    });
-  });
   describe("getSeasonId", () => {
     it("should return first two nums of eventId with 00 suffix", () => {
       expect(getSeasonId("0401")).toEqual("0400");
@@ -79,13 +48,13 @@ describe("updateStandingsUtils", () => {
   });
 
   describe("addRaceToStandings", () => {
-    let getStandingsSheetSpy: any;
+    let getSheetAndRowsSpy: any;
     let getSeasonIdSpy: any;
     let getDriverRowSpy: any;
     let updateRowSpy: any;
     beforeEach(() => {
-      getStandingsSheetSpy = jest
-        .spyOn(require("./updateStandingsUtils"), "getStandingsSheet")
+      getSheetAndRowsSpy = jest
+        .spyOn(require("../googleSheetsUtils"), "getSheetAndRows")
         .mockImplementation(() =>
           toPromise({
             sheet: "mock",
@@ -113,7 +82,7 @@ describe("updateStandingsUtils", () => {
       await addRaceToStandings(addRaceToStandingsRaceData, {
         hasPowerLimit: true,
       });
-      expect(getStandingsSheetSpy).toHaveBeenCalledTimes(1);
+      expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(1);
       expect(getSeasonIdSpy).toHaveBeenCalledTimes(2);
       expect(getDriverRowSpy).toHaveBeenCalledTimes(2);
       expect(updateRowSpy).not.toHaveBeenCalled();
@@ -125,7 +94,7 @@ describe("updateStandingsUtils", () => {
       await addRaceToStandings(addRaceToStandingsRaceData, {
         hasPowerLimit: true,
       });
-      expect(getStandingsSheetSpy).toHaveBeenCalledTimes(1);
+      expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(1);
       expect(getSeasonIdSpy).toHaveBeenCalledTimes(2);
       expect(getDriverRowSpy).toHaveBeenCalledTimes(2);
       expect(updateRowSpy).toHaveBeenCalledTimes(2);

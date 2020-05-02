@@ -5,7 +5,7 @@ import {
   parseString,
   parseEventId,
   parseNumericBoolean,
-} from "../googleSheetsServiceUtils";
+} from "../helpers";
 import { RaceGroup, IDriverSeasonRaceData } from "../../types";
 
 export const isNumeric = (str: string): boolean => {

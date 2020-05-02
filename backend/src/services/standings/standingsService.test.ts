@@ -1,39 +1,13 @@
-const { GoogleSpreadsheet } = require("google-spreadsheet");
-import * as gsService from "./googleSheetsService";
-import { calendarService } from ".";
-import config from "../config";
+import { calendarService, eventService, standingsService } from "..";
+import * as updateStandingsUtils from "./updateStandingsUtils";
 import {
   getRaceCalendarReturn,
-  toPromise,
   getRaceDataReturn,
-} from "../utils/mockData";
-import * as updateStandingsUtils from "./updateStandingsUtils";
-import * as misc from "../utils/misc";
-import eventService from "./event/eventService";
+  toPromise,
+} from "../../utils/mockData";
+import * as misc from "../../utils/misc";
 
-jest.mock("google-spreadsheet");
-
-describe("googleSheetsService", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  describe("getDocument", () => {
-    it("should call GoogleSpreadsheet constructor with GS_ID", async () => {
-      await gsService.getDocument();
-      expect(GoogleSpreadsheet).toHaveBeenCalledWith(config.GS_ID);
-    });
-    it("should use useServiceAccountAuth auth method", async () => {
-      await gsService.getDocument();
-      expect(
-        GoogleSpreadsheet.prototype.useServiceAccountAuth
-      ).toHaveBeenCalledWith(config.GS_AUTH);
-    });
-    it("should load document info", async () => {
-      await gsService.getDocument();
-      expect(GoogleSpreadsheet.prototype.loadInfo).toHaveBeenCalled();
-    });
-  });
+describe("standingsService", () => {
   describe("updateStandings", () => {
     let getRaceCalendarSpy: any;
     let getRaceDataSpy: any;
@@ -75,11 +49,11 @@ describe("googleSheetsService", () => {
     });
 
     it("should call getRaceCalendar", async () => {
-      await gsService.updateStandings();
+      await standingsService.updateStandings();
       expect(getRaceCalendarSpy).toHaveBeenCalled();
     });
     it("should not call getRaceData for all processed events", async () => {
-      await gsService.updateStandings();
+      await standingsService.updateStandings();
       expect(getRaceDataSpy).not.toHaveBeenCalled();
     });
     it("should run all unprocessed events", async () => {
@@ -89,7 +63,7 @@ describe("googleSheetsService", () => {
       jest
         .spyOn(calendarService, "getRaceCalendar")
         .mockReturnValue(Promise.resolve(mod));
-      await gsService.updateStandings();
+      await standingsService.updateStandings();
       expect(getRaceDataSpy).toHaveBeenCalledTimes(2);
       expect(addRaceToStandingsSpy).toHaveBeenCalledTimes(2);
       expect(updatePowerLimitSpy).toHaveBeenCalledTimes(1);
