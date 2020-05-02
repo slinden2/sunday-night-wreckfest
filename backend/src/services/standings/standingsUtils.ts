@@ -30,7 +30,6 @@ export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
       powerLimit: parsePowerLimit(row.powerLimit),
       eventIds: parseEventIds(row.eventIds),
     };
-
     cleanRows.push(driver);
   });
 

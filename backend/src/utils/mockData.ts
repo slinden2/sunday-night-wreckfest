@@ -1,4 +1,5 @@
 import { IDriverSeasonRaceData, RaceGroup, RaceCalendarEvent } from "../types";
+import { IStandingRow } from "../services/standings/standingsUtils";
 
 export const toPromise = <T>(data: T): Promise<typeof data> =>
   new Promise(resolve => {
@@ -216,5 +217,47 @@ export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [
     heatPositions: [9, 9, 9, 7, 9],
     heatPoints: [30, 30, 30, 40, 30],
     seasonPoints: 22,
+  },
+];
+
+export const toStandingRowsInput: any[] = [
+  {
+    seasonId: "0400",
+    driverId: "0008",
+    driverName: "Kohtupora98",
+    racesDriven: "1",
+    points: "80",
+    powerLimit: "",
+    eventIds: "0402",
+  },
+  {
+    seasonId: "0400",
+    driverId: "0013",
+    driverName: "Mursu890",
+    racesDriven: "2",
+    points: "44",
+    powerLimit: "",
+    eventIds: "0401;0402",
+  },
+];
+
+export const toStandingRowsReturn: IStandingRow[] = [
+  {
+    seasonId: "0400",
+    driverId: "0008",
+    driverName: "Kohtupora98",
+    racesDriven: 1,
+    points: 80,
+    powerLimit: "",
+    eventIds: ["0402"],
+  },
+  {
+    seasonId: "0400",
+    driverId: "0013",
+    driverName: "Mursu890",
+    racesDriven: 2,
+    points: 44,
+    powerLimit: "",
+    eventIds: ["0401", "0402"],
   },
 ];
