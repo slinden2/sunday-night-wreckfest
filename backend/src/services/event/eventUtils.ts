@@ -1,63 +1,13 @@
-import { DataIntegrityError } from "../../utils/errors";
 import {
-  isString,
-  isNumber,
   parseString,
   parseEventId,
   parseNumericBoolean,
+  parseDriverId,
+  parseLapTime,
+  parseGroup,
+  parseHeatPositions,
 } from "../helpers";
-import { RaceGroup, IDriverSeasonRaceData } from "../../types";
-
-export const isNumeric = (str: string): boolean => {
-  return /^\d+$/.test(str);
-};
-
-export const parseDriverId = (driverId: any): string => {
-  if (
-    !driverId ||
-    !isString(driverId) ||
-    !isNumeric(driverId) ||
-    !(driverId.length === 4)
-  ) {
-    throw new DataIntegrityError("Invalid or missing driverId: " + driverId);
-  }
-
-  return driverId;
-};
-
-export const isLapTime = (time: any): boolean => {
-  return /^\d{2}:\d{2},\d{3}$/.test(time);
-};
-
-export const parseLapTime = (time: any): string => {
-  if (!time || !isString(time) || !isLapTime(time)) {
-    throw new DataIntegrityError("Invalid or missing qTime: " + time);
-  }
-
-  return time;
-};
-
-const isRaceGroup = (group: any): group is RaceGroup => {
-  return Object.values(<any>RaceGroup).includes(group);
-};
-
-export const parseGroup = (group: any): RaceGroup => {
-  if (!group || !isRaceGroup(group)) {
-    throw new DataIntegrityError("Invalid or missing group: " + group);
-  }
-
-  return group;
-};
-
-export const parseHeatPositions = (positions: Array<any>): Array<number> => {
-  positions.forEach(pos => {
-    if (!isNumber(pos)) {
-      throw new DataIntegrityError("Invalid position: " + pos);
-    }
-  });
-
-  return positions.map(pos => Number(pos));
-};
+import { IDriverSeasonRaceData } from "../../types";
 
 export const getHeatPositions = (driverData: any): Array<any> => {
   const posArr: Array<any> = [];

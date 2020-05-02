@@ -1,7 +1,11 @@
-import { parseEventId, parseString } from "../helpers";
-import { parseDriverId } from "../event/eventUtils";
-import { parseNumber } from "../calendar/calendarUtils";
-import { DataIntegrityError } from "../../utils/errors";
+import {
+  parseEventId,
+  parseString,
+  parsePowerLimit,
+  parseEventIds,
+  parseDriverId,
+  parseNumber,
+} from "../helpers";
 
 export interface IStandingRow {
   seasonId: string;
@@ -12,26 +16,6 @@ export interface IStandingRow {
   powerLimit?: string;
   eventIds: string[];
 }
-
-export const parsePowerLimit = (text: any): string => {
-  if (!text) return "";
-
-  if (!/[DCBA]\d{2,3}/.test(text)) {
-    throw new DataIntegrityError("Invalid powerLimit: " + text);
-  }
-
-  return text;
-};
-
-export const parseEventIds = (eventIdsStr: any): string[] => {
-  const eventIds: string[] = eventIdsStr.split(";");
-
-  eventIds.forEach(eventId => {
-    parseEventId(eventId, "eventId");
-  });
-
-  return eventIds;
-};
 
 export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
   const cleanRows: IStandingRow[] = [];
