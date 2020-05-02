@@ -9,6 +9,7 @@ import {
 } from "../utils/mockData";
 import * as updateStandingsUtils from "./updateStandingsUtils";
 import * as misc from "../utils/misc";
+import eventService from "./event/eventService";
 
 jest.mock("google-spreadsheet");
 
@@ -46,7 +47,7 @@ describe("googleSheetsService", () => {
         .mockImplementation(() => toPromise(getRaceCalendarReturn));
 
       getRaceDataSpy = jest
-        .spyOn(gsService, "getRaceData")
+        .spyOn(eventService, "getRaceData")
         .mockImplementation(() => toPromise(getRaceDataReturn));
 
       addRaceToStandingsSpy = jest

@@ -1,5 +1,5 @@
 import express from "express";
-import { googleSheetsService, calendarService } from "../services";
+import { calendarService, eventService } from "../services";
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get("/", async (_req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const raceData = await googleSheetsService.getRaceData(req.params.id);
+    const raceData = await eventService.getRaceData(req.params.id);
     return res.status(200).json(raceData);
   } catch (err) {
     return next(err);

@@ -1,5 +1,5 @@
 import { parseEventId, parseString } from "../googleSheetsServiceUtils";
-import { parseDriverId } from "../getDriverRaceDetailsUtils";
+import { parseDriverId } from "../event/eventUtils";
 import { parseNumber } from "../calendar/calendarUtils";
 import { DataIntegrityError } from "../../utils/errors";
 

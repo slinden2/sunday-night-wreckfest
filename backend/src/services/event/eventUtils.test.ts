@@ -6,11 +6,11 @@ import {
   isLapTime,
   parseLapTime,
   toDriverRaceDetails,
-} from "./getDriverRaceDetailsUtils";
-import { DataIntegrityError } from "../utils/errors";
-import { getRaceDataInput, getRaceDataReturn } from "../utils/mockData";
+} from "./eventUtils";
+import { DataIntegrityError } from "../../utils/errors";
+import { getRaceDataInput, getRaceDataReturn } from "../../utils/mockData";
 
-describe("getDriverRaceDetailsUtils", () => {
+describe("eventUtils", () => {
   describe("isNumeric", () => {
     it("should return true with 4", () => {
       expect(isNumeric("4")).toBeTruthy();

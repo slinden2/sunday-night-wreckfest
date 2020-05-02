@@ -1,13 +1,12 @@
-import { DataIntegrityError } from "../utils/errors";
+import { DataIntegrityError } from "../../utils/errors";
 import {
   isString,
   isNumber,
   parseString,
   parseEventId,
   parseNumericBoolean,
-} from "./googleSheetsServiceUtils";
-
-import { RaceGroup, IDriverSeasonRaceData } from "../types";
+} from "../googleSheetsServiceUtils";
+import { RaceGroup, IDriverSeasonRaceData } from "../../types";
 
 export const isNumeric = (str: string): boolean => {
   return /^\d+$/.test(str);
