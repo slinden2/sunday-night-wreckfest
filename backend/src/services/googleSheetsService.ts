@@ -10,6 +10,7 @@ import { IDriverSeasonRaceData } from "../types";
 import { toRaceData } from "./getRaceDataUtils";
 import { addRaceToStandings, updatePowerLimit } from "./updateStandingsUtils";
 import { sleep } from "../utils/misc";
+import { calendarService } from ".";
 
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
@@ -55,7 +56,7 @@ export const getRaceData = async (
 };
 
 export const updateStandings = async (): Promise<void> => {
-  const eventList = await getRaceCalendar();
+  const eventList = await calendarService.getRaceCalendar();
   for (const event of eventList) {
     if (event.isReady && event.isCompleted && !event.isProcessed) {
       const raceData = await getRaceData(event.eventId);

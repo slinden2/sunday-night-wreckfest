@@ -1,6 +1,6 @@
 import app from "../app";
 import supertest from "supertest";
-import { googleSheetsService } from "../services";
+import { calendarService } from "../services";
 import { toPromise, getRaceCalendarReturn } from "../utils/mockData";
 
 const api = supertest(app);
@@ -10,7 +10,7 @@ describe("GET /api/races", () => {
 
   beforeAll(() => {
     mockGoogleSheetService = jest
-      .spyOn(googleSheetsService, "getRaceCalendar")
+      .spyOn(calendarService, "getRaceCalendar")
       .mockImplementation(() => toPromise(getRaceCalendarReturn));
   });
 
@@ -24,7 +24,7 @@ describe("GET /api/races", () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
-  it("calls getRaceCalendar from googleSheetService", async () => {
+  it("calls getRaceCalendar from calendarService", async () => {
     await api.get("/api/races").expect(200);
     expect(mockGoogleSheetService).toHaveBeenCalled;
   });

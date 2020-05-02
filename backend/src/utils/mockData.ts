@@ -1,10 +1,59 @@
-import { RaceCalendarEvent } from "../services/getRaceCalendarUtils";
-import { IDriverSeasonRaceData, RaceGroup } from "../types";
+import { IDriverSeasonRaceData, RaceGroup, RaceCalendarEvent } from "../types";
 
 export const toPromise = <T>(data: T): Promise<typeof data> =>
   new Promise(resolve => {
     resolve(data);
   });
+
+export const toRaceCalendarEventsInput: any[] = [
+  {
+    eventId: "0401",
+    isReady: "1",
+    isCompleted: "1",
+    isProcessed: "1",
+    hasPowerLimit: "1",
+    date: "12.1.2020",
+    trackName: "Boulder Bank Full Circuit 2 No X",
+    qLaps: "6",
+    raceLaps: "4",
+  },
+  {
+    eventId: "0402",
+    isReady: "0",
+    isCompleted: "0",
+    isProcessed: "0",
+    hasPowerLimit: "0",
+    date: "19.1.2020",
+    trackName: "Fire Rock Raceway Main Circuit Reverse",
+    qLaps: "9",
+    raceLaps: "6",
+  },
+];
+
+export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
+  {
+    eventId: "0401",
+    isReady: true,
+    isCompleted: true,
+    isProcessed: true,
+    hasPowerLimit: true,
+    date: "2020-01-12",
+    trackName: "Boulder Bank Full Circuit 2 No X",
+    qLaps: 6,
+    raceLaps: 4,
+  },
+  {
+    eventId: "0402",
+    isReady: false,
+    isCompleted: false,
+    isProcessed: false,
+    hasPowerLimit: false,
+    date: "2020-01-19",
+    trackName: "Fire Rock Raceway Main Circuit Reverse",
+    qLaps: 9,
+    raceLaps: 6,
+  },
+];
 
 export const getRaceCalendarReturn: RaceCalendarEvent[] = [
   {

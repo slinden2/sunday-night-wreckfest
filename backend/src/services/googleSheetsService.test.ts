@@ -1,9 +1,9 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import * as gsService from "./googleSheetsService";
+import { calendarService } from ".";
 import config from "../config";
 import {
   getRaceCalendarReturn,
-  // getRaceDataReturn,
   toPromise,
   getRaceDataReturn,
 } from "../utils/mockData";
@@ -42,7 +42,7 @@ describe("googleSheetsService", () => {
     let sleepSpy: any;
     beforeEach(() => {
       getRaceCalendarSpy = jest
-        .spyOn(gsService, "getRaceCalendar")
+        .spyOn(calendarService, "getRaceCalendar")
         .mockImplementation(() => toPromise(getRaceCalendarReturn));
 
       getRaceDataSpy = jest
@@ -86,7 +86,7 @@ describe("googleSheetsService", () => {
       getRaceCalendarReturn.forEach(d => (d.isProcessed = false));
       getRaceCalendarReturn[1].hasPowerLimit = false;
       jest
-        .spyOn(gsService, "getRaceCalendar")
+        .spyOn(calendarService, "getRaceCalendar")
         .mockReturnValue(Promise.resolve(mod));
       await gsService.updateStandings();
       expect(getRaceDataSpy).toHaveBeenCalledTimes(2);

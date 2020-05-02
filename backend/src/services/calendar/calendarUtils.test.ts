@@ -4,10 +4,14 @@ import {
   parseString,
   parseNumber,
   toRaceCalendarEvents,
-} from "./getRaceCalendarUtils";
-import { DataIntegrityError } from "../utils/errors";
+} from "./calendarUtils";
+import { DataIntegrityError } from "../../utils/errors";
+import {
+  toRaceCalendarEventsInput,
+  toRaceCalendarEventsReturn,
+} from "../../utils/mockData";
 
-describe("getRaceCalendarUtils", () => {
+describe("calendarUtils", () => {
   describe("isDate", () => {
     it("should be truthy with 2020-01-01", () => {
       expect(isDate("2020-01-01")).toBeTruthy();
@@ -73,58 +77,10 @@ describe("getRaceCalendarUtils", () => {
   });
   describe("toRaceCalendarEvents", () => {
     it("Should convert 'any' type to RaceCalendarEvent[]", () => {
-      const testArr = [
-        {
-          eventId: "0401",
-          isReady: "1",
-          isCompleted: "1",
-          isProcessed: "1",
-          hasPowerLimit: "1",
-          date: "12.1.2020",
-          trackName: "Boulder Bank Full Circuit 2 No X",
-          qLaps: "6",
-          raceLaps: "4",
-        },
-        {
-          eventId: "0402",
-          isReady: "0",
-          isCompleted: "0",
-          isProcessed: "0",
-          hasPowerLimit: "0",
-          date: "19.1.2020",
-          trackName: "Fire Rock Raceway Main Circuit Reverse",
-          qLaps: "9",
-          raceLaps: "6",
-        },
-      ];
-
-      const resArray = [
-        {
-          eventId: "0401",
-          isReady: true,
-          isCompleted: true,
-          isProcessed: true,
-          hasPowerLimit: true,
-          date: "2020-01-12",
-          trackName: "Boulder Bank Full Circuit 2 No X",
-          qLaps: 6,
-          raceLaps: 4,
-        },
-        {
-          eventId: "0402",
-          isReady: false,
-          isCompleted: false,
-          isProcessed: false,
-          hasPowerLimit: false,
-          date: "2020-01-19",
-          trackName: "Fire Rock Raceway Main Circuit Reverse",
-          qLaps: 9,
-          raceLaps: 6,
-        },
-      ];
-
-      toRaceCalendarEvents(testArr).forEach((race, i) => {
-        expect(race).toEqual(expect.objectContaining(resArray[i]));
+      toRaceCalendarEvents(toRaceCalendarEventsInput).forEach((race, i) => {
+        expect(race).toEqual(
+          expect.objectContaining(toRaceCalendarEventsReturn[i])
+        );
       });
     });
   });

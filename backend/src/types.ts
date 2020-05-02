@@ -1,3 +1,15 @@
+export interface RaceCalendarEvent {
+  eventId: string;
+  isReady: boolean;
+  isCompleted: boolean;
+  isProcessed: boolean;
+  hasPowerLimit: boolean;
+  date: string;
+  trackName: string;
+  qLaps: number;
+  raceLaps: number;
+}
+
 export enum RaceGroup {
   A = "A",
   B = "B",

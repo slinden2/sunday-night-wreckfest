@@ -1,6 +1,6 @@
 import { parseEventId, parseString } from "../googleSheetsServiceUtils";
 import { parseDriverId } from "../getDriverRaceDetailsUtils";
-import { parseNumber } from "../getRaceCalendarUtils";
+import { parseNumber } from "../calendar/calendarUtils";
 import { DataIntegrityError } from "../../utils/errors";
 
 export interface IStandingRow {

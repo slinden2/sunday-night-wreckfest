@@ -1,22 +1,11 @@
-import { DataIntegrityError } from "../utils/errors";
+import { DataIntegrityError } from "../../utils/errors";
 import {
   isString,
   parseEventId,
   isNumber,
   parseNumericBoolean,
-} from "./googleSheetsServiceUtils";
-
-export interface RaceCalendarEvent {
-  eventId: string;
-  isReady: boolean;
-  isCompleted: boolean;
-  isProcessed: boolean;
-  hasPowerLimit: boolean;
-  date: string;
-  trackName: string;
-  qLaps: number;
-  raceLaps: number;
-}
+} from "../googleSheetsServiceUtils";
+import { RaceCalendarEvent } from "../../types";
 
 export const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
