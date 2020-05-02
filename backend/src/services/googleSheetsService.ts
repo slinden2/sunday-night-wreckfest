@@ -1,10 +1,6 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 import config from "../config";
-import {
-  toRaceCalendarEvents,
-  RaceCalendarEvent,
-} from "./getRaceCalendarUtils";
 import { toDriverRaceDetails } from "./getDriverRaceDetailsUtils";
 import { IDriverSeasonRaceData } from "../types";
 import { toRaceData } from "./getRaceDataUtils";
@@ -24,19 +20,6 @@ export const getSheetRows = async (id: number) => {
   const sheet = doc.sheetsById[id];
   const rows = await sheet.getRows();
   return rows;
-};
-
-export const setIsProcessedTrue = async (eventId: string) => {
-  const rows: any[] = await getSheetRows(0);
-  const processedRow = rows.find(row => row.eventId === eventId);
-  processedRow.isProcessed = "1";
-  await processedRow.save();
-};
-
-export const getRaceCalendar = async (): Promise<RaceCalendarEvent[]> => {
-  const rawRows = await getSheetRows(0);
-  const raceCalendarEvents = toRaceCalendarEvents(rawRows);
-  return raceCalendarEvents;
 };
 
 export const getDriverRaceDetails = async (
@@ -66,7 +49,7 @@ export const updateStandings = async (): Promise<void> => {
       if (event.hasPowerLimit) {
         await updatePowerLimit();
       }
-      await setIsProcessedTrue(event.eventId);
+      await calendarService.setIsProcessedTrue(event.eventId);
       // let's not bombard the API if there are more than 1 races to update
       await sleep(5000);
     }
@@ -74,7 +57,6 @@ export const updateStandings = async (): Promise<void> => {
 };
 
 export default {
-  getRaceCalendar,
   getRaceData,
   updateStandings,
 };

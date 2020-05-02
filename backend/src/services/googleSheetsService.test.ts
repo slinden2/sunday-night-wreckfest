@@ -58,7 +58,7 @@ describe("googleSheetsService", () => {
         .mockImplementation();
 
       setIsProcessedTrueSpy = jest
-        .spyOn(gsService, "setIsProcessedTrue")
+        .spyOn(calendarService, "setIsProcessedTrue")
         .mockImplementation();
 
       sleepSpy = jest.spyOn(misc, "sleep").mockImplementation();
