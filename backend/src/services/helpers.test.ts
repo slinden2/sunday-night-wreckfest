@@ -13,6 +13,7 @@ import {
   parseHeatPositions,
   isLapTime,
   parseLapTime,
+  parsePowerLimit,
 } from "./helpers";
 import { DataIntegrityError } from "../utils/errors";
 
@@ -205,6 +206,26 @@ describe("helpers", () => {
     });
     it("should throw with 1:01,500", () => {
       expect(() => parseLapTime("1:01,500")).toThrow(DataIntegrityError);
+    });
+  });
+  describe("parsePowerLimit", () => {
+    it("should accept C161", () => {
+      expect(parsePowerLimit("C161")).toEqual("C161");
+    });
+    it("should accept B161", () => {
+      expect(parsePowerLimit("B161")).toEqual("B161");
+    });
+    it("should accept A161", () => {
+      expect(parsePowerLimit("A161")).toEqual("A161");
+    });
+    it("should accept D86", () => {
+      expect(parsePowerLimit("D86")).toEqual("D86");
+    });
+    it("should throw with G161", () => {
+      expect(() => parsePowerLimit("G161")).toThrow(DataIntegrityError);
+    });
+    it("should throw with C1", () => {
+      expect(() => parsePowerLimit("C1")).toThrow(DataIntegrityError);
     });
   });
 });

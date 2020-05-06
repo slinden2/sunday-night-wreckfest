@@ -1,4 +1,4 @@
-import { sleep } from "./misc";
+import { sleep, getSumOfArrayElements, getSimpleTime } from "./misc";
 
 jest.useFakeTimers();
 
@@ -12,6 +12,19 @@ describe("misc", () => {
       });
       jest.runAllTimers();
       return pendingPromise;
+    });
+  });
+
+  describe("getSumOfArrayElements", () => {
+    it("should return a sum of array elements", () => {
+      expect(getSumOfArrayElements([5, 5, 5])).toEqual(15);
+    });
+  });
+
+  describe("getSimpleTime", () => {
+    it("should return ISOString in YYYYMMDD-HHMMSS format", () => {
+      const re = /\d{8}-\d{6}/.test(getSimpleTime());
+      expect(re).toBeTruthy();
     });
   });
 });
