@@ -262,3 +262,24 @@ export const toStandingRowsReturn: IStandingRow[] = [
     eventIds: ["0401", "0402"],
   },
 ];
+
+export const getStandingsReturn: IStandingRow[] = [
+  {
+    seasonId: "0400",
+    driverId: "0001",
+    driverName: "Test Driver 1",
+    racesDriven: 1,
+    points: 100,
+    powerLimit: "C161",
+    eventIds: ["0401"],
+  },
+  {
+    seasonId: "0400",
+    driverId: "0002",
+    driverName: "Test Driver 2",
+    racesDriven: 2,
+    points: 180,
+    powerLimit: "C161",
+    eventIds: ["0401", "0402"],
+  },
+];
