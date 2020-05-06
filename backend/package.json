@@ -14,7 +14,6 @@
     "view:coverage": "serve coverage/lcov-report",
     "clean": "RD /S /Q coverage src\\build",
     "lint": "eslint --ext .ts",
-    "updateStandings": "ts-node src/services/standings/standingsService.ts",
     "jest:clear_cache": "jest --clearCache"
   },
   "author": "Samu Linden",

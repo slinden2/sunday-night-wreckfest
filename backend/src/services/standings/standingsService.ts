@@ -1,7 +1,11 @@
-import { getSheetAndRows } from "../googleSheetsUtils";
+import { getSheetAndRows, makeBackup } from "../googleSheetsUtils";
 import { toStandingRows } from "./standingsUtils";
 import { calendarService, eventService } from "..";
-import { addRaceToStandings, updatePowerLimit } from "./updateStandingsUtils";
+import {
+  addRaceToStandings,
+  updatePowerLimit,
+  markDuplicates,
+} from "./updateStandingsUtils";
 import { sleep } from "../../utils/misc";
 
 const getStandings = async (seasonId: string) => {
@@ -15,8 +19,14 @@ export const updateStandings = async (): Promise<void> => {
   const eventList = await calendarService.getRaceCalendar();
   for (const event of eventList) {
     if (event.isReady && event.isCompleted && !event.isProcessed) {
+      await makeBackup("standings");
+
       const raceData = await eventService.getRaceData(event.eventId);
-      await addRaceToStandings(raceData, {
+
+      // Check for duplicate seasonPoints (draws) and mark them
+      const raceDataWithDups = await markDuplicates(raceData);
+
+      await addRaceToStandings(raceDataWithDups, {
         hasPowerLimit: event.hasPowerLimit,
       });
       if (event.hasPowerLimit) {

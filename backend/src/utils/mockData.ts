@@ -191,6 +191,7 @@ export const updateRowReturn = {
   points: 50,
   powerLimit: "",
   eventIds: "0401;0402",
+  verifyScore: "",
 };
 
 export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [

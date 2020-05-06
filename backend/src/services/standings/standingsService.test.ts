@@ -14,6 +14,7 @@ describe("standingsService", () => {
     let addRaceToStandingsSpy: any;
     let updatePowerLimitSpy: any;
     let setIsProcessedTrueSpy: any;
+    let getSumOfArrayElementsSpy: any;
     let sleepSpy: any;
     beforeEach(() => {
       getRaceCalendarSpy = jest
@@ -36,6 +37,10 @@ describe("standingsService", () => {
         .spyOn(calendarService, "setIsProcessedTrue")
         .mockImplementation();
 
+      getSumOfArrayElementsSpy = jest
+        .spyOn(misc, "getSumOfArrayElements")
+        .mockImplementation();
+
       sleepSpy = jest.spyOn(misc, "sleep").mockImplementation();
     });
 
@@ -45,6 +50,7 @@ describe("standingsService", () => {
       addRaceToStandingsSpy.mockRestore();
       updatePowerLimitSpy.mockRestore();
       setIsProcessedTrueSpy.mockRestore();
+      getSumOfArrayElementsSpy.mockRestore();
       sleepSpy.mockRestore();
     });
 
@@ -68,6 +74,7 @@ describe("standingsService", () => {
       expect(addRaceToStandingsSpy).toHaveBeenCalledTimes(2);
       expect(updatePowerLimitSpy).toHaveBeenCalledTimes(1);
       expect(setIsProcessedTrueSpy).toHaveBeenCalledTimes(2);
+      expect(getSumOfArrayElementsSpy).toHaveBeenCalledTimes(4);
       expect(sleepSpy).toHaveBeenCalledTimes(2);
     });
   });

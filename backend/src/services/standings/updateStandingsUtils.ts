@@ -8,14 +8,30 @@ in the best possible way as the google-spreadsheet has no types.
 import { IDriverSeasonRaceData } from "../../types";
 import { parseEventId } from "../helpers";
 import { getSheetAndRows } from "../googleSheetsUtils";
+import { getSumOfArrayElements } from "../../utils/misc";
+
+export const getPointVerifyString = (
+  pos: number,
+  driver: IDriverSeasonRaceData
+): string => {
+  return `POS: ${pos} | SP: ${driver.seasonPoints} | G: ${
+    driver.group
+  } | HP: ${getSumOfArrayElements(driver.heatPoints)}`;
+};
 
 export const updateRow = (
+  pos: number,
   driverRow: any,
   driver: IDriverSeasonRaceData,
   hasPowerLimit: boolean
 ) => {
   driverRow.points = Number(driverRow.points);
   driverRow.points += Number(driver.seasonPoints);
+  if (driver.verifyScore) {
+    driverRow.verifyScore = getPointVerifyString(pos, driver);
+  } else {
+    driverRow.verifyScore = "";
+  }
 
   const previousRaceIds = driverRow.eventIds.split(";");
 
@@ -66,7 +82,8 @@ export const addRaceToStandings = async (
   const newRows: any[] = [];
   const rowsToUpdate: any[] = [];
 
-  for (const driver of raceData) {
+  for (const [idx, driver] of raceData.entries()) {
+    const pos = idx + 1;
     const seasonId = getSeasonId(driver.eventId);
     const driverRow = getDriverRow(seasonId, driver.driverId, standings.rows);
 
@@ -76,6 +93,9 @@ export const addRaceToStandings = async (
         driverId: driver.driverId,
         driverName: driver.driverName,
         points: driver.seasonPoints,
+        verifyScore: driver.verifyScore
+          ? getPointVerifyString(pos, driver)
+          : "",
         racesDriven: 1,
         eventIds: driver.eventId,
       });
@@ -83,6 +103,7 @@ export const addRaceToStandings = async (
     }
 
     const updatedDriverRow = updateRow(
+      pos,
       driverRow,
       driver,
       options.hasPowerLimit
@@ -119,4 +140,19 @@ export const updatePowerLimit = async () => {
   ];
 
   await Promise.all(rowsToUpdate);
+};
+
+export const markDuplicates = async (
+  data: IDriverSeasonRaceData[]
+): Promise<typeof data> => {
+  for (let i = 0; i < data.length - 1; i++) {
+    if (
+      getSumOfArrayElements(data[i].heatPoints) ===
+      getSumOfArrayElements(data[i + 1].heatPoints)
+    ) {
+      data[i].verifyScore = true;
+      data[i + 1].verifyScore = true;
+    }
+  }
+  return data;
 };
