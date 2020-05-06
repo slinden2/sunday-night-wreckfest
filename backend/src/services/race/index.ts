@@ -7,6 +7,7 @@ points for the event etc.
 import { IDriverSeasonRaceData, RaceGroup } from "../../types";
 import { heatPoints, seasonPoints } from "./points";
 import { DataIntegrityError } from "../../utils/errors";
+import { getSumOfArrayElements } from "../../utils/misc";
 
 class Race {
   rawData: IDriverSeasonRaceData[];
@@ -53,8 +54,8 @@ class Race {
   Sort drivers by the total of heatPoints.
   */
   private _sortByPoints(a: IDriverSeasonRaceData, b: IDriverSeasonRaceData) {
-    const aPoints = a.heatPoints?.reduce((acc, cur) => acc + cur);
-    const bPoints = b.heatPoints?.reduce((acc, cur) => acc + cur);
+    const aPoints = getSumOfArrayElements(a.heatPoints);
+    const bPoints = getSumOfArrayElements(b.heatPoints);
 
     if (!aPoints || !bPoints) {
       throw new DataIntegrityError(
