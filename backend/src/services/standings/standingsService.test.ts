@@ -1,4 +1,5 @@
 import { calendarService, eventService, standingsService } from "..";
+import * as gsUtils from "../googleSheetsUtils";
 import * as updateStandingsUtils from "./updateStandingsUtils";
 import {
   getRaceCalendarReturn,
@@ -10,6 +11,7 @@ import * as misc from "../../utils/misc";
 describe("standingsService", () => {
   describe("updateStandings", () => {
     let getRaceCalendarSpy: any;
+    let makeBackupSpy: any;
     let getRaceDataSpy: any;
     let addRaceToStandingsSpy: any;
     let updatePowerLimitSpy: any;
@@ -20,6 +22,8 @@ describe("standingsService", () => {
       getRaceCalendarSpy = jest
         .spyOn(calendarService, "getRaceCalendar")
         .mockImplementation(() => toPromise(getRaceCalendarReturn));
+
+      makeBackupSpy = jest.spyOn(gsUtils, "makeBackup").mockImplementation();
 
       getRaceDataSpy = jest
         .spyOn(eventService, "getRaceData")
@@ -46,6 +50,7 @@ describe("standingsService", () => {
 
     afterEach(() => {
       getRaceCalendarSpy.mockRestore();
+      makeBackupSpy.mockRestore();
       getRaceDataSpy.mockRestore();
       addRaceToStandingsSpy.mockRestore();
       updatePowerLimitSpy.mockRestore();
@@ -70,6 +75,7 @@ describe("standingsService", () => {
         .spyOn(calendarService, "getRaceCalendar")
         .mockReturnValue(Promise.resolve(mod));
       await standingsService.updateStandings();
+      expect(makeBackupSpy).toHaveBeenCalledTimes(2);
       expect(getRaceDataSpy).toHaveBeenCalledTimes(2);
       expect(addRaceToStandingsSpy).toHaveBeenCalledTimes(2);
       expect(updatePowerLimitSpy).toHaveBeenCalledTimes(1);
