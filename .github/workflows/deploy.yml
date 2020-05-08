@@ -1,0 +1,67 @@
+name: Test and Deploy
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      working-directory-be: ./backend
+      working-directory-fe: ./frontend
+      GS_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
+      GS_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GS_SERVICE_ACCOUNT_EMAIL }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ${{ env.working-directory-be }}
+      - name: Run tests
+        run: npm test
+        working-directory: ${{ env.working-directory-be }}
+        env:
+          CI: true
+      - name: Build backend
+        run: npm run build:server
+        working-directory: ${{ env.working-directory-be }}
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ${{ env.working-directory-fe }}
+      - name: Build frontend
+        run: npm run build
+        working-directory: ${{ env.working-directory-fe }}
+      - name: Create production bundle
+        run: |
+          mkdir -p ./dist
+          cp -r ./backend/build/. ./dist
+          cp -r ./frontend/build/. ./dist/client
+          rm -r ./backend/build/
+          rm -r ./frontend/build/
+          cp ./backend/package.json ./dist/package.json
+          cp ./backend/package-lock.json ./dist/package-lock.json
+          cp ./backend/Procfile ./dist/Procfile
+      - name: Commit production bundle
+        run: |
+          git config --global user.name '${{ secrets.USERNAME }}'
+          git config --global user.email '${{ secrets.USERNAME }}@users.noreply.github.com'
+          git add .
+          git commit -m "Automated production bundle creation"
+      - name: Push production bundle to repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push procution bundle to dokku
+        uses: slinden2/dokku-deploy-github-action@v1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          dokku-ip-address: ${{ secrets.SERVER_IP }}
+          dokku-host: "sundaynightwreckfest.tk"
+          app-name: "snw"
+          git-subtree-prefix: "dist"

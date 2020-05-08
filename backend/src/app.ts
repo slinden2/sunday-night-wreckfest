@@ -1,19 +1,28 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import "source-map-support/register";
 
 import { raceRoute, standingsRoute } from "./routes/";
 
 import middleware from "./utils/middleware";
+import config from "./config";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(middleware.requestLogger);
 
-if (process.env.NODE_ENV === "test") {
+if (config.ENV === "test" || config.ENV === "CI") {
   app.get("/ping", (_req, res) => {
     res.send("pong");
+  });
+}
+
+if (config.ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client")));
+  app.get("/", (_req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "index.html"));
   });
 }
 

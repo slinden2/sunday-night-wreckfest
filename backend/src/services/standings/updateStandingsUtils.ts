@@ -9,6 +9,7 @@ import { IDriverSeasonRaceData } from "../../types";
 import { parseEventId } from "../helpers";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import { getSumOfArrayElements } from "../../utils/misc";
+import config from "../../config";
 
 export const getPointVerifyString = (
   pos: number,
@@ -112,7 +113,7 @@ export const addRaceToStandings = async (
     rowsToUpdate.push(updatedDriverRow.save());
   }
 
-  if (process.env.NODE_ENV !== "test") {
+  if (config.ENV !== "test") {
     if (newRows.length) {
       await standings.sheet.addRows(newRows);
     }
