@@ -22,6 +22,8 @@ const App = () => {
     return <div>error...</div>;
   }
 
+  console.log(data);
+
   return <div>SNW</div>;
 };
 
