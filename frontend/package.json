@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^12.12.38"
+    "@types/node": "^12.12.38",
+    "eslint-plugin-react-hooks": "^4.0.0"
   }
 }

@@ -20,7 +20,7 @@ const useFetchData = (url: string): FetchDataReturn => {
     setError(false);
   };
 
-  const load = async () => {
+  const invoke = React.useCallback(async () => {
     init();
     try {
       const response = await fetch(url);
@@ -30,9 +30,9 @@ const useFetchData = (url: string): FetchDataReturn => {
       setError(true);
     }
     setLoading(false);
-  };
+  }, [url]);
 
-  return [{ data, loading, error }, load];
+  return [{ data, loading, error }, invoke];
 };
 
 export default useFetchData;
