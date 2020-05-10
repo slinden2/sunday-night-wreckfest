@@ -9,3 +9,8 @@ export interface IRaceCalendarEvent {
   qLaps: number;
   raceLaps: number;
 }
+
+export interface INavItem {
+  title: string;
+  url: string;
+}

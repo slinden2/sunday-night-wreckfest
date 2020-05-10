@@ -1,30 +1,14 @@
 import React from "react";
-import { useFetchData } from "./hooks";
-import config from "./config";
-
-const raceCalendarUrl = config.baseUrl + "/api/races";
+import Navigation from "./components/Navigation";
+import CalendarContainer from "./components/calendar/CalendarContainer";
 
 const App = () => {
-  const [{ data, loading, error }, invoke] = useFetchData(raceCalendarUrl);
-
-  React.useEffect(() => {
-    const loadRaceCalendar = async () => {
-      await invoke();
-    };
-    loadRaceCalendar();
-  }, [invoke]);
-
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error...</div>;
-  }
-
-  console.log(data);
-
-  return <div>SNW</div>;
+  return (
+    <div>
+      <Navigation />
+      <CalendarContainer />
+    </div>
+  );
 };
 
 export default App;

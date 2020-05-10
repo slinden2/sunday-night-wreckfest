@@ -10,6 +10,14 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ],
   "settings": {
     "react": {
       "pragma": "React",
@@ -25,7 +33,8 @@
       { "argsIgnorePattern": "^_" }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-    // "no-console": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "no-console": "warn",
+    "react/prop-types": "off"
   }
 }
