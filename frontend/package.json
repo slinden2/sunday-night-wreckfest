@@ -11,6 +11,7 @@
     "@types/react-dom": "^16.9.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5"
   },
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.12.38",
+    "@types/react-router-dom": "^5.1.5",
     "eslint-plugin-react-hooks": "^4.0.0"
   }
 }
