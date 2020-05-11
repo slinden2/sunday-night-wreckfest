@@ -5,7 +5,7 @@ import { IRaceCalendarEvent } from "../../types";
 import PageContainer from "../PageContainer";
 import CalendarContent from "./CalendarContent";
 
-const raceCalendarUrl = config.baseUrl + "/api/races";
+const raceCalendarUrl = config.baseUrl + "/races";
 
 const CalendarContainer = () => {
   const [calendar, invoke] = useFetchData(raceCalendarUrl);
