@@ -7,7 +7,7 @@ import { calendarService } from "..";
 describe("calendarService", () => {
   let getSheetAndRowsSpy: jest.SpyInstance;
   let toRaceCalendarEventsSpy: jest.SpyInstance;
-  let saveSpy = jest.fn();
+  const saveSpy = jest.fn();
 
   beforeEach(() => {
     getSheetAndRowsSpy = jest

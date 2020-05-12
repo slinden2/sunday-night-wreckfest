@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import config from "../config";
 import { getSimpleTime } from "../utils/misc";
@@ -5,7 +6,9 @@ import { getSimpleTime } from "../utils/misc";
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
   await doc.useServiceAccountAuth({
+    // eslint-disable-next-line @typescript-eslint/camelcase
     client_email: config.GS_SERVICE_ACCOUNT_EMAIL,
+    // eslint-disable-next-line @typescript-eslint/camelcase
     private_key: config.GS_PRIVATE_KEY,
   });
   await doc.loadInfo();

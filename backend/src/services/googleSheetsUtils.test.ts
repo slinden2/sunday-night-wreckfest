@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import * as gsUtils from "./googleSheetsUtils";
 import config from "../config";

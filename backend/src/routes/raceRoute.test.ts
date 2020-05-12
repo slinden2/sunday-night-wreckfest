@@ -26,7 +26,7 @@ describe("GET /api/races", () => {
   });
   it("calls getRaceCalendar from calendarService", async () => {
     await api.get("/api/races").expect(200);
-    expect(mockGoogleSheetService).toHaveBeenCalled;
+    expect(mockGoogleSheetService).toHaveBeenCalled();
   });
   it("should return 2 races", async () => {
     const res = await api.get("/api/races");

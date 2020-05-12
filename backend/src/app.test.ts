@@ -5,7 +5,7 @@ const api = supertest(app);
 
 describe("GET / - Server working", () => {
   it("should exist", () => {
-    expect(app).toBeDefined;
+    expect(app).toBeDefined();
   });
   it('should return "pong"', async () => {
     const res = await api.get("/ping").expect(200);

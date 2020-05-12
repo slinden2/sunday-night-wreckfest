@@ -12,7 +12,7 @@ server.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`);
 
   // Check for updates every 15 minutes and update standings
-  cron.schedule("*/15 * * * *", async () => {
-    await standingsService.updateStandings();
+  cron.schedule("*/15 * * * *", () => {
+    standingsService.updateStandings().catch(e => logger.error(e));
   });
 });

@@ -70,7 +70,9 @@ class Race {
   Sort the driver _within_ their group (array) by sum of heatPoints.
   */
   private _sortGroupData(raceData: Array<IDriverSeasonRaceData[]>) {
-    return raceData.map(groupData => groupData.sort(this._sortByPoints));
+    return raceData.map(groupData =>
+      groupData.sort((a, b) => this._sortByPoints(a, b))
+    );
   }
 
   /* 

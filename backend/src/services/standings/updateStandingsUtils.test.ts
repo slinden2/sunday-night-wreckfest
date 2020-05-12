@@ -54,6 +54,7 @@ describe("updateStandingsUtils", () => {
     let updateRowSpy: any;
     beforeEach(() => {
       getSheetAndRowsSpy = jest
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("../googleSheetsUtils"), "getSheetAndRows")
         .mockImplementation(() =>
           toPromise({
@@ -62,12 +63,15 @@ describe("updateStandingsUtils", () => {
           })
         );
       getSeasonIdSpy = jest
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("./updateStandingsUtils"), "getSeasonId")
         .mockImplementation();
       getDriverRowSpy = jest
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("./updateStandingsUtils"), "getDriverRow")
         .mockImplementation();
       updateRowSpy = jest
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("./updateStandingsUtils"), "updateRow")
         .mockImplementation(() => ({
           save: jest.fn(),
@@ -89,6 +93,7 @@ describe("updateStandingsUtils", () => {
     });
     it("should call functions correctly with one existing and one new driver row", async () => {
       getDriverRowSpy = jest
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("./updateStandingsUtils"), "getDriverRow")
         .mockImplementation(() => "mock");
       await addRaceToStandings(addRaceToStandingsRaceData, {

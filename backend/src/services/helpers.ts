@@ -91,7 +91,7 @@ export const parseLapTime = (time: any): string => {
 };
 
 const isRaceGroup = (group: any): group is RaceGroup => {
-  return Object.values(<any>RaceGroup).includes(group);
+  return Object.values(RaceGroup as any).includes(group);
 };
 
 export const parseGroup = (group: any): RaceGroup => {
