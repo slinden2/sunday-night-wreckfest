@@ -30,7 +30,7 @@ class Race {
         return bPoints - aPoints;
     }
     _sortGroupData(raceData) {
-        return raceData.map(groupData => groupData.sort(this._sortByPoints));
+        return raceData.map(groupData => groupData.sort((a, b) => this._sortByPoints(a, b)));
     }
     _addSeasonPoints(raceData) {
         const mergedArray = [];
