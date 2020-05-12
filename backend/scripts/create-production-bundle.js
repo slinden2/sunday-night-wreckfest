@@ -2,8 +2,7 @@ const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 
 const buildBackend = async () => {
-  // const cwd = "../";
-  await exec("npm run build");
+  await exec("npm run build:server");
 };
 
 const buildFrontend = async () => {
