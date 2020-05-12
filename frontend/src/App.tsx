@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import CalendarContainer from "./components/calendar/CalendarContainer";
 import StandingsContainer from "./components/standings/StandingsContainer";
+import SNWContainer from "./components/snw/SNWContainer";
 
 const App = () => {
   return (
@@ -16,6 +17,9 @@ const App = () => {
           </Route>
           <Route path="/standings">
             <StandingsContainer />
+          </Route>
+          <Route path="/snw">
+            <SNWContainer />
           </Route>
         </Switch>
       </div>
