@@ -12,7 +12,7 @@ export interface IRaceCalendarEvent {
 export interface ISeason {
   seasonId: string;
   seasonName: string;
-  events: [Omit<Omit<IRaceCalendarEvent, "seasonId">, "seasonName">];
+  events: [Omit<IRaceCalendarEvent, "seasonId" | "seasonName">];
 }
 
 export interface ISeasonHash {
