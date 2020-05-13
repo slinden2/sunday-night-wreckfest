@@ -8,6 +8,8 @@ export const toPromise = <T>(data: T): Promise<typeof data> =>
 
 export const toRaceCalendarEventsInput: any[] = [
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0401",
     isReady: "1",
     isCompleted: "1",
@@ -19,6 +21,8 @@ export const toRaceCalendarEventsInput: any[] = [
     raceLaps: "4",
   },
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0402",
     isReady: "0",
     isCompleted: "0",
@@ -33,6 +37,8 @@ export const toRaceCalendarEventsInput: any[] = [
 
 export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0401",
     isReady: true,
     isCompleted: true,
@@ -44,6 +50,8 @@ export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
     raceLaps: 4,
   },
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0402",
     isReady: false,
     isCompleted: false,
@@ -58,6 +66,8 @@ export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
 
 export const getRaceCalendarReturn: RaceCalendarEvent[] = [
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0401",
     isReady: true,
     isCompleted: true,
@@ -69,6 +79,8 @@ export const getRaceCalendarReturn: RaceCalendarEvent[] = [
     raceLaps: 4,
   },
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0402",
     isReady: true,
     isCompleted: true,
