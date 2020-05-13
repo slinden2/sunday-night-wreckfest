@@ -1,10 +1,10 @@
 import React from "react";
-import { IRaceCalendarEvent } from "../../types";
+import { ISeason } from "../../types";
 import Table from "../Table";
 import LoadingIndicator from "../LoadingIndicator";
 
 interface Props {
-  events: IRaceCalendarEvent[];
+  seasons: ISeason[];
   loading: boolean;
 }
 
@@ -17,12 +17,21 @@ const headerMap = {
 
 const headers = ["date", "trackName", "qLaps", "raceLaps"];
 
-const CalendarContent = ({ events, loading }: Props) => {
-  if (loading || !events) {
+const CalendarContent = ({ seasons, loading }: Props) => {
+  if (loading || !seasons) {
     return <LoadingIndicator />;
   }
 
-  return <Table data={events} headers={headers} headerMap={headerMap} />;
+  return (
+    <>
+      {seasons.map(season => (
+        <div key={season.seasonId}>
+          <h2>{season.seasonName}</h2>
+          <Table data={season.events} headers={headers} headerMap={headerMap} />
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default CalendarContent;
