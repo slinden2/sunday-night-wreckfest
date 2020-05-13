@@ -9,6 +9,7 @@ import {
 
 export interface IStandingRow {
   seasonId: string;
+  seasonName: string;
   driverId: string;
   driverName: string;
   racesDriven: number;
@@ -23,6 +24,7 @@ export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
   rawRows.forEach(row => {
     const driver: IStandingRow = {
       seasonId: parseEventId(row.seasonId, "seasonId"),
+      seasonName: parseString(row.seasonId, "seasonName"),
       driverId: parseDriverId(row.driverId),
       driverName: parseString(row.driverName, "driverName"),
       racesDriven: parseNumber(row.racesDriven, "racesDriven"),

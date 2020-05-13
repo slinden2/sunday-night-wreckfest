@@ -26,6 +26,7 @@ export interface INavItem {
 
 export interface IStandingRow {
   seasonId: string;
+  seasonName: string;
   driverId: string;
   driverName: string;
   racesDriven: number;
