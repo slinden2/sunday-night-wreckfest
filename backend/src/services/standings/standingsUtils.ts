@@ -24,7 +24,7 @@ export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
   rawRows.forEach(row => {
     const driver: IStandingRow = {
       seasonId: parseEventId(row.seasonId, "seasonId"),
-      seasonName: parseString(row.seasonId, "seasonName"),
+      seasonName: parseString(row.seasonName, "seasonName"),
       driverId: parseDriverId(row.driverId),
       driverName: parseString(row.driverName, "driverName"),
       racesDriven: parseNumber(row.racesDriven, "racesDriven"),

@@ -8,10 +8,9 @@ import {
 } from "./updateStandingsUtils";
 import { sleep } from "../../utils/misc";
 
-const getStandings = async (seasonId: string) => {
+const getStandings = async () => {
   const standings = await getSheetAndRows("standings");
-  const rawRows = standings.rows.filter(row => row.seasonId === seasonId);
-  const standingRows = toStandingRows(rawRows);
+  const standingRows = toStandingRows(standings.rows);
   return standingRows;
 };
 
