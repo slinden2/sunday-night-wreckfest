@@ -5,6 +5,8 @@ exports.toRaceCalendarEvents = (rawRows) => {
     const cleanRows = [];
     rawRows.forEach((row) => {
         const event = {
+            seasonId: helpers_1.parseEventId(row.seasonId, "seasonId"),
+            seasonName: helpers_1.parseString(row.seasonName, "seasonName"),
             eventId: helpers_1.parseEventId(row.eventId, "eventId"),
             isReady: helpers_1.parseNumericBoolean(row.isReady, "isReady"),
             isCompleted: helpers_1.parseNumericBoolean(row.isCompleted, "isCompleted"),

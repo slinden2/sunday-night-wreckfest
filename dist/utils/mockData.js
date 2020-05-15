@@ -6,6 +6,8 @@ exports.toPromise = (data) => new Promise(resolve => {
 });
 exports.toRaceCalendarEventsInput = [
     {
+        seasonId: "0400",
+        seasonName: "SEASON 4",
         eventId: "0401",
         isReady: "1",
         isCompleted: "1",
@@ -17,6 +19,8 @@ exports.toRaceCalendarEventsInput = [
         raceLaps: "4",
     },
     {
+        seasonId: "0400",
+        seasonName: "SEASON 4",
         eventId: "0402",
         isReady: "0",
         isCompleted: "0",
@@ -30,6 +34,8 @@ exports.toRaceCalendarEventsInput = [
 ];
 exports.toRaceCalendarEventsReturn = [
     {
+        seasonId: "0400",
+        seasonName: "SEASON 4",
         eventId: "0401",
         isReady: true,
         isCompleted: true,
@@ -41,6 +47,8 @@ exports.toRaceCalendarEventsReturn = [
         raceLaps: 4,
     },
     {
+        seasonId: "0400",
+        seasonName: "SEASON 4",
         eventId: "0402",
         isReady: false,
         isCompleted: false,
@@ -54,6 +62,8 @@ exports.toRaceCalendarEventsReturn = [
 ];
 exports.getRaceCalendarReturn = [
     {
+        seasonId: "0400",
+        seasonName: "SEASON 4",
         eventId: "0401",
         isReady: true,
         isCompleted: true,
@@ -65,6 +75,8 @@ exports.getRaceCalendarReturn = [
         raceLaps: 4,
     },
     {
+        seasonId: "0400",
+        seasonName: "SEASON 4",
         eventId: "0402",
         isReady: true,
         isCompleted: true,
@@ -211,6 +223,7 @@ exports.addRaceToStandingsRaceData = [
 exports.toStandingRowsInput = [
     {
         seasonId: "0400",
+        seasonName: "SEASON 4",
         driverId: "0008",
         driverName: "Kohtupora98",
         racesDriven: "1",
@@ -220,6 +233,7 @@ exports.toStandingRowsInput = [
     },
     {
         seasonId: "0400",
+        seasonName: "SEASON 4",
         driverId: "0013",
         driverName: "Mursu890",
         racesDriven: "2",
@@ -231,6 +245,7 @@ exports.toStandingRowsInput = [
 exports.toStandingRowsReturn = [
     {
         seasonId: "0400",
+        seasonName: "SEASON 4",
         driverId: "0008",
         driverName: "Kohtupora98",
         racesDriven: 1,
@@ -240,6 +255,7 @@ exports.toStandingRowsReturn = [
     },
     {
         seasonId: "0400",
+        seasonName: "SEASON 4",
         driverId: "0013",
         driverName: "Mursu890",
         racesDriven: 2,
@@ -252,6 +268,7 @@ exports.getStandingsReturn = [
     {
         seasonId: "0400",
         driverId: "0001",
+        seasonName: "SEASON 4",
         driverName: "Test Driver 1",
         racesDriven: 1,
         points: 100,
@@ -261,6 +278,7 @@ exports.getStandingsReturn = [
     {
         seasonId: "0400",
         driverId: "0002",
+        seasonName: "SEASON 4",
         driverName: "Test Driver 2",
         racesDriven: 2,
         points: 180,
