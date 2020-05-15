@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const services_1 = require("../services");
+const eventService_1 = require("../services/event/eventService");
 const router = express_1.default.Router();
 router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -26,8 +27,10 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
 }));
 router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const calendar = yield services_1.calendarService.getRaceCalendar();
         const raceData = yield services_1.eventService.getRaceData(req.params.id);
-        return res.status(200).json(raceData);
+        const mergedData = eventService_1.mergeRaceData(req.params.id, calendar, raceData);
+        return res.status(200).json(mergedData);
     }
     catch (err) {
         return next(err);

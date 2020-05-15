@@ -21,7 +21,15 @@ exports.getRaceData = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const raceData = new race_1.default(driverRaceDetails);
     return raceData.getRaceData;
 });
+exports.mergeRaceData = (id, calendar, raceData) => {
+    const race = calendar.find(event => event.eventId === id);
+    if (!race) {
+        throw new Error("No races found with given id");
+    }
+    return Object.assign(Object.assign({}, race), { details: raceData });
+};
 exports.default = {
     getRaceData: exports.getRaceData,
+    mergeRaceData: exports.mergeRaceData,
 };
 //# sourceMappingURL=eventService.js.map
