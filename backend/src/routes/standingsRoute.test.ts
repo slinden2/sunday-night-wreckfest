@@ -20,23 +20,23 @@ describe("GET /api/standings", () => {
 
   it("should return json", async () => {
     await api
-      .get("/api/standings/0400")
+      .get("/api/standings")
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
 
   it("should call getStandings from standingsService", async () => {
-    await api.get("/api/standings/0400").expect(200);
+    await api.get("/api/standings").expect(200);
     expect(mockStandingsService).toHaveBeenCalled();
   });
 
   it("should return 2 drivers", async () => {
-    const res = await api.get("/api/standings/0400");
+    const res = await api.get("/api/standings");
     expect(res.body).toHaveLength(2);
   });
 
   it("should return the mockData", async () => {
-    const res = await api.get("/api/standings/0400");
+    const res = await api.get("/api/standings");
     expect(res.body).toEqual(expect.arrayContaining(getStandingsReturn));
   });
 });

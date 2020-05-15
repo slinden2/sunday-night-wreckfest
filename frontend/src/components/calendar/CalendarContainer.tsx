@@ -1,9 +1,10 @@
 import React from "react";
 import { useFetchData } from "../../hooks";
 import config from "../../config";
-import { IRaceCalendarEvent } from "../../types";
+import { IRaceCalendarEvent, ISeason } from "../../types";
 import PageContainer from "../PageContainer";
 import CalendarContent from "./CalendarContent";
+import { calendarToSeasons } from "../../utils";
 
 const raceCalendarUrl = config.baseUrl + "/races";
 
@@ -18,12 +19,14 @@ const CalendarContainer = () => {
     loadRaceCalendar();
   }, [invoke]);
 
+  let seasons: ISeason[] = [];
+  if (!loading && data) {
+    seasons = calendarToSeasons(data as IRaceCalendarEvent[]);
+  }
+
   return (
     <PageContainer title="Kisakalenteri">
-      <CalendarContent
-        events={data as IRaceCalendarEvent[]}
-        loading={loading}
-      />
+      <CalendarContent seasons={seasons} loading={loading} />
     </PageContainer>
   );
 };

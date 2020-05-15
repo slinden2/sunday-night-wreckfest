@@ -8,6 +8,8 @@ export const toPromise = <T>(data: T): Promise<typeof data> =>
 
 export const toRaceCalendarEventsInput: any[] = [
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0401",
     isReady: "1",
     isCompleted: "1",
@@ -19,6 +21,8 @@ export const toRaceCalendarEventsInput: any[] = [
     raceLaps: "4",
   },
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0402",
     isReady: "0",
     isCompleted: "0",
@@ -33,6 +37,8 @@ export const toRaceCalendarEventsInput: any[] = [
 
 export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0401",
     isReady: true,
     isCompleted: true,
@@ -44,6 +50,8 @@ export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
     raceLaps: 4,
   },
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0402",
     isReady: false,
     isCompleted: false,
@@ -58,6 +66,8 @@ export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
 
 export const getRaceCalendarReturn: RaceCalendarEvent[] = [
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0401",
     isReady: true,
     isCompleted: true,
@@ -69,6 +79,8 @@ export const getRaceCalendarReturn: RaceCalendarEvent[] = [
     raceLaps: 4,
   },
   {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
     eventId: "0402",
     isReady: true,
     isCompleted: true,
@@ -224,6 +236,7 @@ export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [
 export const toStandingRowsInput: any[] = [
   {
     seasonId: "0400",
+    seasonName: "SEASON 4",
     driverId: "0008",
     driverName: "Kohtupora98",
     racesDriven: "1",
@@ -233,6 +246,7 @@ export const toStandingRowsInput: any[] = [
   },
   {
     seasonId: "0400",
+    seasonName: "SEASON 4",
     driverId: "0013",
     driverName: "Mursu890",
     racesDriven: "2",
@@ -245,6 +259,7 @@ export const toStandingRowsInput: any[] = [
 export const toStandingRowsReturn: IStandingRow[] = [
   {
     seasonId: "0400",
+    seasonName: "SEASON 4",
     driverId: "0008",
     driverName: "Kohtupora98",
     racesDriven: 1,
@@ -254,6 +269,7 @@ export const toStandingRowsReturn: IStandingRow[] = [
   },
   {
     seasonId: "0400",
+    seasonName: "SEASON 4",
     driverId: "0013",
     driverName: "Mursu890",
     racesDriven: 2,
@@ -267,6 +283,7 @@ export const getStandingsReturn: IStandingRow[] = [
   {
     seasonId: "0400",
     driverId: "0001",
+    seasonName: "SEASON 4",
     driverName: "Test Driver 1",
     racesDriven: 1,
     points: 100,
@@ -276,6 +293,7 @@ export const getStandingsReturn: IStandingRow[] = [
   {
     seasonId: "0400",
     driverId: "0002",
+    seasonName: "SEASON 4",
     driverName: "Test Driver 2",
     racesDriven: 2,
     points: 180,

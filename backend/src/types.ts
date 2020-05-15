@@ -1,4 +1,6 @@
 export interface RaceCalendarEvent {
+  seasonId: string;
+  seasonName: string;
   eventId: string;
   isReady: boolean;
   isCompleted: boolean;
