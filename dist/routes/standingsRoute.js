@@ -17,16 +17,7 @@ const services_1 = require("../services");
 const router = express_1.default.Router();
 router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const standings = yield services_1.standingsService.getStandings("0400");
-        res.status(200).json(standings);
-    }
-    catch (err) {
-        next(err);
-    }
-}));
-router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const standings = yield services_1.standingsService.getStandings(req.params.id);
+        const standings = yield services_1.standingsService.getStandings();
         res.status(200).json(standings);
     }
     catch (err) {

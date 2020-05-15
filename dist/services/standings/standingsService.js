@@ -14,10 +14,9 @@ const standingsUtils_1 = require("./standingsUtils");
 const __1 = require("..");
 const updateStandingsUtils_1 = require("./updateStandingsUtils");
 const misc_1 = require("../../utils/misc");
-const getStandings = (seasonId) => __awaiter(void 0, void 0, void 0, function* () {
+const getStandings = () => __awaiter(void 0, void 0, void 0, function* () {
     const standings = yield googleSheetsUtils_1.getSheetAndRows("standings");
-    const rawRows = standings.rows.filter(row => row.seasonId === seasonId);
-    const standingRows = standingsUtils_1.toStandingRows(rawRows);
+    const standingRows = standingsUtils_1.toStandingRows(standings.rows);
     return standingRows;
 });
 exports.updateStandings = () => __awaiter(void 0, void 0, void 0, function* () {

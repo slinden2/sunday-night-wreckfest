@@ -6,6 +6,7 @@ exports.toStandingRows = (rawRows) => {
     rawRows.forEach(row => {
         const driver = {
             seasonId: helpers_1.parseEventId(row.seasonId, "seasonId"),
+            seasonName: helpers_1.parseString(row.seasonName, "seasonName"),
             driverId: helpers_1.parseDriverId(row.driverId),
             driverName: helpers_1.parseString(row.driverName, "driverName"),
             racesDriven: helpers_1.parseNumber(row.racesDriven, "racesDriven"),
