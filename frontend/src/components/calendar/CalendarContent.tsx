@@ -13,9 +13,10 @@ const headerMap = {
   trackName: "Track",
   qLaps: "Q Laps",
   raceLaps: "Race Laps",
+  link: "Results",
 };
 
-const headers = ["date", "trackName", "qLaps", "raceLaps"];
+const headers = ["date", "trackName", "qLaps", "raceLaps", "link"];
 
 const CalendarContent = ({ seasons, loading }: Props) => {
   if (loading || !seasons) {

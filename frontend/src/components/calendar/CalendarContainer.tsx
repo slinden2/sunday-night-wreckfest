@@ -5,6 +5,7 @@ import { IRaceCalendarEvent, ISeason } from "../../types";
 import PageContainer from "../PageContainer";
 import CalendarContent from "./CalendarContent";
 import { calendarToSeasons } from "../../utils";
+import { Link } from "react-router-dom";
 
 const raceCalendarUrl = config.baseUrl + "/races";
 
@@ -21,7 +22,12 @@ const CalendarContainer = () => {
 
   let seasons: ISeason[] = [];
   if (!loading && data) {
-    seasons = calendarToSeasons(data as IRaceCalendarEvent[]);
+    seasons = calendarToSeasons(
+      data.map((event: IRaceCalendarEvent) => ({
+        ...event,
+        link: <Link to={config.getRaceUrl(event.eventId)}>Link</Link>,
+      })) as IRaceCalendarEvent[]
+    );
   }
 
   return (

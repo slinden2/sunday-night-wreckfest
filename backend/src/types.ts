@@ -38,3 +38,7 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   seasonPoints?: number;
   verifyScore?: boolean;
 }
+
+export interface IRaceDetails extends RaceCalendarEvent {
+  details: IDriverSeasonRaceData[];
+}

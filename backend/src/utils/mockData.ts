@@ -301,3 +301,39 @@ export const getStandingsReturn: IStandingRow[] = [
     eventIds: ["0401", "0402"],
   },
 ];
+
+export const mergeRaceDataReturn = {
+  date: "20200101",
+  eventId: "0401",
+  hasPowerLimit: true,
+  isCompleted: true,
+  isProcessed: true,
+  isReady: true,
+  qLaps: 5,
+  raceLaps: 4,
+  seasonId: "0400",
+  seasonName: "SEASON 4",
+  trackName: "Test Track",
+  details: [
+    {
+      driverId: "0001",
+      driverName: "Test Driver",
+      eventId: "0401",
+      group: "A",
+      heatPositions: [1, 2, 3, 4, 5],
+      isProcessed: true,
+      isReady: true,
+      qTime: "01:01,500",
+    },
+    {
+      driverId: "0002",
+      driverName: "Test Driver2",
+      eventId: "0401",
+      group: "A",
+      heatPositions: [2, 3, 4, 5, 6],
+      isProcessed: true,
+      isReady: true,
+      qTime: "01:00,500",
+    },
+  ],
+};
