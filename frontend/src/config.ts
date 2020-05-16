@@ -1,9 +1,7 @@
-const port = 3001;
-const baseUrl = `http://localhost:${port}/api`;
+const baseUrl = `/api`;
 const getRaceUrl = (id: string) => `/races/${id}`;
 
 export default {
-  port,
   baseUrl,
   getRaceUrl,
 };
