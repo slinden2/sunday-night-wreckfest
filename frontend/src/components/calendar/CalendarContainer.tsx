@@ -1,38 +1,46 @@
 import React from "react";
 import { useFetchData } from "../../hooks";
 import config from "../../config";
-import { IRaceCalendarEvent, ISeason } from "../../types";
+import { IRaceCalendarEvent } from "../../types";
 import PageContainer from "../PageContainer";
 import CalendarContent from "./CalendarContent";
-import { calendarToSeasons } from "../../utils";
 import { Link } from "react-router-dom";
+import { useStateValue, setCalendar } from "../../state";
 
 const raceCalendarUrl = config.baseUrl + "/races";
 
 const CalendarContainer = () => {
-  const [calendar, invoke] = useFetchData(raceCalendarUrl);
-  const { data, loading } = calendar;
+  const [response, invoke] = useFetchData(raceCalendarUrl);
+  const [{ calendar }, dispatch] = useStateValue();
 
+  // Fetch calendar data from api
   React.useEffect(() => {
     const loadRaceCalendar = async () => {
-      await invoke();
+      try {
+        await invoke();
+      } catch (err) {
+        console.error(err);
+      }
     };
-    loadRaceCalendar();
-  }, [invoke]);
+    if (!calendar.length) {
+      loadRaceCalendar();
+    }
+  }, [invoke, calendar]);
 
-  let seasons: ISeason[] = [];
-  if (!loading && data) {
-    seasons = calendarToSeasons(
-      data.map((event: IRaceCalendarEvent) => ({
+  // Put calendar data in state
+  React.useEffect(() => {
+    if (response.data) {
+      const dataWithLinks = response.data.map((event: IRaceCalendarEvent) => ({
         ...event,
         link: <Link to={config.getRaceUrl(event.eventId)}>Link</Link>,
-      })) as IRaceCalendarEvent[]
-    );
-  }
+      })) as IRaceCalendarEvent[];
+      dispatch(setCalendar(dataWithLinks));
+    }
+  }, [response.data, dispatch]);
 
   return (
     <PageContainer title="Kisakalenteri">
-      <CalendarContent seasons={seasons} loading={loading} />
+      <CalendarContent seasons={calendar} loading={response.loading} />
     </PageContainer>
   );
 };
