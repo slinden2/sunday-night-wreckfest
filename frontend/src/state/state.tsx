@@ -1,13 +1,17 @@
 import React from "react";
-import { ISeason } from "../types";
+import { ISeason, IRaceDetails, IStandingRow } from "../types";
 import { Action } from "./reducer";
 
 export type State = {
   calendar: ISeason[];
+  races: IRaceDetails[];
+  standings: IStandingRow[];
 };
 
 const initialState: State = {
   calendar: [],
+  races: [],
+  standings: [],
 };
 
 export const StateContext = React.createContext<

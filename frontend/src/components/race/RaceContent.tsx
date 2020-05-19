@@ -3,7 +3,7 @@ import { IRaceDetails } from "../../types";
 import Table from "../Table";
 
 interface Props {
-  raceDetails: IRaceDetails;
+  data?: IRaceDetails;
 }
 
 const headers = [
@@ -24,8 +24,10 @@ const headerMap = {
   qTime: "Aika-ajotulos",
 };
 
-const RaceContent = ({ raceDetails }: Props) => {
-  const newDetails = raceDetails.details.map(driver => ({
+const RaceContent = ({ data }: Props) => {
+  if (!data) return <div>The race does not exist.</div>;
+
+  const newDetails = data.details.map(driver => ({
     ...driver,
     heatPoints: driver.heatPoints?.join(", "),
     heatPositions: driver.heatPositions?.join(", "),
@@ -36,19 +38,19 @@ const RaceContent = ({ raceDetails }: Props) => {
         <tbody>
           <tr>
             <td>Date</td>
-            <td>{raceDetails.date}</td>
+            <td>{data.date}</td>
           </tr>
           <tr>
             <td>Qualifying Laps</td>
-            <td>{raceDetails.qLaps}</td>
+            <td>{data.qLaps}</td>
           </tr>
           <tr>
             <td>Race Laps</td>
-            <td>{raceDetails.raceLaps}</td>
+            <td>{data.raceLaps}</td>
           </tr>
           <tr>
             <td>Power Limit</td>
-            <td>{raceDetails.hasPowerLimit ? "YES" : "NO"}</td>
+            <td>{data.hasPowerLimit ? "YES" : "NO"}</td>
           </tr>
         </tbody>
       </table>

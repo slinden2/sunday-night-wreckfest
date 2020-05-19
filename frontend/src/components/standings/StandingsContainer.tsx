@@ -1,14 +1,12 @@
 import React from "react";
-import { useFetchData } from "../../hooks";
 import config from "../../config";
+import { setStandings, useStateValue } from "../../state";
 
 import PageContainer from "../PageContainer";
 import StandingsContent from "./StandingsContent";
 import { IStandingRow } from "../../types";
 import Dropdown from "../Dropdown";
 import LoadingIndicator from "../LoadingIndicator";
-
-const standingsUrl = config.baseUrl + "/standings";
 
 export type Options = {
   value: string;
@@ -35,19 +33,27 @@ const getOptions = (standings: IStandingRow[]): Options[] => {
 };
 
 const StandingsContainer = () => {
-  const [data, invoke] = useFetchData(standingsUrl);
+  const [{ standings }, dispatch] = useStateValue();
+  const isLoading = standings.length === 0;
   const [selected, setSelected] = React.useState<string>("0400");
-  const { data: temp, loading } = data;
-  const standings = temp as IStandingRow[];
 
   React.useEffect(() => {
+    const standingsUrl = config.baseUrl + "/standings";
     const loadStandings = async () => {
-      await invoke();
+      try {
+        const response = await fetch(standingsUrl);
+        const json = await response.json();
+        dispatch(setStandings(json));
+      } catch (err) {
+        console.error(err);
+      }
     };
-    loadStandings();
-  }, [invoke]);
+    if (isLoading) {
+      loadStandings();
+    }
+  }, [dispatch, isLoading]);
 
-  if (loading || !standings) {
+  if (isLoading) {
     return <LoadingIndicator />;
   }
 

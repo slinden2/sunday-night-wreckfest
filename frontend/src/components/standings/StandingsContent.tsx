@@ -15,6 +15,8 @@ const headerMap = {
   powerLimit: "Power Limit",
 };
 const StandingsContent = ({ standings }: Props) => {
+  if (!standings.length) return <div>No standings found.</div>;
+
   return (
     <div>
       <h2>{standings[0].seasonName}</h2>

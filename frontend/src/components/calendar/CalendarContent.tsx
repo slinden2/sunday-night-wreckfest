@@ -1,12 +1,7 @@
 import React from "react";
-import { ISeason } from "../../types";
 import Table from "../Table";
 import LoadingIndicator from "../LoadingIndicator";
-
-interface Props {
-  seasons: ISeason[];
-  loading: boolean;
-}
+import { useStateValue } from "../../state";
 
 const headerMap = {
   date: "Date",
@@ -18,14 +13,17 @@ const headerMap = {
 
 const headers = ["date", "trackName", "qLaps", "raceLaps", "link"];
 
-const CalendarContent = ({ seasons, loading }: Props) => {
-  if (loading || !seasons) {
+const CalendarContent = () => {
+  const [{ calendar }] = useStateValue();
+  const isLoading = calendar.length === 0;
+
+  if (isLoading) {
     return <LoadingIndicator />;
   }
 
   return (
     <>
-      {seasons.map(season => (
+      {calendar.map(season => (
         <div key={season.seasonId}>
           <h2>{season.seasonName}</h2>
           <Table data={season.events} headers={headers} headerMap={headerMap} />

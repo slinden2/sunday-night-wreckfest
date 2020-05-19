@@ -1,34 +1,42 @@
 import React from "react";
 import PageContainer from "../PageContainer";
 import { useParams } from "react-router-dom";
-import { useFetchData } from "../../hooks";
 import config from "../../config";
-import LoadingIndicator from "../LoadingIndicator";
+import { setRaces } from "../../state";
 import RaceContent from "./RaceContent";
-import { IRaceDetails } from "../../types";
+import { useStateValue } from "../../state";
+import LoadingIndicator from "../LoadingIndicator";
 
 const RaceContainer = () => {
   const { id } = useParams();
-  const [{ data, loading }, invoke] = useFetchData(
-    config.baseUrl + config.getRaceUrl(id)
-  );
-  const raceDetails = data as IRaceDetails;
+  const [{ races }, dispatch] = useStateValue();
+  const isLoading = !races.some(race => race.eventId === id);
 
   React.useEffect(() => {
+    const raceUrl = config.baseUrl + config.getRaceUrl(id);
     const loadRaceData = async () => {
-      await invoke();
+      try {
+        const response = await fetch(raceUrl);
+        const json = await response.json();
+        dispatch(setRaces(json));
+      } catch (err) {
+        console.error(err);
+      }
     };
-    loadRaceData();
-  }, [invoke]);
+    if (isLoading) {
+      loadRaceData();
+    }
+  }, [id, dispatch, isLoading]);
 
-  if (loading || !data) {
+  if (isLoading) {
     return <LoadingIndicator />;
   }
+
+  const race = races.find(race => race.eventId === id);
+
   return (
-    <PageContainer
-      title={`${raceDetails.seasonName} | ${raceDetails.trackName}`}
-    >
-      <RaceContent raceDetails={raceDetails} />
+    <PageContainer title={`${race?.seasonName} | ${race?.trackName}`}>
+      <RaceContent data={race} />
     </PageContainer>
   );
 };
