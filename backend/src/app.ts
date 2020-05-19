@@ -19,15 +19,15 @@ if (config.ENV === "test" || config.ENV === "CI") {
   });
 }
 
+app.use("/api/races", raceRoute);
+app.use("/api/standings", standingsRoute);
+
 if (config.ENV === "production") {
   app.use(express.static(path.join(__dirname, "client")));
-  app.get("/", (_req, res) => {
+  app.get("*", (_req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "index.html"));
   });
 }
-
-app.use("/api/races", raceRoute);
-app.use("/api/standings", standingsRoute);
 
 app.use(middleware.errorHandler);
 app.use(middleware.unknownEndpoint);
