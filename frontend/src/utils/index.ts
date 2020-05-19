@@ -39,3 +39,15 @@ export function calendarToSeasons(events: IRaceCalendarEvent[]): ISeason[] {
 
   return seasons;
 }
+
+// Supported format: MM:SS,FFF
+export const convertTimeToSecs = (time: string): number => {
+  return time
+    .split(/[:,]/)
+    .map((segment, i) => {
+      if (i === 0) return 60 * Number(segment);
+      if (i === 1) return Number(segment);
+      else return Number(segment) / 1000;
+    })
+    .reduce((acc, cur) => acc + cur);
+};
