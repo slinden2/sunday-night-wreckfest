@@ -14,11 +14,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const services_1 = require("../services");
+const config_1 = __importDefault(require("../config"));
 const router = express_1.default.Router();
 router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const standings = yield services_1.standingsService.getStandings();
         res.status(200).json(standings);
+    }
+    catch (err) {
+        next(err);
+    }
+}));
+router.get("/update/:hash", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (req.params.hash !== config_1.default.STANDINGS_UPDATE_HASH) {
+            throw new Error("Invalid standings update hash");
+        }
+        yield services_1.standingsService.updateStandings();
+        res.status(200).json({
+            message: "Standings successfully updated.",
+        });
     }
     catch (err) {
         next(err);
