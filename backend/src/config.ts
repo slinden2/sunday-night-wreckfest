@@ -10,6 +10,8 @@ const GS_SERVICE_ACCOUNT_EMAIL: string | undefined =
 const GS_PRIVATE_KEY: string | undefined = process.env.GS_PRIVATE_KEY?.split(
   "\\n"
 ).join("\n");
+const STANDINGS_UPDATE_HASH: string | undefined =
+  process.env.STANDINGS_UPDATE_HASH;
 
 export default {
   ENV,
@@ -17,4 +19,5 @@ export default {
   GS_ID,
   GS_SERVICE_ACCOUNT_EMAIL,
   GS_PRIVATE_KEY,
+  STANDINGS_UPDATE_HASH,
 };

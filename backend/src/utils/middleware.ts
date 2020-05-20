@@ -27,6 +27,9 @@ const errorHandler = (
   if (error.name === "DataIntegrityError") {
     response.status(500).send({ error: error.message });
   }
+  if (error.message === "Invalid standings update hash") {
+    response.status(400).send({ error: error.message });
+  }
   next(error);
 };
 
