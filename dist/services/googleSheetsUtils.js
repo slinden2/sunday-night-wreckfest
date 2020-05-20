@@ -43,6 +43,7 @@ exports.makeBackup = (sheetName) => __awaiter(void 0, void 0, void 0, function* 
     newSheet.updateProperties({
         title: `${sheetName} ${misc_1.getSimpleTime()}`,
     });
+    yield misc_1.sleep(2000);
     yield newSheet.setHeaderRow(oldSheet.headerValues);
     const rows = yield oldSheet.getRows();
     const rawRows = rows.map((row) => row._rawData);
