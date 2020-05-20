@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import config from "../config";
-import { getSimpleTime } from "../utils/misc";
+import { getSimpleTime, sleep } from "../utils/misc";
 
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
@@ -52,6 +52,8 @@ export const makeBackup = async (sheetName: string) => {
   newSheet.updateProperties({
     title: `${sheetName} ${getSimpleTime()}`,
   });
+
+  await sleep(2000);
 
   // Set the header row of the new sheet as in the old sheet
   await newSheet.setHeaderRow(oldSheet.headerValues);
