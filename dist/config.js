@@ -11,11 +11,13 @@ const PORT = Number(process.env.PORT) || 3001;
 const GS_ID = process.env.GS_ID;
 const GS_SERVICE_ACCOUNT_EMAIL = process.env.GS_SERVICE_ACCOUNT_EMAIL;
 const GS_PRIVATE_KEY = (_a = process.env.GS_PRIVATE_KEY) === null || _a === void 0 ? void 0 : _a.split("\\n").join("\n");
+const STANDINGS_UPDATE_HASH = process.env.STANDINGS_UPDATE_HASH;
 exports.default = {
     ENV,
     PORT,
     GS_ID,
     GS_SERVICE_ACCOUNT_EMAIL,
     GS_PRIVATE_KEY,
+    STANDINGS_UPDATE_HASH,
 };
 //# sourceMappingURL=config.js.map
