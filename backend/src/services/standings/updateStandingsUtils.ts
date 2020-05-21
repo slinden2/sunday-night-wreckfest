@@ -5,8 +5,7 @@ This is a Typescript file, but the language is not used
 in the best possible way as the google-spreadsheet has no types.
 */
 
-import { IDriverSeasonRaceData } from "../../types";
-import { parseEventId } from "../helpers";
+import { IDriverSeasonRaceData, RaceCalendarEvent } from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import { getSumOfArrayElements } from "../../utils/misc";
 import config from "../../config";
@@ -57,11 +56,6 @@ export const updateRow = (
   return driverRow;
 };
 
-export const getSeasonId = (eventId: string) => {
-  const parsedEventId = parseEventId(eventId, "eventId");
-  return parsedEventId.substr(0, 2) + "00";
-};
-
 export const getDriverRow = (
   seasonId: string,
   driverId: string,
@@ -73,10 +67,8 @@ export const getDriverRow = (
 };
 
 export const addRaceToStandings = async (
-  raceData: IDriverSeasonRaceData[],
-  options: {
-    hasPowerLimit: boolean;
-  }
+  event: RaceCalendarEvent,
+  raceData: IDriverSeasonRaceData[]
 ): Promise<void> => {
   const standings = await getSheetAndRows("standings");
 
@@ -85,12 +77,16 @@ export const addRaceToStandings = async (
 
   for (const [idx, driver] of raceData.entries()) {
     const pos = idx + 1;
-    const seasonId = getSeasonId(driver.eventId);
-    const driverRow = getDriverRow(seasonId, driver.driverId, standings.rows);
+    const driverRow = getDriverRow(
+      event.seasonId,
+      driver.driverId,
+      standings.rows
+    );
 
     if (!driverRow) {
       newRows.push({
-        seasonId,
+        seasonId: event.seasonId,
+        seasonName: event.seasonName,
         driverId: driver.driverId,
         driverName: driver.driverName,
         points: driver.seasonPoints,
@@ -107,7 +103,7 @@ export const addRaceToStandings = async (
       pos,
       driverRow,
       driver,
-      options.hasPowerLimit
+      event.hasPowerLimit
     );
 
     rowsToUpdate.push(updatedDriverRow.save());
@@ -143,9 +139,7 @@ export const updatePowerLimit = async () => {
   await Promise.all(rowsToUpdate);
 };
 
-export const markDuplicates = async (
-  data: IDriverSeasonRaceData[]
-): Promise<typeof data> => {
+export const markDuplicates = (data: IDriverSeasonRaceData[]): typeof data => {
   for (let i = 0; i < data.length - 1; i++) {
     if (
       getSumOfArrayElements(data[i].heatPoints) ===
@@ -156,4 +150,13 @@ export const markDuplicates = async (
     }
   }
   return data;
+};
+
+// Adds update completion time to the standings sheet
+export const addUpdateTime = async () => {
+  const standings = await getSheetAndRows("standings");
+  await standings.sheet.loadCells("M6");
+  const cell = standings.sheet.getCellByA1("M6");
+  cell.value = new Date().toLocaleString("fi");
+  await standings.sheet.saveUpdatedCells();
 };

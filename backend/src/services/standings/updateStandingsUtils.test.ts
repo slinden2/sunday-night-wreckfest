@@ -6,24 +6,15 @@ import {
   updateRowDriver,
   updateRowReturn,
   addRaceToStandingsRaceData,
+  toRaceCalendarEventsReturn,
 } from "../../utils/mockData";
 import {
-  getSeasonId,
   getDriverRow,
   updateRow,
   addRaceToStandings,
 } from "./updateStandingsUtils";
-import { DataIntegrityError } from "../../utils/errors";
 
 describe("updateStandingsUtils", () => {
-  describe("getSeasonId", () => {
-    it("should return first two nums of eventId with 00 suffix", () => {
-      expect(getSeasonId("0401")).toEqual("0400");
-    });
-    it("should throw with incorrect eventId", () => {
-      expect(() => getSeasonId("04011")).toThrow(DataIntegrityError);
-    });
-  });
   describe("getDriverRow", () => {
     it("should return driver by seasonId and driverId", () => {
       expect(getDriverRow("0400", "0001", getDriverRowInput)).toEqual(
@@ -49,7 +40,6 @@ describe("updateStandingsUtils", () => {
 
   describe("addRaceToStandings", () => {
     let getSheetAndRowsSpy: any;
-    let getSeasonIdSpy: any;
     let getDriverRowSpy: any;
     let updateRowSpy: any;
     beforeEach(() => {
@@ -62,10 +52,6 @@ describe("updateStandingsUtils", () => {
             rows: "mock",
           })
         );
-      getSeasonIdSpy = jest
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        .spyOn(require("./updateStandingsUtils"), "getSeasonId")
-        .mockImplementation();
       getDriverRowSpy = jest
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("./updateStandingsUtils"), "getDriverRow")
@@ -83,11 +69,11 @@ describe("updateStandingsUtils", () => {
     });
 
     it("should call functions correctly with new driver rows", async () => {
-      await addRaceToStandings(addRaceToStandingsRaceData, {
-        hasPowerLimit: true,
-      });
+      await addRaceToStandings(
+        toRaceCalendarEventsReturn[0],
+        addRaceToStandingsRaceData
+      );
       expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(1);
-      expect(getSeasonIdSpy).toHaveBeenCalledTimes(2);
       expect(getDriverRowSpy).toHaveBeenCalledTimes(2);
       expect(updateRowSpy).not.toHaveBeenCalled();
     });
@@ -96,11 +82,11 @@ describe("updateStandingsUtils", () => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         .spyOn(require("./updateStandingsUtils"), "getDriverRow")
         .mockImplementation(() => "mock");
-      await addRaceToStandings(addRaceToStandingsRaceData, {
-        hasPowerLimit: true,
-      });
+      await addRaceToStandings(
+        toRaceCalendarEventsReturn[0],
+        addRaceToStandingsRaceData
+      );
       expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(1);
-      expect(getSeasonIdSpy).toHaveBeenCalledTimes(2);
       expect(getDriverRowSpy).toHaveBeenCalledTimes(2);
       expect(updateRowSpy).toHaveBeenCalledTimes(2);
     });
