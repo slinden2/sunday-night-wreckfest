@@ -60,6 +60,9 @@ exports.toRaceCalendarEventsReturn = [
         raceLaps: 6,
     },
 ];
+exports.getDrawsRaceCal = exports.toRaceCalendarEventsReturn.map(event => {
+    return Object.assign(Object.assign({}, event), { isReady: true, isCompleted: true, isProcessed: false });
+});
 exports.getRaceCalendarReturn = [
     {
         seasonId: "0400",
@@ -140,6 +143,9 @@ exports.getRaceDataReturn = [
         heatPositions: [2, 3, 4, 5, 6],
     },
 ];
+exports.getDrawsReturn = exports.getRaceDataReturn.map(driver => {
+    return Object.assign(Object.assign({}, driver), { heatPoints: [50, 50, 50, 50, 50] });
+});
 exports.getDriverRowInput = [
     {
         driverId: "0001",
@@ -192,7 +198,6 @@ exports.updateRowReturn = {
     points: 50,
     powerLimit: "",
     eventIds: "0401;0402",
-    verifyScore: "",
 };
 exports.addRaceToStandingsRaceData = [
     {

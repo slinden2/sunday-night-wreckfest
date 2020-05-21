@@ -27,6 +27,9 @@ class Race {
         if (!aPoints || !bPoints) {
             throw new errors_1.DataIntegrityError(`Missing heatPoints: aPoints ${aPoints}, bPoints: ${bPoints}`);
         }
+        if (aPoints === bPoints && a.drawPosition && b.drawPosition) {
+            return a.drawPosition - b.drawPosition;
+        }
         return bPoints - aPoints;
     }
     _sortGroupData(raceData) {

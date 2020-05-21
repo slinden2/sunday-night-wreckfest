@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const services_1 = require("../services");
 const eventService_1 = require("../services/event/eventService");
+const config_1 = __importDefault(require("../config"));
 const router = express_1.default.Router();
 router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -34,6 +35,20 @@ router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
     catch (err) {
         return next(err);
+    }
+}));
+router.get("/update/:hash", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (req.params.hash !== config_1.default.STANDINGS_UPDATE_HASH) {
+            throw new Error("Invalid standings update hash");
+        }
+        yield services_1.eventService.checkDraws();
+        res.status(200).json({
+            message: "eventDetails successfully updated.",
+        });
+    }
+    catch (err) {
+        next(err);
     }
 }));
 exports.default = router;
