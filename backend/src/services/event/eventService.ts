@@ -37,9 +37,7 @@ export const checkDraws = async () => {
   for (const event of eventList) {
     if (event.isReady && event.isCompleted && !event.isProcessed) {
       const raceData = await getRaceData(event.eventId);
-
       const rowsToVerify = getDraws(raceData);
-
       if (rowsToVerify.length) {
         const eventDetails = await getSheetAndRows("eventDetails");
         const promises: Promise<any>[] = [];

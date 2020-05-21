@@ -64,6 +64,12 @@ export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
   },
 ];
 
+export const getDrawsRaceCal: RaceCalendarEvent[] = toRaceCalendarEventsReturn.map(
+  event => {
+    return { ...event, isReady: true, isCompleted: true, isProcessed: false };
+  }
+);
+
 export const getRaceCalendarReturn: RaceCalendarEvent[] = [
   {
     seasonId: "0400",
@@ -147,6 +153,12 @@ export const getRaceDataReturn: IDriverSeasonRaceData[] = [
   },
 ];
 
+export const getDrawsReturn: IDriverSeasonRaceData[] = getRaceDataReturn.map(
+  driver => {
+    return { ...driver, heatPoints: [50, 50, 50, 50, 50] };
+  }
+);
+
 export const getDriverRowInput = [
   {
     driverId: "0001",
@@ -203,7 +215,6 @@ export const updateRowReturn = {
   points: 50,
   powerLimit: "",
   eventIds: "0401;0402",
-  verifyScore: "",
 };
 
 export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [
