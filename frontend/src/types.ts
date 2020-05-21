@@ -52,8 +52,8 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   qTime: string;
   group: RaceGroup;
   heatPositions: Array<number>;
-  heatPoints?: Array<number>;
-  seasonPoints?: number;
+  heatPoints: Array<number>;
+  seasonPoints: number;
   verifyScore?: boolean;
 }
 

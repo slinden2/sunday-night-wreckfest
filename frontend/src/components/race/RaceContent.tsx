@@ -40,11 +40,13 @@ const RaceContent = ({ data }: Props) => {
     return aTime - bTime;
   });
 
-  const raceDetails = data.details.map(driver => ({
-    ...driver,
-    heatPoints: driver.heatPoints?.join(", "),
-    heatPositions: driver.heatPositions?.join(", "),
-  }));
+  const raceDetails = data.details
+    .map(driver => ({
+      ...driver,
+      heatPoints: driver.heatPoints?.join(", "),
+      heatPositions: driver.heatPositions?.join(", "),
+    }))
+    .sort((a, b) => b.seasonPoints - a.seasonPoints);
   return (
     <div>
       <table>

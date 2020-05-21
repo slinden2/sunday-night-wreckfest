@@ -17,10 +17,12 @@ const headerMap = {
 const StandingsContent = ({ standings }: Props) => {
   if (!standings.length) return <div>No standings found.</div>;
 
+  const sortedStandings = standings.sort((a, b) => b.points - a.points);
+
   return (
     <div>
       <h2>{standings[0].seasonName}</h2>
-      <Table data={standings} headers={headers} headerMap={headerMap} />
+      <Table data={sortedStandings} headers={headers} headerMap={headerMap} />
     </div>
   );
 };
