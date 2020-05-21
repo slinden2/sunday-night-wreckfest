@@ -12,6 +12,7 @@ const GS_PRIVATE_KEY: string | undefined = process.env.GS_PRIVATE_KEY?.split(
 ).join("\n");
 const STANDINGS_UPDATE_HASH: string | undefined =
   process.env.STANDINGS_UPDATE_HASH;
+const CHECK_DRAW_TEXT = "X";
 
 export default {
   ENV,
@@ -20,4 +21,5 @@ export default {
   GS_SERVICE_ACCOUNT_EMAIL,
   GS_PRIVATE_KEY,
   STANDINGS_UPDATE_HASH,
+  CHECK_DRAW_TEXT,
 };

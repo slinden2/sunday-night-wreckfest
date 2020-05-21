@@ -63,6 +63,11 @@ class Race {
       );
     }
 
+    // In case of draw use drawPosition to sort
+    if (aPoints === bPoints && a.drawPosition && b.drawPosition) {
+      return a.drawPosition - b.drawPosition;
+    }
+
     return bPoints - aPoints;
   }
 

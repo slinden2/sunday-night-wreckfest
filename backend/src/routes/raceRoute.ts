@@ -1,6 +1,7 @@
 import express from "express";
 import { calendarService, eventService } from "../services";
 import { mergeRaceData } from "../services/event/eventService";
+import config from "../config";
 
 const router = express.Router();
 
@@ -21,6 +22,20 @@ router.get("/:id", async (req, res, next) => {
     return res.status(200).json(mergedData);
   } catch (err) {
     return next(err);
+  }
+});
+
+router.get("/update/:hash", async (req, res, next) => {
+  try {
+    if (req.params.hash !== config.STANDINGS_UPDATE_HASH) {
+      throw new Error("Invalid standings update hash");
+    }
+    await eventService.checkDraws();
+    res.status(200).json({
+      message: "eventDetails successfully updated.",
+    });
+  } catch (err) {
+    next(err);
   }
 });
 

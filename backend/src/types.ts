@@ -36,7 +36,7 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   heatPositions: Array<number>;
   heatPoints?: Array<number>;
   seasonPoints?: number;
-  verifyScore?: boolean;
+  drawPosition?: number;
 }
 
 export interface IRaceDetails extends RaceCalendarEvent {
