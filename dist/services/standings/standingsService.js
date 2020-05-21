@@ -25,14 +25,13 @@ exports.updateStandings = () => __awaiter(void 0, void 0, void 0, function* () {
         if (event.isReady && event.isCompleted && !event.isProcessed) {
             yield googleSheetsUtils_1.makeBackup("standings");
             const raceData = yield __1.eventService.getRaceData(event.eventId);
-            const raceDataWithDups = yield updateStandingsUtils_1.markDuplicates(raceData);
-            yield updateStandingsUtils_1.addRaceToStandings(raceDataWithDups, {
-                hasPowerLimit: event.hasPowerLimit,
-            });
+            const raceDataWithDups = updateStandingsUtils_1.markDuplicates(raceData);
+            yield updateStandingsUtils_1.addRaceToStandings(event, raceDataWithDups);
             if (event.hasPowerLimit) {
                 yield updateStandingsUtils_1.updatePowerLimit();
             }
             yield __1.calendarService.setIsProcessedTrue(event.eventId);
+            yield updateStandingsUtils_1.addUpdateTime();
             yield misc_1.sleep(5000);
         }
     }
