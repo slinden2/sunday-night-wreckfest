@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const helpers_1 = require("../helpers");
 const googleSheetsUtils_1 = require("../googleSheetsUtils");
 const misc_1 = require("../../utils/misc");
 const config_1 = __importDefault(require("../../config"));
@@ -43,24 +42,20 @@ exports.updateRow = (pos, driverRow, driver, hasPowerLimit) => {
     }
     return driverRow;
 };
-exports.getSeasonId = (eventId) => {
-    const parsedEventId = helpers_1.parseEventId(eventId, "eventId");
-    return parsedEventId.substr(0, 2) + "00";
-};
 exports.getDriverRow = (seasonId, driverId, rows) => {
     return rows.find(row => row.driverId === driverId && row.seasonId === seasonId);
 };
-exports.addRaceToStandings = (raceData, options) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addRaceToStandings = (event, raceData) => __awaiter(void 0, void 0, void 0, function* () {
     const standings = yield googleSheetsUtils_1.getSheetAndRows("standings");
     const newRows = [];
     const rowsToUpdate = [];
     for (const [idx, driver] of raceData.entries()) {
         const pos = idx + 1;
-        const seasonId = exports.getSeasonId(driver.eventId);
-        const driverRow = exports.getDriverRow(seasonId, driver.driverId, standings.rows);
+        const driverRow = exports.getDriverRow(event.seasonId, driver.driverId, standings.rows);
         if (!driverRow) {
             newRows.push({
-                seasonId,
+                seasonId: event.seasonId,
+                seasonName: event.seasonName,
                 driverId: driver.driverId,
                 driverName: driver.driverName,
                 points: driver.seasonPoints,
@@ -72,7 +67,7 @@ exports.addRaceToStandings = (raceData, options) => __awaiter(void 0, void 0, vo
             });
             continue;
         }
-        const updatedDriverRow = exports.updateRow(pos, driverRow, driver, options.hasPowerLimit);
+        const updatedDriverRow = exports.updateRow(pos, driverRow, driver, event.hasPowerLimit);
         rowsToUpdate.push(updatedDriverRow.save());
     }
     if (config_1.default.ENV !== "test") {
@@ -97,7 +92,7 @@ exports.updatePowerLimit = () => __awaiter(void 0, void 0, void 0, function* () 
     ];
     yield Promise.all(rowsToUpdate);
 });
-exports.markDuplicates = (data) => __awaiter(void 0, void 0, void 0, function* () {
+exports.markDuplicates = (data) => {
     for (let i = 0; i < data.length - 1; i++) {
         if (misc_1.getSumOfArrayElements(data[i].heatPoints) ===
             misc_1.getSumOfArrayElements(data[i + 1].heatPoints)) {
@@ -106,5 +101,12 @@ exports.markDuplicates = (data) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
     return data;
+};
+exports.addUpdateTime = () => __awaiter(void 0, void 0, void 0, function* () {
+    const standings = yield googleSheetsUtils_1.getSheetAndRows("standings");
+    yield standings.sheet.loadCells("M6");
+    const cell = standings.sheet.getCellByA1("M6");
+    cell.value = new Date().toLocaleString("fi");
+    yield standings.sheet.saveUpdatedCells();
 });
 //# sourceMappingURL=updateStandingsUtils.js.map
