@@ -7,31 +7,15 @@ in the best possible way as the google-spreadsheet has no types.
 
 import { IDriverSeasonRaceData, RaceCalendarEvent } from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
-import { getSumOfArrayElements } from "../../utils/misc";
 import config from "../../config";
 
-export const getPointVerifyString = (
-  pos: number,
-  driver: IDriverSeasonRaceData
-): string => {
-  return `POS: ${pos} | SP: ${driver.seasonPoints} | G: ${
-    driver.group
-  } | HP: ${getSumOfArrayElements(driver.heatPoints)}`;
-};
-
 export const updateRow = (
-  pos: number,
   driverRow: any,
   driver: IDriverSeasonRaceData,
   hasPowerLimit: boolean
 ) => {
   driverRow.points = Number(driverRow.points);
   driverRow.points += Number(driver.seasonPoints);
-  if (driver.verifyScore) {
-    driverRow.verifyScore = getPointVerifyString(pos, driver);
-  } else {
-    driverRow.verifyScore = "";
-  }
 
   const previousRaceIds = driverRow.eventIds.split(";");
 
@@ -75,8 +59,7 @@ export const addRaceToStandings = async (
   const newRows: any[] = [];
   const rowsToUpdate: any[] = [];
 
-  for (const [idx, driver] of raceData.entries()) {
-    const pos = idx + 1;
+  for (const driver of raceData) {
     const driverRow = getDriverRow(
       event.seasonId,
       driver.driverId,
@@ -90,21 +73,13 @@ export const addRaceToStandings = async (
         driverId: driver.driverId,
         driverName: driver.driverName,
         points: driver.seasonPoints,
-        verifyScore: driver.verifyScore
-          ? getPointVerifyString(pos, driver)
-          : "",
         racesDriven: 1,
         eventIds: driver.eventId,
       });
       continue;
     }
 
-    const updatedDriverRow = updateRow(
-      pos,
-      driverRow,
-      driver,
-      event.hasPowerLimit
-    );
+    const updatedDriverRow = updateRow(driverRow, driver, event.hasPowerLimit);
 
     rowsToUpdate.push(updatedDriverRow.save());
   }
@@ -137,19 +112,6 @@ export const updatePowerLimit = async () => {
   ];
 
   await Promise.all(rowsToUpdate);
-};
-
-export const markDuplicates = (data: IDriverSeasonRaceData[]): typeof data => {
-  for (let i = 0; i < data.length - 1; i++) {
-    if (
-      getSumOfArrayElements(data[i].heatPoints) ===
-      getSumOfArrayElements(data[i + 1].heatPoints)
-    ) {
-      data[i].verifyScore = true;
-      data[i + 1].verifyScore = true;
-    }
-  }
-  return data;
 };
 
 // Adds update completion time to the standings sheet

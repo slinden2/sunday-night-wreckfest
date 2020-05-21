@@ -4,7 +4,6 @@ import { calendarService, eventService } from "..";
 import {
   addRaceToStandings,
   updatePowerLimit,
-  markDuplicates,
   addUpdateTime,
 } from "./updateStandingsUtils";
 import { sleep } from "../../utils/misc";
@@ -22,14 +21,12 @@ export const updateStandings = async (): Promise<void> => {
       await makeBackup("standings");
 
       const raceData = await eventService.getRaceData(event.eventId);
+      await addRaceToStandings(event, raceData);
 
-      // Check for duplicate seasonPoints (draws) and mark them
-      const raceDataWithDups = markDuplicates(raceData);
-
-      await addRaceToStandings(event, raceDataWithDups);
       if (event.hasPowerLimit) {
         await updatePowerLimit();
       }
+
       await calendarService.setIsProcessedTrue(event.eventId);
       await addUpdateTime();
 
