@@ -5,7 +5,7 @@ This is a Typescript file, but the language is not used
 in the best possible way as the google-spreadsheet has no types.
 */
 
-import { IDriverSeasonRaceData, RaceCalendarEvent } from "../../types";
+import { IDriverSeasonRaceData, IRaceCalendarEvent } from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import config from "../../config";
 
@@ -40,7 +40,7 @@ export const getDriverRow = (
 };
 
 export const addRaceToStandings = async (
-  event: RaceCalendarEvent,
+  event: IRaceCalendarEvent,
   raceData: IDriverSeasonRaceData[]
 ): Promise<void> => {
   const standings = await getSheetAndRows("standings");

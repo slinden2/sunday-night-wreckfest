@@ -5,15 +5,15 @@ import {
   parseString,
   parseNumber,
 } from "../helpers";
-import { RaceCalendarEvent } from "../../types";
+import { IRaceCalendarEvent } from "../../types";
 
 export const toRaceCalendarEvents = (
   rawRows: any
-): Array<RaceCalendarEvent> => {
-  const cleanRows: Array<RaceCalendarEvent> = [];
+): Array<IRaceCalendarEvent> => {
+  const cleanRows: Array<IRaceCalendarEvent> = [];
 
   rawRows.forEach((row: any) => {
-    const event: RaceCalendarEvent = {
+    const event: IRaceCalendarEvent = {
       seasonId: parseEventId(row.seasonId, "seasonId"),
       seasonName: parseString(row.seasonName, "seasonName"),
       eventId: parseEventId(row.eventId, "eventId"),

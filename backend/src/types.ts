@@ -1,4 +1,4 @@
-export interface RaceCalendarEvent {
+export interface IRaceCalendarEvent {
   seasonId: string;
   seasonName: string;
   eventId: string;
@@ -39,6 +39,6 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   drawPosition?: number;
 }
 
-export interface IRaceDetails extends RaceCalendarEvent {
+export interface IRaceDetails extends IRaceCalendarEvent {
   details: IDriverSeasonRaceData[];
 }

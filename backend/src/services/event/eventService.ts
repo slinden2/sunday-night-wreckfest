@@ -2,7 +2,7 @@ import { toDriverRaceDetails, getDraws } from "./eventUtils";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import {
   IDriverSeasonRaceData,
-  RaceCalendarEvent,
+  IRaceCalendarEvent,
   IRaceDetails,
 } from "../../types";
 import Race from "../race";
@@ -20,7 +20,7 @@ export const getRaceData = async (
 
 export const mergeRaceData = (
   id: string,
-  calendar: RaceCalendarEvent[],
+  calendar: IRaceCalendarEvent[],
   raceData: IDriverSeasonRaceData[]
 ): IRaceDetails => {
   const race = calendar.find(event => event.eventId === id);

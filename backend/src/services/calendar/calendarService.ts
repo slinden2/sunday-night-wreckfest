@@ -1,8 +1,8 @@
 import { getSheetAndRows } from "../googleSheetsUtils";
 import { toRaceCalendarEvents } from "./calendarUtils";
-import { RaceCalendarEvent } from "../../types";
+import { IRaceCalendarEvent } from "../../types";
 
-export const getRaceCalendar = async (): Promise<RaceCalendarEvent[]> => {
+export const getRaceCalendar = async (): Promise<IRaceCalendarEvent[]> => {
   const raceCalendar = await getSheetAndRows("raceCalendar");
   const raceCalendarEvents = toRaceCalendarEvents(raceCalendar.rows);
   return raceCalendarEvents;

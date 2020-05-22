@@ -1,4 +1,4 @@
-import { IDriverSeasonRaceData, RaceGroup, RaceCalendarEvent } from "../types";
+import { IDriverSeasonRaceData, RaceGroup, IRaceCalendarEvent } from "../types";
 import { IStandingRow } from "../services/standings/standingsUtils";
 
 export const toPromise = <T>(data: T): Promise<typeof data> =>
@@ -35,7 +35,7 @@ export const toRaceCalendarEventsInput: any[] = [
   },
 ];
 
-export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
+export const toRaceCalendarEventsReturn: IRaceCalendarEvent[] = [
   {
     seasonId: "0400",
     seasonName: "SEASON 4",
@@ -64,13 +64,13 @@ export const toRaceCalendarEventsReturn: RaceCalendarEvent[] = [
   },
 ];
 
-export const getDrawsRaceCal: RaceCalendarEvent[] = toRaceCalendarEventsReturn.map(
+export const getDrawsRaceCal: IRaceCalendarEvent[] = toRaceCalendarEventsReturn.map(
   event => {
     return { ...event, isReady: true, isCompleted: true, isProcessed: false };
   }
 );
 
-export const getRaceCalendarReturn: RaceCalendarEvent[] = [
+export const getRaceCalendarReturn: IRaceCalendarEvent[] = [
   {
     seasonId: "0400",
     seasonName: "SEASON 4",

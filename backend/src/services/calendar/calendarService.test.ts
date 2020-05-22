@@ -1,7 +1,7 @@
 import * as gsUtils from "../googleSheetsUtils";
 import * as calendarUtils from "./calendarUtils";
 import { toPromise } from "../../utils/mockData";
-import { RaceCalendarEvent } from "../../types";
+import { IRaceCalendarEvent } from "../../types";
 import { calendarService } from "..";
 
 describe("calendarService", () => {
@@ -22,7 +22,7 @@ describe("calendarService", () => {
     toRaceCalendarEventsSpy = jest
       .spyOn(calendarUtils, "toRaceCalendarEvents")
       .mockImplementation(() => {
-        return [] as RaceCalendarEvent[];
+        return [] as IRaceCalendarEvent[];
       });
   });
 

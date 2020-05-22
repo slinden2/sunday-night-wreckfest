@@ -6,7 +6,7 @@ import {
 
 describe("calendarUtils", () => {
   describe("toRaceCalendarEvents", () => {
-    it("Should convert 'any' type to RaceCalendarEvent[]", () => {
+    it("Should convert 'any' type to IRaceCalendarEvent[]", () => {
       toRaceCalendarEvents(toRaceCalendarEventsInput).forEach((race, i) => {
         expect(race).toEqual(
           expect.objectContaining(toRaceCalendarEventsReturn[i])
