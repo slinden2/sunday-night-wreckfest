@@ -140,6 +140,7 @@ export const getRaceDataReturn: IDriverSeasonRaceData[] = [
     qTime: "01:01,500",
     group: RaceGroup.A,
     heatPositions: [1, 2, 3, 4, 5],
+    seasonPoints: 100,
   },
   {
     driverId: "0002",
@@ -150,12 +151,21 @@ export const getRaceDataReturn: IDriverSeasonRaceData[] = [
     qTime: "01:00,500",
     group: RaceGroup.A,
     heatPositions: [2, 3, 4, 5, 6],
+    seasonPoints: 95,
   },
 ];
 
 export const getDrawsReturn: IDriverSeasonRaceData[] = getRaceDataReturn.map(
   driver => {
     return { ...driver, heatPoints: [50, 50, 50, 50, 50] };
+  }
+);
+
+export const toDriverRaceDetailsReturn: IDriverSeasonRaceData[] = getRaceDataReturn.map(
+  driver => {
+    const newDriver = { ...driver };
+    delete newDriver.seasonPoints;
+    return newDriver;
   }
 );
 
@@ -335,6 +345,7 @@ export const mergeRaceDataReturn = {
       isProcessed: true,
       isReady: true,
       qTime: "01:01,500",
+      seasonPoints: 100,
     },
     {
       driverId: "0002",
@@ -345,6 +356,7 @@ export const mergeRaceDataReturn = {
       isProcessed: true,
       isReady: true,
       qTime: "01:00,500",
+      seasonPoints: 95,
     },
   ],
 };

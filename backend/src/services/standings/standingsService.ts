@@ -24,7 +24,15 @@ export const updateStandings = async (): Promise<void> => {
       await addRaceToStandings(event, raceData);
 
       if (event.hasPowerLimit) {
-        await updatePowerLimit();
+        const winner = raceData.find(driver => driver.seasonPoints === 100);
+
+        if (!winner) {
+          throw new Error(
+            "No driver with 100 season points (winner) found. Can't update power limit."
+          );
+        }
+
+        await updatePowerLimit(event.seasonId, winner.driverId);
       }
 
       await calendarService.setIsProcessedTrue(event.eventId);

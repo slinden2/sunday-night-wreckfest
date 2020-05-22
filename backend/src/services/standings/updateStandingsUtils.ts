@@ -9,11 +9,7 @@ import { IDriverSeasonRaceData, RaceCalendarEvent } from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import config from "../../config";
 
-export const updateRow = (
-  driverRow: any,
-  driver: IDriverSeasonRaceData,
-  hasPowerLimit: boolean
-) => {
+export const updateRow = (driverRow: any, driver: IDriverSeasonRaceData) => {
   driverRow.points = Number(driverRow.points);
   driverRow.points += Number(driver.seasonPoints);
 
@@ -29,13 +25,6 @@ export const updateRow = (
   driverRow.eventIds = newRaceIds.join(";");
 
   driverRow.racesDriven = newRaceIds.length;
-
-  // Race winner automatically gets a power penalty
-  if (hasPowerLimit && driver.seasonPoints === 100) {
-    driverRow.powerLimit = "C161";
-  } else {
-    driverRow.powerLimit = "";
-  }
 
   return driverRow;
 };
@@ -79,9 +68,9 @@ export const addRaceToStandings = async (
       continue;
     }
 
-    const updatedDriverRow = updateRow(driverRow, driver, event.hasPowerLimit);
+    const updatedDriverRow = updateRow(driverRow, driver);
 
-    rowsToUpdate.push(updatedDriverRow.save());
+    rowsToUpdate.push(updatedDriverRow.save({ raw: true }));
   }
 
   if (config.ENV !== "test") {
@@ -95,21 +84,29 @@ export const addRaceToStandings = async (
   }
 };
 
-export const updatePowerLimit = async () => {
+export const updatePowerLimit = async (seasonId: string, winnerId: string) => {
   const standings = await getSheetAndRows("standings");
-  const rowsOrdered = [...standings.rows].sort(
+  const eventRows = [...standings.rows].filter(
+    row => row.seasonId === seasonId
+  );
+  const rowsOrdered = eventRows.sort(
     (a, b) => Number(b.points) - Number(a.points)
   );
+
+  const winnerRow = rowsOrdered.find(row => row.driverId === winnerId);
+  winnerRow.powerLimit = "C161";
 
   rowsOrdered[0].powerLimit = "C155";
   rowsOrdered[1].powerLimit = "C158";
   rowsOrdered[2].powerLimit = "C161";
 
-  const rowsToUpdate = [
-    rowsOrdered[0].save(),
-    rowsOrdered[1].save(),
-    rowsOrdered[2].save(),
-  ];
+  rowsOrdered.slice(3).forEach(row => {
+    if (row.driverId !== winnerId) {
+      row.powerLimit = "";
+    }
+  });
+
+  const rowsToUpdate = rowsOrdered.map(row => row.save({ raw: true }));
 
   await Promise.all(rowsToUpdate);
 };

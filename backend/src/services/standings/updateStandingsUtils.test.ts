@@ -27,14 +27,14 @@ describe("updateStandingsUtils", () => {
   });
   describe("updateRow", () => {
     it("should update the row correctly", () => {
-      expect(updateRow(updateRowDriverRow, updateRowDriver, true)).toEqual(
+      expect(updateRow(updateRowDriverRow, updateRowDriver)).toEqual(
         updateRowReturn
       );
     });
     it("should throw on duplicate eventId", () => {
-      expect(() =>
-        updateRow(updateRowDriverRowErr, updateRowDriver, true)
-      ).toThrow(/Duplicate eventId/);
+      expect(() => updateRow(updateRowDriverRowErr, updateRowDriver)).toThrow(
+        /Duplicate eventId/
+      );
     });
   });
 
