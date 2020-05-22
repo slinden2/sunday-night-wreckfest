@@ -3,7 +3,7 @@ Utility functions used by more than one files.
 */
 
 import { DataIntegrityError } from "../utils/errors";
-import { RaceGroup } from "../types";
+import { RaceGroup, VideoType, VideoService } from "../types";
 
 export const isString = (param: any): param is string => {
   return typeof param === "string" || param instanceof String;
@@ -157,4 +157,36 @@ export const parseNumber = (num: any, field: string): number => {
   }
 
   return Number(num);
+};
+
+export const isVideoDataString = (text: string): boolean => {
+  if (/^((twitch|youtube),[a-zA-Z0-9]+;)+$/.test(text)) return true;
+  else return false;
+};
+
+export const isVideoService = (text: any): text is VideoService => {
+  if (Object.values(VideoService).includes(text)) return true;
+  else return false;
+};
+
+export const parseVideos = (videoDataString: string): VideoType[] => {
+  if (!isVideoDataString(videoDataString)) {
+    throw new DataIntegrityError("Invalid videoDataString " + videoDataString);
+  }
+
+  const videoDataArrays = videoDataString
+    .substr(0, videoDataString.length - 1)
+    .split(";");
+
+  const videoData = videoDataArrays.map(video => {
+    const [service, id] = video.split(",");
+
+    if (!isVideoService(service)) {
+      throw new DataIntegrityError("Invalid VideoService " + service);
+    }
+
+    return { service: VideoService[service], id };
+  });
+
+  return videoData;
 };

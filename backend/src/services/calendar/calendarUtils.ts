@@ -4,6 +4,7 @@ import {
   parseDate,
   parseString,
   parseNumber,
+  parseVideos,
 } from "../helpers";
 import { IRaceCalendarEvent } from "../../types";
 
@@ -25,6 +26,7 @@ export const toRaceCalendarEvents = (
       trackName: parseString(row.trackName, "trackName"),
       qLaps: parseNumber(row.qLaps, "qLaps"),
       raceLaps: parseNumber(row.raceLaps, "raceLaps"),
+      ...(row.videos ? { videos: parseVideos(row.videos) } : null),
     };
 
     cleanRows.push(event);

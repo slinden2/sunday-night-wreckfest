@@ -1,3 +1,13 @@
+export enum VideoService {
+  youtube = "youtube",
+  twitch = "twitch",
+}
+
+export type VideoType = {
+  service: VideoService;
+  id: string;
+};
+
 export interface IRaceCalendarEvent {
   seasonId: string;
   seasonName: string;
@@ -10,6 +20,7 @@ export interface IRaceCalendarEvent {
   trackName: string;
   qLaps: number;
   raceLaps: number;
+  videos?: VideoType[];
 }
 
 export enum RaceGroup {

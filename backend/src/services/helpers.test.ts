@@ -14,6 +14,9 @@ import {
   isLapTime,
   parseLapTime,
   parsePowerLimit,
+  parseVideos,
+  isVideoService,
+  isVideoDataString,
 } from "./helpers";
 import { DataIntegrityError } from "../utils/errors";
 
@@ -226,6 +229,51 @@ describe("helpers", () => {
     });
     it("should throw with C1", () => {
       expect(() => parsePowerLimit("C1")).toThrow(DataIntegrityError);
+    });
+  });
+  describe("isVideoService", () => {
+    it("should return true with youtube and twitch", () => {
+      expect(isVideoService("youtube")).toBeTruthy();
+      expect(isVideoService("twitch")).toBeTruthy();
+    });
+    it("should return false with something other than youtube or twitch", () => {
+      expect(isVideoService("vimeo")).toBeFalsy();
+    });
+  });
+  describe("isVideoDataString", () => {
+    it("should return true with youtube and twitch", () => {
+      expect(isVideoDataString("twitch,a;youtube,123;")).toBeTruthy();
+    });
+    it("should return false if you miss the last semicolon", () => {
+      expect(isVideoDataString("twitch,a;youtube,123")).toBeFalsy();
+    });
+  });
+  describe("parseVideos", () => {
+    it("should accept twitch,a;youtube,123; and return an array of VideoTypes", () => {
+      expect(parseVideos("twitch,a;youtube,123;")).toEqual([
+        { service: "twitch", id: "a" },
+        { service: "youtube", id: "123" },
+      ]);
+    });
+    it("should return correct object also with one item", () => {
+      expect(parseVideos("twitch,a;")).toEqual([
+        { service: "twitch", id: "a" },
+      ]);
+    });
+    it("should throw if you miss the last semicolon", () => {
+      expect(() => parseVideos("twitch,a;youtube,123")).toThrowError(
+        DataIntegrityError
+      );
+    });
+    it("should throw if id is something else than a number or a letter", () => {
+      expect(() => parseVideos("twitch,a;youtube,_")).toThrowError(
+        DataIntegrityError
+      );
+    });
+    it("should throw if service is not youtube or twitch", () => {
+      expect(() => parseVideos("vimeo,a;youtube,123")).toThrowError(
+        DataIntegrityError
+      );
     });
   });
 });
