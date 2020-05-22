@@ -34,8 +34,12 @@ const RaceContainer = () => {
 
   const race = races.find(race => race.eventId === id);
 
+  if (!race) {
+    throw new Error(`Race with raceId: ${id} does not exist!`);
+  }
+
   return (
-    <PageContainer title={`${race?.seasonName} | ${race?.trackName}`}>
+    <PageContainer title={`${race.seasonName} | ${race.trackName}`}>
       <RaceContent data={race} />
     </PageContainer>
   );

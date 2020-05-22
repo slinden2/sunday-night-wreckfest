@@ -1,10 +1,10 @@
 import React from "react";
-import { IRaceDetails } from "../../types";
+import { IRaceDetails, VideoService } from "../../types";
 import Table from "../Table";
 import { convertTimeToSecs } from "../../utils";
 
 interface Props {
-  data?: IRaceDetails;
+  data: IRaceDetails;
 }
 
 const qHeaders = ["driverName", "qTime", "group"];
@@ -32,8 +32,6 @@ const raceHeaderMap = {
 };
 
 const RaceContent = ({ data }: Props) => {
-  if (!data) return <div>The race does not exist.</div>;
-
   const qDetails = data.details.sort((a, b) => {
     const aTime = convertTimeToSecs(a.qTime);
     const bTime = convertTimeToSecs(b.qTime);
@@ -47,6 +45,7 @@ const RaceContent = ({ data }: Props) => {
       heatPositions: driver.heatPositions?.join(", "),
     }))
     .sort((a, b) => b.seasonPoints - a.seasonPoints);
+
   return (
     <div>
       <table>
@@ -81,6 +80,34 @@ const RaceContent = ({ data }: Props) => {
           headerMap={raceHeaderMap}
         />
       </div>
+      {data.videos && (
+        <div>
+          {data.videos.map(video => {
+            if (video.service === VideoService.twitch) {
+              return (
+                <iframe
+                  key={video.id}
+                  src={`https://player.twitch.tv/?autoplay=false&video=v${video.id}`}
+                  height="378"
+                  width="620"
+                  scrolling="no"
+                ></iframe>
+              );
+            }
+
+            if (video.service === VideoService.youtube) {
+              return (
+                <iframe
+                  key={video.id}
+                  width="620"
+                  height="378"
+                  src={`https://www.youtube.com/embed/${video.id}`}
+                ></iframe>
+              );
+            }
+          })}
+        </div>
+      )}
     </div>
   );
 };
