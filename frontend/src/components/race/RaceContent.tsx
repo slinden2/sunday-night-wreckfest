@@ -90,7 +90,9 @@ const RaceContent = ({ data }: Props) => {
                   src={`https://player.twitch.tv/?autoplay=false&video=v${video.id}`}
                   height="378"
                   width="620"
+                  title={video.id}
                   scrolling="no"
+                  allowFullScreen
                 ></iframe>
               );
             }
@@ -101,7 +103,9 @@ const RaceContent = ({ data }: Props) => {
                   key={video.id}
                   width="620"
                   height="378"
+                  title={video.id}
                   src={`https://www.youtube.com/embed/${video.id}`}
+                  allowFullScreen
                 ></iframe>
               );
             }
