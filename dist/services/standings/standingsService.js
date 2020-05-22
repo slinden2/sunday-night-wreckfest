@@ -27,7 +27,11 @@ exports.updateStandings = () => __awaiter(void 0, void 0, void 0, function* () {
             const raceData = yield __1.eventService.getRaceData(event.eventId);
             yield updateStandingsUtils_1.addRaceToStandings(event, raceData);
             if (event.hasPowerLimit) {
-                yield updateStandingsUtils_1.updatePowerLimit();
+                const winner = raceData.find(driver => driver.seasonPoints === 100);
+                if (!winner) {
+                    throw new Error("No driver with 100 season points (winner) found. Can't update power limit.");
+                }
+                yield updateStandingsUtils_1.updatePowerLimit(event.seasonId, winner.driverId);
             }
             yield __1.calendarService.setIsProcessedTrue(event.eventId);
             yield updateStandingsUtils_1.addUpdateTime();

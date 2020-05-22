@@ -131,6 +131,7 @@ exports.getRaceDataReturn = [
         qTime: "01:01,500",
         group: types_1.RaceGroup.A,
         heatPositions: [1, 2, 3, 4, 5],
+        seasonPoints: 100,
     },
     {
         driverId: "0002",
@@ -141,10 +142,16 @@ exports.getRaceDataReturn = [
         qTime: "01:00,500",
         group: types_1.RaceGroup.A,
         heatPositions: [2, 3, 4, 5, 6],
+        seasonPoints: 95,
     },
 ];
 exports.getDrawsReturn = exports.getRaceDataReturn.map(driver => {
     return Object.assign(Object.assign({}, driver), { heatPoints: [50, 50, 50, 50, 50] });
+});
+exports.toDriverRaceDetailsReturn = exports.getRaceDataReturn.map(driver => {
+    const newDriver = Object.assign({}, driver);
+    delete newDriver.seasonPoints;
+    return newDriver;
 });
 exports.getDriverRowInput = [
     {
@@ -313,6 +320,7 @@ exports.mergeRaceDataReturn = {
             isProcessed: true,
             isReady: true,
             qTime: "01:01,500",
+            seasonPoints: 100,
         },
         {
             driverId: "0002",
@@ -323,6 +331,7 @@ exports.mergeRaceDataReturn = {
             isProcessed: true,
             isReady: true,
             qTime: "01:00,500",
+            seasonPoints: 95,
         },
     ],
 };
