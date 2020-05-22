@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const googleSheetsUtils_1 = require("../googleSheetsUtils");
 const config_1 = __importDefault(require("../../config"));
-exports.updateRow = (driverRow, driver, hasPowerLimit) => {
+exports.updateRow = (driverRow, driver) => {
     driverRow.points = Number(driverRow.points);
     driverRow.points += Number(driver.seasonPoints);
     const previousRaceIds = driverRow.eventIds.split(";");
@@ -24,12 +24,6 @@ exports.updateRow = (driverRow, driver, hasPowerLimit) => {
     const newRaceIds = [...previousRaceIds, driver.eventId];
     driverRow.eventIds = newRaceIds.join(";");
     driverRow.racesDriven = newRaceIds.length;
-    if (hasPowerLimit && driver.seasonPoints === 100) {
-        driverRow.powerLimit = "C161";
-    }
-    else {
-        driverRow.powerLimit = "";
-    }
     return driverRow;
 };
 exports.getDriverRow = (seasonId, driverId, rows) => {
@@ -53,8 +47,8 @@ exports.addRaceToStandings = (event, raceData) => __awaiter(void 0, void 0, void
             });
             continue;
         }
-        const updatedDriverRow = exports.updateRow(driverRow, driver, event.hasPowerLimit);
-        rowsToUpdate.push(updatedDriverRow.save());
+        const updatedDriverRow = exports.updateRow(driverRow, driver);
+        rowsToUpdate.push(updatedDriverRow.save({ raw: true }));
     }
     if (config_1.default.ENV !== "test") {
         if (newRows.length) {
@@ -65,17 +59,21 @@ exports.addRaceToStandings = (event, raceData) => __awaiter(void 0, void 0, void
         }
     }
 });
-exports.updatePowerLimit = () => __awaiter(void 0, void 0, void 0, function* () {
+exports.updatePowerLimit = (seasonId, winnerId) => __awaiter(void 0, void 0, void 0, function* () {
     const standings = yield googleSheetsUtils_1.getSheetAndRows("standings");
-    const rowsOrdered = [...standings.rows].sort((a, b) => Number(b.points) - Number(a.points));
+    const eventRows = [...standings.rows].filter(row => row.seasonId === seasonId);
+    const rowsOrdered = eventRows.sort((a, b) => Number(b.points) - Number(a.points));
+    const winnerRow = rowsOrdered.find(row => row.driverId === winnerId);
+    winnerRow.powerLimit = "C161";
     rowsOrdered[0].powerLimit = "C155";
     rowsOrdered[1].powerLimit = "C158";
     rowsOrdered[2].powerLimit = "C161";
-    const rowsToUpdate = [
-        rowsOrdered[0].save(),
-        rowsOrdered[1].save(),
-        rowsOrdered[2].save(),
-    ];
+    rowsOrdered.slice(3).forEach(row => {
+        if (row.driverId !== winnerId) {
+            row.powerLimit = "";
+        }
+    });
+    const rowsToUpdate = rowsOrdered.map(row => row.save({ raw: true }));
     yield Promise.all(rowsToUpdate);
 });
 exports.addUpdateTime = () => __awaiter(void 0, void 0, void 0, function* () {
