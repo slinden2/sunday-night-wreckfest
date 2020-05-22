@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const eventUtils_1 = require("./eventUtils");
 const googleSheetsUtils_1 = require("../googleSheetsUtils");
 const race_1 = __importDefault(require("../race"));
+const __1 = require("..");
+const config_1 = __importDefault(require("../../config"));
 exports.getRaceData = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const eventDetails = yield googleSheetsUtils_1.getSheetAndRows("eventDetails");
     const driverRaceDetails = eventUtils_1.toDriverRaceDetails(id, eventDetails.rows);
@@ -28,8 +30,28 @@ exports.mergeRaceData = (id, calendar, raceData) => {
     }
     return Object.assign(Object.assign({}, race), { details: raceData });
 };
+exports.checkDraws = () => __awaiter(void 0, void 0, void 0, function* () {
+    const eventList = yield __1.calendarService.getRaceCalendar();
+    for (const event of eventList) {
+        if (event.isReady && event.isCompleted && !event.isProcessed) {
+            const raceData = yield exports.getRaceData(event.eventId);
+            const rowsToVerify = eventUtils_1.getDraws(raceData);
+            if (rowsToVerify.length) {
+                const eventDetails = yield googleSheetsUtils_1.getSheetAndRows("eventDetails");
+                const promises = [];
+                rowsToVerify.forEach(driver => {
+                    const rowToUpdate = eventDetails.rows.find(row => row.eventId === driver.eventId && row.driverId === driver.driverId);
+                    rowToUpdate.drawPosition = config_1.default.CHECK_DRAW_TEXT;
+                    promises.push(rowToUpdate.save({ raw: true }));
+                });
+                yield Promise.all(promises);
+            }
+        }
+    }
+});
 exports.default = {
     getRaceData: exports.getRaceData,
     mergeRaceData: exports.mergeRaceData,
+    checkDraws: exports.checkDraws,
 };
 //# sourceMappingURL=eventService.js.map
