@@ -47,6 +47,7 @@ jobs:
           cp ./backend/package.json ./dist/package.json
           cp ./backend/package-lock.json ./dist/package-lock.json
           cp ./backend/Procfile ./dist/Procfile
+          ls ./dist
       - name: Commit production bundle
         run: |
           git config --global user.name '${{ secrets.USERNAME }}'
@@ -57,7 +58,8 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push procution bundle to dokku
+          force: true
+      - name: Push production bundle to dokku
         uses: slinden2/dokku-deploy-github-action@v1.1-alpha
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
