@@ -95,9 +95,7 @@ const RaceContent = ({ data }: Props) => {
                   allowFullScreen
                 ></iframe>
               );
-            }
-
-            if (video.service === VideoService.youtube) {
+            } else {
               return (
                 <iframe
                   key={video.id}
