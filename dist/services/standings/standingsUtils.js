@@ -4,6 +4,9 @@ const helpers_1 = require("../helpers");
 exports.toStandingRows = (rawRows) => {
     const cleanRows = [];
     rawRows.forEach(row => {
+        const drawPosition = row.drawPosition
+            ? helpers_1.parseNumber(row.drawPosition, "drawPosition")
+            : undefined;
         const driver = {
             seasonId: helpers_1.parseEventId(row.seasonId, "seasonId"),
             seasonName: helpers_1.parseString(row.seasonName, "seasonName"),
@@ -11,6 +14,7 @@ exports.toStandingRows = (rawRows) => {
             driverName: helpers_1.parseString(row.driverName, "driverName"),
             racesDriven: helpers_1.parseNumber(row.racesDriven, "racesDriven"),
             points: helpers_1.parseNumber(row.points, "points"),
+            drawPosition,
             powerLimit: helpers_1.parsePowerLimit(row.powerLimit),
             eventIds: helpers_1.parseEventIds(row.eventIds),
         };
