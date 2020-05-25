@@ -44,6 +44,7 @@ export interface IStandingRow {
   driverName: string;
   racesDriven: number;
   points: number;
+  drawPosition?: number;
   powerLimit?: string;
 }
 

@@ -14,10 +14,21 @@ const headerMap = {
   points: "Points",
   powerLimit: "Power Limit",
 };
+
+const sortByDrawPosition = (a: IStandingRow, b: IStandingRow) => {
+  if (a.drawPosition && b.drawPosition) {
+    return a.drawPosition - b.drawPosition;
+  } else {
+    return 0;
+  }
+};
+
 const StandingsContent = ({ standings }: Props) => {
   if (!standings.length) return <div>No standings found.</div>;
 
-  const sortedStandings = standings.sort((a, b) => b.points - a.points);
+  const sortedStandings = standings.sort(
+    (a, b) => b.points - a.points || sortByDrawPosition(a, b)
+  );
 
   return (
     <div>

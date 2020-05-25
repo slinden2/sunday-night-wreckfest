@@ -14,6 +14,7 @@ export interface IStandingRow {
   driverName: string;
   racesDriven: number;
   points: number;
+  drawPosition?: number;
   powerLimit?: string;
   eventIds: string[];
 }
@@ -22,6 +23,10 @@ export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
   const cleanRows: IStandingRow[] = [];
 
   rawRows.forEach(row => {
+    const drawPosition = row.drawPosition
+      ? parseNumber(row.drawPosition, "drawPosition")
+      : undefined;
+
     const driver: IStandingRow = {
       seasonId: parseEventId(row.seasonId, "seasonId"),
       seasonName: parseString(row.seasonName, "seasonName"),
@@ -29,6 +34,7 @@ export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
       driverName: parseString(row.driverName, "driverName"),
       racesDriven: parseNumber(row.racesDriven, "racesDriven"),
       points: parseNumber(row.points, "points"),
+      drawPosition,
       powerLimit: parsePowerLimit(row.powerLimit),
       eventIds: parseEventIds(row.eventIds),
     };
