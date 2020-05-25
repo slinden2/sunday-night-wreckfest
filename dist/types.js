@@ -1,5 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var VideoService;
+(function (VideoService) {
+    VideoService["youtube"] = "youtube";
+    VideoService["twitch"] = "twitch";
+})(VideoService = exports.VideoService || (exports.VideoService = {}));
 var RaceGroup;
 (function (RaceGroup) {
     RaceGroup["A"] = "A";

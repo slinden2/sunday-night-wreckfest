@@ -115,4 +115,32 @@ exports.parseNumber = (num, field) => {
     }
     return Number(num);
 };
+exports.isVideoDataString = (text) => {
+    if (/^((twitch|youtube),[a-zA-Z0-9]+;)+$/.test(text))
+        return true;
+    else
+        return false;
+};
+exports.isVideoService = (text) => {
+    if (Object.values(types_1.VideoService).includes(text))
+        return true;
+    else
+        return false;
+};
+exports.parseVideos = (videoDataString) => {
+    if (!exports.isVideoDataString(videoDataString)) {
+        throw new errors_1.DataIntegrityError("Invalid videoDataString " + videoDataString);
+    }
+    const videoDataArrays = videoDataString
+        .substr(0, videoDataString.length - 1)
+        .split(";");
+    const videoData = videoDataArrays.map(video => {
+        const [service, id] = video.split(",");
+        if (!exports.isVideoService(service)) {
+            throw new errors_1.DataIntegrityError("Invalid VideoService " + service);
+        }
+        return { service: types_1.VideoService[service], id };
+    });
+    return videoData;
+};
 //# sourceMappingURL=helpers.js.map
