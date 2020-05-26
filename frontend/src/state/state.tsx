@@ -1,6 +1,7 @@
 import React from "react";
 import { ISeason, IRaceDetails, IStandingRow } from "../types";
 import { Action } from "./reducer";
+// import { DefaultTheme, BaseThemeProviderComponent } from "styled-components";
 
 export type State = {
   calendar: ISeason[];
@@ -20,7 +21,9 @@ export const StateContext = React.createContext<
 
 type StateProviderProps = {
   reducer: React.Reducer<State, Action>;
-  children: React.ReactElement;
+  // children: any;
+  // children: BaseThemeProviderComponent<DefaultTheme, DefaultTheme>;
+  children: React.ReactNode;
 };
 
 export const StateProvider: React.FC<StateProviderProps> = ({
