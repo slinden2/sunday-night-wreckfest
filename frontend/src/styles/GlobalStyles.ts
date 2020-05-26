@@ -5,6 +5,8 @@ const GlobalStyle = createGlobalStyle`
   html {
     --size: 40px;
     --borderSize: calc(var(--size) / 2);
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     border: var(--borderSize) solid ${props => props.theme.colors.black};
     font-size: 10px;
@@ -37,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${props => props.theme.colors.yellow};
+    margin: var(--borderSize);
   }
 `;
 

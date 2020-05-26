@@ -7,11 +7,13 @@ import StandingsContainer from "./components/standings/StandingsContainer";
 import SNWContainer from "./components/snw/SNWContainer";
 import RaceContainer from "./components/race/RaceContainer";
 import config from "./config";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <Router>
       <div>
+        <Header />
         <Navigation />
         <Switch>
           <Route exact path="/">
