@@ -3,17 +3,11 @@ import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 
-const Container = styled.div`
-  --negativeMargin: calc(var(--borderSize) * -1);
-  background-color: ${props => props.theme.colors.white};
-  margin: var(--negativeMargin) var(--negativeMargin) 0 var(--negativeMargin);
+const Container = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  a {
-    z-index: 1;
-  }
+  margin: 0;
 `;
 
 const Logo = styled.img`
@@ -26,7 +20,7 @@ const Header = () => {
   return (
     <Container>
       <Link to="/">
-        <Logo src={logo} />
+        <Logo src={logo} alt="Sunday Night Wreckfest" />
       </Link>
     </Container>
   );
