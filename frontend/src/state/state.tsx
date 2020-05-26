@@ -21,8 +21,6 @@ export const StateContext = React.createContext<
 
 type StateProviderProps = {
   reducer: React.Reducer<State, Action>;
-  // children: any;
-  // children: BaseThemeProviderComponent<DefaultTheme, DefaultTheme>;
   children: React.ReactNode;
 };
 
