@@ -1,7 +1,7 @@
 import React from "react";
 import config from "../../config";
 import { IRaceCalendarEvent } from "../../types";
-import PageContainer from "../PageContainer";
+import ContentContainer from "../ContentContainer";
 import CalendarContent from "./CalendarContent";
 import { Link } from "react-router-dom";
 import { useStateValue, setCalendar } from "../../state";
@@ -33,9 +33,9 @@ const CalendarContainer = () => {
   }, [dispatch, isLoading]);
 
   return (
-    <PageContainer title="Kisakalenteri">
+    <ContentContainer title="Kisakalenteri">
       <CalendarContent />
-    </PageContainer>
+    </ContentContainer>
   );
 };
 

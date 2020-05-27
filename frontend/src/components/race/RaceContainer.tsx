@@ -1,5 +1,5 @@
 import React from "react";
-import PageContainer from "../PageContainer";
+import ContentContainer from "../ContentContainer";
 import { useParams } from "react-router-dom";
 import config from "../../config";
 import { setRaces } from "../../state";
@@ -39,9 +39,9 @@ const RaceContainer = () => {
   }
 
   return (
-    <PageContainer title={`${race.seasonName} | ${race.trackName}`}>
+    <ContentContainer title={`${race.seasonName} | ${race.trackName}`}>
       <RaceContent data={race} />
-    </PageContainer>
+    </ContentContainer>
   );
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 import config from "../../config";
 import { setStandings, useStateValue } from "../../state";
 
-import PageContainer from "../PageContainer";
+import ContentContainer from "../ContentContainer";
 import StandingsContent from "./StandingsContent";
 import { IStandingRow } from "../../types";
 import Dropdown from "../Dropdown";
@@ -60,14 +60,14 @@ const StandingsContainer = () => {
   const standingsToShow = standings.filter(row => row.seasonId === selected);
 
   return (
-    <PageContainer title="Sarjataulukko">
+    <ContentContainer title="Sarjataulukko">
       <Dropdown
         options={getOptions(standings)}
         selected={selected}
         setSelected={setSelected}
       />
       <StandingsContent standings={standingsToShow} />
-    </PageContainer>
+    </ContentContainer>
   );
 };
 

@@ -1,13 +1,21 @@
 import React from "react";
-import styled from "styled-components";
-import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import logo from "../assets/logo.svg";
+import blackGrit from "../assets/blackgrit.png";
 
 const Container = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
+
+  border-image-source: url(${blackGrit});
+  border-image-slice: 200;
+  border-image-repeat: round;
+  border-width: var(--borderSize);
+  border-style: solid solid none solid;
 `;
 
 const Logo = styled.img`
