@@ -5,7 +5,9 @@ import { INavItem } from "../types";
 import whiteGrit from "../assets/whitegrit.png";
 import blackGrit from "../assets/blackgrit.png";
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin: 0 var(--borderSize);
+`;
 
 const NavList = styled.ul`
   list-style: none;
