@@ -4,13 +4,19 @@ import blackGrit from "../assets/blackgrit.png";
 import whiteGrit from "../assets/whitegrit.png";
 
 const Container = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
   min-height: 100%;
   margin: 0 auto;
   padding: 4rem;
   background-color: ${props => props.theme.colors.white};
   border-radius: 2px;
   z-index: 1000;
+
+  ${props => props.theme.media.tablet} {
+    padding: 2rem;
+  }
 `;
 
 const Title = styled.h2`
@@ -19,6 +25,10 @@ const Title = styled.h2`
   font-weight: 800;
   letter-spacing: 0.05em;
   position: relative;
+
+  ${props => props.theme.media.tablet} {
+    font-size: 3rem;
+  }
 
   span {
     padding: 2rem 2rem 2rem 0px;

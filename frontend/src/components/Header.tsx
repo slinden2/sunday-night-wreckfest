@@ -11,11 +11,13 @@ const Container = styled.h1`
   align-items: center;
   margin: 0;
 
-  border-image-source: url(${blackGrit});
-  border-image-slice: 200;
-  border-image-repeat: round;
-  border-width: var(--borderSize);
-  border-style: solid solid none solid;
+  ${props => props.theme.media.desktop} {
+    border-image-source: url(${blackGrit});
+    border-image-slice: 200;
+    border-image-repeat: round;
+    border-width: var(--borderSize);
+    border-style: solid solid none solid;
+  }
 `;
 
 const Logo = styled.img`

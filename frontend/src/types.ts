@@ -72,3 +72,13 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
 export interface IRaceDetails extends IRaceCalendarEvent {
   details: IDriverSeasonRaceData[];
 }
+
+export interface ITableHeaderMap {
+  [field: string]: {
+    title: string;
+    rowSpan?: number;
+    colSpan?: number;
+    dataIndex?: number;
+    alignCenter?: boolean;
+  };
+}

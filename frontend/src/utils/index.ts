@@ -51,3 +51,12 @@ export const convertTimeToSecs = (time: string): number => {
     })
     .reduce((acc, cur) => acc + cur);
 };
+
+// DD.MM.YYYY
+export const getFinnishDate = (str: string): string => {
+  const rawDate = new Date(str);
+  const date = String(rawDate.getDate()).padStart(2, "0");
+  const month = String(rawDate.getMonth() + 1).padStart(2, "0");
+  const year = String(rawDate.getFullYear());
+  return `${date}.${month}.${year}`;
+};

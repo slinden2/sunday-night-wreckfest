@@ -5,6 +5,7 @@ import ContentContainer from "../ContentContainer";
 import CalendarContent from "./CalendarContent";
 import { Link } from "react-router-dom";
 import { useStateValue, setCalendar } from "../../state";
+import { getFinnishDate } from "../../utils";
 
 const raceCalendarUrl = config.baseUrl + "/races";
 
@@ -20,7 +21,8 @@ const CalendarContainer = () => {
         const json = await response.json();
         const dataWithLinks = json.map((event: IRaceCalendarEvent) => ({
           ...event,
-          link: <Link to={config.getRaceUrl(event.eventId)}>Link</Link>,
+          link: <Link to={config.getRaceUrl(event.eventId)}>Linkki</Link>,
+          date: getFinnishDate(event.date),
         })) as IRaceCalendarEvent[];
         dispatch(setCalendar(dataWithLinks));
       } catch (err) {

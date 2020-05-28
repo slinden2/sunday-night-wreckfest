@@ -19,13 +19,17 @@ const MainContainer = styled.div`
 
 const PageContainer = styled.div`
   background-color: ${props => props.theme.colors.yellow};
-  height: 100vh;
+  height: 100%;
+  min-height: 70vh;
   padding-bottom: 4rem;
-  border-image-source: url(${blackGrit});
-  border-image-slice: 200;
-  border-image-repeat: round;
-  border-width: var(--borderSize);
-  border-style: none solid solid solid;
+
+  ${props => props.theme.media.desktop} {
+    border-image-source: url(${blackGrit});
+    border-image-slice: 200;
+    border-image-repeat: round;
+    border-width: var(--borderSize);
+    border-style: none solid solid solid;
+  }
 `;
 
 const App = () => {
