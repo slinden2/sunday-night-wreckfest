@@ -24,6 +24,14 @@ const STable = styled.table`
     border-bottom: 2px solid black;
   }
 
+  tr:nth-child(even) {
+    background-color: ${props => props.theme.colors.lightgrey};
+  }
+
+  thead tr:nth-child(even) {
+    background-color: ${props => props.theme.colors.black};
+  }
+
   td,
   th {
     padding: 0.5rem;

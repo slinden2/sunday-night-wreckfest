@@ -6,6 +6,7 @@ import { setRaces } from "../../state";
 import RaceContent from "./RaceContent";
 import { useStateValue } from "../../state";
 import LoadingIndicator from "../LoadingIndicator";
+import { getFinnishDate } from "../../utils";
 
 const RaceContainer = () => {
   const { id } = useParams();
@@ -18,7 +19,8 @@ const RaceContainer = () => {
       try {
         const response = await fetch(raceUrl);
         const json = await response.json();
-        dispatch(setRaces(json));
+        const races = { ...json, date: getFinnishDate(json.date) };
+        dispatch(setRaces(races));
       } catch (err) {
         console.error(err);
       }
@@ -38,8 +40,10 @@ const RaceContainer = () => {
     throw new Error(`Race with raceId: ${id} does not exist!`);
   }
 
+  const raceNum = race.eventId.substr(race.eventId.length - 2);
+
   return (
-    <ContentContainer title={`${race.seasonName} | ${race.trackName}`}>
+    <ContentContainer title={`${race.seasonName} | Kilpailu ${raceNum}`}>
       <RaceContent data={race} />
     </ContentContainer>
   );

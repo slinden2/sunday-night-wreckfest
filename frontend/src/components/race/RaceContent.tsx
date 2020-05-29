@@ -1,35 +1,85 @@
 import React from "react";
-import { IRaceDetails, VideoService } from "../../types";
+import styled from "styled-components";
+import { IRaceDetails, VideoService, ITableHeaderMap } from "../../types";
 import Table from "../Table";
 import { convertTimeToSecs } from "../../utils";
+
+const EventTable = styled.table`
+  border: 2px solid black;
+  border-collapse: collapse;
+  text-align: left;
+
+  ${props => props.theme.media.tablet} {
+    font-size: 1.2rem;
+  }
+
+  td,
+  th {
+    border-bottom: 2px solid black;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+  }
+
+  th {
+    background-color: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.white};
+  }
+`;
+
+const VideoContainer = styled.div`
+  ${props => props.theme.media.desktop} {
+  }
+`;
+
+const VideoFrame = styled.div`
+  padding-bottom: 56.25%;
+  position: relative;
+  margin-bottom: 1rem;
+
+  @media (min-width: 1260px) {
+    display: inline-block;
+    width: 550px;
+    height: 281px;
+    position: static;
+    padding: 0 1rem 0 1rem;
+  }
+`;
+
+const IFrame = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: 1260px) {
+    position: static;
+    margin-bottom: 0;
+  }
+`;
+
+const qHeaders = [["driverName", "qTime", "group"]];
+
+const qHeaderMap: ITableHeaderMap = {
+  driverName: { title: "Kuljettaja", dataIndex: 0 },
+  qTime: { title: "Kierrosaika", dataIndex: 1, alignCenter: true },
+  group: { title: "L", dataIndex: 2, alignCenter: true },
+};
+
+const raceHeaders = [
+  ["driverName", "group", "seasonPoints", "heatPositions", "heatPoints"],
+];
+
+const raceHeaderMap: ITableHeaderMap = {
+  driverName: { title: "Kuljettaja", dataIndex: 0 },
+  seasonPoints: { title: "P", dataIndex: 1, alignCenter: true },
+  group: { title: "L", dataIndex: 2, alignCenter: true },
+  heatPositions: { title: "Lähtösijoitukset", dataIndex: 3, alignCenter: true },
+  heatPoints: { title: "Lähtöpisteet", dataIndex: 4, alignCenter: true },
+};
 
 interface Props {
   data: IRaceDetails;
 }
-
-const qHeaders = ["driverName", "qTime", "group"];
-
-const qHeaderMap = {
-  driverName: "Kuljettaja",
-  qTime: "Aika",
-  group: "Lohko",
-};
-
-const raceHeaders = [
-  "driverName",
-  "seasonPoints",
-  "group",
-  "heatPositions",
-  "heatPoints",
-];
-
-const raceHeaderMap = {
-  driverName: "Kuljettaja",
-  seasonPoints: "P",
-  group: "L",
-  heatPositions: "Lähtötulokset",
-  heatPoints: "Lähtöpisteet",
-};
 
 const RaceContent = ({ data }: Props) => {
   const qDetails = data.details.sort((a, b) => {
@@ -48,32 +98,36 @@ const RaceContent = ({ data }: Props) => {
 
   return (
     <div>
-      <table>
+      <EventTable>
         <tbody>
           <tr>
-            <td>Päivä</td>
+            <th>Päivämäärä</th>
             <td>{data.date}</td>
           </tr>
           <tr>
-            <td>Aika-ajokierrokset</td>
+            <th>Rata</th>
+            <td>{data.trackName}</td>
+          </tr>
+          <tr>
+            <th>Aika-ajokierrokset</th>
             <td>{data.qLaps}</td>
           </tr>
           <tr>
-            <td>Kilpailukierrokset</td>
+            <th>Kilpailukierrokset</th>
             <td>{data.raceLaps}</td>
           </tr>
           <tr>
-            <td>Tehoraja</td>
+            <th>Tehoraja</th>
             <td>{data.hasPowerLimit ? "X" : ""}</td>
           </tr>
         </tbody>
-      </table>
+      </EventTable>
       <div>
-        <h2>Aika-ajotulokset</h2>
+        <h3>Aika-ajotulokset</h3>
         <Table data={qDetails} headers={qHeaders} headerMap={qHeaderMap} />
       </div>
       <div>
-        <h2>Kilpailutulokset</h2>
+        <h3>Kilpailutulokset</h3>
         <Table
           data={raceDetails}
           headers={raceHeaders}
@@ -82,32 +136,35 @@ const RaceContent = ({ data }: Props) => {
       </div>
       {data.videos && (
         <div>
-          {data.videos.map(video => {
-            if (video.service === VideoService.twitch) {
-              return (
-                <iframe
-                  key={video.id}
-                  src={`https://player.twitch.tv/?autoplay=false&video=v${video.id}`}
-                  height="378"
-                  width="620"
-                  title={video.id}
-                  scrolling="no"
-                  allowFullScreen
-                ></iframe>
-              );
-            } else {
-              return (
-                <iframe
-                  key={video.id}
-                  width="620"
-                  height="378"
-                  title={video.id}
-                  src={`https://www.youtube.com/embed/${video.id}`}
-                  allowFullScreen
-                ></iframe>
-              );
-            }
-          })}
+          <h3>Media</h3>
+          <VideoContainer>
+            {data.videos.map(video => {
+              if (video.service === VideoService.twitch) {
+                return (
+                  <VideoFrame>
+                    <IFrame
+                      key={video.id}
+                      src={`https://player.twitch.tv/?autoplay=false&video=v${video.id}`}
+                      title={video.id}
+                      scrolling="no"
+                      allowFullScreen
+                    ></IFrame>
+                  </VideoFrame>
+                );
+              } else {
+                return (
+                  <VideoFrame>
+                    <IFrame
+                      key={video.id}
+                      title={video.id}
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      allowFullScreen
+                    ></IFrame>
+                  </VideoFrame>
+                );
+              }
+            })}
+          </VideoContainer>
         </div>
       )}
     </div>
