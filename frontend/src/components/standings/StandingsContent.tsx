@@ -1,18 +1,19 @@
 import React from "react";
 import { IStandingRow } from "../../types";
 import Table from "../Table";
+import { HeaderH3, Page } from "../styledElements";
 
 interface Props {
   standings: IStandingRow[];
 }
 
-const headers = ["driverName", "racesDriven", "points", "powerLimit"];
+const headers = [["driverName", "racesDriven", "points", "powerLimit"]];
 
 const headerMap = {
-  driverName: "Driver",
-  racesDriven: "Races",
-  points: "Points",
-  powerLimit: "Power Limit",
+  driverName: { title: "Kuljettaja", dataIndex: 0 },
+  racesDriven: { title: "Kilpailut", dataIndex: 1, alignCenter: true },
+  points: { title: "P", dataIndex: 2, alignCenter: true },
+  powerLimit: { title: "Tehoraja", dataIndex: 3, alignCenter: true },
 };
 
 const sortByDrawPosition = (a: IStandingRow, b: IStandingRow) => {
@@ -31,10 +32,10 @@ const StandingsContent = ({ standings }: Props) => {
   );
 
   return (
-    <div>
-      <h2>{standings[0].seasonName}</h2>
+    <Page>
+      <HeaderH3>{standings[0].seasonName}</HeaderH3>
       <Table data={sortedStandings} headers={headers} headerMap={headerMap} />
-    </div>
+    </Page>
   );
 };
 

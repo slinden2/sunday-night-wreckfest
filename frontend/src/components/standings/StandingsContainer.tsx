@@ -35,7 +35,7 @@ const getOptions = (standings: IStandingRow[]): Options[] => {
 const StandingsContainer = () => {
   const [{ standings }, dispatch] = useStateValue();
   const isLoading = standings.length === 0;
-  const [selected, setSelected] = React.useState<string>("0400");
+  const [selected, setSelected] = React.useState<string>("");
 
   React.useEffect(() => {
     const standingsUrl = config.baseUrl + "/standings";
@@ -43,6 +43,8 @@ const StandingsContainer = () => {
       try {
         const response = await fetch(standingsUrl);
         const json = await response.json();
+        // Show the latest series standings by default
+        setSelected(json[json.length - 1].seasonId);
         dispatch(setStandings(json));
       } catch (err) {
         console.error(err);
