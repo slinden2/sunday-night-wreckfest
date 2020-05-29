@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ITableHeaderMap } from "../../types";
+import { styledLinkProps } from "../styledElements";
 
 const Container = styled.div`
   max-width: 100%;
@@ -45,25 +46,7 @@ const STable = styled.table`
   }
 
   a {
-    text-decoration: underline;
-    color: inherit;
-    display: inline-block;
-    position: relative;
-
-    &::before {
-      display: block;
-      content: "";
-      width: 100%;
-      height: 4px;
-      background-color: ${props => props.theme.colors.yellow};
-      position: absolute;
-      bottom: -2px;
-      transform: rotate(1.6deg);
-    }
-
-    &:hover::before {
-      transform: scaleX(1.1) rotate(1.6deg);
-    }
+    ${styledLinkProps}
   }
 `;
 

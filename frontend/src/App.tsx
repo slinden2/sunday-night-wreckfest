@@ -11,6 +11,7 @@ import config from "./config";
 import Header from "./components/Header";
 import blackGrit from "./assets/blackgrit.png";
 import TeamsContainer from "./components/teams/TeamsContainer";
+import Footer from "./components/Footer";
 
 const MainContainer = styled.div`
   border: var(--borderSize) solid ${props => props.theme.colors.black};
@@ -58,6 +59,7 @@ const App = () => {
             </Route>
           </Switch>
         </PageContainer>
+        <Footer />
       </MainContainer>
     </Router>
   );
