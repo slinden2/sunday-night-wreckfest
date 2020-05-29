@@ -156,7 +156,7 @@ const Navigation = () => {
         {navLinks.map((link, i) => (
           <NavListItem key={link.title} ignoreAfter={i === lastLinkIndex}>
             {link.external ? (
-              <a href={link.url} rel="_blank">
+              <a href={link.url} rel="noopener noreferrer" target="_blank">
                 <LinkSpan>
                   <LinkText>{link.title}</LinkText>
                 </LinkSpan>
