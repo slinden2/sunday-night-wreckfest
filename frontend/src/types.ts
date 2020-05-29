@@ -35,6 +35,7 @@ export interface ISeasonHash {
 export interface INavItem {
   title: string;
   url: string;
+  external?: boolean;
 }
 
 export interface IStandingRow {

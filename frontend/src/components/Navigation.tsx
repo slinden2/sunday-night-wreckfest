@@ -138,7 +138,8 @@ const navLinks: INavItem[] = [
   },
   {
     title: "Discord",
-    url: "/discordi",
+    url: "https://discord.gg/Xz3wa3",
+    external: true,
   },
   {
     title: "SNW",
@@ -154,11 +155,19 @@ const Navigation = () => {
       <NavList>
         {navLinks.map((link, i) => (
           <NavListItem key={link.title} ignoreAfter={i === lastLinkIndex}>
-            <NavLink exact to={link.url}>
-              <LinkSpan>
-                <LinkText>{link.title}</LinkText>
-              </LinkSpan>
-            </NavLink>
+            {link.external ? (
+              <a href={link.url} rel="_blank">
+                <LinkSpan>
+                  <LinkText>{link.title}</LinkText>
+                </LinkSpan>
+              </a>
+            ) : (
+              <NavLink exact to={link.url}>
+                <LinkSpan>
+                  <LinkText>{link.title}</LinkText>
+                </LinkSpan>
+              </NavLink>
+            )}
           </NavListItem>
         ))}
       </NavList>
