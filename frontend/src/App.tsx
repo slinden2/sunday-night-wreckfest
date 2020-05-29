@@ -30,7 +30,7 @@ const PageContainer = styled.div`
     border-image-slice: 200;
     border-image-repeat: round;
     border-width: var(--borderSize);
-    border-style: none solid solid solid;
+    border-style: none solid none solid;
   }
 `;
 
