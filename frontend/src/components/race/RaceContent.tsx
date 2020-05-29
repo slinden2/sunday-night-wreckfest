@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IRaceDetails, VideoService, ITableHeaderMap } from "../../types";
 import Table from "../Table";
 import { convertTimeToSecs } from "../../utils";
+import { HeaderH3, Page, SectionContainer } from "../styledElements";
 
 const EventTable = styled.table`
   border: 2px solid black;
@@ -97,7 +98,7 @@ const RaceContent = ({ data }: Props) => {
     .sort((a, b) => b.seasonPoints - a.seasonPoints);
 
   return (
-    <div>
+    <Page>
       <EventTable>
         <tbody>
           <tr>
@@ -122,21 +123,21 @@ const RaceContent = ({ data }: Props) => {
           </tr>
         </tbody>
       </EventTable>
-      <div>
-        <h3>Aika-ajotulokset</h3>
+      <SectionContainer>
+        <HeaderH3>Aika-ajotulokset</HeaderH3>
         <Table data={qDetails} headers={qHeaders} headerMap={qHeaderMap} />
-      </div>
-      <div>
-        <h3>Kilpailutulokset</h3>
+      </SectionContainer>
+      <SectionContainer>
+        <HeaderH3>Kilpailutulokset</HeaderH3>
         <Table
           data={raceDetails}
           headers={raceHeaders}
           headerMap={raceHeaderMap}
         />
-      </div>
+      </SectionContainer>
       {data.videos && (
-        <div>
-          <h3>Media</h3>
+        <SectionContainer>
+          <HeaderH3>Media</HeaderH3>
           <VideoContainer>
             {data.videos.map(video => {
               if (video.service === VideoService.twitch) {
@@ -165,9 +166,9 @@ const RaceContent = ({ data }: Props) => {
               }
             })}
           </VideoContainer>
-        </div>
+        </SectionContainer>
       )}
-    </div>
+    </Page>
   );
 };
 

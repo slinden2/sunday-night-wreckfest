@@ -1,28 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-
 import Table from "../Table";
 import LoadingIndicator from "../LoadingIndicator";
 import { useStateValue } from "../../state";
 import { ITableHeaderMap } from "../../types";
-
-const Page = styled.div`
-  margin-top: 5rem;
-`;
-
-const TableContainer = styled.div`
-  margin-bottom: 5rem;
-`;
-
-const TableTitle = styled.h3`
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0 0 1rem 0;
-
-  ${props => props.theme.media.tablet} {
-    font-size: 2rem;
-  }
-`;
+import { HeaderH3, SectionContainer, Page } from "../styledElements";
 
 const headerMap: ITableHeaderMap = {
   date: { title: "Päivämäärä", rowSpan: 2, dataIndex: 0 },
@@ -49,10 +30,10 @@ const CalendarContent = () => {
   return (
     <Page>
       {calendar.map(season => (
-        <TableContainer key={season.seasonId}>
-          <TableTitle>{season.seasonName}</TableTitle>
+        <SectionContainer key={season.seasonId}>
+          <HeaderH3>{season.seasonName}</HeaderH3>
           <Table data={season.events} headers={headers} headerMap={headerMap} />
-        </TableContainer>
+        </SectionContainer>
       ))}
     </Page>
   );
