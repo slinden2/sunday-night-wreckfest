@@ -7,13 +7,12 @@ const customMinMediaQuery = (minWidth: number) =>
   `@media (min-width: ${minWidth}px)`;
 
 const theme: DefaultTheme = {
-  borderRadius: "5px",
-
   colors: {
     yellow: "#ffc600",
     cyan: "#091ffff",
     black: "#000000",
     white: "#ffffff",
+    lightgrey: "#f0f0f0",
   },
 
   media: {

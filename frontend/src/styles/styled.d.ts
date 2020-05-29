@@ -4,13 +4,12 @@ import "styled-components";
 // and extend them!
 declare module "styled-components" {
   export interface DefaultTheme {
-    borderRadius: string;
-
     colors: {
       yellow: string;
       cyan: string;
       black: string;
       white: string;
+      lightgrey: string;
     };
 
     media: {
