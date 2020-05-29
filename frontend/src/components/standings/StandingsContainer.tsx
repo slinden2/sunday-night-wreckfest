@@ -43,8 +43,6 @@ const StandingsContainer = () => {
       try {
         const response = await fetch(standingsUrl);
         const json = await response.json();
-        // Show the latest series standings by default
-        setSelected(json[json.length - 1].seasonId);
         dispatch(setStandings(json));
       } catch (err) {
         console.error(err);
@@ -57,6 +55,12 @@ const StandingsContainer = () => {
 
   if (isLoading) {
     return <LoadingIndicator />;
+  }
+
+  // Show the latest series standings by default
+  const mostRecentSeason = standings[standings.length - 1].seasonId;
+  if (selected !== mostRecentSeason) {
+    setSelected(mostRecentSeason);
   }
 
   const standingsToShow = standings.filter(row => row.seasonId === selected);
