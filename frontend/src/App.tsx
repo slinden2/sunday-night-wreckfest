@@ -10,6 +10,7 @@ import RaceContainer from "./components/race/RaceContainer";
 import config from "./config";
 import Header from "./components/Header";
 import blackGrit from "./assets/blackgrit.png";
+import TeamsContainer from "./components/teams/TeamsContainer";
 
 const MainContainer = styled.div`
   border: var(--borderSize) solid ${props => props.theme.colors.black};
@@ -46,8 +47,11 @@ const App = () => {
             <Route path={config.getRaceUrl(":id")}>
               <RaceContainer />
             </Route>
-            <Route path="/standings">
+            <Route path="/sarjataulukko">
               <StandingsContainer />
+            </Route>
+            <Route path="/tiimit">
+              <TeamsContainer />
             </Route>
             <Route path="/snw">
               <SNWContainer />

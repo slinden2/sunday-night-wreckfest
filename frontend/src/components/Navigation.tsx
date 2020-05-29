@@ -130,11 +130,7 @@ const navLinks: INavItem[] = [
   },
   {
     title: "Sarjataulukko",
-    url: "/standings",
-  },
-  {
-    title: "Kuskit",
-    url: "/kuskit",
+    url: "/sarjataulukko",
   },
   {
     title: "Tiimit",
