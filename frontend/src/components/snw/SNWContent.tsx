@@ -6,34 +6,26 @@ const SNWContent = () => {
     <Page>
       <HeaderH3>Mikä on SNW?</HeaderH3>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium ut
-        tenetur, animi ratione voluptatem, illum saepe voluptatum beatae eius
-        earum, excepturi commodi veniam fugiat molestiae. Repudiandae adipisci
-        similique doloremque odio.
+        Sunday Night Wreckfest on yksi nimikkopelinsä vanhimmista suomalaisista
+        kilpailuyhteisöistä, joka koostuu eri tasoisista kuljettajista, joilla
+        on taustaa eri autopeleistä tai oikean elämän autoilusta. Wreckfestin
+        ryppyiset, ruosteiset ruoskat ja simcade -fysiikat tarjoavat erilaista
+        ajotoimintaa muihin markkinoilla oleviin ajeluihin verrattuna, ja siksi
+        yleensä kilpailuidemme teemana on sovellettu jokamiesluokka.
       </p>
       <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod velit
-        optio nisi porro molestiae suscipit explicabo sit eum est at odit,
-        voluptatem nostrum ab, ducimus labore. Quaerat, quis magnam libero
-        debitis hic ipsum corporis quos nisi saepe ipsam fuga magni ad quia
-        blanditiis soluta quo eligendi ut, distinctio doloribus excepturi
-        necessitatibus laborum modi sit? Ad laborum nam incidunt aperiam sit vel
-        necessitatibus, dolorum, velit doloribus, eaque fugit. Voluptas
-        accusamus placeat praesentium excepturi nam dolorum beatae, omnis
-        aspernatur quisquam corporis, eos maiores? Quisquam consequuntur
-        laboriosam ipsum et possimus ullam. Natus et deserunt sunt aliquam
-        debitis fugiat temporibus nam consequatur quos molestias corrupti vitae,
-        corporis possimus accusantium a eum veritatis beatae, quod vel omnis
-        quasi unde dolor! Recusandae, praesentium repellendus eos eveniet
-        architecto tempora, animi beatae obcaecati iste dolorem exercitationem
-        quidem deleniti debitis rerum quo suscipit perferendis. Voluptas ipsam
-        similique quasi ut facilis beatae voluptates corporis expedita dolor
-        nesciunt ea tenetur, libero praesentium eaque unde vitae error fugit,
-        distinctio est ducimus debitis numquam aperiam. A nisi earum in, natus
-        molestiae nostrum tenetur minus, voluptatum nihil iure eum itaque rerum
-        vero, labore quisquam dignissimos molestias alias voluptates culpa esse
-        nulla amet inventore cumque fugiat. Possimus officia reiciendis commodi
-        illo iusto aspernatur a tempore.
+        Virallinen kausi on kaikista kilpamuodoistamme kruununjalokivi, joka
+        tukee 36:tta osallistujaa. Kovan tason kilpakaudessa riittää
+        treeniseuraa, keskustelua autojen säädöistä tai radan ominaisuuksista
+        sekä hampaat irvessä -hetkiä sijoista taistellen 9 kisapäivän ajan! Jos
+        vakavamielinen kisailu ei maistu, niin tarjolla on monia muita
+        kilpamuotoja, esim tila-autojen oma kamppailu nimeltä Perhehelvetti.
+        Kilpailut ovat aina sunnuntai-iltaisin, jotta mahdollisimman monella
+        olisi tsäänssi päästä nauttimaan korkeaoktaanisesta toiminnasta sekä
+        läpän heitosta yhteisön jäsenten kanssa!
+      </p>
+      <p>
+        <strong>Tervetuloa yhteisöömme!</strong>
       </p>
     </Page>
   );
