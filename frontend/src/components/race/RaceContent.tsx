@@ -97,6 +97,8 @@ const RaceContent = ({ data }: Props) => {
     }))
     .sort((a, b) => b.seasonPoints - a.seasonPoints);
 
+  console.log(data);
+
   return (
     <Page>
       <EventTable>
@@ -148,6 +150,17 @@ const RaceContent = ({ data }: Props) => {
                       src={`https://player.twitch.tv/?autoplay=false&video=v${video.id}`}
                       title={video.id}
                       scrolling="no"
+                      allowFullScreen
+                    ></IFrame>
+                  </VideoFrame>
+                );
+              } else if (video.service === VideoService.twitchClip) {
+                return (
+                  <VideoFrame>
+                    <IFrame
+                      key={video.id}
+                      src={`https://clips.twitch.tv/embed?clip=${video.id}&parent=streamernews.example.com`}
+                      title={video.id}
                       allowFullScreen
                     ></IFrame>
                   </VideoFrame>

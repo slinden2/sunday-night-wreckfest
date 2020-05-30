@@ -1,6 +1,7 @@
 export enum VideoService {
   youtube = "youtube",
   twitch = "twitch",
+  twitchClip = "twitchClip",
 }
 
 export type VideoType = {

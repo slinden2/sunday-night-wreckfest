@@ -160,7 +160,7 @@ export const parseNumber = (num: any, field: string): number => {
 };
 
 export const isVideoDataString = (text: string): boolean => {
-  if (/^((twitch|youtube),[a-zA-Z0-9]+;)+$/.test(text)) return true;
+  if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9]+;)+$/.test(text)) return true;
   else return false;
 };
 
@@ -170,6 +170,7 @@ export const isVideoService = (text: any): text is VideoService => {
 };
 
 export const parseVideos = (videoDataString: string): VideoType[] => {
+  console.log(videoDataString);
   if (!isVideoDataString(videoDataString)) {
     throw new DataIntegrityError("Invalid videoDataString " + videoDataString);
   }

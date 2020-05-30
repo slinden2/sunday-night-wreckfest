@@ -9,8 +9,8 @@ const headerMap: ITableHeaderMap = {
   date: { title: "Päivämäärä", rowSpan: 2, dataIndex: 0 },
   trackName: { title: "Rata", rowSpan: 2, dataIndex: 1 },
   laps: { title: "Kierrokset", colSpan: 2, alignCenter: true },
-  qLaps: { title: "Q", dataIndex: 2, alignCenter: true },
-  raceLaps: { title: "R", dataIndex: 3, alignCenter: true },
+  qLaps: { title: "A", dataIndex: 2, alignCenter: true },
+  raceLaps: { title: "K", dataIndex: 3, alignCenter: true },
   link: { title: "Tulokset", rowSpan: 2, dataIndex: 4, alignCenter: true },
 };
 
