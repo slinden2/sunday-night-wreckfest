@@ -46,7 +46,7 @@ const BlackGritContainer = styled.div`
   padding: 4rem;
 `;
 
-const DiscordFlex = styled.div`
+const DiscordFlex = styled.span`
   display: inline-flex;
   align-items: center;
 `;

@@ -170,7 +170,6 @@ export const isVideoService = (text: any): text is VideoService => {
 };
 
 export const parseVideos = (videoDataString: string): VideoType[] => {
-  console.log(videoDataString);
   if (!isVideoDataString(videoDataString)) {
     throw new DataIntegrityError("Invalid videoDataString " + videoDataString);
   }

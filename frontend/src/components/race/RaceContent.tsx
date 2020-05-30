@@ -97,8 +97,6 @@ const RaceContent = ({ data }: Props) => {
     }))
     .sort((a, b) => b.seasonPoints - a.seasonPoints);
 
-  console.log(data);
-
   return (
     <Page>
       <EventTable>
