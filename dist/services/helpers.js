@@ -116,7 +116,7 @@ exports.parseNumber = (num, field) => {
     return Number(num);
 };
 exports.isVideoDataString = (text) => {
-    if (/^((twitch|youtube),[a-zA-Z0-9]+;)+$/.test(text))
+    if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9]+;)+$/.test(text))
         return true;
     else
         return false;
@@ -128,6 +128,7 @@ exports.isVideoService = (text) => {
         return false;
 };
 exports.parseVideos = (videoDataString) => {
+    console.log(videoDataString);
     if (!exports.isVideoDataString(videoDataString)) {
         throw new errors_1.DataIntegrityError("Invalid videoDataString " + videoDataString);
     }

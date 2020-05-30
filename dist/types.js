@@ -4,6 +4,7 @@ var VideoService;
 (function (VideoService) {
     VideoService["youtube"] = "youtube";
     VideoService["twitch"] = "twitch";
+    VideoService["twitchClip"] = "twitchClip";
 })(VideoService = exports.VideoService || (exports.VideoService = {}));
 var RaceGroup;
 (function (RaceGroup) {
