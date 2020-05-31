@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import blackGrit from "./assets/blackgrit.png";
 import TeamsContainer from "./components/teams/TeamsContainer";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const MainContainer = styled.div`
   border: var(--borderSize) solid ${props => props.theme.colors.black};
@@ -41,6 +42,7 @@ const App = () => {
         <Header />
         <Navigation />
         <PageContainer>
+          <ScrollToTop />
           <Switch>
             <Route exact path="/">
               <CalendarContainer />
