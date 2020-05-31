@@ -128,7 +128,6 @@ exports.isVideoService = (text) => {
         return false;
 };
 exports.parseVideos = (videoDataString) => {
-    console.log(videoDataString);
     if (!exports.isVideoDataString(videoDataString)) {
         throw new errors_1.DataIntegrityError("Invalid videoDataString " + videoDataString);
     }
