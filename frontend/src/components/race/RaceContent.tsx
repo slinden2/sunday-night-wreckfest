@@ -58,24 +58,35 @@ const IFrame = styled.iframe`
   }
 `;
 
-const qHeaders = [["driverName", "qTime", "group"]];
+const qHeaders = [["#", "driverName", "qTime", "group"]];
 
 const qHeaderMap: ITableHeaderMap = {
-  driverName: { title: "Kuljettaja", dataIndex: 0 },
-  qTime: { title: "Kierrosaika", dataIndex: 1, alignCenter: true },
-  group: { title: "L", dataIndex: 2, alignCenter: true },
+  "#": { title: "#", dataIndex: 0, alignCenter: true },
+  driverName: { title: "Kuljettaja", dataIndex: 1 },
+  qTime: { title: "Kierrosaika", dataIndex: 2, alignCenter: true },
+  group: { title: "L", dataIndex: 3, alignCenter: true },
 };
 
 const raceHeaders = [
-  ["driverName", "group", "seasonPoints", "heatPositions", "heatPoints"],
+  [
+    "#",
+    "driverName",
+    "seasonPoints",
+    "group",
+    "heatPositions",
+    "heatPoints",
+    "totalPoints",
+  ],
 ];
 
 const raceHeaderMap: ITableHeaderMap = {
-  driverName: { title: "Kuljettaja", dataIndex: 0 },
-  seasonPoints: { title: "P", dataIndex: 1, alignCenter: true },
-  group: { title: "L", dataIndex: 2, alignCenter: true },
-  heatPositions: { title: "Lähtösijoitukset", dataIndex: 3, alignCenter: true },
-  heatPoints: { title: "Lähtöpisteet", dataIndex: 4, alignCenter: true },
+  "#": { title: "#", dataIndex: 0, alignCenter: true },
+  driverName: { title: "Kuljettaja", dataIndex: 1 },
+  seasonPoints: { title: "P", dataIndex: 2, alignCenter: true },
+  group: { title: "L", dataIndex: 3, alignCenter: true },
+  heatPositions: { title: "Lähtösijoitukset", dataIndex: 4, alignCenter: true },
+  heatPoints: { title: "Lähtöpisteet", dataIndex: 5, alignCenter: true },
+  totalPoints: { title: "P", dataIndex: 6, alignCenter: true },
 };
 
 interface Props {
@@ -83,19 +94,25 @@ interface Props {
 }
 
 const RaceContent = ({ data }: Props) => {
-  const qDetails = data.details.sort((a, b) => {
-    const aTime = convertTimeToSecs(a.qTime);
-    const bTime = convertTimeToSecs(b.qTime);
-    return aTime - bTime;
-  });
+  const qDetails = data.details
+    .sort((a, b) => {
+      const aTime = convertTimeToSecs(a.qTime);
+      const bTime = convertTimeToSecs(b.qTime);
+      return aTime - bTime;
+    })
+    .map((driver, i) => ({ ...driver, "#": i + 1 }));
+
+  console.log(qDetails);
 
   const raceDetails = data.details
     .map(driver => ({
       ...driver,
+      totalPoints: driver.heatPoints.reduce((acc, cur) => acc + cur),
       heatPoints: driver.heatPoints?.join(", "),
       heatPositions: driver.heatPositions?.join(", "),
     }))
-    .sort((a, b) => b.seasonPoints - a.seasonPoints);
+    .sort((a, b) => b.seasonPoints - a.seasonPoints)
+    .map((driver, i) => ({ ...driver, "#": i + 1 }));
 
   return (
     <Page>

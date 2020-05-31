@@ -7,13 +7,14 @@ interface Props {
   standings: IStandingRow[];
 }
 
-const headers = [["driverName", "racesDriven", "points", "powerLimit"]];
+const headers = [["#", "driverName", "racesDriven", "points", "powerLimit"]];
 
 const headerMap = {
-  driverName: { title: "Kuljettaja", dataIndex: 0 },
-  racesDriven: { title: "Kilpailut", dataIndex: 1, alignCenter: true },
-  points: { title: "P", dataIndex: 2, alignCenter: true },
-  powerLimit: { title: "Tehoraja", dataIndex: 3, alignCenter: true },
+  "#": { title: "#", dataIndex: 0, alignCenter: true },
+  driverName: { title: "Kuljettaja", dataIndex: 1 },
+  racesDriven: { title: "Kilpailut", dataIndex: 2, alignCenter: true },
+  points: { title: "P", dataIndex: 3, alignCenter: true },
+  powerLimit: { title: "Tehoraja", dataIndex: 4, alignCenter: true },
 };
 
 const sortByDrawPosition = (a: IStandingRow, b: IStandingRow) => {
@@ -27,9 +28,9 @@ const sortByDrawPosition = (a: IStandingRow, b: IStandingRow) => {
 const StandingsContent = ({ standings }: Props) => {
   if (!standings.length) return <div>No standings found.</div>;
 
-  const sortedStandings = standings.sort(
-    (a, b) => b.points - a.points || sortByDrawPosition(a, b)
-  );
+  const sortedStandings = standings
+    .sort((a, b) => b.points - a.points || sortByDrawPosition(a, b))
+    .map((driver, i) => ({ ...driver, "#": i + 1 }));
 
   return (
     <Page>

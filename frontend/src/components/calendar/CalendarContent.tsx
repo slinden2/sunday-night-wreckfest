@@ -6,15 +6,16 @@ import { ITableHeaderMap } from "../../types";
 import { HeaderH3, SectionContainer, Page } from "../styledElements";
 
 const headerMap: ITableHeaderMap = {
-  date: { title: "Päivämäärä", rowSpan: 2, dataIndex: 0 },
-  trackName: { title: "Rata", rowSpan: 2, dataIndex: 1 },
+  "#": { title: "#", rowSpan: 2, dataIndex: 0, alignCenter: true },
+  date: { title: "Päivämäärä", rowSpan: 2, dataIndex: 1 },
+  trackName: { title: "Rata", rowSpan: 2, dataIndex: 2 },
   laps: { title: "Kierrokset", colSpan: 2, alignCenter: true },
-  qLaps: { title: "A", dataIndex: 2, alignCenter: true },
-  raceLaps: { title: "K", dataIndex: 3, alignCenter: true },
-  link: { title: "Tulokset", rowSpan: 2, dataIndex: 4, alignCenter: true },
+  qLaps: { title: "A", dataIndex: 3, alignCenter: true },
+  raceLaps: { title: "K", dataIndex: 4, alignCenter: true },
+  link: { title: "Tulokset", rowSpan: 2, dataIndex: 5, alignCenter: true },
 };
 
-const headersRow1 = ["date", "trackName", "laps", "link"];
+const headersRow1 = ["#", "date", "trackName", "laps", "link"];
 const headersRow2 = ["qLaps", "raceLaps"];
 
 const headers = [headersRow1, headersRow2];
@@ -29,12 +30,22 @@ const CalendarContent = () => {
 
   return (
     <Page>
-      {calendar.map(season => (
-        <SectionContainer key={season.seasonId}>
-          <HeaderH3>{season.seasonName}</HeaderH3>
-          <Table data={season.events} headers={headers} headerMap={headerMap} />
-        </SectionContainer>
-      ))}
+      {calendar.map(season => {
+        const eventsWithPos = season.events.map((event, i) => ({
+          ...event,
+          "#": i + 1,
+        }));
+        return (
+          <SectionContainer key={season.seasonId}>
+            <HeaderH3>{season.seasonName}</HeaderH3>
+            <Table
+              data={eventsWithPos}
+              headers={headers}
+              headerMap={headerMap}
+            />
+          </SectionContainer>
+        );
+      })}
     </Page>
   );
 };
