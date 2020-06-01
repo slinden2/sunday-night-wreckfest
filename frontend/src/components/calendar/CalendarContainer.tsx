@@ -1,6 +1,6 @@
 import React from "react";
 import config from "../../config";
-import { IRaceCalendarEvent } from "../../types";
+import { IRaceCalendarEvent, ISeason } from "../../types";
 import ContentContainer from "../ContentContainer";
 import CalendarContent from "./CalendarContent";
 import { Link } from "react-router-dom";
@@ -11,6 +11,13 @@ const raceCalendarUrl = config.baseUrl + "/races";
 
 const CalendarContainer = () => {
   const [{ calendar }, dispatch] = useStateValue();
+  const [activeCalendar, setActiveCalendar] = React.useState<ISeason[]>(
+    calendar
+  );
+
+  typeof activeCalendar;
+  typeof setActiveCalendar;
+
   const isLoading = calendar.length === 0;
 
   // Fetch calendar data from api

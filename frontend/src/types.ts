@@ -26,6 +26,7 @@ export interface IRaceCalendarEvent {
 export interface ISeason {
   seasonId: string;
   seasonName: string;
+  isCompleted: boolean;
   events: [Omit<IRaceCalendarEvent, "seasonId" | "seasonName">];
 }
 

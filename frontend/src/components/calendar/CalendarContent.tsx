@@ -1,9 +1,32 @@
 import React from "react";
+import styled, { css } from "styled-components";
 import Table from "../Table";
 import LoadingIndicator from "../LoadingIndicator";
 import { useStateValue } from "../../state";
-import { ITableHeaderMap } from "../../types";
+import { ITableHeaderMap, ISeason } from "../../types";
 import { HeaderH3, SectionContainer, Page } from "../styledElements";
+
+const CalendarSelector = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const SelectionButton = styled.span<{ isActive: boolean }>`
+  margin: 0 1rem;
+  cursor: pointer;
+
+  ${props =>
+    props.isActive &&
+    css`
+      font-weight: 800;
+      text-decoration: underline;
+    `}
+`;
+
+enum SelectedCal {
+  Tulevat = "Tulevat",
+  Menneet = "Menneet",
+}
 
 const headerMap: ITableHeaderMap = {
   "#": { title: "#", rowSpan: 2, dataIndex: 0, alignCenter: true },
@@ -20,8 +43,39 @@ const headersRow2 = ["qLaps", "raceLaps"];
 
 const headers = [headersRow1, headersRow2];
 
+const getUpcomingEvents = (cal: ISeason[]) =>
+  cal.filter(event => !event.isCompleted);
+const getHistoricEvents = (cal: ISeason[]) =>
+  cal.filter(event => event.isCompleted).reverse();
+
 const CalendarContent = () => {
   const [{ calendar }] = useStateValue();
+  const [activeCalendar, setActiveCalendar] = React.useState<ISeason[]>(
+    calendar
+  );
+  const [selectedCal, setSelectedCal] = React.useState<SelectedCal>(
+    SelectedCal.Tulevat
+  );
+
+  React.useEffect(() => {
+    setActiveCalendar(getUpcomingEvents(calendar));
+  }, [calendar]);
+
+  const handleCalSelection = (type: SelectedCal) => {
+    switch (type) {
+      case SelectedCal.Tulevat:
+        setActiveCalendar(getUpcomingEvents(calendar));
+        setSelectedCal(SelectedCal.Tulevat);
+        break;
+      case SelectedCal.Menneet:
+        setActiveCalendar(getHistoricEvents(calendar));
+        setSelectedCal(SelectedCal.Menneet);
+        break;
+      default:
+        break;
+    }
+  };
+
   const isLoading = calendar.length === 0;
 
   if (isLoading) {
@@ -30,7 +84,22 @@ const CalendarContent = () => {
 
   return (
     <Page>
-      {calendar.map(season => {
+      <CalendarSelector>
+        <SelectionButton
+          onClick={() => handleCalSelection(SelectedCal.Tulevat)}
+          isActive={selectedCal === SelectedCal.Tulevat}
+        >
+          Tulevat
+        </SelectionButton>
+        |
+        <SelectionButton
+          onClick={() => handleCalSelection(SelectedCal.Menneet)}
+          isActive={selectedCal === SelectedCal.Menneet}
+        >
+          Menneet
+        </SelectionButton>
+      </CalendarSelector>
+      {activeCalendar.map(season => {
         const eventsWithPos = season.events.map((event, i) => ({
           ...event,
           "#": i + 1,

@@ -23,6 +23,7 @@ export function calendarToSeasons(events: IRaceCalendarEvent[]): ISeason[] {
         acc[seasonId] = {
           seasonId,
           seasonName,
+          isCompleted: false,
           events: [event],
         };
       } else {
@@ -37,7 +38,12 @@ export function calendarToSeasons(events: IRaceCalendarEvent[]): ISeason[] {
     ...eventsBySeason[key],
   }));
 
-  return seasons;
+  const seasonsWithIsCompleted = seasons.map(season => ({
+    ...season,
+    isCompleted: season.events.every(event => event.isCompleted),
+  }));
+
+  return seasonsWithIsCompleted;
 }
 
 // Supported format: MM:SS,FFF
