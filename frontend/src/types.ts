@@ -72,7 +72,15 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   verifyScore?: boolean;
 }
 
+export type Mod = {
+  name: string;
+  url: string;
+};
+
 export interface IRaceDetails extends IRaceCalendarEvent {
+  description?: string;
+  cars?: string[];
+  mods: Mod[];
   details: IDriverSeasonRaceData[];
 }
 

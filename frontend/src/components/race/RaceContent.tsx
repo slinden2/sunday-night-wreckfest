@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { IRaceDetails, VideoService, ITableHeaderMap } from "../../types";
 import Table from "../Table";
 import { convertTimeToSecs } from "../../utils";
-import { HeaderH3, Page, SectionContainer } from "../styledElements";
+import {
+  HeaderH3,
+  Page,
+  SectionContainer,
+  styledLinkProps,
+} from "../styledElements";
 
 const EventTable = styled.table`
   border: 2px solid black;
@@ -23,6 +28,11 @@ const EventTable = styled.table`
   th {
     background-color: ${props => props.theme.colors.black};
     color: ${props => props.theme.colors.white};
+  }
+
+  a {
+    ${styledLinkProps}
+    margin-right: 0.5rem;
   }
 `;
 
@@ -132,12 +142,43 @@ const RaceContent = ({ data }: Props) => {
             <th>Kilpailukierrokset</th>
             <td>{data.raceLaps}</td>
           </tr>
-          <tr>
-            <th>Tehoraja</th>
-            <td>{data.hasPowerLimit ? "X" : ""}</td>
-          </tr>
+          {data.cars && (
+            <tr>
+              <th>Autot</th>
+              <td>{data.cars.join(", ")}</td>
+            </tr>
+          )}
+          {data.hasPowerLimit && (
+            <tr>
+              <th>Tehoraja</th>
+              <td>X</td>
+            </tr>
+          )}
+          {data.mods && (
+            <tr>
+              <th>Modit</th>
+              <td>
+                {data.mods.map(mod => (
+                  <a
+                    key={mod.name}
+                    target="_black"
+                    rel="noopener noreferrer"
+                    href={mod.url}
+                  >
+                    <span>{mod.name}</span>
+                  </a>
+                ))}
+              </td>
+            </tr>
+          )}
         </tbody>
       </EventTable>
+      {data.description && (
+        <SectionContainer>
+          <HeaderH3>Kuvaus</HeaderH3>
+          <p>{data.description}</p>
+        </SectionContainer>
+      )}
       <SectionContainer>
         <HeaderH3>Aika-ajotulokset</HeaderH3>
         <Table data={qDetails} headers={qHeaders} headerMap={qHeaderMap} />
