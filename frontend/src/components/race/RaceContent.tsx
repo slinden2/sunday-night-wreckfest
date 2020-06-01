@@ -102,8 +102,6 @@ const RaceContent = ({ data }: Props) => {
     })
     .map((driver, i) => ({ ...driver, "#": i + 1 }));
 
-  console.log(qDetails);
-
   const raceDetails = data.details
     .map(driver => ({
       ...driver,
