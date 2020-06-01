@@ -84,7 +84,7 @@ export const toSeasonDetails = (
   seasonData: any
 ): ISeasonData | undefined => {
   const rawSeason = seasonData.find((season: any) => season.seasonId === id);
-  if (!rawSeason.seasonId) {
+  if (!rawSeason) {
     return undefined;
   }
 
