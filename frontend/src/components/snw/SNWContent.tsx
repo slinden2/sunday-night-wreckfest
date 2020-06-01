@@ -15,9 +15,9 @@ const SNWContent = () => {
       </p>
       <p>
         Virallinen kausi on kaikista kilpamuodoistamme kruununjalokivi, joka
-        tukee 36:tta osallistujaa. Kovan tason kilpakaudessa riittää
-        treeniseuraa, keskustelua autojen säädöistä tai radan ominaisuuksista
-        sekä hampaat irvessä -hetkiä sijoista taistellen 9 kisapäivän ajan! Jos
+        tukee 36 osallistujaa. Kovan tason kilpakaudessa riittää treeniseuraa,
+        keskustelua autojen säädöistä tai radan ominaisuuksista sekä hampaat
+        irvessä -hetkiä sijoista taistellen 9 kisapäivän ajan! Jos
         vakavamielinen kisailu ei maistu, niin tarjolla on monia muita
         kilpamuotoja, esim tila-autojen oma kamppailu nimeltä Perhehelvetti.
         Kilpailut ovat aina sunnuntai-iltaisin, jotta mahdollisimman monella

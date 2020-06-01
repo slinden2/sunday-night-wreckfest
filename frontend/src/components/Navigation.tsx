@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { INavItem } from "../types";
 import whiteGrit from "../assets/whitegrit.png";
 import blackGrit from "../assets/blackgrit.png";
+import config from "../config";
 
 const Container = styled.div`
   margin: 0 var(--borderSize);
@@ -138,7 +139,7 @@ const navLinks: INavItem[] = [
   },
   {
     title: "Discord",
-    url: "https://discord.gg/Xz3wa3",
+    url: config.discordLink,
     external: true,
   },
   {
