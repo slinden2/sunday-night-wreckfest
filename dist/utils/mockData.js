@@ -335,4 +335,25 @@ exports.mergeRaceDataReturn = {
         },
     ],
 };
+exports.toSeasonDataInput = {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
+    description: "testDesc",
+    cars: "sunrise;raiden;",
+    mods: "mod1,www.mod1.com;mod2,www.mod2.com;",
+};
+exports.toSeasonDataReturn = {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
+    description: "testDesc",
+    cars: ["sunrise", "raiden"],
+    mods: [
+        { name: "mod1", url: "www.mod1.com" },
+        { name: "mod2", url: "www.mod2.com" },
+    ],
+};
+exports.mergeRaceDataReturn2 = Object.assign(Object.assign({}, exports.mergeRaceDataReturn), { description: "testDesc", cars: ["sunrise", "raiden"], mods: [
+        { name: "mod1", url: "www.mod1.com" },
+        { name: "mod2", url: "www.mod2.com" },
+    ] });
 //# sourceMappingURL=mockData.js.map

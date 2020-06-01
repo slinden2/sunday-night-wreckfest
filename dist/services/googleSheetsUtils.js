@@ -28,6 +28,7 @@ const sheetMap = {
     raceCalendar: 0,
     eventDetails: 1495986400,
     standings: 1733156042,
+    seasons: 1876267219,
 };
 exports.getSheetAndRows = (sheetName) => __awaiter(void 0, void 0, void 0, function* () {
     const doc = yield exports.getDocument();

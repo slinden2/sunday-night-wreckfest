@@ -143,4 +143,46 @@ exports.parseVideos = (videoDataString) => {
     });
     return videoData;
 };
+exports.isModDataString = (text) => {
+    if (/^(\w+,[\w:\/\\.\?&=]+;)+$/.test(text))
+        return true;
+    else
+        return false;
+};
+exports.parseMods = (modString) => {
+    if (!exports.isModDataString(modString)) {
+        throw new errors_1.DataIntegrityError("Invalid videoDataString " + modString);
+    }
+    const modDataArrays = modString.substr(0, modString.length - 1).split(";");
+    const modData = modDataArrays.map(mod => {
+        const [name, url] = mod.split(",");
+        if (!name || !exports.isString(name)) {
+            throw new errors_1.DataIntegrityError("Invalid modName: " + name);
+        }
+        if (!url || !exports.isString(url)) {
+            throw new errors_1.DataIntegrityError("Invalid modUrl: " + url);
+        }
+        return { name, url };
+    });
+    return modData;
+};
+exports.isCarString = (text) => {
+    if (/^(\w+;)+$/.test(text))
+        return true;
+    else
+        return false;
+};
+exports.parseCars = (carString) => {
+    if (!exports.isCarString(carString)) {
+        throw new errors_1.DataIntegrityError("Invalid cars: " + carString);
+    }
+    const carDataArrays = carString.substr(0, carString.length - 1).split(";");
+    const carData = carDataArrays.map((car) => {
+        if (!car || !exports.isString(car)) {
+            throw new errors_1.DataIntegrityError("Invalid cars: " + carString);
+        }
+        return car;
+    });
+    return carData;
+};
 //# sourceMappingURL=helpers.js.map

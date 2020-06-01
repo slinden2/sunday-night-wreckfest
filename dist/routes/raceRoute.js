@@ -29,8 +29,13 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
 router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const calendar = yield services_1.calendarService.getRaceCalendar();
+        const calendarEvent = calendar.find(event => event.eventId === req.params.id);
+        if (!calendarEvent) {
+            throw new Error(`No event found with eventId ${req.params.id}`);
+        }
         const raceData = yield services_1.eventService.getRaceData(req.params.id);
-        const mergedData = eventService_1.mergeRaceData(req.params.id, calendar, raceData);
+        const seasonData = yield eventService_1.getSeasonData(calendarEvent.seasonId);
+        const mergedData = eventService_1.mergeRaceData(calendarEvent, raceData, seasonData);
         return res.status(200).json(mergedData);
     }
     catch (err) {

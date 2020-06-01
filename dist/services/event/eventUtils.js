@@ -57,4 +57,15 @@ exports.getDraws = (data) => {
     }
     return draws;
 };
+exports.toSeasonDetails = (id, seasonData) => {
+    const rawSeason = seasonData.find((season) => season.seasonId === id);
+    if (!rawSeason.seasonId) {
+        return undefined;
+    }
+    return Object.assign(Object.assign({ seasonId: helpers_1.parseEventId(rawSeason.seasonId, "seasonId"), seasonName: helpers_1.parseString(rawSeason.seasonName, "seasonName"), description: helpers_1.parseString(rawSeason.description, "description") }, (rawSeason.cars
+        ? {
+            cars: helpers_1.parseCars(rawSeason.cars),
+        }
+        : null)), (rawSeason.mods ? { mods: helpers_1.parseMods(rawSeason.mods) } : null));
+};
 //# sourceMappingURL=eventUtils.js.map

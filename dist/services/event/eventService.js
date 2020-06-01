@@ -23,13 +23,15 @@ exports.getRaceData = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const raceData = new race_1.default(driverRaceDetails);
     return raceData.getRaceData;
 });
-exports.mergeRaceData = (id, calendar, raceData) => {
-    const race = calendar.find(event => event.eventId === id);
-    if (!race) {
-        throw new Error("No races found with given id");
-    }
-    return Object.assign(Object.assign({}, race), { details: raceData });
+exports.mergeRaceData = (calendar, raceData, seasonData) => {
+    return seasonData
+        ? Object.assign(Object.assign({}, calendar), { description: seasonData.description, cars: seasonData === null || seasonData === void 0 ? void 0 : seasonData.cars, mods: seasonData === null || seasonData === void 0 ? void 0 : seasonData.mods, details: raceData }) : Object.assign(Object.assign({}, calendar), { details: raceData });
 };
+exports.getSeasonData = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const seasonRawData = yield googleSheetsUtils_1.getSheetAndRows("seasons");
+    const seasonDetails = eventUtils_1.toSeasonDetails(id, seasonRawData.rows);
+    return seasonDetails;
+});
 exports.checkDraws = () => __awaiter(void 0, void 0, void 0, function* () {
     const eventList = yield __1.calendarService.getRaceCalendar();
     for (const event of eventList) {
