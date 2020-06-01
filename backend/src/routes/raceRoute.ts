@@ -1,6 +1,6 @@
 import express from "express";
 import { calendarService, eventService } from "../services";
-import { mergeRaceData } from "../services/event/eventService";
+import { mergeRaceData, getSeasonData } from "../services/event/eventService";
 import config from "../config";
 
 const router = express.Router();
@@ -17,8 +17,16 @@ router.get("/", async (_req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const calendar = await calendarService.getRaceCalendar();
+    const calendarEvent = calendar.find(
+      event => event.eventId === req.params.id
+    );
+    if (!calendarEvent) {
+      throw new Error(`No event found with eventId ${req.params.id}`);
+    }
+
     const raceData = await eventService.getRaceData(req.params.id);
-    const mergedData = mergeRaceData(req.params.id, calendar, raceData);
+    const seasonData = await getSeasonData(calendarEvent.seasonId);
+    const mergedData = mergeRaceData(calendarEvent, seasonData, raceData);
     return res.status(200).json(mergedData);
   } catch (err) {
     return next(err);

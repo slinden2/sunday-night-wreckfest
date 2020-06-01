@@ -3,7 +3,7 @@ Utility functions used by more than one files.
 */
 
 import { DataIntegrityError } from "../utils/errors";
-import { RaceGroup, VideoType, VideoService } from "../types";
+import { RaceGroup, VideoType, VideoService, Mod } from "../types";
 
 export const isString = (param: any): param is string => {
   return typeof param === "string" || param instanceof String;
@@ -189,4 +189,56 @@ export const parseVideos = (videoDataString: string): VideoType[] => {
   });
 
   return videoData;
+};
+
+export const isModDataString = (text: any): boolean => {
+  if (/^(\w+,[\w:\/\\.\?&=]+;)+$/.test(text)) return true;
+  else return false;
+};
+
+export const parseMods = (modString: string): Mod[] => {
+  if (!isModDataString(modString)) {
+    throw new DataIntegrityError("Invalid videoDataString " + modString);
+  }
+
+  const modDataArrays = modString.substr(0, modString.length - 1).split(";");
+
+  const modData = modDataArrays.map(mod => {
+    const [name, url] = mod.split(",");
+
+    if (!name || !isString(name)) {
+      throw new DataIntegrityError("Invalid modName: " + name);
+    }
+
+    if (!url || !isString(url)) {
+      throw new DataIntegrityError("Invalid modUrl: " + url);
+    }
+
+    return { name, url };
+  });
+
+  return modData;
+};
+
+export const isCarString = (text: any): boolean => {
+  if (/^(\w+;)+$/.test(text)) return true;
+  else return false;
+};
+
+export const parseCars = (carString: any): string[] => {
+  if (!isCarString(carString)) {
+    throw new DataIntegrityError("Invalid cars: " + carString);
+  }
+
+  const carDataArrays = carString.substr(0, carString.length - 1).split(";");
+
+  const carData: string[] = carDataArrays.map((car: any) => {
+    if (!car || !isString(car)) {
+      throw new DataIntegrityError("Invalid cars: " + carString);
+    }
+
+    return car;
+  });
+
+  return carData;
 };

@@ -1,9 +1,10 @@
-import { toDriverRaceDetails, getDraws } from "./eventUtils";
+import { toDriverRaceDetails, getDraws, toSeasonDetails } from "./eventUtils";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import {
   IDriverSeasonRaceData,
   IRaceCalendarEvent,
   IRaceDetails,
+  ISeasonData,
 } from "../../types";
 import Race from "../race";
 import { calendarService } from "..";
@@ -19,17 +20,30 @@ export const getRaceData = async (
 };
 
 export const mergeRaceData = (
-  id: string,
-  calendar: IRaceCalendarEvent[],
+  calendar: IRaceCalendarEvent,
+  seasonData: ISeasonData | null,
   raceData: IDriverSeasonRaceData[]
 ): IRaceDetails => {
-  const race = calendar.find(event => event.eventId === id);
+  return seasonData
+    ? {
+        ...calendar,
+        description: seasonData.description,
+        cars: seasonData?.cars,
+        mods: seasonData?.mods,
+        details: raceData,
+      }
+    : {
+        ...calendar,
+        details: raceData,
+      };
+};
 
-  if (!race) {
-    throw new Error("No races found with given id");
-  }
-
-  return { ...race, details: raceData };
+export const getSeasonData = async (
+  id: string
+): Promise<ISeasonData | null> => {
+  const seasonRawData = await getSheetAndRows("seasons");
+  const seasonDetails = toSeasonDetails(id, seasonRawData.rows);
+  return seasonDetails;
 };
 
 export const checkDraws = async () => {

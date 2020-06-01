@@ -28,6 +28,7 @@ const sheetMap: ISheetMap = {
   raceCalendar: 0,
   eventDetails: 1495986400,
   standings: 1733156042,
+  seasons: 1876267219,
 };
 
 export const getSheetAndRows = async (

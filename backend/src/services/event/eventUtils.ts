@@ -7,8 +7,10 @@ import {
   parseGroup,
   parseHeatPositions,
   parseNumber,
+  parseMods,
+  parseCars,
 } from "../helpers";
-import { IDriverSeasonRaceData } from "../../types";
+import { IDriverSeasonRaceData, ISeasonData } from "../../types";
 import { getSumOfArrayElements } from "../../utils/misc";
 import config from "../../config";
 
@@ -75,4 +77,27 @@ export const getDraws = (data: IDriverSeasonRaceData[]): typeof data => {
     }
   }
   return draws;
+};
+
+export const toSeasonDetails = (
+  id: string,
+  seasonData: any
+): ISeasonData | null => {
+  const rawSeason = seasonData.find((season: any) => season.seasonId === id);
+
+  if (!rawSeason.seasonId) {
+    return null;
+  }
+
+  return {
+    seasonId: parseEventId(rawSeason.seasonId, "seasonId"),
+    seasonName: parseString(rawSeason.seasonName, "seasonName"),
+    description: parseString(rawSeason.description, "description"),
+    ...(rawSeason.cars
+      ? {
+          cars: parseCars(rawSeason.cars),
+        }
+      : null),
+    ...(rawSeason.mods ? { mods: parseMods(rawSeason.mods) } : null),
+  };
 };
