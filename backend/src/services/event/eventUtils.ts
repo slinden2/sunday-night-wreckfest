@@ -82,11 +82,10 @@ export const getDraws = (data: IDriverSeasonRaceData[]): typeof data => {
 export const toSeasonDetails = (
   id: string,
   seasonData: any
-): ISeasonData | null => {
+): ISeasonData | undefined => {
   const rawSeason = seasonData.find((season: any) => season.seasonId === id);
-
   if (!rawSeason.seasonId) {
-    return null;
+    return undefined;
   }
 
   return {

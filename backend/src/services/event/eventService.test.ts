@@ -9,27 +9,25 @@ import {
   toPromise,
   getDrawsReturn,
   getDrawsRaceCal,
+  mergeRaceDataReturn2,
+  toSeasonDataReturn,
 } from "../../utils/mockData";
 
 describe("eventService", () => {
   describe("mergeRaceData", () => {
-    it("should return merge data correctly", () => {
+    it("should return merge data correctly without season data", () => {
       expect(
-        eventService.mergeRaceData(
-          "0401",
-          getRaceCalendarReturn,
-          getRaceDataReturn
-        )
+        eventService.mergeRaceData(getRaceCalendarReturn[0], getRaceDataReturn)
       ).toEqual(mergeRaceDataReturn);
     });
-    it("should throw with inexisting eventId", () => {
-      expect(() =>
+    it("should return merge data correctly with season data", () => {
+      expect(
         eventService.mergeRaceData(
-          "0405",
-          getRaceCalendarReturn,
-          getRaceDataReturn
+          getRaceCalendarReturn[0],
+          getRaceDataReturn,
+          toSeasonDataReturn
         )
-      ).toThrow(/No races found/);
+      ).toEqual(mergeRaceDataReturn2);
     });
   });
   describe("checkDraws", () => {

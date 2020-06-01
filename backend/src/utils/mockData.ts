@@ -1,4 +1,9 @@
-import { IDriverSeasonRaceData, RaceGroup, IRaceCalendarEvent } from "../types";
+import {
+  IDriverSeasonRaceData,
+  RaceGroup,
+  IRaceCalendarEvent,
+  ISeasonData,
+} from "../types";
 import { IStandingRow } from "../services/standings/standingsUtils";
 
 export const toPromise = <T>(data: T): Promise<typeof data> =>
@@ -358,5 +363,34 @@ export const mergeRaceDataReturn = {
       qTime: "01:00,500",
       seasonPoints: 95,
     },
+  ],
+};
+
+export const toSeasonDataInput = {
+  seasonId: "0400",
+  seasonName: "SEASON 4",
+  description: "testDesc",
+  cars: "sunrise;raiden;",
+  mods: "mod1,www.mod1.com;mod2,www.mod2.com;",
+};
+
+export const toSeasonDataReturn: ISeasonData = {
+  seasonId: "0400",
+  seasonName: "SEASON 4",
+  description: "testDesc",
+  cars: ["sunrise", "raiden"],
+  mods: [
+    { name: "mod1", url: "www.mod1.com" },
+    { name: "mod2", url: "www.mod2.com" },
+  ],
+};
+
+export const mergeRaceDataReturn2 = {
+  ...mergeRaceDataReturn,
+  description: "testDesc",
+  cars: ["sunrise", "raiden"],
+  mods: [
+    { name: "mod1", url: "www.mod1.com" },
+    { name: "mod2", url: "www.mod2.com" },
   ],
 };

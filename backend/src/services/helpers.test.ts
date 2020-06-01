@@ -17,6 +17,8 @@ import {
   parseVideos,
   isVideoService,
   isVideoDataString,
+  parseCars,
+  parseMods,
 } from "./helpers";
 import { DataIntegrityError } from "../utils/errors";
 
@@ -274,6 +276,39 @@ describe("helpers", () => {
       expect(() => parseVideos("vimeo,a;youtube,123")).toThrowError(
         DataIntegrityError
       );
+    });
+  });
+  describe("parseCars", () => {
+    it("should accept sunrise;raiden;test; input", () => {
+      expect(() => parseCars("sunrise;raiden;test;")).not.toThrowError();
+    });
+    it("should not accept sunrise;raiden;test input", () => {
+      expect(() => parseCars("sunrise;raiden;test")).toThrowError();
+    });
+    it("should not accept sunrise;raiden;test input", () => {
+      expect(parseCars("sunrise;raiden;test;")).toEqual([
+        "sunrise",
+        "raiden",
+        "test",
+      ]);
+    });
+  });
+  describe("parseMods", () => {
+    it("should accept kytkin,www.kytkin.com;lahna,www.lahna.com; input", () => {
+      expect(() =>
+        parseMods("kytkin,www.kytkin.com;lahna,www.lahna.com;")
+      ).not.toThrowError();
+    });
+    it("should not accept kytkin,www.kytkin.com,lahna,www.lahna.com; input", () => {
+      expect(() =>
+        parseMods("kytkin,www.kytkin.com,lahna,www.lahna.com;")
+      ).toThrowError();
+    });
+    it("should convert kytkin,www.kytkin.com;lahna,www.lahna.com; into an array of Mod objects", () => {
+      expect(parseMods("kytkin,www.kytkin.com;lahna,www.lahna.com;")).toEqual([
+        { name: "kytkin", url: "www.kytkin.com" },
+        { name: "lahna", url: "www.lahna.com" },
+      ]);
     });
   });
 });

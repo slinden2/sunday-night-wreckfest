@@ -26,7 +26,7 @@ router.get("/:id", async (req, res, next) => {
 
     const raceData = await eventService.getRaceData(req.params.id);
     const seasonData = await getSeasonData(calendarEvent.seasonId);
-    const mergedData = mergeRaceData(calendarEvent, seasonData, raceData);
+    const mergedData = mergeRaceData(calendarEvent, raceData, seasonData);
     return res.status(200).json(mergedData);
   } catch (err) {
     return next(err);

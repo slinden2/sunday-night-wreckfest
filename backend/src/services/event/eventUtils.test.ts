@@ -1,7 +1,9 @@
-import { toDriverRaceDetails } from "./eventUtils";
+import { toDriverRaceDetails, toSeasonDetails } from "./eventUtils";
 import {
   getRaceDataInput,
   toDriverRaceDetailsReturn,
+  toSeasonDataInput,
+  toSeasonDataReturn,
 } from "../../utils/mockData";
 
 describe("eventUtils", () => {
@@ -12,6 +14,13 @@ describe("eventUtils", () => {
           expect.objectContaining(toDriverRaceDetailsReturn[i])
         );
       });
+    });
+  });
+  describe("toSeasonDetails", () => {
+    it("should parse raw season data into ISeasoNData", () => {
+      expect(toSeasonDetails("0400", [toSeasonDataInput])).toEqual(
+        toSeasonDataReturn
+      );
     });
   });
 });

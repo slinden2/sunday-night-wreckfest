@@ -21,8 +21,8 @@ export const getRaceData = async (
 
 export const mergeRaceData = (
   calendar: IRaceCalendarEvent,
-  seasonData: ISeasonData | null,
-  raceData: IDriverSeasonRaceData[]
+  raceData: IDriverSeasonRaceData[],
+  seasonData?: ISeasonData
 ): IRaceDetails => {
   return seasonData
     ? {
@@ -40,7 +40,7 @@ export const mergeRaceData = (
 
 export const getSeasonData = async (
   id: string
-): Promise<ISeasonData | null> => {
+): Promise<ISeasonData | undefined> => {
   const seasonRawData = await getSheetAndRows("seasons");
   const seasonDetails = toSeasonDetails(id, seasonRawData.rows);
   return seasonDetails;
