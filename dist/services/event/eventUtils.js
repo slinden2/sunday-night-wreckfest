@@ -59,7 +59,7 @@ exports.getDraws = (data) => {
 };
 exports.toSeasonDetails = (id, seasonData) => {
     const rawSeason = seasonData.find((season) => season.seasonId === id);
-    if (!rawSeason.seasonId) {
+    if (!rawSeason) {
         return undefined;
     }
     return Object.assign(Object.assign({ seasonId: helpers_1.parseEventId(rawSeason.seasonId, "seasonId"), seasonName: helpers_1.parseString(rawSeason.seasonName, "seasonName"), description: helpers_1.parseString(rawSeason.description, "description") }, (rawSeason.cars
