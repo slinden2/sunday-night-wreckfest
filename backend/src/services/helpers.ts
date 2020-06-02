@@ -193,6 +193,7 @@ export const parseVideos = (videoDataString: string): VideoType[] => {
 };
 
 export const isModDataString = (text: any): boolean => {
+  // eslint-disable-next-line no-useless-escape
   if (/^([\w\s.]+,[\w:\/\\.\?&=]+;)+$/.test(text)) return true;
   else return false;
 };
