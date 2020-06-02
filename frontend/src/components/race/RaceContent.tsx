@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import createDOMPurify from "dompurify";
 import { IRaceDetails, VideoService, ITableHeaderMap } from "../../types";
 import Table from "../Table";
 import { convertTimeToSecs } from "../../utils";
@@ -122,6 +123,8 @@ const RaceContent = ({ data }: Props) => {
     .sort((a, b) => b.seasonPoints - a.seasonPoints)
     .map((driver, i) => ({ ...driver, "#": i + 1 }));
 
+  const DOMPurify = createDOMPurify(window);
+
   return (
     <Page>
       <EventTable>
@@ -176,7 +179,11 @@ const RaceContent = ({ data }: Props) => {
       {data.description && (
         <SectionContainer>
           <HeaderH3>Kuvaus</HeaderH3>
-          <div dangerouslySetInnerHTML={{ __html: data.description }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(data.description),
+            }}
+          />
         </SectionContainer>
       )}
       <SectionContainer>
