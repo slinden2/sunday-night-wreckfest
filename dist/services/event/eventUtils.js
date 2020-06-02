@@ -62,7 +62,7 @@ exports.toSeasonDetails = (id, seasonData) => {
     if (!rawSeason) {
         return undefined;
     }
-    return Object.assign(Object.assign({ seasonId: helpers_1.parseEventId(rawSeason.seasonId, "seasonId"), seasonName: helpers_1.parseString(rawSeason.seasonName, "seasonName"), description: helpers_1.parseString(rawSeason.description, "description") }, (rawSeason.cars
+    return Object.assign(Object.assign({ seasonId: helpers_1.parseEventId(rawSeason.seasonId, "seasonId"), seasonName: helpers_1.parseString(rawSeason.seasonName, "seasonName"), description: helpers_1.parseDescription(rawSeason.description) }, (rawSeason.cars
         ? {
             cars: helpers_1.parseCars(rawSeason.cars),
         }
