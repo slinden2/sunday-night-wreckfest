@@ -35,15 +35,30 @@ class Race {
     _sortGroupData(raceData) {
         return raceData.map(groupData => groupData.sort((a, b) => this._sortByPoints(a, b)));
     }
+    _getSeasonPointSet() {
+        const seasonId = this.rawData[0].eventId.substr(0, 2) + "00";
+        const oldestPoints = ["0100", "0200"];
+        const olderPoints = ["K000", "P000"];
+        const oldPoints = ["0300", "S000", "U000"];
+        if (oldestPoints.includes(seasonId))
+            return { points: points_1.seasonPointsS1S2, type: "oldest" };
+        if (olderPoints.includes(seasonId))
+            return { points: points_1.seasonPointsKRPH, type: "older" };
+        if (oldPoints.includes(seasonId))
+            return { points: points_1.seasonPointsS3TT, type: "old" };
+        else
+            return { points: points_1.seasonPoints, type: "new" };
+    }
     _addSeasonPoints(raceData) {
         const mergedArray = [];
         const mergedRaceData = mergedArray.concat(...raceData);
         let firstOfB = false;
         let firstOfC = false;
+        const seasonPointSet = this._getSeasonPointSet();
         return mergedRaceData.map((driver, i) => {
-            driver = Object.assign(Object.assign({}, driver), { seasonPoints: points_1.seasonPoints[i] });
+            driver = Object.assign(Object.assign({}, driver), { seasonPoints: seasonPointSet.points[i] });
             if (!firstOfB && driver.group === types_1.RaceGroup.B && driver.seasonPoints) {
-                driver.seasonPoints += 2;
+                driver.seasonPoints += seasonPointSet.type === "new" ? 2 : 1;
                 firstOfB = true;
             }
             if (!firstOfC && driver.group === types_1.RaceGroup.C && driver.seasonPoints) {
