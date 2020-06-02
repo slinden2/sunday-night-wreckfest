@@ -52,7 +52,6 @@ export const toDriverRaceDetails = (
   rawRows: any
 ): IDriverSeasonRaceData[] => {
   const cleanRows: IDriverSeasonRaceData[] = [];
-  typeof cleanRows;
 
   rawRows
     .filter((row: any) => row.eventId === eventId)

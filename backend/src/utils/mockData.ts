@@ -385,7 +385,7 @@ export const toSeasonDataReturn: ISeasonData = {
   ],
 };
 
-export const mergeRaceDataReturn2 = {
+export const mergeRaceDataReturn2: ISeasonData = {
   ...mergeRaceDataReturn,
   description: "<p>testDesc</p>\n",
   cars: ["sunrise", "raiden"],
@@ -394,3 +394,87 @@ export const mergeRaceDataReturn2 = {
     { name: "mod2", url: "www.mod2.com" },
   ],
 };
+
+export const getDrawsInput: IDriverSeasonRaceData[] = [
+  {
+    driverId: "0004",
+    driverName: "KNGS",
+    eventId: "K001",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:00,000",
+    group: RaceGroup.A,
+    heatPositions: [1, 1, 3, 3, 1, 2],
+    drawPosition: undefined,
+    heatPoints: [100, 100, 70, 70, 100, 80],
+    seasonPoints: 25,
+  },
+  {
+    driverId: "0018",
+    driverName: "Kustii",
+    eventId: "K001",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:00,000",
+    group: RaceGroup.A,
+    heatPositions: [3, 5, 7, 1, 3, 1],
+    drawPosition: undefined,
+    heatPoints: [70, 50, 40, 100, 70, 100],
+    seasonPoints: 23,
+  },
+  {
+    driverId: "0029",
+    driverName: "Rytko",
+    eventId: "K001",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:00,000",
+    group: RaceGroup.A,
+    heatPositions: [7, 12, 7, 10, 8],
+    drawPosition: 1,
+    heatPoints: [40, 15, 40, 25, 35],
+    seasonPoints: 9,
+  },
+  {
+    driverId: "0009",
+    driverName: "Sus1ryhmä",
+    eventId: "K001",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:00,000",
+    group: RaceGroup.A,
+    heatPositions: [9, 9, 13, 9, 9, 10],
+    drawPosition: 2,
+    heatPoints: [30, 30, 10, 30, 30, 25],
+    seasonPoints: 7,
+  },
+];
+
+export const getDrawsReturn2: IDriverSeasonRaceData[] = [
+  {
+    driverId: "0009",
+    driverName: "Sus1ryhmä",
+    eventId: "K001",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:00,000",
+    group: RaceGroup.A,
+    heatPositions: [9, 9, 13, 9, 9, 10],
+    drawPosition: 2,
+    heatPoints: [30, 30, 10, 30, 30, 25],
+    seasonPoints: 7,
+  },
+  {
+    driverId: "0029",
+    driverName: "Rytko",
+    eventId: "K001",
+    isReady: true,
+    isProcessed: false,
+    qTime: "00:00,000",
+    group: RaceGroup.A,
+    heatPositions: [7, 12, 7, 10, 8],
+    drawPosition: 1,
+    heatPoints: [40, 15, 40, 25, 35],
+    seasonPoints: 9,
+  },
+];

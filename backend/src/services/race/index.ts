@@ -5,7 +5,13 @@ points for the event etc.
 */
 
 import { IDriverSeasonRaceData, RaceGroup } from "../../types";
-import { heatPoints, seasonPoints } from "./points";
+import {
+  heatPoints,
+  seasonPoints,
+  seasonPointsS1S2,
+  seasonPointsKRPH,
+  seasonPointsS3TT,
+} from "./points";
 import { DataIntegrityError } from "../../utils/errors";
 import { getSumOfArrayElements } from "../../utils/misc";
 
@@ -81,6 +87,29 @@ class Race {
   }
 
   /* 
+  Get correct points object to use for the season in question and the point type.
+
+  oldest: used only for the first two season
+  medium: used fro the season in-between
+  new: currently used point set
+  */
+  private _getSeasonPointSet() {
+    const seasonId = this.rawData[0].eventId.substr(0, 2) + "00";
+
+    const oldestPoints = ["0100", "0200"];
+    const olderPoints = ["K000", "P000"];
+    const oldPoints = ["0300", "S000", "U000"];
+
+    if (oldestPoints.includes(seasonId))
+      return { points: seasonPointsS1S2, type: "oldest" };
+    if (olderPoints.includes(seasonId))
+      return { points: seasonPointsKRPH, type: "older" };
+    if (oldPoints.includes(seasonId))
+      return { points: seasonPointsS3TT, type: "old" };
+    else return { points: seasonPoints, type: "new" };
+  }
+
+  /* 
   Merge the group arrays together and add season points for all drivers
   based on their array index. The drivers must be sorted before this.
   */
@@ -93,12 +122,14 @@ class Race {
     let firstOfB = false;
     let firstOfC = false;
 
+    const seasonPointSet = this._getSeasonPointSet();
+
     return mergedRaceData.map((driver, i) => {
-      driver = { ...driver, seasonPoints: seasonPoints[i] };
+      driver = { ...driver, seasonPoints: seasonPointSet.points[i] };
 
       // first of group B gets 2 extra points
       if (!firstOfB && driver.group === RaceGroup.B && driver.seasonPoints) {
-        driver.seasonPoints += 2;
+        driver.seasonPoints += seasonPointSet.type === "new" ? 2 : 1;
         firstOfB = true;
       }
 
