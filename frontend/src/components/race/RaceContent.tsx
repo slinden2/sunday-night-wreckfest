@@ -176,7 +176,7 @@ const RaceContent = ({ data }: Props) => {
       {data.description && (
         <SectionContainer>
           <HeaderH3>Kuvaus</HeaderH3>
-          <p>{data.description}</p>
+          <div dangerouslySetInnerHTML={{ __html: data.description }} />
         </SectionContainer>
       )}
       <SectionContainer>

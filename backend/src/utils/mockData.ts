@@ -377,7 +377,7 @@ export const toSeasonDataInput = {
 export const toSeasonDataReturn: ISeasonData = {
   seasonId: "0400",
   seasonName: "SEASON 4",
-  description: "testDesc",
+  description: "<p>testDesc</p>\n",
   cars: ["sunrise", "raiden"],
   mods: [
     { name: "mod1", url: "www.mod1.com" },
@@ -387,7 +387,7 @@ export const toSeasonDataReturn: ISeasonData = {
 
 export const mergeRaceDataReturn2 = {
   ...mergeRaceDataReturn,
-  description: "testDesc",
+  description: "<p>testDesc</p>\n",
   cars: ["sunrise", "raiden"],
   mods: [
     { name: "mod1", url: "www.mod1.com" },

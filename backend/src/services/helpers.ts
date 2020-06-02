@@ -2,6 +2,7 @@
 Utility functions used by more than one files.
 */
 
+import marked from "marked";
 import { DataIntegrityError } from "../utils/errors";
 import { RaceGroup, VideoType, VideoService, Mod } from "../types";
 
@@ -192,7 +193,7 @@ export const parseVideos = (videoDataString: string): VideoType[] => {
 };
 
 export const isModDataString = (text: any): boolean => {
-  if (/^(\w+,[\w:\/\\.\?&=]+;)+$/.test(text)) return true;
+  if (/^([\w\s.]+,[\w:\/\\.\?&=]+;)+$/.test(text)) return true;
   else return false;
 };
 
@@ -221,7 +222,7 @@ export const parseMods = (modString: string): Mod[] => {
 };
 
 export const isCarString = (text: any): boolean => {
-  if (/^(\w+;)+$/.test(text)) return true;
+  if (/^([\w\s]+;)+$/.test(text)) return true;
   else return false;
 };
 
@@ -241,4 +242,8 @@ export const parseCars = (carString: any): string[] => {
   });
 
   return carData;
+};
+
+export const parseDescription = (descriptionString: any): string => {
+  return marked(descriptionString);
 };

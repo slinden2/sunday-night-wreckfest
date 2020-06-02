@@ -17,7 +17,8 @@ describe("eventUtils", () => {
     });
   });
   describe("toSeasonDetails", () => {
-    it("should parse raw season data into ISeasoNData", () => {
+    it("should parse raw season data into ISeasonData", () => {
+      console.log(toSeasonDetails("0400", [toSeasonDataInput]));
       expect(toSeasonDetails("0400", [toSeasonDataInput])).toEqual(
         toSeasonDataReturn
       );
