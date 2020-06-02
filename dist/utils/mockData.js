@@ -345,14 +345,14 @@ exports.toSeasonDataInput = {
 exports.toSeasonDataReturn = {
     seasonId: "0400",
     seasonName: "SEASON 4",
-    description: "testDesc",
+    description: "<p>testDesc</p>\n",
     cars: ["sunrise", "raiden"],
     mods: [
         { name: "mod1", url: "www.mod1.com" },
         { name: "mod2", url: "www.mod2.com" },
     ],
 };
-exports.mergeRaceDataReturn2 = Object.assign(Object.assign({}, exports.mergeRaceDataReturn), { description: "testDesc", cars: ["sunrise", "raiden"], mods: [
+exports.mergeRaceDataReturn2 = Object.assign(Object.assign({}, exports.mergeRaceDataReturn), { description: "<p>testDesc</p>\n", cars: ["sunrise", "raiden"], mods: [
         { name: "mod1", url: "www.mod1.com" },
         { name: "mod2", url: "www.mod2.com" },
     ] });
