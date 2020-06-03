@@ -57,13 +57,13 @@ export const addRaceToStandings = async (
 
     if (!driverRow) {
       newRows.push({
-        seasonId: event.seasonId,
+        seasonId: `'${event.seasonId}`,
         seasonName: event.seasonName,
-        driverId: driver.driverId,
+        driverId: `'${driver.driverId}`,
         driverName: driver.driverName,
         points: driver.seasonPoints,
         racesDriven: 1,
-        eventIds: driver.eventId,
+        eventIds: `'${driver.eventId}`,
       });
       continue;
     }
