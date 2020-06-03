@@ -3,7 +3,7 @@ import cors from "cors";
 import path from "path";
 import "source-map-support/register";
 
-import { raceRoute, standingsRoute } from "./routes/";
+import { raceRoute, standingsRoute, steamRoute } from "./routes/";
 
 import middleware from "./utils/middleware";
 import config from "./config";
@@ -21,6 +21,7 @@ if (config.ENV === "test" || config.ENV === "CI") {
 
 app.use("/api/races", raceRoute);
 app.use("/api/standings", standingsRoute);
+app.use("/api/servers", steamRoute);
 
 if (config.ENV === "production") {
   app.use(express.static(path.join(__dirname, "client")));

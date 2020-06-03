@@ -248,3 +248,7 @@ export const parseCars = (carString: any): string[] => {
 export const parseDescription = (descriptionString: any): string => {
   return marked(descriptionString);
 };
+
+export const parseServerName = (name: string): string => {
+  return name.split(/\^\d/).join("").trim();
+};

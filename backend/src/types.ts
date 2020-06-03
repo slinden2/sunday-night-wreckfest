@@ -70,3 +70,29 @@ export interface ISeasonData {
   cars?: string[];
   mods?: Mod[];
 }
+
+export interface IWFServerDataRaw {
+  addr: string;
+  gameport: number;
+  steamid: string;
+  name: string;
+  appid: number;
+  gamedir: string;
+  version: string;
+  product: string;
+  region: number;
+  players: number;
+  max_players: number;
+  bots: number;
+  map: string;
+  secure: boolean;
+  dedicated: boolean;
+  os: string;
+  gametype: string;
+}
+
+export interface IWFServerData {
+  name: string;
+  players: number;
+  maxPlayers: number;
+}
