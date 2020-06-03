@@ -7,4 +7,6 @@ const raceRoute_1 = __importDefault(require("./raceRoute"));
 exports.raceRoute = raceRoute_1.default;
 const standingsRoute_1 = __importDefault(require("./standingsRoute"));
 exports.standingsRoute = standingsRoute_1.default;
+const steamRoute_1 = __importDefault(require("./steamRoute"));
+exports.steamRoute = steamRoute_1.default;
 //# sourceMappingURL=index.js.map

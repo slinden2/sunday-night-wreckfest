@@ -9,4 +9,6 @@ const calendarService_1 = __importDefault(require("./calendar/calendarService"))
 exports.calendarService = calendarService_1.default;
 const eventService_1 = __importDefault(require("./event/eventService"));
 exports.eventService = eventService_1.default;
+const steamService_1 = __importDefault(require("./steam/steamService"));
+exports.steamService = steamService_1.default;
 //# sourceMappingURL=index.js.map

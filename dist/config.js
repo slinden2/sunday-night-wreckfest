@@ -13,6 +13,10 @@ const GS_SERVICE_ACCOUNT_EMAIL = process.env.GS_SERVICE_ACCOUNT_EMAIL;
 const GS_PRIVATE_KEY = (_a = process.env.GS_PRIVATE_KEY) === null || _a === void 0 ? void 0 : _a.split("\\n").join("\n");
 const STANDINGS_UPDATE_HASH = process.env.STANDINGS_UPDATE_HASH;
 const CHECK_DRAW_TEXT = "X";
+const STEAM_API_KEY = process.env.STEAM_API_KEY;
+const STEAM_ID = Number(process.env.STEAM_ID);
+const LABBE_DOMAIN = process.env.LABBE_DOMAIN;
+const WF_SERVER_PORT_ARRAY = [33544, 33541, 33542, 33543];
 exports.default = {
     ENV,
     PORT,
@@ -21,5 +25,9 @@ exports.default = {
     GS_PRIVATE_KEY,
     STANDINGS_UPDATE_HASH,
     CHECK_DRAW_TEXT,
+    STEAM_API_KEY,
+    STEAM_ID,
+    LABBE_DOMAIN,
+    WF_SERVER_PORT_ARRAY,
 };
 //# sourceMappingURL=config.js.map

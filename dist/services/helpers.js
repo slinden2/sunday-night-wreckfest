@@ -192,4 +192,7 @@ exports.parseCars = (carString) => {
 exports.parseDescription = (descriptionString) => {
     return marked_1.default(descriptionString);
 };
+exports.parseServerName = (name) => {
+    return name.split(/\^\d/).join("").trim();
+};
 //# sourceMappingURL=helpers.js.map

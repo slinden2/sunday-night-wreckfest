@@ -21,6 +21,7 @@ if (config_1.default.ENV === "test" || config_1.default.ENV === "CI") {
 }
 app.use("/api/races", routes_1.raceRoute);
 app.use("/api/standings", routes_1.standingsRoute);
+app.use("/api/servers", routes_1.steamRoute);
 if (config_1.default.ENV === "production") {
     app.use(express_1.default.static(path_1.default.join(__dirname, "client")));
     app.get("*", (_req, res) => {
