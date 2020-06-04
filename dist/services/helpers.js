@@ -120,7 +120,7 @@ exports.parseNumber = (num, field) => {
     return Number(num);
 };
 exports.isVideoDataString = (text) => {
-    if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9]+;)+$/.test(text))
+    if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9_]+;)+$/.test(text))
         return true;
     else
         return false;
