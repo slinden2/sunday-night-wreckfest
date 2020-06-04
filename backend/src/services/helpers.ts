@@ -161,7 +161,7 @@ export const parseNumber = (num: any, field: string): number => {
 };
 
 export const isVideoDataString = (text: string): boolean => {
-  if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9]+;)+$/.test(text)) return true;
+  if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9_]+;)+$/.test(text)) return true;
   else return false;
 };
 
