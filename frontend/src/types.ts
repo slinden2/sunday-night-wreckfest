@@ -93,3 +93,9 @@ export interface ITableHeaderMap {
     alignCenter?: boolean;
   };
 }
+
+export interface IWFServerData {
+  name: string;
+  players: number;
+  maxPlayers: number;
+}

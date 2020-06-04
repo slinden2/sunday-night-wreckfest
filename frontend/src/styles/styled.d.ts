@@ -13,7 +13,8 @@ declare module "styled-components" {
     };
 
     media: {
-      custom: (maxWidth: number) => string;
+      customMax: (maxWidth: number) => string;
+      customMin: (minWidth: number) => string;
       desktop: string;
       tablet: string;
       phone: string;

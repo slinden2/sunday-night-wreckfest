@@ -16,7 +16,8 @@ const theme: DefaultTheme = {
   },
 
   media: {
-    custom: customMediaQuery,
+    customMin: customMinMediaQuery,
+    customMax: customMediaQuery,
     desktop: customMinMediaQuery(922),
     tablet: customMediaQuery(768),
     phone: customMediaQuery(576),

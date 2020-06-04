@@ -13,6 +13,7 @@ import blackGrit from "./assets/blackgrit.png";
 import TeamsContainer from "./components/teams/TeamsContainer";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import { IWFServerData } from "./types";
 
 const MainContainer = styled.div`
   border: var(--borderSize) solid ${props => props.theme.colors.black};
@@ -35,11 +36,31 @@ const PageContainer = styled.div`
   }
 `;
 
+const getServersUrl = config.baseUrl + "/servers";
+
 const App = () => {
+  const [servers, setServers] = React.useState<IWFServerData[]>([]);
+
+  React.useEffect(() => {
+    const loadRaceCalendar = async () => {
+      try {
+        const response = await fetch(getServersUrl);
+        const json = await response.json();
+        const data = json.map((srv: IWFServerData) => ({
+          ...srv,
+        })) as IWFServerData[];
+        setServers(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    loadRaceCalendar();
+  }, []);
+
   return (
     <Router>
       <MainContainer>
-        <Header />
+        <Header servers={servers} />
         <Navigation />
         <PageContainer>
           <ScrollToTop />
