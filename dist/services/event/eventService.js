@@ -20,12 +20,29 @@ const config_1 = __importDefault(require("../../config"));
 exports.getRaceData = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const eventDetails = yield googleSheetsUtils_1.getSheetAndRows("eventDetails");
     const driverRaceDetails = eventUtils_1.toDriverRaceDetails(id, eventDetails.rows);
+    if (!driverRaceDetails.length) {
+        return undefined;
+    }
     const raceData = new race_1.default(driverRaceDetails);
     return raceData.getRaceData;
 });
-exports.mergeRaceData = (calendar, raceData, seasonData) => {
-    return seasonData
-        ? Object.assign(Object.assign({}, calendar), { description: seasonData.description, cars: seasonData === null || seasonData === void 0 ? void 0 : seasonData.cars, mods: seasonData === null || seasonData === void 0 ? void 0 : seasonData.mods, details: raceData }) : Object.assign(Object.assign({}, calendar), { details: raceData });
+exports.mergeRaceData = (calendar, optionalData) => {
+    const { seasonData, raceData } = optionalData;
+    const hasWrittenResultsWithSeasonData = Boolean(!raceData && seasonData);
+    const hasWrittenResultsWithNoSeasonData = !raceData && !seasonData;
+    const hasRaceDataWithNoSeasonData = Boolean(raceData && !seasonData);
+    if (hasWrittenResultsWithSeasonData) {
+        return Object.assign(Object.assign({}, calendar), { description: seasonData.description, cars: seasonData === null || seasonData === void 0 ? void 0 : seasonData.cars, mods: seasonData === null || seasonData === void 0 ? void 0 : seasonData.mods });
+    }
+    else if (hasWrittenResultsWithNoSeasonData) {
+        return calendar;
+    }
+    else if (hasRaceDataWithNoSeasonData) {
+        return Object.assign(Object.assign({}, calendar), { details: raceData });
+    }
+    else {
+        return Object.assign(Object.assign({}, calendar), { description: seasonData.description, cars: seasonData === null || seasonData === void 0 ? void 0 : seasonData.cars, mods: seasonData === null || seasonData === void 0 ? void 0 : seasonData.mods, details: raceData });
+    }
 };
 exports.getSeasonData = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const seasonRawData = yield googleSheetsUtils_1.getSheetAndRows("seasons");
@@ -37,16 +54,19 @@ exports.checkDraws = () => __awaiter(void 0, void 0, void 0, function* () {
     for (const event of eventList) {
         if (event.isReady && event.isCompleted && !event.isProcessed) {
             const raceData = yield exports.getRaceData(event.eventId);
-            const rowsToVerify = eventUtils_1.getDraws(raceData);
-            if (rowsToVerify.length) {
-                const eventDetails = yield googleSheetsUtils_1.getSheetAndRows("eventDetails");
-                const promises = [];
-                rowsToVerify.forEach(driver => {
-                    const rowToUpdate = eventDetails.rows.find(row => row.eventId === driver.eventId && row.driverId === driver.driverId);
-                    rowToUpdate.drawPosition = config_1.default.CHECK_DRAW_TEXT;
-                    promises.push(rowToUpdate.save({ raw: true }));
-                });
-                yield Promise.all(promises);
+            if (raceData) {
+                const rowsToVerify = eventUtils_1.getDraws(raceData);
+                if (rowsToVerify.length) {
+                    const eventDetails = yield googleSheetsUtils_1.getSheetAndRows("eventDetails");
+                    const promises = [];
+                    rowsToVerify.forEach(driver => {
+                        const rowToUpdate = eventDetails.rows.find(row => row.eventId === driver.eventId &&
+                            row.driverId === driver.driverId);
+                        rowToUpdate.drawPosition = config_1.default.CHECK_DRAW_TEXT;
+                        promises.push(rowToUpdate.save({ raw: true }));
+                    });
+                    yield Promise.all(promises);
+                }
             }
         }
     }
@@ -55,5 +75,6 @@ exports.default = {
     getRaceData: exports.getRaceData,
     mergeRaceData: exports.mergeRaceData,
     checkDraws: exports.checkDraws,
+    getSeasonData: exports.getSeasonData,
 };
 //# sourceMappingURL=eventService.js.map

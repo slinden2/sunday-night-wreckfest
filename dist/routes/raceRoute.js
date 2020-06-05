@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const services_1 = require("../services");
-const eventService_1 = require("../services/event/eventService");
 const config_1 = __importDefault(require("../config"));
 const router = express_1.default.Router();
 router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,10 +32,21 @@ router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         if (!calendarEvent) {
             throw new Error(`No event found with eventId ${req.params.id}`);
         }
-        const raceData = yield services_1.eventService.getRaceData(req.params.id);
-        const seasonData = yield eventService_1.getSeasonData(calendarEvent.seasonId);
-        const mergedData = eventService_1.mergeRaceData(calendarEvent, raceData, seasonData);
-        return res.status(200).json(mergedData);
+        const seasonData = yield services_1.eventService.getSeasonData(calendarEvent.seasonId);
+        if (calendarEvent.writtenResults) {
+            const mergedData = services_1.eventService.mergeRaceData(calendarEvent, {
+                seasonData,
+            });
+            return res.status(200).json(mergedData);
+        }
+        else {
+            const raceData = yield services_1.eventService.getRaceData(req.params.id);
+            const mergedData = services_1.eventService.mergeRaceData(calendarEvent, {
+                seasonData,
+                raceData,
+            });
+            return res.status(200).json(mergedData);
+        }
     }
     catch (err) {
         return next(err);
