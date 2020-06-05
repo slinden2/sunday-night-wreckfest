@@ -22,7 +22,7 @@ const CalendarContainer = () => {
         const json = await response.json();
         const dataWithLinks = json.map((event: IRaceCalendarEvent) => ({
           ...event,
-          link: <Link to={config.getRaceUrl(event.eventId)}>Linkki</Link>,
+          link: <Link to={`/kilpailut/${event.eventId}`}>Linkki</Link>,
           date: getFinnishDate(event.date),
         })) as IRaceCalendarEvent[];
         dispatch(setCalendar(dataWithLinks));

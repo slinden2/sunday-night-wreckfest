@@ -68,7 +68,7 @@ const App = () => {
             <Route exact path="/">
               <CalendarContainer />
             </Route>
-            <Route path={config.getRaceUrl(":id")}>
+            <Route path={"/kilpailut/:id"}>
               <RaceContainer />
             </Route>
             <Route path="/sarjataulukko">
