@@ -21,6 +21,7 @@ export interface IRaceCalendarEvent {
   raceLaps: number;
   hasPowerLimit: boolean;
   videos?: VideoType[];
+  writtenResults?: string;
 }
 
 export interface ISeason {

@@ -21,21 +21,42 @@ export const getRaceData = async (
 
 export const mergeRaceData = (
   calendar: IRaceCalendarEvent,
-  raceData: IDriverSeasonRaceData[],
-  seasonData?: ISeasonData
+  optionalData: {
+    seasonData?: ISeasonData;
+    raceData?: IDriverSeasonRaceData[];
+  }
 ): IRaceDetails => {
-  return seasonData
-    ? {
-        ...calendar,
-        description: seasonData.description,
-        cars: seasonData?.cars,
-        mods: seasonData?.mods,
-        details: raceData,
-      }
-    : {
-        ...calendar,
-        details: raceData,
-      };
+  const { seasonData, raceData } = optionalData;
+
+  const hasWrittenResultsWithSeasonData = Boolean(!raceData && seasonData);
+  const hasWrittenResultsWithNoSeasonData = !raceData && !seasonData;
+  const hasRaceDataWithNoSeasonData = Boolean(raceData && !seasonData);
+
+  if (hasWrittenResultsWithSeasonData) {
+    return {
+      ...calendar,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      description: seasonData!.description,
+      cars: seasonData?.cars,
+      mods: seasonData?.mods,
+    };
+  } else if (hasWrittenResultsWithNoSeasonData) {
+    return calendar;
+  } else if (hasRaceDataWithNoSeasonData) {
+    return {
+      ...calendar,
+      details: raceData,
+    };
+  } else {
+    return {
+      ...calendar,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      description: seasonData!.description,
+      cars: seasonData?.cars,
+      mods: seasonData?.mods,
+      details: raceData,
+    };
+  }
 };
 
 export const getSeasonData = async (

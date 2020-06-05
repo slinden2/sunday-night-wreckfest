@@ -9,7 +9,7 @@ import {
   parseNumber,
   parseMods,
   parseCars,
-  parseDescription,
+  parseMarkdown,
 } from "../helpers";
 import { IDriverSeasonRaceData, ISeasonData } from "../../types";
 import { getSumOfArrayElements } from "../../utils/misc";
@@ -91,7 +91,7 @@ export const toSeasonDetails = (
   return {
     seasonId: parseEventId(rawSeason.seasonId, "seasonId"),
     seasonName: parseString(rawSeason.seasonName, "seasonName"),
-    description: parseDescription(rawSeason.description),
+    description: parseMarkdown(rawSeason.description, "description"),
     ...(rawSeason.cars
       ? {
           cars: parseCars(rawSeason.cars),

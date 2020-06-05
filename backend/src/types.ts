@@ -22,6 +22,7 @@ export interface IRaceCalendarEvent {
   qLaps: number;
   raceLaps: number;
   videos?: VideoType[];
+  writtenResults?: string;
 }
 
 export enum RaceGroup {
@@ -55,7 +56,7 @@ export interface IRaceDetails extends IRaceCalendarEvent {
   description?: string;
   cars?: string[];
   mods?: Mod[];
-  details: IDriverSeasonRaceData[];
+  details?: IDriverSeasonRaceData[];
 }
 
 export type Mod = {

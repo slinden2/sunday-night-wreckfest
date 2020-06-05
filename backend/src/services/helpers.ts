@@ -245,8 +245,12 @@ export const parseCars = (carString: any): string[] => {
   return carData;
 };
 
-export const parseDescription = (descriptionString: any): string => {
-  return marked(descriptionString);
+export const parseMarkdown = (markdownString: any, field: string): string => {
+  if (!markdownString) {
+    throw new DataIntegrityError("Missing markdown field: " + field);
+  }
+
+  return marked(markdownString);
 };
 
 export const parseServerName = (name: string): string => {
