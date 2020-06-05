@@ -17,16 +17,17 @@ describe("eventService", () => {
   describe("mergeRaceData", () => {
     it("should return merge data correctly without season data", () => {
       expect(
-        eventService.mergeRaceData(getRaceCalendarReturn[0], getRaceDataReturn)
+        eventService.mergeRaceData(getRaceCalendarReturn[0], {
+          raceData: getRaceDataReturn,
+        })
       ).toEqual(mergeRaceDataReturn);
     });
     it("should return merge data correctly with season data", () => {
       expect(
-        eventService.mergeRaceData(
-          getRaceCalendarReturn[0],
-          getRaceDataReturn,
-          toSeasonDataReturn
-        )
+        eventService.mergeRaceData(getRaceCalendarReturn[0], {
+          raceData: getRaceDataReturn,
+          seasonData: toSeasonDataReturn,
+        })
       ).toEqual(mergeRaceDataReturn2);
     });
   });

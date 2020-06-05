@@ -21,25 +21,27 @@ export const updateStandings = async (): Promise<void> => {
       await makeBackup("standings");
 
       const raceData = await eventService.getRaceData(event.eventId);
-      await addRaceToStandings(event, raceData);
+      if (raceData) {
+        await addRaceToStandings(event, raceData);
 
-      if (event.hasPowerLimit) {
-        const winner = raceData.find(driver => driver.seasonPoints === 100);
+        if (event.hasPowerLimit) {
+          const winner = raceData.find(driver => driver.seasonPoints === 100);
 
-        if (!winner) {
-          throw new Error(
-            "No driver with 100 season points (winner) found. Can't update power limit."
-          );
+          if (!winner) {
+            throw new Error(
+              "No driver with 100 season points (winner) found. Can't update power limit."
+            );
+          }
+
+          await updatePowerLimit(event.seasonId, winner.driverId);
         }
 
-        await updatePowerLimit(event.seasonId, winner.driverId);
+        await calendarService.setIsProcessedTrue(event.eventId);
+        await addUpdateTime();
+
+        // let's not bombard the API if there are more than 1 races to update
+        await sleep(5000);
       }
-
-      await calendarService.setIsProcessedTrue(event.eventId);
-      await addUpdateTime();
-
-      // let's not bombard the API if there are more than 1 races to update
-      await sleep(5000);
     }
   }
 };

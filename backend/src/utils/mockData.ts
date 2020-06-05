@@ -104,6 +104,10 @@ export const getRaceCalendarReturn: IRaceCalendarEvent[] = [
   },
 ];
 
+export const getRaceCalendarReturnWithWrittenRes: typeof getRaceCalendarReturn = getRaceCalendarReturn.map(
+  cal => ({ ...cal, writtenResults: "Results For Testing" })
+);
+
 export const getRaceDataInput = [
   {
     driverId: "0001",
@@ -478,3 +482,20 @@ export const getDrawsReturn2: IDriverSeasonRaceData[] = [
     seasonPoints: 9,
   },
 ];
+
+export const getSeasonDataReturn: ISeasonData = {
+  seasonId: "0400",
+  seasonName: "Test Season",
+  description: "<p>Test</p>\n",
+  cars: ["Test1, Test2"],
+  mods: [
+    {
+      name: "TestMod1",
+      url: "https://testmod1.com",
+    },
+    {
+      name: "TestMod2",
+      url: "https://testmod2.com",
+    },
+  ],
+};

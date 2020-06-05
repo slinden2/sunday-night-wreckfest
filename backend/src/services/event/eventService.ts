@@ -103,4 +103,5 @@ export default {
   getRaceData,
   mergeRaceData,
   checkDraws,
+  getSeasonData,
 };
