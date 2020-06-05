@@ -105,7 +105,7 @@ interface Props {
 }
 
 const RaceContent = ({ data }: Props) => {
-  const qDetails = data.details
+  const qDetails = [...data.details]
     .sort((a, b) => {
       const aTime = convertTimeToSecs(a.qTime);
       const bTime = convertTimeToSecs(b.qTime);
@@ -120,7 +120,6 @@ const RaceContent = ({ data }: Props) => {
       heatPoints: driver.heatPoints?.join(", "),
       heatPositions: driver.heatPositions?.join(", "),
     }))
-    .sort((a, b) => b.seasonPoints - a.seasonPoints)
     .map((driver, i) => ({ ...driver, "#": i + 1 }));
 
   const DOMPurify = createDOMPurify(window);
