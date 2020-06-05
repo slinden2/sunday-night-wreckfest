@@ -88,10 +88,12 @@ const RaceContent = ({ data }: Props) => {
             <th>Rata</th>
             <td>{data.trackName}</td>
           </tr>
-          <tr>
-            <th>Aika-ajokierrokset</th>
-            <td>{data.qLaps}</td>
-          </tr>
+          {data.qLaps > 0 && (
+            <tr>
+              <th>Aika-ajokierrokset</th>
+              <td>{data.qLaps}</td>
+            </tr>
+          )}
           <tr>
             <th>Kilpailukierrokset</th>
             <td>{data.raceLaps}</td>

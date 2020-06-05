@@ -61,10 +61,12 @@ const RaceResults = ({ data }: Props) => {
 
   return (
     <div>
-      <SectionContainer>
-        <HeaderH3>Aika-ajotulokset</HeaderH3>
-        <Table data={qDetails} headers={qHeaders} headerMap={qHeaderMap} />
-      </SectionContainer>
+      {data.qLaps > 0 && (
+        <SectionContainer>
+          <HeaderH3>Aika-ajotulokset</HeaderH3>
+          <Table data={qDetails} headers={qHeaders} headerMap={qHeaderMap} />
+        </SectionContainer>
+      )}
       <SectionContainer>
         <HeaderH3>Kilpailutulokset</HeaderH3>
         <Table
