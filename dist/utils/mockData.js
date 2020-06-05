@@ -91,6 +91,7 @@ exports.getRaceCalendarReturn = [
         raceLaps: 4,
     },
 ];
+exports.getRaceCalendarReturnWithWrittenRes = exports.getRaceCalendarReturn.map(cal => (Object.assign(Object.assign({}, cal), { writtenResults: "Results For Testing" })));
 exports.getRaceDataInput = [
     {
         driverId: "0001",
@@ -438,4 +439,20 @@ exports.getDrawsReturn2 = [
         seasonPoints: 9,
     },
 ];
+exports.getSeasonDataReturn = {
+    seasonId: "0400",
+    seasonName: "Test Season",
+    description: "<p>Test</p>\n",
+    cars: ["Test1, Test2"],
+    mods: [
+        {
+            name: "TestMod1",
+            url: "https://testmod1.com",
+        },
+        {
+            name: "TestMod2",
+            url: "https://testmod2.com",
+        },
+    ],
+};
 //# sourceMappingURL=mockData.js.map

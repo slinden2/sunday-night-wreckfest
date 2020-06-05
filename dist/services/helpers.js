@@ -189,8 +189,11 @@ exports.parseCars = (carString) => {
     });
     return carData;
 };
-exports.parseDescription = (descriptionString) => {
-    return marked_1.default(descriptionString);
+exports.parseMarkdown = (markdownString, field) => {
+    if (!markdownString) {
+        throw new errors_1.DataIntegrityError("Missing markdown field: " + field);
+    }
+    return marked_1.default(markdownString);
 };
 exports.parseServerName = (name) => {
     return name.split(/\^\d/).join("").trim();
