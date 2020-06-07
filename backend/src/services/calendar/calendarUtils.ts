@@ -25,6 +25,9 @@ export const toRaceCalendarEvents = (
       hasPowerLimit: parseNumericBoolean(row.hasPowerLimit, "hasPowerLimit"),
       date: parseDate(row.date),
       trackName: parseString(row.trackName, "trackName"),
+      ...(row.trackName2
+        ? { trackName2: parseString(row.trackName2, "trackName2") }
+        : null),
       qLaps: parseNumber(row.qLaps, "qLaps"),
       raceLaps: parseNumber(row.raceLaps, "raceLaps"),
       ...(row.videos ? { videos: parseVideos(row.videos) } : null),

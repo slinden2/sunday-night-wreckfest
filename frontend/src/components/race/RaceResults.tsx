@@ -61,7 +61,7 @@ const RaceResults = ({ data }: Props) => {
 
   return (
     <div>
-      {data.qLaps > 0 && (
+      {data.qLaps > 0 && !data.trackName2 && (
         <SectionContainer>
           <HeaderH3>Aika-ajotulokset</HeaderH3>
           <Table data={qDetails} headers={qHeaders} headerMap={qHeaderMap} />

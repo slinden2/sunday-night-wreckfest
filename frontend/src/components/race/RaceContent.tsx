@@ -76,6 +76,15 @@ interface Props {
 const RaceContent = ({ data }: Props) => {
   const DOMPurify = createDOMPurify(window);
 
+  const trackText = data.trackName2 ? "1. rata" : "Rata";
+
+  const qLapsText = data.trackName2
+    ? "1. kilpailukierrokset"
+    : "Aika-ajokierrokset";
+  const raceLapsText = data.trackName2
+    ? "2. kilpailukierrokset"
+    : "Kilpailukierroset";
+
   return (
     <Page>
       <EventTable>
@@ -85,17 +94,23 @@ const RaceContent = ({ data }: Props) => {
             <td>{data.date}</td>
           </tr>
           <tr>
-            <th>Rata</th>
+            <th>{trackText}</th>
             <td>{data.trackName}</td>
           </tr>
+          {data.trackName2 && (
+            <tr>
+              <th>2. rata</th>
+              <td>{data.trackName2}</td>
+            </tr>
+          )}
           {data.qLaps > 0 && (
             <tr>
-              <th>Aika-ajokierrokset</th>
+              <th>{qLapsText}</th>
               <td>{data.qLaps}</td>
             </tr>
           )}
           <tr>
-            <th>Kilpailukierrokset</th>
+            <th>{raceLapsText}</th>
             <td>{data.raceLaps}</td>
           </tr>
           {data.cars && (

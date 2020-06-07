@@ -17,6 +17,7 @@ export interface IRaceCalendarEvent {
   isCompleted: boolean;
   date: string;
   trackName: string;
+  trackName2?: string;
   qLaps: number;
   raceLaps: number;
   hasPowerLimit: boolean;

@@ -24,6 +24,9 @@ const CalendarContainer = () => {
           ...event,
           link: <Link to={`/kilpailut/${event.eventId}`}>Linkki</Link>,
           date: getFinnishDate(event.date),
+          ...(event.trackName2
+            ? { trackName: `${event.trackName} / ${event.trackName2}` }
+            : { trackName: event.trackName }),
         })) as IRaceCalendarEvent[];
         dispatch(setCalendar(dataWithLinks));
       } catch (err) {

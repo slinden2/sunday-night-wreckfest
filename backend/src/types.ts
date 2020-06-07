@@ -19,6 +19,7 @@ export interface IRaceCalendarEvent {
   hasPowerLimit: boolean;
   date: string;
   trackName: string;
+  trackName2?: string;
   qLaps: number;
   raceLaps: number;
   videos?: VideoType[];
