@@ -375,7 +375,7 @@ export const toSeasonDataInput = {
   seasonName: "SEASON 4",
   description: "testDesc",
   cars: "sunrise;raiden;",
-  mods: "mod1,www.mod1.com;mod2,www.mod2.com;",
+  mods: "mod1,123456;mod2,234567;",
 };
 
 export const toSeasonDataReturn: ISeasonData = {
@@ -384,8 +384,8 @@ export const toSeasonDataReturn: ISeasonData = {
   description: "<p>testDesc</p>\n",
   cars: ["sunrise", "raiden"],
   mods: [
-    { name: "mod1", url: "www.mod1.com" },
-    { name: "mod2", url: "www.mod2.com" },
+    { name: "mod1", id: 123456 },
+    { name: "mod2", id: 234567 },
   ],
 };
 
@@ -394,8 +394,8 @@ export const mergeRaceDataReturn2: ISeasonData = {
   description: "<p>testDesc</p>\n",
   cars: ["sunrise", "raiden"],
   mods: [
-    { name: "mod1", url: "www.mod1.com" },
-    { name: "mod2", url: "www.mod2.com" },
+    { name: "mod1", id: 123456 },
+    { name: "mod2", id: 234567 },
   ],
 };
 
@@ -491,11 +491,11 @@ export const getSeasonDataReturn: ISeasonData = {
   mods: [
     {
       name: "TestMod1",
-      url: "https://testmod1.com",
+      id: 123456,
     },
     {
       name: "TestMod2",
-      url: "https://testmod2.com",
+      id: 234567,
     },
   ],
 };

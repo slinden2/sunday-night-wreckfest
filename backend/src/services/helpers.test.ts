@@ -294,20 +294,18 @@ describe("helpers", () => {
     });
   });
   describe("parseMods", () => {
-    it("should accept kytkin,www.kytkin.com;lahna,www.lahna.com; input", () => {
-      expect(() =>
-        parseMods("kytkin,www.kytkin.com;lahna,www.lahna.com;")
-      ).not.toThrowError();
+    it("should accept kytkin,123456;lahna,234567; input", () => {
+      expect(() => parseMods("kytkin,123456;lahna,234567;")).not.toThrowError();
     });
     it("should not accept kytkin,www.kytkin.com,lahna,www.lahna.com; input", () => {
       expect(() =>
         parseMods("kytkin,www.kytkin.com,lahna,www.lahna.com;")
       ).toThrowError();
     });
-    it("should convert kytkin,www.kytkin.com;lahna,www.lahna.com; into an array of Mod objects", () => {
-      expect(parseMods("kytkin,www.kytkin.com;lahna,www.lahna.com;")).toEqual([
-        { name: "kytkin", url: "www.kytkin.com" },
-        { name: "lahna", url: "www.lahna.com" },
+    it("should convert kytkin,1232456;lahna,234567; into an array of Mod objects", () => {
+      expect(parseMods("kytkin,1232456;lahna,234567;")).toEqual([
+        { name: "kytkin", id: 1232456 },
+        { name: "lahna", id: 234567 },
       ]);
     });
   });

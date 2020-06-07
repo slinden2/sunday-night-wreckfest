@@ -216,7 +216,7 @@ export const parseMods = (modString: string): Mod[] => {
       throw new DataIntegrityError("Invalid modId: " + id);
     }
 
-    return { name, id };
+    return { name, id: Number(id) };
   });
 
   return modData;
