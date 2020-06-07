@@ -13,6 +13,7 @@ jobs:
       working-directory-fe: ./frontend
       GS_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
       GS_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GS_SERVICE_ACCOUNT_EMAIL }}
+      LABBE_DOMAIN: ${{ secrets.LABBE_DOMAIN }}
 
     steps:
       - uses: actions/checkout@v2
