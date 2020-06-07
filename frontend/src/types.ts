@@ -76,7 +76,7 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
 
 export type Mod = {
   name: string;
-  url: string;
+  id: number;
 };
 
 export interface IRaceDetails extends IRaceCalendarEvent {

@@ -161,7 +161,7 @@ export const parseNumber = (num: any, field: string): number => {
 };
 
 export const isVideoDataString = (text: string): boolean => {
-  if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9_]+;)+$/.test(text)) return true;
+  if (/^((twitch|twitchClip|youtube),.+;)+$/.test(text)) return true;
   else return false;
 };
 
@@ -194,7 +194,7 @@ export const parseVideos = (videoDataString: string): VideoType[] => {
 
 export const isModDataString = (text: any): boolean => {
   // eslint-disable-next-line no-useless-escape
-  if (/^([\w\s.]+,[\w:\/\\.\?&=]+;)+$/.test(text)) return true;
+  if (/^([\w\s\.]+,\d+;)+$/.test(text)) return true;
   else return false;
 };
 
@@ -206,17 +206,17 @@ export const parseMods = (modString: string): Mod[] => {
   const modDataArrays = modString.substr(0, modString.length - 1).split(";");
 
   const modData = modDataArrays.map(mod => {
-    const [name, url] = mod.split(",");
+    const [name, id] = mod.split(",");
 
     if (!name || !isString(name)) {
       throw new DataIntegrityError("Invalid modName: " + name);
     }
 
-    if (!url || !isString(url)) {
-      throw new DataIntegrityError("Invalid modUrl: " + url);
+    if (!id || !isNumber(id)) {
+      throw new DataIntegrityError("Invalid modId: " + id);
     }
 
-    return { name, url };
+    return { name, id };
   });
 
   return modData;

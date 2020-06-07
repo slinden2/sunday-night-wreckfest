@@ -10,6 +10,7 @@ import {
 } from "../styledElements";
 import RaceResults from "./RaceResults";
 import WrittenRaceResults from "./WrittenRaceResults";
+import config from "../../config";
 
 const EventTable = styled.table`
   border: 2px solid black;
@@ -134,7 +135,7 @@ const RaceContent = ({ data }: Props) => {
                     key={mod.name}
                     target="_black"
                     rel="noopener noreferrer"
-                    href={mod.url}
+                    href={config.getModUrl(mod.id)}
                   >
                     <span>{mod.name}</span>
                   </a>

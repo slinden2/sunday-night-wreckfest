@@ -62,7 +62,7 @@ export interface IRaceDetails extends IRaceCalendarEvent {
 
 export type Mod = {
   name: string;
-  url: string;
+  id: number;
 };
 
 export interface ISeasonData {
