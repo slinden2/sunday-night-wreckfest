@@ -120,7 +120,7 @@ exports.parseNumber = (num, field) => {
     return Number(num);
 };
 exports.isVideoDataString = (text) => {
-    if (/^((twitch|twitchClip|youtube),[a-zA-Z0-9_]+;)+$/.test(text))
+    if (/^((twitch|twitchClip|youtube),.+;)+$/.test(text))
         return true;
     else
         return false;
@@ -148,7 +148,7 @@ exports.parseVideos = (videoDataString) => {
     return videoData;
 };
 exports.isModDataString = (text) => {
-    if (/^([\w\s.]+,[\w:\/\\.\?&=]+;)+$/.test(text))
+    if (/^([\w\s\.]+,\d+;)+$/.test(text))
         return true;
     else
         return false;
@@ -159,14 +159,14 @@ exports.parseMods = (modString) => {
     }
     const modDataArrays = modString.substr(0, modString.length - 1).split(";");
     const modData = modDataArrays.map(mod => {
-        const [name, url] = mod.split(",");
+        const [name, id] = mod.split(",");
         if (!name || !exports.isString(name)) {
             throw new errors_1.DataIntegrityError("Invalid modName: " + name);
         }
-        if (!url || !exports.isString(url)) {
-            throw new errors_1.DataIntegrityError("Invalid modUrl: " + url);
+        if (!id || !exports.isNumber(id)) {
+            throw new errors_1.DataIntegrityError("Invalid modId: " + id);
         }
-        return { name, url };
+        return { name, id: Number(id) };
     });
     return modData;
 };

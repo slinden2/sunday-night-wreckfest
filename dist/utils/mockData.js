@@ -341,7 +341,7 @@ exports.toSeasonDataInput = {
     seasonName: "SEASON 4",
     description: "testDesc",
     cars: "sunrise;raiden;",
-    mods: "mod1,www.mod1.com;mod2,www.mod2.com;",
+    mods: "mod1,123456;mod2,234567;",
 };
 exports.toSeasonDataReturn = {
     seasonId: "0400",
@@ -349,13 +349,13 @@ exports.toSeasonDataReturn = {
     description: "<p>testDesc</p>\n",
     cars: ["sunrise", "raiden"],
     mods: [
-        { name: "mod1", url: "www.mod1.com" },
-        { name: "mod2", url: "www.mod2.com" },
+        { name: "mod1", id: 123456 },
+        { name: "mod2", id: 234567 },
     ],
 };
 exports.mergeRaceDataReturn2 = Object.assign(Object.assign({}, exports.mergeRaceDataReturn), { description: "<p>testDesc</p>\n", cars: ["sunrise", "raiden"], mods: [
-        { name: "mod1", url: "www.mod1.com" },
-        { name: "mod2", url: "www.mod2.com" },
+        { name: "mod1", id: 123456 },
+        { name: "mod2", id: 234567 },
     ] });
 exports.getDrawsInput = [
     {
@@ -447,11 +447,11 @@ exports.getSeasonDataReturn = {
     mods: [
         {
             name: "TestMod1",
-            url: "https://testmod1.com",
+            id: 123456,
         },
         {
             name: "TestMod2",
-            url: "https://testmod2.com",
+            id: 234567,
         },
     ],
 };
