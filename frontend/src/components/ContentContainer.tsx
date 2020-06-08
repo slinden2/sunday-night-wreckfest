@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import blackGrit from "../assets/blackgrit.png";
 import whiteGrit from "../assets/whitegrit.png";
+import { useDocTitle } from "../hooks";
 
 const Container = styled.div`
   width: 100%;
@@ -71,6 +72,8 @@ interface Props {
 }
 
 const ContentContainer: React.FC<Props> = ({ title, children }: Props) => {
+  useDocTitle(title);
+
   return (
     <Container>
       <Title>
