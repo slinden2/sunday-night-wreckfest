@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo_optimized.svg";
 import blackGrit from "../assets/blackgrit.png";
 import { IWFServerData } from "../types";
 
