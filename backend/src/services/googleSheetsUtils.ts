@@ -29,6 +29,7 @@ const sheetMap: ISheetMap = {
   eventDetails: 1495986400,
   standings: 1733156042,
   seasons: 1876267219,
+  drivers: 1062100406,
 };
 
 export const getSheetAndRows = async (

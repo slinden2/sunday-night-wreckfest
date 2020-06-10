@@ -98,3 +98,15 @@ export interface IWFServerData {
   players: number;
   maxPlayers: number;
 }
+
+export interface Driver {
+  id: string;
+  name: string;
+  team?: string;
+}
+
+export interface Team {
+  name: string;
+  driver1: string;
+  driver2?: string;
+}
