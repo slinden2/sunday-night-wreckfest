@@ -3,6 +3,8 @@ import {
   RaceGroup,
   IRaceCalendarEvent,
   ISeasonData,
+  Driver,
+  Team,
 } from "../types";
 import { IStandingRow } from "../services/standings/standingsUtils";
 
@@ -499,3 +501,29 @@ export const getSeasonDataReturn: ISeasonData = {
     },
   ],
 };
+
+export const rawDriverData = [
+  { driverId: "0001", driverName: "Test Driver1", team: "Team Test" },
+  { driverId: "0002", driverName: "Test Driver2", team: "Team Test" },
+  { driverId: "0003", driverName: "Test Driver3", team: "Team Test 2" },
+  { driverId: "0004", driverName: "Test Driver4" },
+];
+
+export const driverData: Driver[] = [
+  { id: "0001", name: "Test Driver1", team: "Team Test" },
+  { id: "0002", name: "Test Driver2", team: "Team Test" },
+  { id: "0003", name: "Test Driver3", team: "Team Test 2" },
+  { id: "0004", name: "Test Driver4" },
+];
+
+export const teamData: Team[] = [
+  {
+    name: "Team Test",
+    driver1: "Test Driver1",
+    driver2: "Test Driver2",
+  },
+  {
+    name: "Team Test 2",
+    driver1: "Test Driver3",
+  },
+];
