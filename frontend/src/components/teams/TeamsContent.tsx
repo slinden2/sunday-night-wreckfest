@@ -8,11 +8,11 @@ import LoadingIndicator from "../LoadingIndicator";
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 `;
 
 const Card = styled.div`
-  margin: 1rem 0.5rem;
+  margin: 1rem 1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -25,6 +25,7 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: ${props => props.theme.colors.black};
 
     img {
       max-width: 100%;
@@ -55,7 +56,7 @@ const TeamsContent = () => {
           {teams.map(team => (
             <Card key={team.name}>
               <div className="img-container">
-                <img src={noTeamLogo} />
+                <img src={team.logoUrl ? team.logoUrl : noTeamLogo} />
               </div>
               <div className="meta-container">
                 <h4>{team.name}</h4>

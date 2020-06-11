@@ -9,6 +9,9 @@ export const toDriver = (rawRows: any[]): Driver[] => {
       id: parseDriverId(row.driverId),
       name: parseString(row.driverName, "driverName"),
       ...(row.team ? { team: parseString(row.team, "team") } : null),
+      ...(row.teamLogoUrl
+        ? { teamLogoUrl: parseString(row.teamLogoUrl, "teamLogoUrl") }
+        : null),
     };
     cleanRows.push(driver);
   });
@@ -27,6 +30,7 @@ export const extractTeamsFromDrivers = (drivers: Driver[]): Team[] => {
       acc.push({
         name: cur.team,
         driver1: cur.name,
+        ...(cur.teamLogoUrl ? { logoUrl: cur.teamLogoUrl } : null),
       });
     }
 

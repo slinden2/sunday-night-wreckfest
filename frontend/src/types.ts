@@ -106,4 +106,5 @@ export interface Team {
   name: string;
   driver1: string;
   driver2?: string;
+  logoUrl?: string;
 }

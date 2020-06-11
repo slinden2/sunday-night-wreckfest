@@ -103,10 +103,12 @@ export interface Driver {
   id: string;
   name: string;
   team?: string;
+  teamLogoUrl?: string;
 }
 
 export interface Team {
   name: string;
   driver1: string;
   driver2?: string;
+  logoUrl?: string;
 }
