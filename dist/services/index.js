@@ -11,4 +11,6 @@ const eventService_1 = __importDefault(require("./event/eventService"));
 exports.eventService = eventService_1.default;
 const steamService_1 = __importDefault(require("./steam/steamService"));
 exports.steamService = steamService_1.default;
+const teamService_1 = __importDefault(require("./team/teamService"));
+exports.teamService = teamService_1.default;
 //# sourceMappingURL=index.js.map

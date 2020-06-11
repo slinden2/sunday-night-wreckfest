@@ -29,6 +29,7 @@ const sheetMap = {
     eventDetails: 1495986400,
     standings: 1733156042,
     seasons: 1876267219,
+    drivers: 1062100406,
 };
 exports.getSheetAndRows = (sheetName) => __awaiter(void 0, void 0, void 0, function* () {
     const doc = yield exports.getDocument();
