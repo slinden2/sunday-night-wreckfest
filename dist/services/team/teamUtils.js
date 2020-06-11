@@ -4,7 +4,9 @@ const helpers_1 = require("../helpers");
 exports.toDriver = (rawRows) => {
     const cleanRows = [];
     rawRows.forEach(row => {
-        const driver = Object.assign({ id: helpers_1.parseDriverId(row.driverId), name: helpers_1.parseString(row.driverName, "driverName") }, (row.team ? { team: helpers_1.parseString(row.team, "team") } : null));
+        const driver = Object.assign(Object.assign({ id: helpers_1.parseDriverId(row.driverId), name: helpers_1.parseString(row.driverName, "driverName") }, (row.team ? { team: helpers_1.parseString(row.team, "team") } : null)), (row.teamLogoUrl
+            ? { teamLogoUrl: helpers_1.parseString(row.teamLogoUrl, "teamLogoUrl") }
+            : null));
         cleanRows.push(driver);
     });
     return cleanRows;
@@ -18,10 +20,7 @@ exports.extractTeamsFromDrivers = (drivers) => {
             existingTeam.driver2 = cur.name;
         }
         else {
-            acc.push({
-                name: cur.team,
-                driver1: cur.name,
-            });
+            acc.push(Object.assign({ name: cur.team, driver1: cur.name }, (cur.teamLogoUrl ? { logoUrl: cur.teamLogoUrl } : null)));
         }
         return acc;
     }, []);
