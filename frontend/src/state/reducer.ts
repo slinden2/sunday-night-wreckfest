@@ -3,6 +3,7 @@ import {
   IRaceCalendarEvent,
   IRaceDetails,
   IStandingRow,
+  Team,
 } from "../types";
 import { State } from "./state";
 import { calendarToSeasons } from "../utils";
@@ -19,6 +20,10 @@ export type Action =
   | {
       type: "SET_STANDINGS";
       payload: IStandingRow[];
+    }
+  | {
+      type: "SET_TEAMS";
+      payload: Team[];
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -34,6 +39,8 @@ export const reducer = (state: State, action: Action): State => {
     }
     case "SET_STANDINGS":
       return { ...state, standings: action.payload };
+    case "SET_TEAMS":
+      return { ...state, teams: action.payload };
     default:
       return state;
   }
@@ -59,5 +66,12 @@ export const setStandings = (standings: IStandingRow[]): Action => {
   return {
     type: "SET_STANDINGS",
     payload: standings,
+  };
+};
+
+export const setTeams = (teams: Team[]): Action => {
+  return {
+    type: "SET_TEAMS",
+    payload: teams,
   };
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { ISeason, IRaceDetails, IStandingRow } from "../types";
+import { ISeason, IRaceDetails, IStandingRow, Team } from "../types";
 import { Action } from "./reducer";
 // import { DefaultTheme, BaseThemeProviderComponent } from "styled-components";
 
@@ -7,12 +7,14 @@ export type State = {
   calendar: ISeason[];
   races: IRaceDetails[];
   standings: IStandingRow[];
+  teams: Team[];
 };
 
 const initialState: State = {
   calendar: [],
   races: [],
   standings: [],
+  teams: [],
 };
 
 export const StateContext = React.createContext<
