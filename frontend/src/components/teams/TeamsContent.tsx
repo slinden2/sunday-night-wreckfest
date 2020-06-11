@@ -56,7 +56,10 @@ const TeamsContent = () => {
           {teams.map(team => (
             <Card key={team.name}>
               <div className="img-container">
-                <img src={team.logoUrl ? team.logoUrl : noTeamLogo} />
+                <img
+                  alt={`${team.name} logo`}
+                  src={team.logoUrl ? team.logoUrl : noTeamLogo}
+                />
               </div>
               <div className="meta-container">
                 <h4>{team.name}</h4>
