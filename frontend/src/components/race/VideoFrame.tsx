@@ -54,7 +54,7 @@ const VideoFrame = ({ video }: Props) => {
       videoUrl = `https://player.twitch.tv/?autoplay=false&video=v${video.id}${parentParam}`;
       break;
     case VideoService.twitchClip:
-      videoUrl = `https://clips.twitch.tv/embed?clip=${video.id}&parent=sundaynightwreckfest.fi&parent=www.sundaynightwreckfest.fi`;
+      videoUrl = `https://clips.twitch.tv/embed?clip=${video.id}${parentParam}`;
       break;
     default:
       assertUnreachable(video.service);
