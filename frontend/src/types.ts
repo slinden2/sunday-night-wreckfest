@@ -93,6 +93,7 @@ export interface ITableHeaderMap {
     colSpan?: number;
     dataIndex?: number;
     alignCenter?: boolean;
+    width?: number;
   };
 }
 

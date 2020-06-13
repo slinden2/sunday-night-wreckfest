@@ -50,8 +50,15 @@ const STable = styled.table`
   }
 `;
 
-const HeaderCell = styled.th<{ alignCenter: boolean }>`
+const HeaderCell = styled.th<{
+  alignCenter: boolean;
+  width: number | undefined;
+}>`
   text-align: ${props => (props.alignCenter ? "center" : "left")};
+
+  ${props => props.theme.media.desktop} {
+    width: ${props => (props.width ? `${props.width}px` : "auto")};
+  }
 `;
 
 const TableCell = styled.td<{ alignCenter: boolean }>`
@@ -96,6 +103,7 @@ const Table = ({ data, headers, headerMap }: Props) => {
                       alignCenter={
                         headerObj.alignCenter ? headerObj.alignCenter : false
                       }
+                      width={headerMap[header].width}
                     >
                       {headerObj.title}
                     </HeaderCell>

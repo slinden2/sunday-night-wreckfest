@@ -29,13 +29,25 @@ enum SelectedCal {
 }
 
 const headerMap: ITableHeaderMap = {
-  "#": { title: "#", rowSpan: 2, dataIndex: 0, alignCenter: true },
-  date: { title: "Päivämäärä", rowSpan: 2, dataIndex: 1 },
+  "#": { title: "#", rowSpan: 2, dataIndex: 0, alignCenter: true, width: 50 },
+  date: {
+    title: "Päivämäärä",
+    rowSpan: 2,
+    dataIndex: 1,
+    alignCenter: true,
+    width: 125,
+  },
   trackName: { title: "Rata", rowSpan: 2, dataIndex: 2 },
   laps: { title: "Kierrokset", colSpan: 2, alignCenter: true },
-  qLaps: { title: "A", dataIndex: 3, alignCenter: true },
-  raceLaps: { title: "K", dataIndex: 4, alignCenter: true },
-  link: { title: "Tulokset", rowSpan: 2, dataIndex: 5, alignCenter: true },
+  qLaps: { title: "A", dataIndex: 3, alignCenter: true, width: 75 },
+  raceLaps: { title: "K", dataIndex: 4, alignCenter: true, width: 75 },
+  link: {
+    title: "Tulokset",
+    rowSpan: 2,
+    dataIndex: 5,
+    alignCenter: true,
+    width: 100,
+  },
 };
 
 const headersRow1 = ["#", "date", "trackName", "laps", "link"];
