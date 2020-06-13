@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { VideoType, VideoService } from "../../types";
+import config from "../../config";
 
 function assertUnreachable(x: never): never {
   throw new Error("Didn't expect to get here: " + x);
@@ -40,15 +41,20 @@ interface Props {
 const VideoFrame = ({ video }: Props) => {
   let videoUrl: string;
 
+  const parentParam =
+    config.ENV === "production"
+      ? "&parent=sundaynightwreckfest.fi&parent=www.sundaynightwreckfest.fi"
+      : "&parent=localhost";
+
   switch (video.service) {
     case VideoService.youtube:
       videoUrl = `https://www.youtube.com/embed/${video.id}`;
       break;
     case VideoService.twitch:
-      videoUrl = `https://player.twitch.tv/?autoplay=false&video=v${video.id}`;
+      videoUrl = `https://player.twitch.tv/?autoplay=false&video=v${video.id}${parentParam}`;
       break;
     case VideoService.twitchClip:
-      videoUrl = `https://clips.twitch.tv/embed?clip=${video.id}&parent=streamernews.example.com`;
+      videoUrl = `https://clips.twitch.tv/embed?clip=${video.id}&parent=sundaynightwreckfest.fi&parent=www.sundaynightwreckfest.fi`;
       break;
     default:
       assertUnreachable(video.service);
