@@ -1,3 +1,7 @@
+/* 
+Displays data for a single race
+*/
+
 import React from "react";
 import createDOMPurify from "dompurify";
 

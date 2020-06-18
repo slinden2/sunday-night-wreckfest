@@ -1,3 +1,7 @@
+/* 
+Displays qualifying and race stat tables for a single race
+*/
+
 import React from "react";
 import { SectionContainer, HeaderH3 } from "../styledElements";
 import Table from "../Table";
@@ -42,6 +46,7 @@ interface Props {
 const RaceResults = ({ data }: Props) => {
   if (!data.details || data.details.length === 0) return null;
 
+  // Get stats for the qualifying sorted in ascending order by qTime
   const qDetails = [...data.details]
     .sort((a, b) => {
       const aTime = convertTimeToSecs(a.qTime);
@@ -50,6 +55,7 @@ const RaceResults = ({ data }: Props) => {
     })
     .map((driver, i) => ({ ...driver, "#": i + 1 }));
 
+  // Get stats for the race formatted with additional fields
   const raceDetails = data.details
     .map(driver => ({
       ...driver,

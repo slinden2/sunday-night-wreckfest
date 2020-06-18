@@ -1,3 +1,7 @@
+/* 
+Race meta data table on single race pages
+*/
+
 import React from "react";
 import styled from "styled-components";
 

@@ -1,3 +1,8 @@
+/* 
+This component scrolls the view to top whenever 
+route is changed
+*/
+
 import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";

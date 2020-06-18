@@ -1,3 +1,9 @@
+/* 
+Calendar content component
+
+Displays calendar data
+*/
+
 import React from "react";
 import styled, { css } from "styled-components";
 import Table from "../Table";
@@ -6,11 +12,13 @@ import { useStateValue } from "../../state";
 import { ITableHeaderMap, ISeason } from "../../types";
 import { HeaderH3, SectionContainer, Page } from "../styledElements";
 
+// Selector component to switch between current and old events
 const CalendarSelector = styled.div`
   display: flex;
   justify-content: center;
 `;
 
+// Button component for current and old events
 const SelectionButton = styled.span<{ isActive: boolean }>`
   margin: 0 1rem;
   cursor: pointer;
@@ -28,6 +36,7 @@ enum SelectedCal {
   Menneet = "Menneet",
 }
 
+// Data for each calendar header
 const headerMap: ITableHeaderMap = {
   "#": { title: "#", rowSpan: 2, dataIndex: 0, alignCenter: true, width: 50 },
   date: {

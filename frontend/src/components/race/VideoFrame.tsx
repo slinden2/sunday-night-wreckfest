@@ -1,3 +1,7 @@
+/* 
+A frame component for a single video
+*/
+
 import React from "react";
 import styled from "styled-components";
 import { VideoType, VideoService } from "../../types";

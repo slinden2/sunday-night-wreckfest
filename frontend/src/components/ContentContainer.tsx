@@ -1,3 +1,9 @@
+/* 
+Used as the main container for the content section.
+
+The title is defined in this container.
+ */
+
 import React from "react";
 import styled from "styled-components";
 import blackGrit from "../assets/blackgrit.png";

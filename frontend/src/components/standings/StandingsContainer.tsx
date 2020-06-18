@@ -1,3 +1,9 @@
+/*
+Container for standings
+
+Handles data fetching and formatting and passed data to content component
+*/
+
 import React from "react";
 import config from "../../config";
 import { setStandings, useStateValue } from "../../state";
@@ -18,6 +24,7 @@ export type StandingsHash = {
   seasonName: string;
 };
 
+// Get season options for dropdown list (season selector dropdown)
 const getOptions = (standings: IStandingRow[]): Options[] => {
   const options: Options[] = [];
 

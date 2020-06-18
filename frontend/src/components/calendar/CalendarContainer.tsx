@@ -1,3 +1,10 @@
+/* 
+Container component for race calendar
+
+Handles data fetching and formatting and passes the formatted data to the
+content component.
+*/
+
 import React from "react";
 import config from "../../config";
 import { IRaceCalendarEvent } from "../../types";
@@ -20,10 +27,13 @@ const CalendarContainer = () => {
       try {
         const response = await fetch(raceCalendarUrl);
         const json = await response.json();
+        // Add links to the fetched data
         const dataWithLinks = json.map((event: IRaceCalendarEvent) => ({
           ...event,
           link: <Link to={`/kilpailut/${event.eventId}`}>Linkki</Link>,
+          // Reformat date to Finnish time format
           date: getFinnishDate(event.date),
+          // If the event has two two tracks, combine the name in one field
           ...(event.trackName2
             ? { trackName: `${event.trackName} / ${event.trackName2}` }
             : { trackName: event.trackName }),

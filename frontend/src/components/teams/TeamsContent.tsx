@@ -1,3 +1,7 @@
+/* 
+Temas page content
+*/
+
 import React from "react";
 import styled from "styled-components";
 import { Page } from "../styledElements";

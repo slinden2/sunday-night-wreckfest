@@ -15,12 +15,14 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { IWFServerData } from "./types";
 
+// Container that has a thick black border that wraps the whole site
 const MainContainer = styled.div`
   border: var(--borderSize) solid ${props => props.theme.colors.black};
   color: ${props => props.theme.colors.black};
   min-height: 100vh;
 `;
 
+// Container that wraps the content part of the site (excl. header, navi and footer)
 const PageContainer = styled.div`
   background-color: ${props => props.theme.colors.yellow};
   height: 100%;
@@ -42,7 +44,7 @@ const App = () => {
   const [servers, setServers] = React.useState<IWFServerData[]>([]);
 
   React.useEffect(() => {
-    const loadRaceCalendar = async () => {
+    const loadSNWServers = async () => {
       try {
         const response = await fetch(getServersUrl);
         const json = await response.json();
@@ -54,7 +56,7 @@ const App = () => {
         console.error(err);
       }
     };
-    loadRaceCalendar();
+    loadSNWServers();
   }, []);
 
   return (

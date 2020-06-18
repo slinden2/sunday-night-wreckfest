@@ -39,7 +39,7 @@ const LoadingIndicator = () => {
   return (
     <Container>
       <GritContainer>
-        <span>Loading...</span>
+        <span>Ladataan...</span>
       </GritContainer>
     </Container>
   );

@@ -11,11 +11,13 @@ const SFooter = styled.footer`
   background-color: ${props => props.theme.colors.yellow};
 `;
 
+// Provides black background with inclined top border
 const ColorContainer = styled.div`
   clip-path: polygon(0px 50px, 100% 0px, 100% 100%, 0% 100%);
   background-color: ${props => props.theme.colors.black};
 `;
 
+// Adds white grit on the black footer background
 const GritContainer = styled.div`
   background-size: 500px;
   padding-top: 180px;
@@ -26,6 +28,7 @@ const GritContainer = styled.div`
   text-align: center;
 `;
 
+// White text box
 const TextContainer = styled.div`
   display: inline-block;
   border-radius: 2px;
@@ -41,11 +44,13 @@ const TextContainer = styled.div`
   }
 `;
 
+// Black grit on the white text box
 const BlackGritContainer = styled.div`
   background: url(${blackGrit}) center center / 700px repeat;
   padding: 4rem;
 `;
 
+// Container for Discord text and icon
 const DiscordFlex = styled.span`
   display: inline-flex;
   align-items: center;

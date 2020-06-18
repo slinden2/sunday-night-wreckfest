@@ -1,3 +1,9 @@
+/* 
+Display written results
+
+Alternative for RaceResults
+*/
+
 import React from "react";
 import createDOMPurify from "dompurify";
 

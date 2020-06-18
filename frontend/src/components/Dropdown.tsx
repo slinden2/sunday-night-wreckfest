@@ -1,3 +1,9 @@
+/* 
+Dropdown list component.
+
+Used on the standings page
+ */
+
 import React from "react";
 import styled from "styled-components";
 

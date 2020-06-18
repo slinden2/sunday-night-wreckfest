@@ -1,3 +1,7 @@
+/* 
+Display standings
+*/
+
 import React from "react";
 import { IStandingRow } from "../../types";
 import Table from "../Table";

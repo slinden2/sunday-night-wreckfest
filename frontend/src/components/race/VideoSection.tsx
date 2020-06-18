@@ -1,3 +1,7 @@
+/* 
+Container for videos displayed on the race pages
+*/
+
 import React from "react";
 import styled from "styled-components";
 import { SectionContainer, HeaderH3 } from "../styledElements";

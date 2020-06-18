@@ -1,3 +1,7 @@
+/* 
+Container component for SNW meta data
+*/
+
 import React from "react";
 import ContentContainer from "../ContentContainer";
 import SNWContent from "./SNWContent";

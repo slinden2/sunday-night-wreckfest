@@ -1,3 +1,10 @@
+/* 
+Container component for a single race
+
+Handles data fetching and formatting and passes the formatted data to the
+content component.
+*/
+
 import React from "react";
 import ContentContainer from "../ContentContainer";
 import { useParams } from "react-router-dom";

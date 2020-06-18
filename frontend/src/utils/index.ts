@@ -1,18 +1,5 @@
 import { IRaceCalendarEvent, ISeason, ISeasonHash } from "../types";
 
-interface HasEventId {
-  eventId: string;
-}
-
-export function arrToObj<T extends HasEventId>(arr: T[]) {
-  return arr.reduce((acc, cur) => {
-    return {
-      ...acc,
-      [cur.eventId]: cur,
-    };
-  }, {});
-}
-
 // Converts simple calendar events to an array
 // grouped of objects grouped by season.
 export function calendarToSeasons(events: IRaceCalendarEvent[]): ISeason[] {

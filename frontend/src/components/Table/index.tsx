@@ -1,3 +1,7 @@
+/* 
+Generic table component for displayng all stat tables on the site
+*/
+
 import React from "react";
 import styled from "styled-components";
 import { ITableHeaderMap } from "../../types";
@@ -8,6 +12,7 @@ const Container = styled.div`
   position: relative;
 `;
 
+// Allow horizontal scroll that is needed for mobile
 const ScrollContainer = styled.div`
   overflow-x: auto;
 `;
@@ -67,11 +72,14 @@ const TableCell = styled.td<{ alignCenter: boolean }>`
 
 interface Props {
   data: Array<any>;
+  // Headers is an array of arrays of strings. Each header array is a row.
+  // This is needed, because some headers need to be multiple rows tall.
   headers: Array<string[]>;
   headerMap: ITableHeaderMap;
 }
 
 const Table = ({ data, headers, headerMap }: Props) => {
+  // Combine header rows and sort them by dataIndex
   const orderedHeaders = headers
     .reduce((acc, cur) => {
       const combinedHeaders = [...acc, ...cur];
@@ -85,6 +93,8 @@ const Table = ({ data, headers, headerMap }: Props) => {
       (header: keyof typeof headerMap) =>
         headerMap[header].dataIndex !== undefined
     );
+
+  console.log(orderedHeaders);
 
   return (
     <Container>

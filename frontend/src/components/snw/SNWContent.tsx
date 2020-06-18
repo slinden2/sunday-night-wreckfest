@@ -1,3 +1,7 @@
+/* 
+SNW page content
+*/
+
 import React from "react";
 import { Page, HeaderH3 } from "../styledElements";
 

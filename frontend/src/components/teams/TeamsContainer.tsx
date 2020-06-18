@@ -1,3 +1,7 @@
+/* 
+Container component for teams data
+*/
+
 import React from "react";
 import ContentContainer from "../ContentContainer";
 import TeamsContent from "./TeamsContent";

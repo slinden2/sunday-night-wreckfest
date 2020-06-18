@@ -39,6 +39,8 @@ export interface ISeasonHash {
 export interface INavItem {
   title: string;
   url: string;
+  // With external React Router link can be bypassed and
+  // url can be anything
   external?: boolean;
 }
 
@@ -88,11 +90,21 @@ export interface IRaceDetails extends IRaceCalendarEvent {
 
 export interface ITableHeaderMap {
   [field: string]: {
+    // Visible column title
     title: string;
+    // rowSpan indicates how many rows does a header take. If there are subheaders
+    // present on the table, the cells that have no subheader must have rowSpan 2 for example.
     rowSpan?: number;
+    // colSpan defines how many subheaders does a header have.
     colSpan?: number;
+    // dataIndex is the horizontal index of the data on the row. If a column has
+    // colspan greater than 1, it must not have a dataIndex. dataIndex indicates
+    // the column where the data goes. If a columns colspan is 2, it means that it
+    // has two subcolumns under it and those headers must be indexed.
     dataIndex?: number;
+    // Possibility to center align cell contents
     alignCenter?: boolean;
+    // Possibility to give fixed width for a column
     width?: number;
   };
 }
