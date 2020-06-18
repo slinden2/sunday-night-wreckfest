@@ -10,6 +10,7 @@ import Race from "../race";
 import { calendarService } from "..";
 import config from "../../config";
 
+// Get all race data of a single race
 export const getRaceData = async (
   id: string
 ): Promise<IDriverSeasonRaceData[] | undefined> => {
@@ -24,6 +25,10 @@ export const getRaceData = async (
   return raceData.getRaceData;
 };
 
+// Merge race data with meta data from seasons and raceCalendar sheets
+// Returns different results based on what data has been entered in the DB.
+// For example, season data is optional so if the event we are merging
+// does not have a row in seasons sheet, the seasonData is ignored.
 export const mergeRaceData = (
   calendar: IRaceCalendarEvent,
   optionalData: {
@@ -64,6 +69,7 @@ export const mergeRaceData = (
   }
 };
 
+// Get season data for a specific event
 export const getSeasonData = async (
   id: string
 ): Promise<ISeasonData | undefined> => {
@@ -72,6 +78,8 @@ export const getSeasonData = async (
   return seasonDetails;
 };
 
+// Check if there are draws in eventDetails and mark the rows to be
+// solved manually
 export const checkDraws = async () => {
   const eventList = await calendarService.getRaceCalendar();
   for (const event of eventList) {
@@ -88,6 +96,8 @@ export const checkDraws = async () => {
                 row.eventId === driver.eventId &&
                 row.driverId === driver.driverId
             );
+            // A row that is in a draw situation will be marked in drawPosition column
+            // for manual solving.
             rowToUpdate.drawPosition = config.CHECK_DRAW_TEXT;
             promises.push(rowToUpdate.save({ raw: true }));
           });

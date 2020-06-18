@@ -15,6 +15,8 @@ import { IDriverSeasonRaceData, ISeasonData } from "../../types";
 import { getSumOfArrayElements } from "../../utils/misc";
 import config from "../../config";
 
+// Gets heat positions from a stat row (cols prefixed with pos) and
+// converts them into an array
 export const getHeatPositions = (driverData: any): Array<any> => {
   const posArr: Array<any> = [];
   Object.getOwnPropertyNames(driverData).forEach((prop: string) => {
@@ -25,6 +27,7 @@ export const getHeatPositions = (driverData: any): Array<any> => {
   return posArr;
 };
 
+// Parses eventDetails rows
 export const toIDriverSeasonRaceData = (
   driverData: any
 ): IDriverSeasonRaceData => {
@@ -47,6 +50,7 @@ export const toIDriverSeasonRaceData = (
   };
 };
 
+// Parses eventDetails of a speficic event
 export const toDriverRaceDetails = (
   eventId: string,
   rawRows: any
@@ -63,6 +67,7 @@ export const toDriverRaceDetails = (
   return cleanRows;
 };
 
+// Get draw situtations within an event
 export const getDraws = (data: IDriverSeasonRaceData[]): typeof data => {
   const draws: typeof data = [];
   for (let i = 0; i < data.length - 1; i++) {
@@ -79,6 +84,7 @@ export const getDraws = (data: IDriverSeasonRaceData[]): typeof data => {
   return draws;
 };
 
+// Parses seasons rows
 export const toSeasonDetails = (
   id: string,
   seasonData: any

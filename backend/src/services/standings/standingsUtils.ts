@@ -19,6 +19,7 @@ export interface IStandingRow {
   eventIds: string[];
 }
 
+// Convert standings raw data to IStandingRow type
 export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
   const cleanRows: IStandingRow[] = [];
 

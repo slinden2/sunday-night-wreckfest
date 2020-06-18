@@ -8,22 +8,27 @@ import {
 } from "./updateStandingsUtils";
 import { sleep } from "../../utils/misc";
 
+// Get standings data
 const getStandings = async () => {
   const standings = await getSheetAndRows("standings");
   const standingRows = toStandingRows(standings.rows);
   return standingRows;
 };
 
+// Update standings if new complete data available in eventDetails
 export const updateStandings = async (): Promise<void> => {
   const eventList = await calendarService.getRaceCalendar();
   for (const event of eventList) {
+    // If new data available
     if (event.isReady && event.isCompleted && !event.isProcessed) {
       await makeBackup("standings");
 
+      // Get race data
       const raceData = await eventService.getRaceData(event.eventId);
       if (raceData) {
         await addRaceToStandings(event, raceData);
 
+        // if event has a power limit, update rows accordingly
         if (event.hasPowerLimit) {
           const winner = raceData.find(driver => driver.seasonPoints === 100);
 

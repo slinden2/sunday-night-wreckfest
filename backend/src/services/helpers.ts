@@ -1,5 +1,7 @@
 /* 
-Utility functions used by more than one files.
+Utility functions used by more than one files. All of these
+are used for parsing the data acquired from 
+the Google Sheets DB.
 */
 
 import marked from "marked";
@@ -30,6 +32,7 @@ export const isNumber = (param: any): param is number => {
   return !isNaN(Number(param)) && typeof param !== "boolean";
 };
 
+// Parses zeros and ones and converts them to false or true
 export const parseNumericBoolean = (param: string, field: string): boolean => {
   if (
     !param ||
@@ -42,6 +45,8 @@ export const parseNumericBoolean = (param: string, field: string): boolean => {
   return Boolean(Number(param));
 };
 
+// Power limit value consists of a letter D, C, B or A and 2-3 numbers.
+// Derives from Wreckfest car power levels.
 export const parsePowerLimit = (text: any): string => {
   if (!text) return "";
 
@@ -52,6 +57,7 @@ export const parsePowerLimit = (text: any): string => {
   return text;
 };
 
+// Parses an eventId strings from the stadings sheet formatted: eventId;eventId;
 export const parseEventIds = (eventIdsStr: any): string[] => {
   const eventIds: string[] = eventIdsStr.split(";");
 
@@ -66,6 +72,7 @@ export const isNumeric = (str: string): boolean => {
   return /^\d+$/.test(str);
 };
 
+// Driver ID is a string of 0 numbers: 0001, 0002...
 export const parseDriverId = (driverId: any): string => {
   if (
     !driverId ||
@@ -83,6 +90,7 @@ export const isLapTime = (time: any): boolean => {
   return /^\d{2}:\d{2},\d{3}$/.test(time);
 };
 
+// Parses lap times formatted: mm:ss,fff
 export const parseLapTime = (time: any): string => {
   if (!time || !isString(time) || !isLapTime(time)) {
     throw new DataIntegrityError("Invalid or missing qTime: " + time);
@@ -95,6 +103,8 @@ const isRaceGroup = (group: any): group is RaceGroup => {
   return Object.values(RaceGroup as any).includes(group);
 };
 
+// RaceGroup is a letter A, B or C. Used to divide drivers in racing groups
+// after qualification.
 export const parseGroup = (group: any): RaceGroup => {
   if (!group || !isRaceGroup(group)) {
     throw new DataIntegrityError("Invalid or missing group: " + group);
@@ -103,6 +113,7 @@ export const parseGroup = (group: any): RaceGroup => {
   return group;
 };
 
+// Heat positions is an array of numbers
 export const parseHeatPositions = (positions: Array<any>): Array<number> => {
   positions.forEach(pos => {
     if (!isNumber(pos)) {
@@ -117,6 +128,7 @@ export const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
 
+// Allowed date format is DD.MM.YYYY
 export const parseDate = (date: string): string => {
   if (!date || !isString) {
     throw new DataIntegrityError(
@@ -170,6 +182,8 @@ export const isVideoService = (text: any): text is VideoService => {
   else return false;
 };
 
+// Parses videos from the race calendar rows.
+// youtube,id;twitch,id;twitchClip,slug;
 export const parseVideos = (videoDataString: string): VideoType[] => {
   if (!isVideoDataString(videoDataString)) {
     throw new DataIntegrityError("Invalid videoDataString " + videoDataString);
@@ -198,6 +212,8 @@ export const isModDataString = (text: any): boolean => {
   else return false;
 };
 
+// Parses videos from the race calendar rows.
+// mod1,id;mod2,id;
 export const parseMods = (modString: string): Mod[] => {
   if (!isModDataString(modString)) {
     throw new DataIntegrityError("Invalid videoDataString " + modString);
@@ -245,6 +261,7 @@ export const parseCars = (carString: any): string[] => {
   return carData;
 };
 
+// Parses markdown entered in a cell in the DB
 export const parseMarkdown = (markdownString: any, field: string): string => {
   if (!markdownString) {
     throw new DataIntegrityError("Missing markdown field: " + field);

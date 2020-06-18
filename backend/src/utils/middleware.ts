@@ -2,6 +2,7 @@ import express from "express";
 
 import logger from "./logger";
 
+// A simple middleware to print out http requests.
 const requestLogger = (
   request: express.Request,
   _response: express.Response,
@@ -11,6 +12,9 @@ const requestLogger = (
   next();
 };
 
+// Handles unknown endpoints in development and tests.
+// In production unknown endpoint is not possible, because
+// 404 is handled in frontend.
 const unknownEndpoint = (
   _request: express.Request,
   response: express.Response

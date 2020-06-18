@@ -24,6 +24,7 @@ app.use("/api/standings", standingsRoute);
 app.use("/api/teams", teamRoute);
 app.use("/api/servers", steamRoute);
 
+// Unlike in development, in production the backend serves the frontend
 if (config.ENV === "production") {
   app.use(express.static(path.join(__dirname, "client")));
   app.get("*", (_req, res) => {

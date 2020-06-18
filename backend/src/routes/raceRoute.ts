@@ -4,6 +4,7 @@ import config from "../config";
 
 const router = express.Router();
 
+// Get the complete race calendar
 router.get("/", async (_req, res, next) => {
   try {
     const raceCalendar = await calendarService.getRaceCalendar();
@@ -13,6 +14,7 @@ router.get("/", async (_req, res, next) => {
   }
 });
 
+// Get a single race
 router.get("/:id", async (req, res, next) => {
   try {
     const calendar = await calendarService.getRaceCalendar();
@@ -27,12 +29,15 @@ router.get("/:id", async (req, res, next) => {
     const seasonData = await eventService.getSeasonData(calendarEvent.seasonId);
 
     if (calendarEvent.writtenResults) {
+      // If written results are present, no stat calculation is needed and therefore
+      // the data returned is different.
       const mergedData = eventService.mergeRaceData(calendarEvent, {
         seasonData,
       });
 
       return res.status(200).json(mergedData);
     } else {
+      // Returns regular race data with stat tables
       const raceData = await eventService.getRaceData(req.params.id);
       const mergedData = eventService.mergeRaceData(calendarEvent, {
         seasonData,
@@ -45,6 +50,8 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// An endpoint to check draws in the eventDetails sheet.
+// Works only if the secret hash is provided.
 router.get("/update/:hash", async (req, res, next) => {
   try {
     if (req.params.hash !== config.STANDINGS_UPDATE_HASH) {

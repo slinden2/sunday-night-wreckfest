@@ -4,6 +4,7 @@ import config from "../config";
 
 const router = express.Router();
 
+// Get all standings
 router.get("/", async (_req, res, next) => {
   try {
     const standings = await standingsService.getStandings();
@@ -13,6 +14,8 @@ router.get("/", async (_req, res, next) => {
   }
 });
 
+// An endpoint for updating the stadings sheet in the DB.
+// Works only if the secret hash is provided.
 router.get("/update/:hash", async (req, res, next) => {
   try {
     if (req.params.hash !== config.STANDINGS_UPDATE_HASH) {

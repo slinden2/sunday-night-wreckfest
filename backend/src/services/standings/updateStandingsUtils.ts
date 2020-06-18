@@ -9,6 +9,8 @@ import { IDriverSeasonRaceData, IRaceCalendarEvent } from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import config from "../../config";
 
+// Updates the points of an existing standings row and adds the
+// corrisponding event to the event string
 export const updateRow = (driverRow: any, driver: IDriverSeasonRaceData) => {
   driverRow.points = Number(driverRow.points);
   driverRow.points += Number(driver.seasonPoints);
@@ -29,6 +31,7 @@ export const updateRow = (driverRow: any, driver: IDriverSeasonRaceData) => {
   return driverRow;
 };
 
+// Get row by season and driver ids
 export const getDriverRow = (
   seasonId: string,
   driverId: string,
@@ -39,6 +42,8 @@ export const getDriverRow = (
   );
 };
 
+// Handles the insertion of a new race into the standings sheet
+// either by creating a new row or updating an existing one.
 export const addRaceToStandings = async (
   event: IRaceCalendarEvent,
   raceData: IDriverSeasonRaceData[]
@@ -84,6 +89,10 @@ export const addRaceToStandings = async (
   }
 };
 
+// Updates the power limit after updating the standings for a specific event.
+// First three drivers of the standings get power limitations.
+// Also if the winner of the previous event is not in top-3, he also
+// gets limited power like the third driver of the stadings.
 export const updatePowerLimit = async (seasonId: string, winnerId: string) => {
   const standings = await getSheetAndRows("standings");
   const eventRows = [...standings.rows].filter(

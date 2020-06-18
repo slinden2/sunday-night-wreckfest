@@ -3,6 +3,7 @@ import { teamService } from "../services";
 
 const router = express.Router();
 
+// Get all teams
 router.get("/", async (_req, res, next) => {
   try {
     const teams = await teamService.getTeams();

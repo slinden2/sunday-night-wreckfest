@@ -3,6 +3,7 @@ import { steamService } from "../services";
 
 const router = express.Router();
 
+// Get all available SNW servers
 router.get("/", async (_req, res, next) => {
   try {
     const servers = await steamService.getSNWServers();

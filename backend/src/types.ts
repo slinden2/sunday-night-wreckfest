@@ -1,3 +1,4 @@
+// Supported video services needed for parsing video id's/slugs from the DB.
 export enum VideoService {
   youtube = "youtube",
   twitch = "twitch",
@@ -9,6 +10,7 @@ export type VideoType = {
   id: string;
 };
 
+// Type of raceCalendar rows
 export interface IRaceCalendarEvent {
   seasonId: string;
   seasonName: string;
@@ -44,6 +46,7 @@ export interface IBaseDriverRaceData {
   isProcessed: boolean;
 }
 
+// Type for eventDetails row
 export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   qTime: string;
   group: RaceGroup;
@@ -53,6 +56,7 @@ export interface IDriverSeasonRaceData extends IBaseDriverRaceData {
   drawPosition?: number;
 }
 
+// Type for a single race. Used to display data on the race specific page.
 export interface IRaceDetails extends IRaceCalendarEvent {
   description?: string;
   cars?: string[];
@@ -60,6 +64,7 @@ export interface IRaceDetails extends IRaceCalendarEvent {
   details?: IDriverSeasonRaceData[];
 }
 
+// Wreckfest mod type.
 export type Mod = {
   name: string;
   id: number;
@@ -73,6 +78,8 @@ export interface ISeasonData {
   mods?: Mod[];
 }
 
+// Data acquired from the Steam API.
+// The API response is an array of this type.
 export interface IWFServerDataRaw {
   addr: string;
   gameport: number;
@@ -93,6 +100,7 @@ export interface IWFServerDataRaw {
   gametype: string;
 }
 
+// Prettified server data type for usage on site
 export interface IWFServerData {
   name: string;
   players: number;

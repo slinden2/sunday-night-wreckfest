@@ -1,8 +1,13 @@
+/* 
+Util functions for interacting with the Google Sheets DB
+*/
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import config from "../config";
 import { getSimpleTime, sleep } from "../utils/misc";
 
+// Get the document containing the SNW DB.
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
   await doc.useServiceAccountAuth({
@@ -32,6 +37,7 @@ const sheetMap: ISheetMap = {
   drivers: 1062100406,
 };
 
+// Get a specific sheet meta data and its rows in an object.
 export const getSheetAndRows = async (
   sheetName: string
 ): Promise<ISheetAndRows> => {
@@ -42,6 +48,8 @@ export const getSheetAndRows = async (
   return { sheet, rows };
 };
 
+// Makes a bakcup of a certain sheet.
+// Used for example to backing up standings sheet  before updating them.
 export const makeBackup = async (sheetName: string) => {
   const doc = await getDocument();
 

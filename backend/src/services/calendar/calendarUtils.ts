@@ -9,6 +9,7 @@ import {
 } from "../helpers";
 import { IRaceCalendarEvent } from "../../types";
 
+// Parses a calendar row and converts it to the correct type
 export const toRaceCalendarEvents = (
   rawRows: any
 ): Array<IRaceCalendarEvent> => {

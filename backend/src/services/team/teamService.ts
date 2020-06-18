@@ -2,6 +2,7 @@ import { getSheetAndRows } from "../googleSheetsUtils";
 import { toDriver, extractTeamsFromDrivers } from "./teamUtils";
 import { Team } from "../../types";
 
+// Get all teams sorted alphabetically
 export const getTeams = async (): Promise<Team[]> => {
   const driverSheet = await getSheetAndRows("drivers");
   const drivers = toDriver(driverSheet.rows);

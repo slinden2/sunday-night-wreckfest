@@ -1,3 +1,8 @@
+/* 
+Script for creating the production bundle to run it locally.
+Usually the production bundle is created in the CI, so this is not needed.
+*/
+
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 

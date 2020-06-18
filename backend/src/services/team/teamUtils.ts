@@ -1,6 +1,7 @@
 import { Driver, Team } from "../../types";
 import { parseDriverId, parseString } from "../helpers";
 
+// Parse drivers from drivers sheet
 export const toDriver = (rawRows: any[]): Driver[] => {
   const cleanRows: Driver[] = [];
 
@@ -19,6 +20,7 @@ export const toDriver = (rawRows: any[]): Driver[] => {
   return cleanRows;
 };
 
+// Get team data from driver rows
 export const extractTeamsFromDrivers = (drivers: Driver[]): Team[] => {
   const driversPerTeam = drivers.reduce<Team[]>((acc, cur) => {
     if (!cur.team) return acc;
