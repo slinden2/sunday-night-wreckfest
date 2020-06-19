@@ -18,10 +18,10 @@ const config_1 = __importDefault(require("../config"));
 const redis = new ioredis_1.default(config_1.default.REDIS_URL);
 exports.updateCache = () => __awaiter(void 0, void 0, void 0, function* () {
     const raceCalendar = yield services_1.calendarService.getRaceCalendar();
-    yield redis.setex("races", 320, JSON.stringify(raceCalendar));
+    yield redis.setex("/api/races", 320, JSON.stringify(raceCalendar));
     const standings = yield services_1.standingsService.getStandings();
-    yield redis.setex("standings", 320, JSON.stringify(standings));
+    yield redis.setex("/api/standings", 320, JSON.stringify(standings));
     const teams = yield services_1.teamService.getTeams();
-    yield redis.setex("teams", 320, JSON.stringify(teams));
+    yield redis.setex("/api/teams", 320, JSON.stringify(teams));
 });
 //# sourceMappingURL=index.js.map
