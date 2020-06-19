@@ -13,12 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const ioredis_1 = __importDefault(require("ioredis"));
 const services_1 = require("../services");
 const config_1 = __importDefault(require("../config"));
 const router = express_1.default.Router();
-router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const redis = new ioredis_1.default(config_1.default.REDIS_URL);
+router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const raceCalendar = yield services_1.calendarService.getRaceCalendar();
+        yield redis.setex(req.baseUrl, 600, JSON.stringify(raceCalendar));
         return res.status(200).json(raceCalendar);
     }
     catch (err) {

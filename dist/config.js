@@ -17,6 +17,8 @@ const STEAM_API_KEY = process.env.STEAM_API_KEY;
 const STEAM_ID = Number(process.env.STEAM_ID);
 const LABBE_DOMAIN = process.env.LABBE_DOMAIN;
 const WF_SERVER_PORT_ARRAY = [33544, 33541, 33542, 33543];
+const REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1:6379";
+const CACHED_ROUTES = ["/api/races", "/api/standings", "/api/teams"];
 exports.default = {
     ENV,
     PORT,
@@ -29,5 +31,7 @@ exports.default = {
     STEAM_ID,
     LABBE_DOMAIN,
     WF_SERVER_PORT_ARRAY,
+    REDIS_URL,
+    CACHED_ROUTES,
 };
 //# sourceMappingURL=config.js.map
