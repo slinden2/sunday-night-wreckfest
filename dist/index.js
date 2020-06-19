@@ -13,7 +13,9 @@ const server = http_1.default.createServer(app_1.default);
 server.listen(config_1.default.PORT, () => {
     logger_1.default.info(`Server running on port ${config_1.default.PORT}`);
     node_cron_1.default.schedule("5 * * * *", () => {
+        logger_1.default.info("Cron started");
         jobs_1.updateCache().catch(err => logger_1.default.error(err));
+        logger_1.default.info("Cron finished");
     });
 });
 //# sourceMappingURL=index.js.map
