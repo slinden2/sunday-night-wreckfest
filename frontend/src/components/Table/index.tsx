@@ -94,8 +94,6 @@ const Table = ({ data, headers, headerMap }: Props) => {
         headerMap[header].dataIndex !== undefined
     );
 
-  console.log(orderedHeaders);
-
   return (
     <Container>
       <ScrollContainer>
