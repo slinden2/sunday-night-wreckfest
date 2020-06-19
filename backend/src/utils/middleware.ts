@@ -4,7 +4,7 @@ import Redis from "ioredis";
 import logger from "./logger";
 import config from "../config";
 
-const redis = new Redis(config.REDIS_PORT, config.REDIS_HOST);
+const redis = new Redis(config.REDIS_URL);
 
 // A simple middleware to print out http requests.
 const requestLogger = (

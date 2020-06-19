@@ -4,7 +4,7 @@ import { calendarService, eventService } from "../services";
 import config from "../config";
 
 const router = express.Router();
-const redis = new Redis(config.REDIS_PORT, config.REDIS_HOST);
+const redis = new Redis(config.REDIS_URL);
 
 // Get the complete race calendar
 router.get("/", async (req, res, next) => {

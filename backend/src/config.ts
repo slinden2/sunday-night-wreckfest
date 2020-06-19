@@ -39,8 +39,7 @@ const LABBE_DOMAIN: string | undefined = process.env.LABBE_DOMAIN;
 const WF_SERVER_PORT_ARRAY: number[] = [33544, 33541, 33542, 33543];
 
 // REDIS CONFIG
-const REDIS_HOST: string = process.env.REDIS_HOST || "127.0.0.1";
-const REDIS_PORT: number = Number(process.env.REDIS_PORT) || 6379;
+const REDIS_URL: string = process.env.REDIS_URL || "redis://127.0.0.1:6379";
 const CACHED_ROUTES: string[] = ["/api/races", "/api/standings", "/api/teams"];
 
 export default {
@@ -55,7 +54,6 @@ export default {
   STEAM_ID,
   LABBE_DOMAIN,
   WF_SERVER_PORT_ARRAY,
-  REDIS_HOST,
-  REDIS_PORT,
+  REDIS_URL,
   CACHED_ROUTES,
 };

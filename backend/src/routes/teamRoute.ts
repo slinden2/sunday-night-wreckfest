@@ -4,7 +4,7 @@ import { teamService } from "../services";
 import config from "../config";
 
 const router = express.Router();
-const redis = new Redis(config.REDIS_PORT, config.REDIS_HOST);
+const redis = new Redis(config.REDIS_URL);
 
 // Get all teams
 router.get("/", async (req, res, next) => {
