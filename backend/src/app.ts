@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import morgan from "morgan";
 import "source-map-support/register";
 
 import { raceRoute, standingsRoute, steamRoute, teamRoute } from "./routes/";
@@ -11,7 +12,7 @@ import config from "./config";
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(middleware.requestLogger);
+app.use(morgan("short"));
 app.use(middleware.cache);
 
 if (config.ENV === "test" || config.ENV === "CI") {
