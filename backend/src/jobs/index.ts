@@ -6,11 +6,11 @@ const redis = new Redis(config.REDIS_URL);
 
 export const updateCache = async () => {
   const raceCalendar = await calendarService.getRaceCalendar();
-  await redis.setex("races", 320, JSON.stringify(raceCalendar));
+  await redis.setex("/api/races", 320, JSON.stringify(raceCalendar));
 
   const standings = await standingsService.getStandings();
-  await redis.setex("standings", 320, JSON.stringify(standings));
+  await redis.setex("/api/standings", 320, JSON.stringify(standings));
 
   const teams = await teamService.getTeams();
-  await redis.setex("teams", 320, JSON.stringify(teams));
+  await redis.setex("/api/teams", 320, JSON.stringify(teams));
 };
