@@ -4,13 +4,13 @@ import { calendarService, eventService } from "../services";
 import config from "../config";
 
 const router = express.Router();
-const redis = new Redis();
+const redis = new Redis(config.REDIS_PORT, config.REDIS_HOST);
 
 // Get the complete race calendar
-router.get("/", async (_req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const raceCalendar = await calendarService.getRaceCalendar();
-    await redis.setex("races", 600, JSON.stringify(raceCalendar));
+    await redis.setex(req.baseUrl, 600, JSON.stringify(raceCalendar));
 
     return res.status(200).json(raceCalendar);
   } catch (err) {

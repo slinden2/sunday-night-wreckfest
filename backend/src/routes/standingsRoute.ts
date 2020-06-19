@@ -4,13 +4,13 @@ import { standingsService } from "../services";
 import config from "../config";
 
 const router = express.Router();
-const redis = new Redis();
+const redis = new Redis(config.REDIS_PORT, config.REDIS_HOST);
 
 // Get all standings
-router.get("/", async (_req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const standings = await standingsService.getStandings();
-    await redis.setex("standings", 600, JSON.stringify(standings));
+    await redis.setex(req.baseUrl, 600, JSON.stringify(standings));
 
     res.status(200).json(standings);
   } catch (err) {
