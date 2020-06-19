@@ -1,6 +1,10 @@
 import express from "express";
+import Redis from "ioredis";
 
 import logger from "./logger";
+import config from "../config";
+
+const redis = new Redis();
 
 // A simple middleware to print out http requests.
 const requestLogger = (
@@ -37,8 +41,27 @@ const errorHandler = (
   next(error);
 };
 
+const cache = async (
+  request: express.Request,
+  response: express.Response,
+  next: express.NextFunction
+) => {
+  const cacheKey = request.path.split("/")[2];
+  if (config.CACHED_ROUTES.includes(cacheKey)) {
+    const data = await redis.get(cacheKey);
+    if (data !== null) {
+      response.status(200).json(JSON.parse(data));
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+};
+
 export default {
   requestLogger,
   unknownEndpoint,
   errorHandler,
+  cache,
 };

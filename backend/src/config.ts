@@ -38,6 +38,8 @@ const LABBE_DOMAIN: string | undefined = process.env.LABBE_DOMAIN;
 // obtained from the Steam API.
 const WF_SERVER_PORT_ARRAY: number[] = [33544, 33541, 33542, 33543];
 
+const CACHED_ROUTES: string[] = ["races", "standings", "teams"];
+
 export default {
   ENV,
   PORT,
@@ -50,4 +52,5 @@ export default {
   STEAM_ID,
   LABBE_DOMAIN,
   WF_SERVER_PORT_ARRAY,
+  CACHED_ROUTES,
 };

@@ -1,13 +1,17 @@
 import express from "express";
+import Redis from "ioredis";
 import { standingsService } from "../services";
 import config from "../config";
 
 const router = express.Router();
+const redis = new Redis();
 
 // Get all standings
 router.get("/", async (_req, res, next) => {
   try {
     const standings = await standingsService.getStandings();
+    await redis.setex("standings", 600, JSON.stringify(standings));
+
     res.status(200).json(standings);
   } catch (err) {
     next(err);
