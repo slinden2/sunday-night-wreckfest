@@ -14,6 +14,7 @@ const app = express_1.default();
 app.use(express_1.default.json());
 app.use(cors_1.default());
 app.use(middleware_1.default.requestLogger);
+app.use(middleware_1.default.cache);
 if (config_1.default.ENV === "test" || config_1.default.ENV === "CI") {
     app.get("/ping", (_req, res) => {
         res.send("pong");
