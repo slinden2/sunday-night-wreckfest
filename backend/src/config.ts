@@ -40,7 +40,6 @@ const WF_SERVER_PORT_ARRAY: number[] = [33544, 33541, 33542, 33543];
 
 // REDIS CONFIG
 const REDIS_URL: string = process.env.REDIS_URL || "redis://127.0.0.1:6379";
-const CACHED_ROUTES: string[] = ["/api/races", "/api/standings", "/api/teams"];
 
 export default {
   ENV,
@@ -55,5 +54,4 @@ export default {
   LABBE_DOMAIN,
   WF_SERVER_PORT_ARRAY,
   REDIS_URL,
-  CACHED_ROUTES,
 };

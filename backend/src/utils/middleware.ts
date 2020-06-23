@@ -46,13 +46,9 @@ const cache = async (
   response: express.Response,
   next: express.NextFunction
 ) => {
-  if (config.CACHED_ROUTES.includes(request.path)) {
-    const data = await redis.get(request.path);
-    if (data !== null) {
-      response.status(200).json(JSON.parse(data));
-    } else {
-      next();
-    }
+  const data = await redis.get(request.path);
+  if (data !== null) {
+    response.status(200).json(JSON.parse(data));
   } else {
     next();
   }

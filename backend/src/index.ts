@@ -11,7 +11,7 @@ const server = http.createServer(app);
 server.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`);
 
-  cron.schedule("(*/5 * * * *", () => {
+  cron.schedule("* 3 * * *", () => {
     updateCache().catch(err => logger.error(err));
   });
 });

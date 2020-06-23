@@ -11,6 +11,9 @@ import {
   getDrawsRaceCal,
   mergeRaceDataReturn2,
   toSeasonDataReturn,
+  toRaceCalendarEventsReturn,
+  getSeasonDataReturn,
+  getSingleRaceReturn,
 } from "../../utils/mockData";
 
 describe("eventService", () => {
@@ -74,6 +77,30 @@ describe("eventService", () => {
       expect(getRaceDataSpy).toBeCalledTimes(2);
       expect(getDrawsSpy).toBeCalledTimes(2);
       expect(getSheetAndRowsSpy).toBeCalledTimes(2);
+    });
+  });
+  describe("getSingleRace", () => {
+    beforeEach(() => {
+      jest
+        .spyOn(calendarService, "getRaceCalendar")
+        .mockImplementation(() => toPromise(toRaceCalendarEventsReturn));
+
+      jest
+        .spyOn(eventService, "getSeasonData")
+        .mockImplementation(() => toPromise(getSeasonDataReturn));
+
+      jest
+        .spyOn(eventService, "getRaceData")
+        .mockImplementation(() => toPromise(getRaceDataReturn));
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it("should return correct mockData", async () => {
+      const raceData = await eventService.getSingleRace("0401");
+      expect(raceData).toEqual(getSingleRaceReturn);
     });
   });
 });

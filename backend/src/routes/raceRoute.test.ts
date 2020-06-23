@@ -51,8 +51,8 @@ describe("GET /api/races", () => {
         .mockImplementation(() => toPromise(getSeasonDataReturn));
 
       jest.spyOn(eventService, "mergeRaceData").mockImplementation();
-
       jest.spyOn(eventService, "getRaceData").mockImplementation();
+      jest.spyOn(eventService, "getSingleRace").mockImplementation();
     });
 
     afterEach(() => {

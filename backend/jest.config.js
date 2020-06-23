@@ -13,4 +13,5 @@ module.exports = {
     },
   },
   coverageReporters: ["json", "lcov", "text", "clover"],
+  coveragePathIgnorePatterns: ["<rootDir>/src/jobs/"],
 };

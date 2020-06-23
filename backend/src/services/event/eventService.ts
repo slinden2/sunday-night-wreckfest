@@ -109,9 +109,38 @@ export const checkDraws = async () => {
   }
 };
 
+// Function to get all data for a single race. This is called from
+// the /api/races/:id route and also from the cache update script.
+export const getSingleRace = async (id: string) => {
+  const calendar = await calendarService.getRaceCalendar();
+  const calendarEvent = calendar.find(event => event.eventId === id);
+
+  if (!calendarEvent) {
+    throw new Error(`No event found with eventId ${id}`);
+  }
+
+  const seasonData = await getSeasonData(calendarEvent.seasonId);
+
+  if (calendarEvent.writtenResults) {
+    // If written results are present, no stat calculation is needed and therefore
+    // the data returned is different.
+    return mergeRaceData(calendarEvent, {
+      seasonData,
+    });
+  } else {
+    // Returns regular race data with stat tables
+    const raceData = await getRaceData(id);
+    return mergeRaceData(calendarEvent, {
+      seasonData,
+      raceData,
+    });
+  }
+};
+
 export default {
   getRaceData,
   mergeRaceData,
   checkDraws,
   getSeasonData,
+  getSingleRace,
 };

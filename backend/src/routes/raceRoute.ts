@@ -2,6 +2,7 @@ import express from "express";
 import Redis from "ioredis";
 import { calendarService, eventService } from "../services";
 import config from "../config";
+import { updateCache } from "../jobs";
 
 const router = express.Router();
 const redis = new Redis(config.REDIS_URL);
@@ -21,34 +22,8 @@ router.get("/", async (req, res, next) => {
 // Get a single race
 router.get("/:id", async (req, res, next) => {
   try {
-    const calendar = await calendarService.getRaceCalendar();
-    const calendarEvent = calendar.find(
-      event => event.eventId === req.params.id
-    );
-
-    if (!calendarEvent) {
-      throw new Error(`No event found with eventId ${req.params.id}`);
-    }
-
-    const seasonData = await eventService.getSeasonData(calendarEvent.seasonId);
-
-    if (calendarEvent.writtenResults) {
-      // If written results are present, no stat calculation is needed and therefore
-      // the data returned is different.
-      const mergedData = eventService.mergeRaceData(calendarEvent, {
-        seasonData,
-      });
-
-      return res.status(200).json(mergedData);
-    } else {
-      // Returns regular race data with stat tables
-      const raceData = await eventService.getRaceData(req.params.id);
-      const mergedData = eventService.mergeRaceData(calendarEvent, {
-        seasonData,
-        raceData,
-      });
-      return res.status(200).json(mergedData);
-    }
+    const raceData = await eventService.getSingleRace(req.params.id);
+    res.status(200).json(raceData);
   } catch (err) {
     return next(err);
   }
@@ -65,6 +40,21 @@ router.get("/update/:hash", async (req, res, next) => {
     res.status(200).json({
       message: "eventDetails successfully updated.",
     });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// An endpoint for manually updating the cache.
+router.get("/update-cache/:hash", async (req, res, next) => {
+  try {
+    if (req.params.hash !== config.STANDINGS_UPDATE_HASH) {
+      throw new Error("Invalid standings update hash");
+    }
+    res.status(200).json({
+      message: "Cache update started. This will take a while... (15-20min)",
+    });
+    await updateCache();
   } catch (err) {
     next(err);
   }
