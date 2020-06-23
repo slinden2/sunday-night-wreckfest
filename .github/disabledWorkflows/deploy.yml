@@ -6,7 +6,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     env:
       working-directory-be: ./backend
