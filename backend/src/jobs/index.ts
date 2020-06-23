@@ -8,12 +8,12 @@ import {
 import config from "../config";
 import { IRaceCalendarEvent } from "../types";
 import { sleep } from "../utils/misc";
+import logger from "../utils/logger";
 
 const redis = new Redis(config.REDIS_URL);
 
 const updateRaceCache = async (calendar: IRaceCalendarEvent[]) => {
-  for (const event of calendar) {
-    console.log(event.eventId);
+  for (const event of calendar.reverse()) {
     const raceData = await eventService.getSingleRace(event.eventId);
     await redis.setex(
       `/api/races/${event.eventId}`,
@@ -21,18 +21,23 @@ const updateRaceCache = async (calendar: IRaceCalendarEvent[]) => {
       JSON.stringify(raceData)
     );
     await sleep(10000);
+    logger.info(`updateRaceCache - ${event.eventId} done.`);
   }
 };
 
 export const updateCache = async () => {
+  logger.info("updateCache - Cache update started.");
   const raceCalendar = await calendarService.getRaceCalendar();
   await redis.setex("/api/races", 86400, JSON.stringify(raceCalendar));
+  logger.info("updateCache - raceCalendar done.");
 
   const standings = await standingsService.getStandings();
   await redis.setex("/api/standings", 86400, JSON.stringify(standings));
+  logger.info("updateCache - standings done.");
 
   const teams = await teamService.getTeams();
   await redis.setex("/api/teams", 86400, JSON.stringify(teams));
+  logger.info("updateCache - teams done.");
 
   await updateRaceCache(raceCalendar);
 };
