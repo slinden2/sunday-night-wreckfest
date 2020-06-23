@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const ioredis_1 = __importDefault(require("ioredis"));
 const services_1 = require("../services");
 const config_1 = __importDefault(require("../config"));
+const jobs_1 = require("../jobs");
 const router = express_1.default.Router();
 const redis = new ioredis_1.default(config_1.default.REDIS_URL);
 router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,26 +31,8 @@ router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 }));
 router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const calendar = yield services_1.calendarService.getRaceCalendar();
-        const calendarEvent = calendar.find(event => event.eventId === req.params.id);
-        if (!calendarEvent) {
-            throw new Error(`No event found with eventId ${req.params.id}`);
-        }
-        const seasonData = yield services_1.eventService.getSeasonData(calendarEvent.seasonId);
-        if (calendarEvent.writtenResults) {
-            const mergedData = services_1.eventService.mergeRaceData(calendarEvent, {
-                seasonData,
-            });
-            return res.status(200).json(mergedData);
-        }
-        else {
-            const raceData = yield services_1.eventService.getRaceData(req.params.id);
-            const mergedData = services_1.eventService.mergeRaceData(calendarEvent, {
-                seasonData,
-                raceData,
-            });
-            return res.status(200).json(mergedData);
-        }
+        const raceData = yield services_1.eventService.getSingleRace(req.params.id);
+        res.status(200).json(raceData);
     }
     catch (err) {
         return next(err);
@@ -64,6 +47,20 @@ router.get("/update/:hash", (req, res, next) => __awaiter(void 0, void 0, void 0
         res.status(200).json({
             message: "eventDetails successfully updated.",
         });
+    }
+    catch (err) {
+        next(err);
+    }
+}));
+router.get("/update-cache/:hash", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (req.params.hash !== config_1.default.STANDINGS_UPDATE_HASH) {
+            throw new Error("Invalid standings update hash");
+        }
+        res.status(200).json({
+            message: "Cache update started. This will take a while... (15-20min)",
+        });
+        yield jobs_1.updateCache();
     }
     catch (err) {
         next(err);

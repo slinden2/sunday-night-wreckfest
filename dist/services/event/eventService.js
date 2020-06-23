@@ -71,10 +71,31 @@ exports.checkDraws = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
 });
+exports.getSingleRace = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const calendar = yield __1.calendarService.getRaceCalendar();
+    const calendarEvent = calendar.find(event => event.eventId === id);
+    if (!calendarEvent) {
+        throw new Error(`No event found with eventId ${id}`);
+    }
+    const seasonData = yield exports.getSeasonData(calendarEvent.seasonId);
+    if (calendarEvent.writtenResults) {
+        return exports.mergeRaceData(calendarEvent, {
+            seasonData,
+        });
+    }
+    else {
+        const raceData = yield exports.getRaceData(id);
+        return exports.mergeRaceData(calendarEvent, {
+            seasonData,
+            raceData,
+        });
+    }
+});
 exports.default = {
     getRaceData: exports.getRaceData,
     mergeRaceData: exports.mergeRaceData,
     checkDraws: exports.checkDraws,
     getSeasonData: exports.getSeasonData,
+    getSingleRace: exports.getSingleRace,
 };
 //# sourceMappingURL=eventService.js.map

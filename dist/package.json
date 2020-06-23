@@ -16,7 +16,8 @@
     "view:coverage": "serve coverage/lcov-report",
     "clean": "RD /S /Q coverage src\\build",
     "lint": "eslint --ext .ts",
-    "jest:clear_cache": "jest --clearCache"
+    "jest:clear_cache": "jest --clearCache",
+    "updateCache": "cross-env NODE_ENV=development ts-node src/jobs/index.ts"
   },
   "author": "Samu Linden",
   "license": "ISC",

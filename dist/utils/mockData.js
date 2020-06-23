@@ -478,4 +478,47 @@ exports.teamData = [
         driver1: "Test Driver3",
     },
 ];
+exports.getSingleRaceReturn = {
+    seasonId: "0400",
+    seasonName: "SEASON 4",
+    eventId: "0401",
+    isReady: true,
+    isCompleted: true,
+    isProcessed: true,
+    hasPowerLimit: true,
+    date: "2020-01-12",
+    trackName: "Boulder Bank Full Circuit 2 No X",
+    qLaps: 6,
+    raceLaps: 4,
+    description: "<p>Test</p>\n",
+    cars: ["Test1, Test2"],
+    mods: [
+        { name: "TestMod1", id: 123456 },
+        { name: "TestMod2", id: 234567 },
+    ],
+    details: [
+        {
+            driverId: "0001",
+            driverName: "Test Driver",
+            eventId: "0401",
+            isReady: true,
+            isProcessed: true,
+            qTime: "01:01,500",
+            group: types_1.RaceGroup.A,
+            heatPositions: [1, 2, 3, 4, 5],
+            seasonPoints: 100,
+        },
+        {
+            driverId: "0002",
+            driverName: "Test Driver2",
+            eventId: "0401",
+            isReady: true,
+            isProcessed: true,
+            qTime: "01:00,500",
+            group: types_1.RaceGroup.A,
+            heatPositions: [2, 3, 4, 5, 6],
+            seasonPoints: 95,
+        },
+    ],
+};
 //# sourceMappingURL=mockData.js.map

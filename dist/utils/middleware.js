@@ -33,14 +33,9 @@ const errorHandler = (error, _request, response, next) => {
     next(error);
 };
 const cache = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    if (config_1.default.CACHED_ROUTES.includes(request.path)) {
-        const data = yield redis.get(request.path);
-        if (data !== null) {
-            response.status(200).json(JSON.parse(data));
-        }
-        else {
-            next();
-        }
+    const data = yield redis.get(request.path);
+    if (data !== null) {
+        response.status(200).json(JSON.parse(data));
     }
     else {
         next();
