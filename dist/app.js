@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
+const morgan_1 = __importDefault(require("morgan"));
 require("source-map-support/register");
 const routes_1 = require("./routes/");
 const middleware_1 = __importDefault(require("./utils/middleware"));
@@ -13,7 +14,7 @@ const config_1 = __importDefault(require("./config"));
 const app = express_1.default();
 app.use(express_1.default.json());
 app.use(cors_1.default());
-app.use(middleware_1.default.requestLogger);
+app.use(morgan_1.default("short"));
 app.use(middleware_1.default.cache);
 if (config_1.default.ENV === "test" || config_1.default.ENV === "CI") {
     app.get("/ping", (_req, res) => {
