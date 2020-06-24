@@ -4,7 +4,6 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
     "build:server": "tsc -p tsconfig.build.json",
     "build:watch": "onchange \"src/**/*.ts\" -- npm run build",
     "build:bundle": "node ./scripts/create-production-bundle.js",
@@ -14,10 +13,9 @@
     "test:watch": "cross-env NODE_ENV=test jest --coverage --watchAll --detectOpenHandles --runInBand",
     "test:single": "cross-env NODE_ENV=test jest --verbose -t",
     "view:coverage": "serve coverage/lcov-report",
-    "clean": "RD /S /Q coverage src\\build",
+    "clean": "RD /S /Q coverage src\\backend\\build",
     "lint": "eslint --ext .ts",
-    "jest:clear_cache": "jest --clearCache",
-    "updateCache": "cross-env NODE_ENV=development ts-node src/jobs/index.ts"
+    "jest:clear_cache": "jest --clearCache"
   },
   "author": "Samu Linden",
   "license": "ISC",
