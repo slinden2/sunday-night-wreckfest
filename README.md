@@ -36,4 +36,4 @@ The client side of the project is a React app that uses Typescript and hooks. St
 
 ## Dev notes
 
-There are some notes and instructions in the `docs` folder.
+There are some [notes](docs/notes.md) in the `docs` folder.

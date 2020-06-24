@@ -42,3 +42,7 @@ The standings table in the DB spreadsheet is updated by sending a `GET` request 
 ## DB usage
 
 The usage of the DB spreadsheet is described in the spreadsheet itself.
+
+## Deployment
+
+There is a GitHub Action that takes care of the deployment. When there is a push or an pull request to the `master` branch, the action will run. The actions runs all the backend tests, creates the production bundle, pushed it back to the repo and also to the production server (dokku).
