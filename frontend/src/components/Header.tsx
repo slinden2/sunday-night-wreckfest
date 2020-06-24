@@ -21,7 +21,7 @@ const Container = styled.h1`
     border-style: solid solid none solid;
   }
 
-  ${props => props.theme.media.customMax(1020)} {
+  ${props => props.theme.media.customMax(1250)} {
     flex-direction: column;
   }
 `;
@@ -33,7 +33,7 @@ const Logo = styled.img`
 `;
 
 const ServerContainer = styled.table`
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 600;
 
   thead th:first-child {
@@ -45,13 +45,13 @@ const ServerContainer = styled.table`
     text-align: center;
   }
 
-  ${props => props.theme.media.customMin(1020)} {
+  ${props => props.theme.media.customMin(1250)} {
     position: absolute;
     right: 0;
     bottom: 1rem;
   }
 
-  ${props => props.theme.media.customMax(1020)} {
+  ${props => props.theme.media.customMax(1250)} {
     margin-bottom: 1rem;
   }
 
