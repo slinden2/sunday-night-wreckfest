@@ -22,3 +22,23 @@
 - `npm start`: Starts the React dev server
 - `npm run build`: Builds the React projects
 - `npm run lint`: Runs the linter
+
+## Special endpoints
+
+### Cache updates
+
+By default the Redis cache is set to update every night at 3 o'clock by running `updateCache` from `backend/src/jobs/`. This is done via cronjob defined in the server entry point in the `listen` function.
+
+If the DB spreadsheet is modified, the cache can be updated also manually by sending a `GET` request to `/api/races/updateCache/:hash`.
+
+### Draw checking
+
+When the event details are filled after an event, the draw checking has to be done before standings calculation. The draw checking is done by sending a `GET` request to `/api/races/update/:hash`. The draw condition is marked in the `drawPosition` column and must be solved manually.
+
+### Standings calculation
+
+The standings table in the DB spreadsheet is updated by sending a `GET` request to `/api/standings/update/:hash`. The event details must be correctly filled and `isReady` and `isCompleted` must be set to `1` before the calculation.
+
+## DB usage
+
+The usage of the DB spreadsheet is described in the spreadsheet itself.
