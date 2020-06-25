@@ -19,8 +19,10 @@ exports.getRaceCalendar = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.setIsProcessedTrue = (eventId) => __awaiter(void 0, void 0, void 0, function* () {
     const raceCalendar = yield googleSheetsUtils_1.getSheetAndRows("raceCalendar");
     const processedRow = raceCalendar.rows.find(row => row.eventId === eventId);
-    processedRow.isProcessed = "1";
-    yield processedRow.save();
+    if (processedRow) {
+        processedRow.isProcessed = "1";
+        yield processedRow.save();
+    }
 });
 exports.default = {
     getRaceCalendar: exports.getRaceCalendar,

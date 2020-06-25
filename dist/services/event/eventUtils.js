@@ -36,8 +36,8 @@ exports.toIDriverSeasonRaceData = (driverData) => {
 exports.toDriverRaceDetails = (eventId, rawRows) => {
     const cleanRows = [];
     rawRows
-        .filter((row) => row.eventId === eventId)
-        .forEach((row) => {
+        .filter(row => row.eventId === eventId)
+        .forEach(row => {
         const driverDetail = exports.toIDriverSeasonRaceData(row);
         cleanRows.push(driverDetail);
     });
@@ -57,7 +57,7 @@ exports.getDraws = (data) => {
     return draws;
 };
 exports.toSeasonDetails = (id, seasonData) => {
-    const rawSeason = seasonData.find((season) => season.seasonId === id);
+    const rawSeason = seasonData.find(season => season.seasonId === id);
     if (!rawSeason) {
         return undefined;
     }

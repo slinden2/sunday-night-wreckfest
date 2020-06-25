@@ -9,8 +9,18 @@ dotenv_1.default.config();
 const ENV = process.env.NODE_ENV;
 const PORT = Number(process.env.PORT) || 3001;
 const GS_ID = process.env.GS_ID;
+if (!GS_ID) {
+    throw new Error("Missing environment var: GS_ID");
+}
 const GS_SERVICE_ACCOUNT_EMAIL = process.env.GS_SERVICE_ACCOUNT_EMAIL;
 const GS_PRIVATE_KEY = (_a = process.env.GS_PRIVATE_KEY) === null || _a === void 0 ? void 0 : _a.split("\\n").join("\n");
+if (!GS_SERVICE_ACCOUNT_EMAIL || !GS_PRIVATE_KEY) {
+    throw new Error("Missing environment var: GS_SERVICE_ACCOUNT_EMAIL or GS_PRIVATE_KEY");
+}
+const GS_CREDENTIALS = {
+    client_email: GS_SERVICE_ACCOUNT_EMAIL,
+    private_key: GS_PRIVATE_KEY,
+};
 const STANDINGS_UPDATE_HASH = process.env.STANDINGS_UPDATE_HASH;
 const CHECK_DRAW_TEXT = "X";
 const STEAM_API_KEY = process.env.STEAM_API_KEY;
@@ -22,8 +32,7 @@ exports.default = {
     ENV,
     PORT,
     GS_ID,
-    GS_SERVICE_ACCOUNT_EMAIL,
-    GS_PRIVATE_KEY,
+    GS_CREDENTIALS,
     STANDINGS_UPDATE_HASH,
     CHECK_DRAW_TEXT,
     STEAM_API_KEY,

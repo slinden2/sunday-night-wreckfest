@@ -48,7 +48,7 @@ exports.addRaceToStandings = (event, raceData) => __awaiter(void 0, void 0, void
             continue;
         }
         const updatedDriverRow = exports.updateRow(driverRow, driver);
-        rowsToUpdate.push(updatedDriverRow.save({ raw: true }));
+        rowsToUpdate.push(updatedDriverRow.save());
     }
     if (config_1.default.ENV !== "test") {
         if (newRows.length) {
@@ -64,6 +64,9 @@ exports.updatePowerLimit = (seasonId, winnerId) => __awaiter(void 0, void 0, voi
     const eventRows = [...standings.rows].filter(row => row.seasonId === seasonId);
     const rowsOrdered = eventRows.sort((a, b) => Number(b.points) - Number(a.points));
     const winnerRow = rowsOrdered.find(row => row.driverId === winnerId);
+    if (!winnerRow) {
+        throw new Error("updatePowerLimit - No winner found");
+    }
     winnerRow.powerLimit = "C161";
     rowsOrdered[0].powerLimit = "C155";
     rowsOrdered[1].powerLimit = "C158";
@@ -73,7 +76,7 @@ exports.updatePowerLimit = (seasonId, winnerId) => __awaiter(void 0, void 0, voi
             row.powerLimit = "";
         }
     });
-    const rowsToUpdate = rowsOrdered.map(row => row.save({ raw: true }));
+    const rowsToUpdate = rowsOrdered.map(row => row.save());
     yield Promise.all(rowsToUpdate);
 });
 exports.addUpdateTime = () => __awaiter(void 0, void 0, void 0, function* () {

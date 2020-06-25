@@ -12,15 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { GoogleSpreadsheet } = require("google-spreadsheet");
+const google_spreadsheet_1 = require("google-spreadsheet");
 const config_1 = __importDefault(require("../config"));
 const misc_1 = require("../utils/misc");
 exports.getDocument = () => __awaiter(void 0, void 0, void 0, function* () {
-    const doc = new GoogleSpreadsheet(config_1.default.GS_ID);
-    yield doc.useServiceAccountAuth({
-        client_email: config_1.default.GS_SERVICE_ACCOUNT_EMAIL,
-        private_key: config_1.default.GS_PRIVATE_KEY,
-    });
+    const doc = new google_spreadsheet_1.GoogleSpreadsheet(config_1.default.GS_ID);
+    yield doc.useServiceAccountAuth(config_1.default.GS_CREDENTIALS);
     yield doc.loadInfo();
     return doc;
 });
@@ -48,7 +45,7 @@ exports.makeBackup = (sheetName) => __awaiter(void 0, void 0, void 0, function* 
     yield misc_1.sleep(2000);
     yield newSheet.setHeaderRow(oldSheet.headerValues);
     const rows = yield oldSheet.getRows();
-    const rawRows = rows.map((row) => row._rawData);
+    const rawRows = rows.map(row => row._rawData);
     yield newSheet.addRows(rawRows);
 });
 //# sourceMappingURL=googleSheetsUtils.js.map

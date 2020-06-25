@@ -62,8 +62,10 @@ exports.checkDraws = () => __awaiter(void 0, void 0, void 0, function* () {
                     rowsToVerify.forEach(driver => {
                         const rowToUpdate = eventDetails.rows.find(row => row.eventId === driver.eventId &&
                             row.driverId === driver.driverId);
-                        rowToUpdate.drawPosition = config_1.default.CHECK_DRAW_TEXT;
-                        promises.push(rowToUpdate.save({ raw: true }));
+                        if (rowToUpdate) {
+                            rowToUpdate.drawPosition = config_1.default.CHECK_DRAW_TEXT;
+                            promises.push(rowToUpdate.save());
+                        }
                     });
                     yield Promise.all(promises);
                 }
