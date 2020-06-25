@@ -6,6 +6,7 @@ import {
   parseDriverId,
   parseNumber,
 } from "../helpers";
+import { GoogleSpreadsheetRow } from "google-spreadsheet";
 
 export interface IStandingRow {
   seasonId: string;
@@ -20,7 +21,9 @@ export interface IStandingRow {
 }
 
 // Convert standings raw data to IStandingRow type
-export const toStandingRows = (rawRows: any[]): IStandingRow[] => {
+export const toStandingRows = (
+  rawRows: GoogleSpreadsheetRow[]
+): IStandingRow[] => {
   const cleanRows: IStandingRow[] = [];
 
   rawRows.forEach(row => {

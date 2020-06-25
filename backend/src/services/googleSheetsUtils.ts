@@ -2,20 +2,18 @@
 Util functions for interacting with the Google Sheets DB
 */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { GoogleSpreadsheet } = require("google-spreadsheet");
+import {
+  GoogleSpreadsheet,
+  GoogleSpreadsheetWorksheet,
+  GoogleSpreadsheetRow,
+} from "google-spreadsheet";
 import config from "../config";
 import { getSimpleTime, sleep } from "../utils/misc";
 
 // Get the document containing the SNW DB.
 export const getDocument = async () => {
   const doc = new GoogleSpreadsheet(config.GS_ID);
-  await doc.useServiceAccountAuth({
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    client_email: config.GS_SERVICE_ACCOUNT_EMAIL,
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    private_key: config.GS_PRIVATE_KEY,
-  });
+  await doc.useServiceAccountAuth(config.GS_CREDENTIALS);
   await doc.loadInfo();
   return doc;
 };
@@ -25,8 +23,8 @@ interface ISheetMap {
 }
 
 export interface ISheetAndRows {
-  sheet: any;
-  rows: any[];
+  sheet: GoogleSpreadsheetWorksheet;
+  rows: GoogleSpreadsheetRow[];
 }
 
 const sheetMap: ISheetMap = {
@@ -70,6 +68,6 @@ export const makeBackup = async (sheetName: string) => {
 
   // Get old rows and add the raw data into the new sheet
   const rows = await oldSheet.getRows();
-  const rawRows = rows.map((row: any) => row._rawData);
+  const rawRows = rows.map(row => row._rawData);
   await newSheet.addRows(rawRows);
 };

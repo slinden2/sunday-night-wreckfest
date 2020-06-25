@@ -8,10 +8,14 @@ in the best possible way as the google-spreadsheet has no types.
 import { IDriverSeasonRaceData, IRaceCalendarEvent } from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import config from "../../config";
+import { GoogleSpreadsheetRow } from "google-spreadsheet";
 
 // Updates the points of an existing standings row and adds the
 // corrisponding event to the event string
-export const updateRow = (driverRow: any, driver: IDriverSeasonRaceData) => {
+export const updateRow = (
+  driverRow: GoogleSpreadsheetRow,
+  driver: IDriverSeasonRaceData
+) => {
   driverRow.points = Number(driverRow.points);
   driverRow.points += Number(driver.seasonPoints);
 
@@ -35,7 +39,7 @@ export const updateRow = (driverRow: any, driver: IDriverSeasonRaceData) => {
 export const getDriverRow = (
   seasonId: string,
   driverId: string,
-  rows: any[]
+  rows: GoogleSpreadsheetRow[]
 ) => {
   return rows.find(
     row => row.driverId === driverId && row.seasonId === seasonId
@@ -75,7 +79,7 @@ export const addRaceToStandings = async (
 
     const updatedDriverRow = updateRow(driverRow, driver);
 
-    rowsToUpdate.push(updatedDriverRow.save({ raw: true }));
+    rowsToUpdate.push(updatedDriverRow.save());
   }
 
   if (config.ENV !== "test") {
@@ -103,6 +107,10 @@ export const updatePowerLimit = async (seasonId: string, winnerId: string) => {
   );
 
   const winnerRow = rowsOrdered.find(row => row.driverId === winnerId);
+  if (!winnerRow) {
+    throw new Error("updatePowerLimit - No winner found");
+  }
+
   winnerRow.powerLimit = "C161";
 
   rowsOrdered[0].powerLimit = "C155";
@@ -115,7 +123,7 @@ export const updatePowerLimit = async (seasonId: string, winnerId: string) => {
     }
   });
 
-  const rowsToUpdate = rowsOrdered.map(row => row.save({ raw: true }));
+  const rowsToUpdate = rowsOrdered.map(row => row.save());
 
   await Promise.all(rowsToUpdate);
 };

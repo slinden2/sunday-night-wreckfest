@@ -10,14 +10,14 @@ import * as misc from "../../utils/misc";
 
 describe("standingsService", () => {
   describe("updateStandings", () => {
-    let getRaceCalendarSpy: any;
-    let makeBackupSpy: any;
-    let getRaceDataSpy: any;
-    let addRaceToStandingsSpy: any;
-    let updatePowerLimitSpy: any;
-    let setIsProcessedTrueSpy: any;
-    let addUpdateTimeSpy: any;
-    let sleepSpy: any;
+    let getRaceCalendarSpy: jest.SpyInstance;
+    let makeBackupSpy: jest.SpyInstance;
+    let getRaceDataSpy: jest.SpyInstance;
+    let addRaceToStandingsSpy: jest.SpyInstance;
+    let updatePowerLimitSpy: jest.SpyInstance;
+    let setIsProcessedTrueSpy: jest.SpyInstance;
+    let addUpdateTimeSpy: jest.SpyInstance;
+    let sleepSpy: jest.SpyInstance;
     beforeEach(() => {
       getRaceCalendarSpy = jest
         .spyOn(calendarService, "getRaceCalendar")

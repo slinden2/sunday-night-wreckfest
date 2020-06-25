@@ -35,7 +35,7 @@ describe("googleSheetsUtils", () => {
             sheetsById: {
               0: { getRows: sheetGetRowsSpy },
             },
-          })
+          } as any)
         );
     });
 

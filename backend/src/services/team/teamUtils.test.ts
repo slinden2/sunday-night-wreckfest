@@ -4,7 +4,7 @@ import { rawDriverData, driverData, teamData } from "../../utils/mockData";
 describe("teamUtils", () => {
   describe("toDriver", () => {
     it("should parse raw driver data correctly", () => {
-      expect(toDriver(rawDriverData)).toEqual(driverData);
+      expect(toDriver(rawDriverData as any[])).toEqual(driverData);
     });
   });
   describe("extractTeamsFromDrivers", () => {

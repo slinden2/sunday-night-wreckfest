@@ -98,8 +98,10 @@ export const checkDraws = async () => {
             );
             // A row that is in a draw situation will be marked in drawPosition column
             // for manual solving.
-            rowToUpdate.drawPosition = config.CHECK_DRAW_TEXT;
-            promises.push(rowToUpdate.save({ raw: true }));
+            if (rowToUpdate) {
+              rowToUpdate.drawPosition = config.CHECK_DRAW_TEXT;
+              promises.push(rowToUpdate.save());
+            }
           });
 
           await Promise.all(promises);

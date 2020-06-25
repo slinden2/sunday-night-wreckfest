@@ -3,6 +3,7 @@ import * as calendarUtils from "./calendarUtils";
 import { toPromise } from "../../utils/mockData";
 import { IRaceCalendarEvent } from "../../types";
 import { calendarService } from "..";
+import { GoogleSpreadsheetWorksheet } from "google-spreadsheet";
 
 describe("calendarService", () => {
   let getSheetAndRowsSpy: jest.SpyInstance;
@@ -14,8 +15,8 @@ describe("calendarService", () => {
       .spyOn(gsUtils, "getSheetAndRows")
       .mockImplementation(() =>
         toPromise({
-          sheet: {},
-          rows: [{ eventId: "0401", save: saveSpy }],
+          sheet: {} as GoogleSpreadsheetWorksheet,
+          rows: [{ eventId: "0401", save: saveSpy }] as any[],
         } as gsUtils.ISheetAndRows)
       );
 

@@ -14,11 +14,14 @@ import {
 import { IDriverSeasonRaceData, ISeasonData } from "../../types";
 import { getSumOfArrayElements } from "../../utils/misc";
 import config from "../../config";
+import { GoogleSpreadsheetRow } from "google-spreadsheet";
 
 // Gets heat positions from a stat row (cols prefixed with pos) and
 // converts them into an array
-export const getHeatPositions = (driverData: any): Array<any> => {
-  const posArr: Array<any> = [];
+export const getHeatPositions = (
+  driverData: GoogleSpreadsheetRow
+): Array<number> => {
+  const posArr: Array<number> = [];
   Object.getOwnPropertyNames(driverData).forEach((prop: string) => {
     if (prop.startsWith("pos")) {
       driverData[prop] && posArr.push(driverData[prop]);
@@ -29,7 +32,7 @@ export const getHeatPositions = (driverData: any): Array<any> => {
 
 // Parses eventDetails rows
 export const toIDriverSeasonRaceData = (
-  driverData: any
+  driverData: GoogleSpreadsheetRow
 ): IDriverSeasonRaceData => {
   const drawPosition = driverData.drawPosition
     ? driverData.drawPosition === config.CHECK_DRAW_TEXT
@@ -53,13 +56,13 @@ export const toIDriverSeasonRaceData = (
 // Parses eventDetails of a speficic event
 export const toDriverRaceDetails = (
   eventId: string,
-  rawRows: any
+  rawRows: GoogleSpreadsheetRow[]
 ): IDriverSeasonRaceData[] => {
   const cleanRows: IDriverSeasonRaceData[] = [];
 
   rawRows
-    .filter((row: any) => row.eventId === eventId)
-    .forEach((row: any) => {
+    .filter(row => row.eventId === eventId)
+    .forEach(row => {
       const driverDetail = toIDriverSeasonRaceData(row);
       cleanRows.push(driverDetail);
     });
@@ -87,9 +90,9 @@ export const getDraws = (data: IDriverSeasonRaceData[]): typeof data => {
 // Parses seasons rows
 export const toSeasonDetails = (
   id: string,
-  seasonData: any
+  seasonData: GoogleSpreadsheetRow[]
 ): ISeasonData | undefined => {
-  const rawSeason = seasonData.find((season: any) => season.seasonId === id);
+  const rawSeason = seasonData.find(season => season.seasonId === id);
   if (!rawSeason) {
     return undefined;
   }

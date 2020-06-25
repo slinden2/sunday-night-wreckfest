@@ -17,31 +17,31 @@ import {
 describe("updateStandingsUtils", () => {
   describe("getDriverRow", () => {
     it("should return driver by seasonId and driverId", () => {
-      expect(getDriverRow("0400", "0001", getDriverRowInput)).toEqual(
+      expect(getDriverRow("0400", "0001", getDriverRowInput as any[])).toEqual(
         getDriverRowInput[0]
       );
-      expect(getDriverRow("0500", "0001", getDriverRowInput)).toEqual(
+      expect(getDriverRow("0500", "0001", getDriverRowInput as any[])).toEqual(
         getDriverRowInput[2]
       );
     });
   });
   describe("updateRow", () => {
     it("should update the row correctly", () => {
-      expect(updateRow(updateRowDriverRow, updateRowDriver)).toEqual(
+      expect(updateRow(updateRowDriverRow as any, updateRowDriver)).toEqual(
         updateRowReturn
       );
     });
     it("should throw on duplicate eventId", () => {
-      expect(() => updateRow(updateRowDriverRowErr, updateRowDriver)).toThrow(
-        /Duplicate eventId/
-      );
+      expect(() =>
+        updateRow(updateRowDriverRowErr as any, updateRowDriver)
+      ).toThrow(/Duplicate eventId/);
     });
   });
 
   describe("addRaceToStandings", () => {
-    let getSheetAndRowsSpy: any;
-    let getDriverRowSpy: any;
-    let updateRowSpy: any;
+    let getSheetAndRowsSpy: jest.SpyInstance;
+    let getDriverRowSpy: jest.SpyInstance;
+    let updateRowSpy: jest.SpyInstance;
     beforeEach(() => {
       getSheetAndRowsSpy = jest
         // eslint-disable-next-line @typescript-eslint/no-var-requires

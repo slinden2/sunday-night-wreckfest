@@ -1,8 +1,9 @@
 import { Driver, Team } from "../../types";
 import { parseDriverId, parseString } from "../helpers";
+import { GoogleSpreadsheetRow } from "google-spreadsheet";
 
 // Parse drivers from drivers sheet
-export const toDriver = (rawRows: any[]): Driver[] => {
+export const toDriver = (rawRows: GoogleSpreadsheetRow[]): Driver[] => {
   const cleanRows: Driver[] = [];
 
   rawRows.forEach(row => {

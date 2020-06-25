@@ -15,6 +15,7 @@ import {
   getSeasonDataReturn,
   getSingleRaceReturn,
 } from "../../utils/mockData";
+import { GoogleSpreadsheetWorksheet } from "google-spreadsheet";
 
 describe("eventService", () => {
   describe("mergeRaceData", () => {
@@ -58,11 +59,11 @@ describe("eventService", () => {
         .spyOn(gsUtils, "getSheetAndRows")
         .mockImplementation(() =>
           toPromise({
-            sheet: {},
+            sheet: {} as GoogleSpreadsheetWorksheet,
             rows: [
               { eventId: "0401", driverId: "0001", save: saveSpy },
               { eventId: "0401", driverId: "0002", save: saveSpy },
-            ],
+            ] as any[],
           } as gsUtils.ISheetAndRows)
         );
     });

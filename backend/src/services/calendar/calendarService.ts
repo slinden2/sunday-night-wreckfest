@@ -13,8 +13,10 @@ export const getRaceCalendar = async (): Promise<IRaceCalendarEvent[]> => {
 export const setIsProcessedTrue = async (eventId: string) => {
   const raceCalendar = await getSheetAndRows("raceCalendar");
   const processedRow = raceCalendar.rows.find(row => row.eventId === eventId);
-  processedRow.isProcessed = "1";
-  await processedRow.save();
+  if (processedRow) {
+    processedRow.isProcessed = "1";
+    await processedRow.save();
+  }
 };
 
 export default {

@@ -8,14 +8,15 @@ import {
   parseMarkdown,
 } from "../helpers";
 import { IRaceCalendarEvent } from "../../types";
+import { GoogleSpreadsheetRow } from "google-spreadsheet";
 
 // Parses a calendar row and converts it to the correct type
 export const toRaceCalendarEvents = (
-  rawRows: any
+  rawRows: GoogleSpreadsheetRow[]
 ): Array<IRaceCalendarEvent> => {
   const cleanRows: Array<IRaceCalendarEvent> = [];
 
-  rawRows.forEach((row: any) => {
+  rawRows.forEach(row => {
     const event: IRaceCalendarEvent = {
       seasonId: parseEventId(row.seasonId, "seasonId"),
       seasonName: parseString(row.seasonName, "seasonName"),
