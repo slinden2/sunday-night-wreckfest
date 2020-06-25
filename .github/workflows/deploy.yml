@@ -11,6 +11,7 @@ jobs:
     env:
       working-directory-be: ./backend
       working-directory-fe: ./frontend
+      GS_ID: ${{ secrets.GS_ID }}
       GS_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
       GS_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GS_SERVICE_ACCOUNT_EMAIL }}
       LABBE_DOMAIN: ${{ secrets.LABBE_DOMAIN }}
