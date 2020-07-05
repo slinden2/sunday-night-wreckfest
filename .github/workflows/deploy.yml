@@ -64,7 +64,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           dokku-ip-address: ${{ secrets.SERVER_IP }}
-          dokku-host: "sundaynightwreckfest.tk"
+          dokku-host: "new.sundaynightwreckfest.fi"
           app-name: "snw"
           git-subtree-prefix: "dist"
           force-push-subtree: "true"
