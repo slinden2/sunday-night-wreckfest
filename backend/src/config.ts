@@ -45,9 +45,6 @@ const CHECK_DRAW_TEXT = "X";
 
 const STEAM_API_KEY: string | undefined = process.env.STEAM_API_KEY;
 
-// My personal Steam accounts ID. Not needed for anything atm.
-const STEAM_ID: number | undefined = Number(process.env.STEAM_ID);
-
 // This domain is used for a DNS lookup that checks the current
 // IP address of LaBBe's servers as it may change.
 const LABBE_DOMAIN: string | undefined = process.env.LABBE_DOMAIN;
@@ -67,7 +64,6 @@ export default {
   STANDINGS_UPDATE_HASH,
   CHECK_DRAW_TEXT,
   STEAM_API_KEY,
-  STEAM_ID,
   LABBE_DOMAIN,
   WF_SERVER_PORT_ARRAY,
   REDIS_URL,
