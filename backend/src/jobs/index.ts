@@ -20,7 +20,7 @@ const updateRaceCache = async (calendar: IRaceCalendarEvent[]) => {
       86400,
       JSON.stringify(raceData)
     );
-    await sleep(10000);
+    await sleep(15000);
     logger.info(`updateRaceCache - ${event.eventId} done.`);
   }
 };
