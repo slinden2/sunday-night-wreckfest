@@ -1,6 +1,7 @@
 // Supported video services needed for parsing video id's/slugs from the DB.
 export enum VideoService {
   youtube = "youtube",
+  tubelist = "tubelist",
   twitch = "twitch",
   twitchClip = "twitchClip",
 }

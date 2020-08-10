@@ -54,6 +54,9 @@ const VideoFrame = ({ video }: Props) => {
     case VideoService.youtube:
       videoUrl = `https://www.youtube.com/embed/${video.id}`;
       break;
+    case VideoService.tubelist:
+      videoUrl = `https://www.youtube.com/embed/videoseries?list=${video.id}`;
+      break;
     case VideoService.twitch:
       videoUrl = `https://player.twitch.tv/?autoplay=false&video=v${video.id}${parentParam}`;
       break;

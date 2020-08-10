@@ -61,7 +61,7 @@ export const parsePowerLimit = (text: any): string => {
 export const parseEventIds = (eventIdsStr: any): string[] => {
   const eventIds: string[] = eventIdsStr.split(";");
 
-  eventIds.forEach(eventId => {
+  eventIds.forEach((eventId) => {
     parseEventId(eventId, "eventId");
   });
 
@@ -115,13 +115,13 @@ export const parseGroup = (group: any): RaceGroup => {
 
 // Heat positions is an array of numbers
 export const parseHeatPositions = (positions: Array<any>): Array<number> => {
-  positions.forEach(pos => {
+  positions.forEach((pos) => {
     if (!isNumber(pos)) {
       throw new DataIntegrityError("Invalid position: " + pos);
     }
   });
 
-  return positions.map(pos => Number(pos));
+  return positions.map((pos) => Number(pos));
 };
 
 export const isDate = (date: string): boolean => {
@@ -138,7 +138,7 @@ export const parseDate = (date: string): string => {
 
   const newDate = date
     .split(".")
-    .map(item => {
+    .map((item) => {
       if (item.length < 2) {
         return item.padStart(2, "0");
       } else {
@@ -173,7 +173,7 @@ export const parseNumber = (num: any, field: string): number => {
 };
 
 export const isVideoDataString = (text: string): boolean => {
-  if (/^((twitch|twitchClip|youtube),.+;)+$/.test(text)) return true;
+  if (/^((twitch|twitchClip|youtube|tubelist),.+;)+$/.test(text)) return true;
   else return false;
 };
 
@@ -193,7 +193,7 @@ export const parseVideos = (videoDataString: string): VideoType[] => {
     .substr(0, videoDataString.length - 1)
     .split(";");
 
-  const videoData = videoDataArrays.map(video => {
+  const videoData = videoDataArrays.map((video) => {
     const [service, id] = video.split(",");
 
     if (!isVideoService(service)) {
@@ -221,7 +221,7 @@ export const parseMods = (modString: string): Mod[] => {
 
   const modDataArrays = modString.substr(0, modString.length - 1).split(";");
 
-  const modData = modDataArrays.map(mod => {
+  const modData = modDataArrays.map((mod) => {
     const [name, id] = mod.split(",");
 
     if (!name || !isString(name)) {
