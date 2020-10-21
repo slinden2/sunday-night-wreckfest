@@ -14,22 +14,23 @@ import TeamsContainer from "./components/teams/TeamsContainer";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { IWFServerData } from "./types";
+import InfoContainer from "./components/info/InfoContainer";
 
 // Container that has a thick black border that wraps the whole site
 const MainContainer = styled.div`
-  border: var(--borderSize) solid ${props => props.theme.colors.black};
-  color: ${props => props.theme.colors.black};
+  border: var(--borderSize) solid ${(props) => props.theme.colors.black};
+  color: ${(props) => props.theme.colors.black};
   min-height: 100vh;
 `;
 
 // Container that wraps the content part of the site (excl. header, navi and footer)
 const PageContainer = styled.div`
-  background-color: ${props => props.theme.colors.yellow};
+  background-color: ${(props) => props.theme.colors.yellow};
   height: 100%;
   min-height: 70vh;
   padding-bottom: 4rem;
 
-  ${props => props.theme.media.desktop} {
+  ${(props) => props.theme.media.desktop} {
     border-image-source: url(${blackGrit});
     border-image-slice: 200;
     border-image-repeat: round;
@@ -68,6 +69,9 @@ const App = () => {
           <ScrollToTop />
           <Switch>
             <Route exact path="/">
+              <InfoContainer />
+            </Route>
+            <Route path="/kalenteri">
               <CalendarContainer />
             </Route>
             <Route path={"/kilpailut/:id"}>

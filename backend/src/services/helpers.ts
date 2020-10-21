@@ -273,3 +273,17 @@ export const parseMarkdown = (markdownString: any, field: string): string => {
 export const parseServerName = (name: string): string => {
   return name.split(/\^\d/).join("").trim();
 };
+
+// Format: INFO001, INFO002...
+export const parseInfoId = (infoId: any): string => {
+  if (
+    !infoId ||
+    !isString(infoId) ||
+    !(infoId.length === 7) ||
+    !/^INFO\d{3}$/.test(infoId)
+  ) {
+    throw new DataIntegrityError("Invalid or missing infoId: " + infoId);
+  }
+
+  return infoId;
+};

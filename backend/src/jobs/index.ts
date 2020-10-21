@@ -9,6 +9,7 @@ import config from "../config";
 import { IRaceCalendarEvent } from "../types";
 import { sleep } from "../utils/misc";
 import logger from "../utils/logger";
+import infoService from "../services/info/infoService";
 
 const redis = new Redis(config.REDIS_URL);
 
@@ -30,6 +31,10 @@ export const updateCache = async () => {
   const raceCalendar = await calendarService.getRaceCalendar();
   await redis.setex("/api/races", 86400, JSON.stringify(raceCalendar));
   logger.info("updateCache - raceCalendar done.");
+
+  const info = await infoService.getInfo();
+  await redis.setex("/api/standings", 86400, JSON.stringify(info));
+  logger.info("updateCache - info done.");
 
   const standings = await standingsService.getStandings();
   await redis.setex("/api/standings", 86400, JSON.stringify(standings));

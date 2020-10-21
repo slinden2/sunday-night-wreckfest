@@ -4,7 +4,13 @@ import path from "path";
 import morgan from "morgan";
 import "source-map-support/register";
 
-import { raceRoute, standingsRoute, steamRoute, teamRoute } from "./routes/";
+import {
+  infoRoute,
+  raceRoute,
+  standingsRoute,
+  steamRoute,
+  teamRoute,
+} from "./routes/";
 
 import middleware from "./utils/middleware";
 import config from "./config";
@@ -21,6 +27,7 @@ if (config.ENV === "test" || config.ENV === "CI") {
   });
 }
 
+app.use("/api/info", infoRoute);
 app.use("/api/races", raceRoute);
 app.use("/api/standings", standingsRoute);
 app.use("/api/teams", teamRoute);

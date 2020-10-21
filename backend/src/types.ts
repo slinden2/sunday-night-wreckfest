@@ -121,3 +121,8 @@ export interface Team {
   driver2?: string;
   logoUrl?: string;
 }
+
+export interface Info {
+  id: string;
+  text: string;
+}

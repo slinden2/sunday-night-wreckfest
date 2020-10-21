@@ -4,6 +4,7 @@ import {
   IRaceDetails,
   IStandingRow,
   Team,
+  Info,
 } from "../types";
 import { State } from "./state";
 import { calendarToSeasons } from "../utils";
@@ -24,6 +25,10 @@ export type Action =
   | {
       type: "SET_TEAMS";
       payload: Team[];
+    }
+  | {
+      type: "SET_INFO";
+      payload: Info[];
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -32,7 +37,7 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, calendar: action.payload };
     case "SET_RACES": {
       const raceExists = state.races.find(
-        race => race.eventId === action.payload.eventId
+        (race) => race.eventId === action.payload.eventId
       );
       if (raceExists) return state;
       return { ...state, races: [...state.races, action.payload] };
@@ -41,6 +46,8 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, standings: action.payload };
     case "SET_TEAMS":
       return { ...state, teams: action.payload };
+    case "SET_INFO":
+      return { ...state, info: action.payload };
     default:
       return state;
   }
@@ -73,5 +80,12 @@ export const setTeams = (teams: Team[]): Action => {
   return {
     type: "SET_TEAMS",
     payload: teams,
+  };
+};
+
+export const setInfo = (info: Info[]): Action => {
+  return {
+    type: "SET_INFO",
+    payload: info,
   };
 };

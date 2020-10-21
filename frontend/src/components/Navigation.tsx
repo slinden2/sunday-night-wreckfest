@@ -22,9 +22,9 @@ const NavList = styled.ul`
   margin: 0;
   padding: 3rem 2rem 2rem;
   box-shadow: rgba(0, 0, 0, 0.25) 1px -4px 4px;
-  background-color: ${props => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.black};
   margin: 0 calc(var(--borderSize) * -1);
-  border-bottom: 5px solid ${props => props.theme.colors.yellow};
+  border-bottom: 5px solid ${(props) => props.theme.colors.yellow};
 `;
 
 const NavListItem = styled.li<{ ignoreAfter: boolean }>`
@@ -36,7 +36,7 @@ const NavListItem = styled.li<{ ignoreAfter: boolean }>`
   gap: 2rem;
 
   a {
-    color: ${props => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.white};
     text-decoration: none;
     position: relative;
 
@@ -48,9 +48,9 @@ const NavListItem = styled.li<{ ignoreAfter: boolean }>`
         height: 3px;
         position: absolute;
         top: 2em;
-        background-color: ${props => props.theme.colors.yellow};
+        background-color: ${(props) => props.theme.colors.yellow};
 
-        ${props => props.theme.media.tablet} {
+        ${(props) => props.theme.media.tablet} {
           height: 2px;
           top: 1.25em;
         }
@@ -58,14 +58,14 @@ const NavListItem = styled.li<{ ignoreAfter: boolean }>`
     }
   }
 
-  ${props =>
+  ${(props) =>
     !props.ignoreAfter &&
     css`
       &::after {
         display: block;
         content: "+";
         font-size: 1.2em;
-        color: ${props => props.theme.colors.yellow};
+        color: ${(props) => props.theme.colors.yellow};
         transform: rotate(45deg);
         align-self: center;
       }
@@ -78,7 +78,7 @@ const LinkSpan = styled.span`
   letter-spacing: 0.1em;
   position: relative;
 
-  ${props => props.theme.media.tablet} {
+  ${(props) => props.theme.media.tablet} {
     font-size: 1.7rem;
     font-weight: 800;
     letter-spacing: 0.1em;
@@ -102,10 +102,10 @@ const LinkText = styled.span`
       position: absolute;
       left: -0.25em;
       top: 0.75em;
-      background-color: ${props => props.theme.colors.yellow};
+      background-color: ${(props) => props.theme.colors.yellow};
       z-index: -1;
 
-      ${props => props.theme.media.tablet} {
+      ${(props) => props.theme.media.tablet} {
         left: -0.25em;
         top: 1.25em;
       }
@@ -130,8 +130,12 @@ const LinkText = styled.span`
 
 const navLinks: INavItem[] = [
   {
-    title: "Kalenteri",
+    title: "Tiedotus",
     url: "/",
+  },
+  {
+    title: "Kalenteri",
+    url: "/kalenteri",
   },
   {
     title: "Sarjataulukko",

@@ -33,6 +33,7 @@ const sheetMap: ISheetMap = {
   standings: 1733156042,
   seasons: 1876267219,
   drivers: 1062100406,
+  info: 609316978,
 };
 
 // Get a specific sheet meta data and its rows in an object.
@@ -68,6 +69,6 @@ export const makeBackup = async (sheetName: string) => {
 
   // Get old rows and add the raw data into the new sheet
   const rows = await oldSheet.getRows();
-  const rawRows = rows.map(row => row._rawData);
+  const rawRows = rows.map((row) => row._rawData);
   await newSheet.addRows(rawRows);
 };
