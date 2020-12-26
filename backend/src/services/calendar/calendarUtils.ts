@@ -16,7 +16,7 @@ export const toRaceCalendarEvents = (
 ): Array<IRaceCalendarEvent> => {
   const cleanRows: Array<IRaceCalendarEvent> = [];
 
-  rawRows.forEach(row => {
+  rawRows.forEach((row) => {
     const event: IRaceCalendarEvent = {
       seasonId: parseEventId(row.seasonId, "seasonId"),
       seasonName: parseString(row.seasonName, "seasonName"),
@@ -24,6 +24,7 @@ export const toRaceCalendarEvents = (
       isReady: parseNumericBoolean(row.isReady, "isReady"),
       isCompleted: parseNumericBoolean(row.isCompleted, "isCompleted"),
       isProcessed: parseNumericBoolean(row.isProcessed, "isProcessed"),
+      drawsChecked: parseNumericBoolean(row.drawsChecked, "drawsChecked"),
       hasPowerLimit: parseNumericBoolean(row.hasPowerLimit, "hasPowerLimit"),
       date: parseDate(row.date),
       trackName: parseString(row.trackName, "trackName"),

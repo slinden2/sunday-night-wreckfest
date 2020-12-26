@@ -34,4 +34,20 @@ router.get("/update/:hash", async (req, res, next) => {
   }
 });
 
+// An endpoint to check draws in the standings sheet.
+// Works only if the secret hash is provided.
+router.get("/check-draws/:hash", async (req, res, next) => {
+  try {
+    if (req.params.hash !== config.STANDINGS_UPDATE_HASH) {
+      throw new Error("Invalid standings update hash");
+    }
+    await standingsService.checkDraws();
+    res.status(200).json({
+      message: "standings successfully updated.",
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;

@@ -19,6 +19,7 @@ export interface IRaceCalendarEvent {
   isReady: boolean;
   isCompleted: boolean;
   isProcessed: boolean;
+  drawsChecked: boolean;
   hasPowerLimit: boolean;
   date: string;
   trackName: string;

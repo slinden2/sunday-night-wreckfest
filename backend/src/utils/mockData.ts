@@ -14,7 +14,7 @@ import {
 import { IStandingRow } from "../services/standings/standingsUtils";
 
 export const toPromise = <T>(data: T): Promise<typeof data> =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     resolve(data);
   });
 
@@ -26,6 +26,7 @@ export const toRaceCalendarEventsInput: any[] = [
     isReady: "1",
     isCompleted: "1",
     isProcessed: "1",
+    drawsChecked: "1",
     hasPowerLimit: "1",
     date: "12.1.2020",
     trackName: "Boulder Bank Full Circuit 2 No X",
@@ -39,6 +40,7 @@ export const toRaceCalendarEventsInput: any[] = [
     isReady: "0",
     isCompleted: "0",
     isProcessed: "0",
+    drawsChecked: "0",
     hasPowerLimit: "0",
     date: "19.1.2020",
     trackName: "Fire Rock Raceway Main Circuit Reverse",
@@ -55,6 +57,7 @@ export const toRaceCalendarEventsReturn: IRaceCalendarEvent[] = [
     isReady: true,
     isCompleted: true,
     isProcessed: true,
+    drawsChecked: true,
     hasPowerLimit: true,
     date: "2020-01-12",
     trackName: "Boulder Bank Full Circuit 2 No X",
@@ -68,6 +71,7 @@ export const toRaceCalendarEventsReturn: IRaceCalendarEvent[] = [
     isReady: false,
     isCompleted: false,
     isProcessed: false,
+    drawsChecked: false,
     hasPowerLimit: false,
     date: "2020-01-19",
     trackName: "Fire Rock Raceway Main Circuit Reverse",
@@ -77,7 +81,7 @@ export const toRaceCalendarEventsReturn: IRaceCalendarEvent[] = [
 ];
 
 export const getDrawsRaceCal: IRaceCalendarEvent[] = toRaceCalendarEventsReturn.map(
-  event => {
+  (event) => {
     return { ...event, isReady: true, isCompleted: true, isProcessed: false };
   }
 );
@@ -90,6 +94,7 @@ export const getRaceCalendarReturn: IRaceCalendarEvent[] = [
     isReady: true,
     isCompleted: true,
     isProcessed: true,
+    drawsChecked: true,
     hasPowerLimit: true,
     date: "20200101",
     trackName: "Test Track",
@@ -103,6 +108,7 @@ export const getRaceCalendarReturn: IRaceCalendarEvent[] = [
     isReady: true,
     isCompleted: true,
     isProcessed: true,
+    drawsChecked: true,
     hasPowerLimit: true,
     date: "20200101",
     trackName: "Test Track",
@@ -112,7 +118,7 @@ export const getRaceCalendarReturn: IRaceCalendarEvent[] = [
 ];
 
 export const getRaceCalendarReturnWithWrittenRes: typeof getRaceCalendarReturn = getRaceCalendarReturn.map(
-  cal => ({ ...cal, writtenResults: "Results For Testing" })
+  (cal) => ({ ...cal, writtenResults: "Results For Testing" })
 );
 
 export const getRaceDataInput = [
@@ -172,13 +178,13 @@ export const getRaceDataReturn: IDriverSeasonRaceData[] = [
 ];
 
 export const getDrawsReturn: IDriverSeasonRaceData[] = getRaceDataReturn.map(
-  driver => {
+  (driver) => {
     return { ...driver, heatPoints: [50, 50, 50, 50, 50] };
   }
 );
 
 export const toDriverRaceDetailsReturn: IDriverSeasonRaceData[] = getRaceDataReturn.map(
-  driver => {
+  (driver) => {
     const newDriver = { ...driver };
     delete newDriver.seasonPoints;
     return newDriver;
@@ -342,6 +348,7 @@ export const getStandingsReturn: IStandingRow[] = [
 export const mergeRaceDataReturn = {
   date: "20200101",
   eventId: "0401",
+  drawsChecked: true,
   hasPowerLimit: true,
   isCompleted: true,
   isProcessed: true,
@@ -540,6 +547,7 @@ export const getSingleRaceReturn: IRaceDetails = {
   isReady: true,
   isCompleted: true,
   isProcessed: true,
+  drawsChecked: true,
   hasPowerLimit: true,
   date: "2020-01-12",
   trackName: "Boulder Bank Full Circuit 2 No X",
