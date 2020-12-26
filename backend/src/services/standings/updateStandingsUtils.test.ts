@@ -73,7 +73,7 @@ describe("updateStandingsUtils", () => {
         toRaceCalendarEventsReturn[0],
         addRaceToStandingsRaceData
       );
-      expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(1);
+      expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(2);
       expect(getDriverRowSpy).toHaveBeenCalledTimes(2);
       expect(updateRowSpy).not.toHaveBeenCalled();
     });
@@ -86,7 +86,7 @@ describe("updateStandingsUtils", () => {
         toRaceCalendarEventsReturn[0],
         addRaceToStandingsRaceData
       );
-      expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(1);
+      expect(getSheetAndRowsSpy).toHaveBeenCalledTimes(2);
       expect(getDriverRowSpy).toHaveBeenCalledTimes(2);
       expect(updateRowSpy).toHaveBeenCalledTimes(2);
     });

@@ -13,6 +13,7 @@ export interface IStandingRow {
   seasonName: string;
   driverId: string;
   driverName: string;
+  teamName?: string;
   racesDriven: number;
   points: number;
   drawPosition?: number;
@@ -26,7 +27,7 @@ export const toStandingRows = (
 ): IStandingRow[] => {
   const cleanRows: IStandingRow[] = [];
 
-  rawRows.forEach(row => {
+  rawRows.forEach((row) => {
     const drawPosition = row.drawPosition
       ? parseNumber(row.drawPosition, "drawPosition")
       : undefined;
@@ -41,6 +42,7 @@ export const toStandingRows = (
       drawPosition,
       powerLimit: parsePowerLimit(row.powerLimit),
       eventIds: parseEventIds(row.eventIds),
+      ...(row.teamName && { teamName: parseString(row.teamName, "teamName") }),
     };
     cleanRows.push(driver);
   });

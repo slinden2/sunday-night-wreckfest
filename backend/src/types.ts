@@ -21,6 +21,7 @@ export interface IRaceCalendarEvent {
   isProcessed: boolean;
   drawsChecked: boolean;
   hasPowerLimit: boolean;
+  hasTeams: boolean;
   date: string;
   trackName: string;
   trackName2?: string;
@@ -121,6 +122,12 @@ export interface Team {
   driver1: string;
   driver2?: string;
   logoUrl?: string;
+}
+
+export interface DriverAndTeam {
+  id: string;
+  name: string;
+  teamName: string;
 }
 
 export interface Info {

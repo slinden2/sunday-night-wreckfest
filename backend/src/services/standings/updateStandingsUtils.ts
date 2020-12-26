@@ -5,7 +5,11 @@ This is a Typescript file, but the language is not used
 in the best possible way as the google-spreadsheet has no types.
 */
 
-import { IDriverSeasonRaceData, IRaceCalendarEvent } from "../../types";
+import {
+  IDriverSeasonRaceData,
+  IRaceCalendarEvent,
+  DriverAndTeam,
+} from "../../types";
 import { getSheetAndRows } from "../googleSheetsUtils";
 import config from "../../config";
 import { GoogleSpreadsheetRow } from "google-spreadsheet";
@@ -42,7 +46,7 @@ export const getDriverRow = (
   rows: GoogleSpreadsheetRow[]
 ) => {
   return rows.find(
-    row => row.driverId === driverId && row.seasonId === seasonId
+    (row) => row.driverId === driverId && row.seasonId === seasonId
   );
 };
 
@@ -53,6 +57,15 @@ export const addRaceToStandings = async (
   raceData: IDriverSeasonRaceData[]
 ): Promise<void> => {
   const standings = await getSheetAndRows("standings");
+  const drivers = await getSheetAndRows("drivers");
+
+  const driversAndTeams: DriverAndTeam[] = Array.from(drivers.rows).map(
+    (r) => ({
+      id: r.driverId,
+      name: r.driverName,
+      teamName: r.team,
+    })
+  );
 
   const newRows: any[] = [];
   const rowsToUpdate: any[] = [];
@@ -64,12 +77,18 @@ export const addRaceToStandings = async (
       standings.rows
     );
 
+    const driverTeamData = driversAndTeams.find(
+      (driverTeam) => driverTeam.id === driver.driverId
+    );
+    const teamName = driverTeamData?.teamName;
+
     if (!driverRow) {
       newRows.push({
         seasonId: `'${event.seasonId}`,
         seasonName: event.seasonName,
         driverId: `'${driver.driverId}`,
         driverName: driver.driverName,
+        ...(teamName && { teamName }),
         points: driver.seasonPoints,
         racesDriven: 1,
         eventIds: `'${driver.eventId}`,
@@ -100,13 +119,13 @@ export const addRaceToStandings = async (
 export const updatePowerLimit = async (seasonId: string, winnerId: string) => {
   const standings = await getSheetAndRows("standings");
   const eventRows = [...standings.rows].filter(
-    row => row.seasonId === seasonId
+    (row) => row.seasonId === seasonId
   );
   const rowsOrdered = eventRows.sort(
     (a, b) => Number(b.points) - Number(a.points)
   );
 
-  const winnerRow = rowsOrdered.find(row => row.driverId === winnerId);
+  const winnerRow = rowsOrdered.find((row) => row.driverId === winnerId);
   if (!winnerRow) {
     throw new Error("updatePowerLimit - No winner found");
   }
@@ -117,13 +136,13 @@ export const updatePowerLimit = async (seasonId: string, winnerId: string) => {
   rowsOrdered[1].powerLimit = "C158";
   rowsOrdered[2].powerLimit = "C161";
 
-  rowsOrdered.slice(3).forEach(row => {
+  rowsOrdered.slice(3).forEach((row) => {
     if (row.driverId !== winnerId) {
       row.powerLimit = "";
     }
   });
 
-  const rowsToUpdate = rowsOrdered.map(row => row.save());
+  const rowsToUpdate = rowsOrdered.map((row) => row.save());
 
   await Promise.all(rowsToUpdate);
 };

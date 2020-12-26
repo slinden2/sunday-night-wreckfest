@@ -26,6 +26,7 @@ export const toRaceCalendarEvents = (
       isProcessed: parseNumericBoolean(row.isProcessed, "isProcessed"),
       drawsChecked: parseNumericBoolean(row.drawsChecked, "drawsChecked"),
       hasPowerLimit: parseNumericBoolean(row.hasPowerLimit, "hasPowerLimit"),
+      hasTeams: parseNumericBoolean(row.hasTeams, "hasTeams"),
       date: parseDate(row.date),
       trackName: parseString(row.trackName, "trackName"),
       ...(row.trackName2
