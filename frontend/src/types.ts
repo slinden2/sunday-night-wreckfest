@@ -50,6 +50,7 @@ export interface IStandingRow {
   seasonName: string;
   driverId: string;
   driverName: string;
+  teamName?: string;
   racesDriven: number;
   points: number;
   drawPosition?: number;

@@ -3,13 +3,19 @@ Generic table component for displayng all stat tables on the site
 */
 
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ITableHeaderMap } from "../../types";
 import { styledLinkProps } from "../styledElements";
 
-const Container = styled.div`
+const Container = styled.div<{ marginTop: string | undefined }>`
   max-width: 100%;
   position: relative;
+
+  ${({ marginTop }) =>
+    marginTop &&
+    css`
+      margin-top: ${marginTop};
+    `}
 `;
 
 // Allow horizontal scroll that is needed for mobile
@@ -22,7 +28,7 @@ const STable = styled.table`
   border-collapse: collapse;
   width: 100%;
 
-  ${props => props.theme.media.tablet} {
+  ${(props) => props.theme.media.tablet} {
     font-size: 1.2rem;
   }
 
@@ -31,11 +37,11 @@ const STable = styled.table`
   }
 
   tr:nth-child(even) {
-    background-color: ${props => props.theme.colors.lightgrey};
+    background-color: ${(props) => props.theme.colors.lightgrey};
   }
 
   thead tr:nth-child(even) {
-    background-color: ${props => props.theme.colors.black};
+    background-color: ${(props) => props.theme.colors.black};
   }
 
   td,
@@ -44,9 +50,9 @@ const STable = styled.table`
   }
 
   thead {
-    border-bottom: 2px solid ${props => props.theme.colors.black};
-    background-color: ${props => props.theme.colors.black};
-    color: ${props => props.theme.colors.white};
+    border-bottom: 2px solid ${(props) => props.theme.colors.black};
+    background-color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.white};
     text-align: left;
   }
 
@@ -59,15 +65,15 @@ const HeaderCell = styled.th<{
   alignCenter: boolean;
   width: number | undefined;
 }>`
-  text-align: ${props => (props.alignCenter ? "center" : "left")};
+  text-align: ${(props) => (props.alignCenter ? "center" : "left")};
 
-  ${props => props.theme.media.desktop} {
-    width: ${props => (props.width ? `${props.width}px` : "auto")};
+  ${(props) => props.theme.media.desktop} {
+    width: ${(props) => (props.width ? `${props.width}px` : "auto")};
   }
 `;
 
 const TableCell = styled.td<{ alignCenter: boolean }>`
-  text-align: ${props => (props.alignCenter ? "center" : "left")};
+  text-align: ${(props) => (props.alignCenter ? "center" : "left")};
 `;
 
 interface Props {
@@ -76,9 +82,10 @@ interface Props {
   // This is needed, because some headers need to be multiple rows tall.
   headers: Array<string[]>;
   headerMap: ITableHeaderMap;
+  marginTop?: string;
 }
 
-const Table = ({ data, headers, headerMap }: Props) => {
+const Table = ({ data, headers, headerMap, marginTop }: Props) => {
   // Combine header rows and sort them by dataIndex
   const orderedHeaders = headers
     .reduce((acc, cur) => {
@@ -95,13 +102,13 @@ const Table = ({ data, headers, headerMap }: Props) => {
     );
 
   return (
-    <Container>
+    <Container marginTop={marginTop}>
       <ScrollContainer>
         <STable>
           <thead>
             {headers.map((headerRow, i) => (
               <tr key={i}>
-                {headerRow.map(header => {
+                {headerRow.map((header) => {
                   const headerObj = headerMap[header];
                   return (
                     <HeaderCell
@@ -123,7 +130,7 @@ const Table = ({ data, headers, headerMap }: Props) => {
           <tbody>
             {data.map((row, i) => (
               <tr key={i}>
-                {orderedHeaders.map(col => {
+                {orderedHeaders.map((col) => {
                   const alignCenter = headerMap[col].alignCenter ? true : false;
                   return (
                     <TableCell key={col} alignCenter={alignCenter}>

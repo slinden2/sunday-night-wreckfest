@@ -9,6 +9,7 @@ import { HeaderH3, Page } from "../styledElements";
 
 interface Props {
   standings: IStandingRow[];
+  teamStandings?: { name: string; points: number }[];
 }
 
 const headers = [["#", "driverName", "racesDriven", "points", "powerLimit"]];
@@ -21,6 +22,14 @@ const headerMap = {
   powerLimit: { title: "Tehoraja", dataIndex: 4, alignCenter: true },
 };
 
+const teamHeaders = [["#", "name", "points"]];
+
+const teamHeaderMap = {
+  "#": { title: "#", dataIndex: 0, alignCenter: true },
+  name: { title: "Tiimi", dataIndex: 1 },
+  points: { title: "P", dataIndex: 2, alignCenter: true },
+};
+
 const sortByDrawPosition = (a: IStandingRow, b: IStandingRow) => {
   if (a.drawPosition && b.drawPosition) {
     return a.drawPosition - b.drawPosition;
@@ -29,7 +38,7 @@ const sortByDrawPosition = (a: IStandingRow, b: IStandingRow) => {
   }
 };
 
-const StandingsContent = ({ standings }: Props) => {
+const StandingsContent = ({ standings, teamStandings }: Props) => {
   if (!standings.length) return <div>No standings found.</div>;
 
   const sortedStandings = standings
@@ -40,6 +49,14 @@ const StandingsContent = ({ standings }: Props) => {
     <Page>
       <HeaderH3>{standings[0].seasonName}</HeaderH3>
       <Table data={sortedStandings} headers={headers} headerMap={headerMap} />
+      {teamStandings && (
+        <Table
+          data={teamStandings}
+          headers={teamHeaders}
+          headerMap={teamHeaderMap}
+          marginTop="3rem"
+        />
+      )}
     </Page>
   );
 };

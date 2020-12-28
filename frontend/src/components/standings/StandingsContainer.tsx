@@ -29,7 +29,7 @@ const getOptions = (standings: IStandingRow[]): Options[] => {
   const options: Options[] = [];
 
   for (const row of standings) {
-    if (options.some(opt => row.seasonId === opt.value)) {
+    if (options.some((opt) => row.seasonId === opt.value)) {
       continue;
     } else {
       options.push({ value: row.seasonId, content: row.seasonName });
@@ -71,7 +71,25 @@ const StandingsContainer = () => {
     setSelected(mostRecentSeason);
   }
 
-  const standingsToShow = standings.filter(row => row.seasonId === selected);
+  const standingsToShow = standings.filter((row) => row.seasonId === selected);
+  const teamObj = standingsToShow.reduce<Record<string, number>>((acc, cur) => {
+    if (cur.teamName) {
+      if (acc[cur.teamName]) {
+        acc[cur.teamName] += cur.points;
+      } else {
+        acc[cur.teamName] = cur.points;
+      }
+    }
+    return acc;
+  }, {});
+
+  const teamsToShow = Object.keys(teamObj)
+    .map((key) => ({
+      name: key,
+      points: teamObj[key],
+    }))
+    .sort((a, b) => b.points - a.points)
+    .map((team, i) => ({ ...team, "#": i + 1 }));
 
   return (
     <ContentContainer title="Sarjataulukko">
@@ -80,7 +98,10 @@ const StandingsContainer = () => {
         selected={selected}
         setSelected={setSelected}
       />
-      <StandingsContent standings={standingsToShow} />
+      <StandingsContent
+        standings={standingsToShow}
+        teamStandings={teamsToShow}
+      />
     </ContentContainer>
   );
 };
