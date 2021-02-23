@@ -2,7 +2,7 @@ import { IDriverSeasonRaceData, RaceGroup } from "../../types";
 
 const driverData: IDriverSeasonRaceData[] = [
   {
-    driverId: "0004",
+    driverId: "DRI0004",
     driverName: "KNGS",
     eventId: "0401",
     isReady: true,
@@ -12,7 +12,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [1, 2, 2, 1, 2],
   },
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     driverName: "Ay Caramba",
     eventId: "0401",
     isReady: true,
@@ -22,7 +22,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [2, 4, 7, 3, 7],
   },
   {
-    driverId: "0002",
+    driverId: "DRI0002",
     driverName: "Labbe",
     eventId: "0401",
     isReady: true,
@@ -32,7 +32,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [9, 1, 1, 2, 1],
   },
   {
-    driverId: "0003",
+    driverId: "DRI0003",
     driverName: "Hupu",
     eventId: "0401",
     isReady: true,
@@ -42,7 +42,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [7, 5, 5, 7, 5],
   },
   {
-    driverId: "0012",
+    driverId: "DRI0012",
     driverName: "Pyry",
     eventId: "0401",
     isReady: true,
@@ -52,7 +52,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [5, 3, 3, 9, 10],
   },
   {
-    driverId: "0007",
+    driverId: "DRI0007",
     driverName: "Limpperi",
     eventId: "0401",
     isReady: true,
@@ -62,7 +62,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [3, 6, 4, 6, 4],
   },
   {
-    driverId: "0005",
+    driverId: "DRI0005",
     driverName: "Kalakukko77",
     eventId: "0401",
     isReady: true,
@@ -72,7 +72,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [6, 7, 9, 8, 9],
   },
   {
-    driverId: "0006",
+    driverId: "DRI0006",
     driverName: "BamXtreme",
     eventId: "0401",
     isReady: true,
@@ -82,7 +82,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [4, 10, 10, 4, 3],
   },
   {
-    driverId: "0009",
+    driverId: "DRI0009",
     driverName: "Susiryhmä",
     eventId: "0401",
     isReady: true,
@@ -92,7 +92,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [10, 8, 6, 5, 8],
   },
   {
-    driverId: "0011",
+    driverId: "DRI0011",
     driverName: "MoonWalker",
     eventId: "0401",
     isReady: true,
@@ -102,7 +102,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [8, 9, 8, 10, 6],
   },
   {
-    driverId: "0010",
+    driverId: "DRI0010",
     driverName: "CrazyKinkku",
     eventId: "0401",
     isReady: true,
@@ -112,7 +112,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [5, 10, 6, 6, 10],
   },
   {
-    driverId: "0017",
+    driverId: "DRI0017",
     driverName: "St. Jimmy",
     eventId: "0401",
     isReady: true,
@@ -122,7 +122,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [4, 1, 3, 1, 1],
   },
   {
-    driverId: "0015",
+    driverId: "DRI0015",
     driverName: "Finsku",
     eventId: "0401",
     isReady: true,
@@ -132,7 +132,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [2, 3, 1, 7, 2],
   },
   {
-    driverId: "0016",
+    driverId: "DRI0016",
     driverName: "Skikke_fins",
     eventId: "0401",
     isReady: true,
@@ -142,7 +142,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [6, 5, 7, 2, 4],
   },
   {
-    driverId: "0019",
+    driverId: "DRI0019",
     driverName: "Mr.j4you",
     eventId: "0401",
     isReady: true,
@@ -152,7 +152,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [7, 4, 5, 4, 5],
   },
   {
-    driverId: "0014",
+    driverId: "DRI0014",
     driverName: "Nipa83",
     eventId: "0401",
     isReady: true,
@@ -162,7 +162,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [1, 2, 2, 3, 6],
   },
   {
-    driverId: "0020",
+    driverId: "DRI0020",
     driverName: "JanneKoo",
     eventId: "0401",
     isReady: true,
@@ -172,7 +172,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [8, 7, 4, 5, 8],
   },
   {
-    driverId: "0022",
+    driverId: "DRI0022",
     driverName: "Escobar",
     eventId: "0401",
     isReady: true,
@@ -182,7 +182,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [3, 8, 10, 8, 3],
   },
   {
-    driverId: "0013",
+    driverId: "DRI0013",
     driverName: "Mursu890",
     eventId: "0401",
     isReady: true,
@@ -192,7 +192,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [10, 9, 9, 10, 7],
   },
   {
-    driverId: "0021",
+    driverId: "DRI0021",
     driverName: "Hosenfuhrer",
     eventId: "0401",
     isReady: true,
@@ -202,7 +202,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [9, 6, 8, 9, 9],
   },
   {
-    driverId: "5557",
+    driverId: "DRI5557",
     driverName: "Test1",
     eventId: "0401",
     isReady: true,
@@ -212,7 +212,7 @@ const driverData: IDriverSeasonRaceData[] = [
     heatPositions: [1, 2, 2, 2, 1],
   },
   {
-    driverId: "5556",
+    driverId: "DRI5556",
     driverName: "Test2",
     eventId: "0401",
     isReady: true,
@@ -225,7 +225,7 @@ const driverData: IDriverSeasonRaceData[] = [
 
 const orderedDriverData = [
   {
-    driverId: "0004",
+    driverId: "DRI0004",
     driverName: "KNGS",
     eventId: "0401",
     isReady: true,
@@ -237,7 +237,7 @@ const orderedDriverData = [
     seasonPoints: 100,
   },
   {
-    driverId: "0002",
+    driverId: "DRI0002",
     driverName: "Labbe",
     eventId: "0401",
     isReady: true,
@@ -249,7 +249,7 @@ const orderedDriverData = [
     seasonPoints: 95,
   },
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     driverName: "Ay Caramba",
     eventId: "0401",
     isReady: true,
@@ -261,7 +261,7 @@ const orderedDriverData = [
     seasonPoints: 90,
   },
   {
-    driverId: "0007",
+    driverId: "DRI0007",
     driverName: "Limpperi",
     eventId: "0401",
     isReady: true,
@@ -273,7 +273,7 @@ const orderedDriverData = [
     seasonPoints: 85,
   },
   {
-    driverId: "0012",
+    driverId: "DRI0012",
     driverName: "Pyry",
     eventId: "0401",
     isReady: true,
@@ -285,7 +285,7 @@ const orderedDriverData = [
     seasonPoints: 80,
   },
   {
-    driverId: "0006",
+    driverId: "DRI0006",
     driverName: "BamXtreme",
     eventId: "0401",
     isReady: true,
@@ -297,7 +297,7 @@ const orderedDriverData = [
     seasonPoints: 75,
   },
   {
-    driverId: "0003",
+    driverId: "DRI0003",
     driverName: "Hupu",
     eventId: "0401",
     isReady: true,
@@ -309,7 +309,7 @@ const orderedDriverData = [
     seasonPoints: 70,
   },
   {
-    driverId: "0009",
+    driverId: "DRI0009",
     driverName: "Susiryhmä",
     eventId: "0401",
     isReady: true,
@@ -321,7 +321,7 @@ const orderedDriverData = [
     seasonPoints: 65,
   },
   {
-    driverId: "0005",
+    driverId: "DRI0005",
     driverName: "Kalakukko77",
     eventId: "0401",
     isReady: true,
@@ -333,7 +333,7 @@ const orderedDriverData = [
     seasonPoints: 60,
   },
   {
-    driverId: "0011",
+    driverId: "DRI0011",
     driverName: "MoonWalker",
     eventId: "0401",
     isReady: true,
@@ -345,7 +345,7 @@ const orderedDriverData = [
     seasonPoints: 55,
   },
   {
-    driverId: "0017",
+    driverId: "DRI0017",
     driverName: "St. Jimmy",
     eventId: "0401",
     isReady: true,
@@ -357,7 +357,7 @@ const orderedDriverData = [
     seasonPoints: 52,
   },
   {
-    driverId: "0014",
+    driverId: "DRI0014",
     driverName: "Nipa83",
     eventId: "0401",
     isReady: true,
@@ -369,7 +369,7 @@ const orderedDriverData = [
     seasonPoints: 45,
   },
   {
-    driverId: "0015",
+    driverId: "DRI0015",
     driverName: "Finsku",
     eventId: "0401",
     isReady: true,
@@ -381,7 +381,7 @@ const orderedDriverData = [
     seasonPoints: 40,
   },
   {
-    driverId: "0016",
+    driverId: "DRI0016",
     driverName: "Skikke_fins",
     eventId: "0401",
     isReady: true,
@@ -393,7 +393,7 @@ const orderedDriverData = [
     seasonPoints: 35,
   },
   {
-    driverId: "0019",
+    driverId: "DRI0019",
     driverName: "Mr.j4you",
     eventId: "0401",
     isReady: true,
@@ -405,7 +405,7 @@ const orderedDriverData = [
     seasonPoints: 30,
   },
   {
-    driverId: "0022",
+    driverId: "DRI0022",
     driverName: "Escobar",
     eventId: "0401",
     isReady: true,
@@ -417,7 +417,7 @@ const orderedDriverData = [
     seasonPoints: 28,
   },
   {
-    driverId: "0020",
+    driverId: "DRI0020",
     driverName: "JanneKoo",
     eventId: "0401",
     isReady: true,
@@ -429,7 +429,7 @@ const orderedDriverData = [
     seasonPoints: 26,
   },
   {
-    driverId: "0010",
+    driverId: "DRI0010",
     driverName: "CrazyKinkku",
     eventId: "0401",
     isReady: true,
@@ -441,7 +441,7 @@ const orderedDriverData = [
     seasonPoints: 24,
   },
   {
-    driverId: "0021",
+    driverId: "DRI0021",
     driverName: "Hosenfuhrer",
     eventId: "0401",
     isReady: true,
@@ -453,7 +453,7 @@ const orderedDriverData = [
     seasonPoints: 22,
   },
   {
-    driverId: "0013",
+    driverId: "DRI0013",
     driverName: "Mursu890",
     eventId: "0401",
     isReady: true,
@@ -465,7 +465,7 @@ const orderedDriverData = [
     seasonPoints: 20,
   },
   {
-    driverId: "5556",
+    driverId: "DRI5556",
     driverName: "Test2",
     eventId: "0401",
     isReady: true,
@@ -477,7 +477,7 @@ const orderedDriverData = [
     seasonPoints: 19,
   },
   {
-    driverId: "5557",
+    driverId: "DRI5557",
     driverName: "Test1",
     eventId: "0401",
     isReady: true,
@@ -492,7 +492,7 @@ const orderedDriverData = [
 
 const sortByPointsData = [
   {
-    driverId: "0021",
+    driverId: "DRI0021",
     driverName: "Hosenfuhrer",
     eventId: "0401",
     isReady: true,
@@ -503,7 +503,7 @@ const sortByPointsData = [
     heatPoints: [30, 45, 35, 30, 30],
   },
   {
-    driverId: "0013",
+    driverId: "DRI0013",
     driverName: "Mursu890",
     eventId: "0401",
     isReady: true,

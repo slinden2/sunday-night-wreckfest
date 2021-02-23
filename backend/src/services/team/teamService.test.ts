@@ -11,13 +11,13 @@ describe("teamService", () => {
           sheet: {} as GoogleSpreadsheetWorksheet,
           rows: [
             {
-              driverId: "0002",
+              driverId: "DRI0002",
               driverName: "Test Driver 2",
               team: "Test Team 2",
               teamLogoUrl: "/team-logo-2.png",
             },
             {
-              driverId: "0001",
+              driverId: "DRI0001",
               driverName: "Test Driver 1",
               team: "Test Team 1",
               teamLogoUrl: "/team-logo-1.png",
@@ -27,7 +27,7 @@ describe("teamService", () => {
       );
     });
 
-    it("should should return the data in correct format", async () => {
+    it("should return the data in correct format", async () => {
       const teams = await teamService.getTeams();
       expect(teams).toEqual([
         {

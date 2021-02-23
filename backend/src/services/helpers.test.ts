@@ -55,7 +55,7 @@ describe("helpers", () => {
       { type: "undefined", value: undefined },
     ];
 
-    testArr.forEach(testCase => {
+    testArr.forEach((testCase) => {
       it(`should throw an error with a non string param (${testCase.type})`, () => {
         expect(() => parseString(testCase.value, "test")).toThrow(
           DataIntegrityError
@@ -74,7 +74,7 @@ describe("helpers", () => {
       { type: "undefined", value: undefined },
     ];
 
-    testArr.forEach(testCase => {
+    testArr.forEach((testCase) => {
       it(`should throw an error with a non number param (${testCase.type})`, () => {
         expect(() => parseNumber(testCase.value, "test")).toThrow(
           DataIntegrityError
@@ -157,14 +157,14 @@ describe("helpers", () => {
     });
   });
   describe("parseDriverId", () => {
-    it("should return '5555' with '5555'", () => {
-      expect(parseDriverId("5555")).toEqual("5555");
+    it("should return 'DRI5555' with 'DRI5555'", () => {
+      expect(parseDriverId("DRI5555")).toEqual("DRI5555");
     });
-    it("should throw with '555'", () => {
-      expect(() => parseDriverId("555")).toThrow(DataIntegrityError);
+    it("should throw with 'DRI555'", () => {
+      expect(() => parseDriverId("DRI555")).toThrow(DataIntegrityError);
     });
-    it("should throw with '55555'", () => {
-      expect(() => parseDriverId("55555")).toThrow(DataIntegrityError);
+    it("should throw with '5555'", () => {
+      expect(() => parseDriverId("5555")).toThrow(DataIntegrityError);
     });
     it("should throw with '555h'", () => {
       expect(() => parseDriverId("555h")).toThrow(DataIntegrityError);

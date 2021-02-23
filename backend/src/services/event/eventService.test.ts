@@ -61,8 +61,8 @@ describe("eventService", () => {
           toPromise({
             sheet: {} as GoogleSpreadsheetWorksheet,
             rows: [
-              { eventId: "0401", driverId: "0001", save: saveSpy },
-              { eventId: "0401", driverId: "0002", save: saveSpy },
+              { eventId: "0401", driverId: "DRI0001", save: saveSpy },
+              { eventId: "0401", driverId: "DRI0002", save: saveSpy },
             ] as any[],
           } as gsUtils.ISheetAndRows)
         );

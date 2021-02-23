@@ -17,12 +17,12 @@ import {
 describe("updateStandingsUtils", () => {
   describe("getDriverRow", () => {
     it("should return driver by seasonId and driverId", () => {
-      expect(getDriverRow("0400", "0001", getDriverRowInput as any[])).toEqual(
-        getDriverRowInput[0]
-      );
-      expect(getDriverRow("0500", "0001", getDriverRowInput as any[])).toEqual(
-        getDriverRowInput[2]
-      );
+      expect(
+        getDriverRow("0400", "DRI0001", getDriverRowInput as any[])
+      ).toEqual(getDriverRowInput[0]);
+      expect(
+        getDriverRow("0500", "DRI0001", getDriverRowInput as any[])
+      ).toEqual(getDriverRowInput[2]);
     });
   });
   describe("updateRow", () => {

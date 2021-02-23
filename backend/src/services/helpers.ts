@@ -72,13 +72,13 @@ export const isNumeric = (str: string): boolean => {
   return /^\d+$/.test(str);
 };
 
-// Driver ID is a string of 0 numbers: 0001, 0002...
+// Driver ID is a string of DRI + 4 numbers: DRI0001, DRI0002...
 export const parseDriverId = (driverId: any): string => {
   if (
     !driverId ||
     !isString(driverId) ||
-    !isNumeric(driverId) ||
-    !(driverId.length === 4)
+    !(driverId.length === 7) ||
+    !driverId.startsWith("DRI")
   ) {
     throw new DataIntegrityError("Invalid or missing driverId: " + driverId);
   }

@@ -129,7 +129,7 @@ export const getRaceCalendarReturnWithWrittenRes: typeof getRaceCalendarReturn =
 
 export const getRaceDataInput = [
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     driverName: "Test Driver",
     eventId: "0401",
     isReady: "1",
@@ -143,7 +143,7 @@ export const getRaceDataInput = [
     posHeat5: "5",
   },
   {
-    driverId: "0002",
+    driverId: "DRI0002",
     driverName: "Test Driver2",
     eventId: "0401",
     isReady: "1",
@@ -160,7 +160,7 @@ export const getRaceDataInput = [
 
 export const getRaceDataReturn: IDriverSeasonRaceData[] = [
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     driverName: "Test Driver",
     eventId: "0401",
     isReady: true,
@@ -171,7 +171,7 @@ export const getRaceDataReturn: IDriverSeasonRaceData[] = [
     seasonPoints: 100,
   },
   {
-    driverId: "0002",
+    driverId: "DRI0002",
     driverName: "Test Driver2",
     eventId: "0401",
     isReady: true,
@@ -199,22 +199,22 @@ export const toDriverRaceDetailsReturn: IDriverSeasonRaceData[] = getRaceDataRet
 
 export const getDriverRowInput = [
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     seasonId: "0400",
   },
   {
-    driverId: "0002",
+    driverId: "DRI0002",
     seasonId: "0400",
   },
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     seasonId: "0500",
   },
 ];
 
 export const updateRowDriverRow = {
   seasonId: "0400",
-  driverId: "0022",
+  driverId: "DRI0022",
   driverName: "Escobar",
   racesDriven: "1",
   points: "28",
@@ -224,7 +224,7 @@ export const updateRowDriverRow = {
 
 export const updateRowDriverRowErr = {
   seasonId: "0400",
-  driverId: "0022",
+  driverId: "DRI0022",
   driverName: "Escobar",
   racesDriven: "1",
   points: "28",
@@ -233,7 +233,7 @@ export const updateRowDriverRowErr = {
 };
 
 export const updateRowDriver: IDriverSeasonRaceData = {
-  driverId: "0022",
+  driverId: "DRI0022",
   driverName: "Escobar",
   eventId: "0402",
   isReady: true,
@@ -247,7 +247,7 @@ export const updateRowDriver: IDriverSeasonRaceData = {
 
 export const updateRowReturn = {
   seasonId: "0400",
-  driverId: "0022",
+  driverId: "DRI0022",
   driverName: "Escobar",
   racesDriven: 2,
   points: 50,
@@ -257,7 +257,7 @@ export const updateRowReturn = {
 
 export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     driverName: "Test Driver",
     eventId: "0401",
     isReady: true,
@@ -269,7 +269,7 @@ export const addRaceToStandingsRaceData: IDriverSeasonRaceData[] = [
     seasonPoints: 22,
   },
   {
-    driverId: "0001",
+    driverId: "DRI0001",
     driverName: "Test Driver",
     eventId: "0401",
     isReady: true,
@@ -286,7 +286,7 @@ export const toStandingRowsInput: any[] = [
   {
     seasonId: "0400",
     seasonName: "SEASON 4",
-    driverId: "0008",
+    driverId: "DRI0008",
     driverName: "Kohtupora98",
     racesDriven: "1",
     points: "80",
@@ -296,7 +296,7 @@ export const toStandingRowsInput: any[] = [
   {
     seasonId: "0400",
     seasonName: "SEASON 4",
-    driverId: "0013",
+    driverId: "DRI0013",
     driverName: "Mursu890",
     racesDriven: "2",
     points: "44",
@@ -309,7 +309,7 @@ export const toStandingRowsReturn: IStandingRow[] = [
   {
     seasonId: "0400",
     seasonName: "SEASON 4",
-    driverId: "0008",
+    driverId: "DRI0008",
     driverName: "Kohtupora98",
     racesDriven: 1,
     points: 80,
@@ -319,7 +319,7 @@ export const toStandingRowsReturn: IStandingRow[] = [
   {
     seasonId: "0400",
     seasonName: "SEASON 4",
-    driverId: "0013",
+    driverId: "DRI0013",
     driverName: "Mursu890",
     racesDriven: 2,
     points: 44,
@@ -331,7 +331,7 @@ export const toStandingRowsReturn: IStandingRow[] = [
 export const getStandingsReturn: IStandingRow[] = [
   {
     seasonId: "0400",
-    driverId: "0001",
+    driverId: "DRI0001",
     seasonName: "SEASON 4",
     driverName: "Test Driver 1",
     racesDriven: 1,
@@ -341,7 +341,7 @@ export const getStandingsReturn: IStandingRow[] = [
   },
   {
     seasonId: "0400",
-    driverId: "0002",
+    driverId: "DRI0002",
     seasonName: "SEASON 4",
     driverName: "Test Driver 2",
     racesDriven: 2,
@@ -367,7 +367,7 @@ export const mergeRaceDataReturn = {
   trackName: "Test Track",
   details: [
     {
-      driverId: "0001",
+      driverId: "DRI0001",
       driverName: "Test Driver",
       eventId: "0401",
       group: "A",
@@ -378,7 +378,7 @@ export const mergeRaceDataReturn = {
       seasonPoints: 100,
     },
     {
-      driverId: "0002",
+      driverId: "DRI0002",
       driverName: "Test Driver2",
       eventId: "0401",
       group: "A",
@@ -422,7 +422,7 @@ export const mergeRaceDataReturn2: ISeasonData = {
 
 export const getDrawsInput: IDriverSeasonRaceData[] = [
   {
-    driverId: "0004",
+    driverId: "DRI0004",
     driverName: "KNGS",
     eventId: "K001",
     isReady: true,
@@ -435,7 +435,7 @@ export const getDrawsInput: IDriverSeasonRaceData[] = [
     seasonPoints: 25,
   },
   {
-    driverId: "0018",
+    driverId: "DRI0018",
     driverName: "Kustii",
     eventId: "K001",
     isReady: true,
@@ -448,7 +448,7 @@ export const getDrawsInput: IDriverSeasonRaceData[] = [
     seasonPoints: 23,
   },
   {
-    driverId: "0029",
+    driverId: "DRI0029",
     driverName: "Rytko",
     eventId: "K001",
     isReady: true,
@@ -461,7 +461,7 @@ export const getDrawsInput: IDriverSeasonRaceData[] = [
     seasonPoints: 9,
   },
   {
-    driverId: "0009",
+    driverId: "DRI0009",
     driverName: "Sus1ryhmä",
     eventId: "K001",
     isReady: true,
@@ -477,7 +477,7 @@ export const getDrawsInput: IDriverSeasonRaceData[] = [
 
 export const getDrawsReturn2: IDriverSeasonRaceData[] = [
   {
-    driverId: "0009",
+    driverId: "DRI0009",
     driverName: "Sus1ryhmä",
     eventId: "K001",
     isReady: true,
@@ -490,7 +490,7 @@ export const getDrawsReturn2: IDriverSeasonRaceData[] = [
     seasonPoints: 7,
   },
   {
-    driverId: "0029",
+    driverId: "DRI0029",
     driverName: "Rytko",
     eventId: "K001",
     isReady: true,
@@ -522,17 +522,17 @@ export const getSeasonDataReturn: ISeasonData = {
 };
 
 export const rawDriverData = [
-  { driverId: "0001", driverName: "Test Driver1", team: "Team Test" },
-  { driverId: "0002", driverName: "Test Driver2", team: "Team Test" },
-  { driverId: "0003", driverName: "Test Driver3", team: "Team Test 2" },
-  { driverId: "0004", driverName: "Test Driver4" },
+  { driverId: "DRI0001", driverName: "Test Driver1", team: "Team Test" },
+  { driverId: "DRI0002", driverName: "Test Driver2", team: "Team Test" },
+  { driverId: "DRI0003", driverName: "Test Driver3", team: "Team Test 2" },
+  { driverId: "DRI0004", driverName: "Test Driver4" },
 ];
 
 export const driverData: Driver[] = [
-  { id: "0001", name: "Test Driver1", team: "Team Test" },
-  { id: "0002", name: "Test Driver2", team: "Team Test" },
-  { id: "0003", name: "Test Driver3", team: "Team Test 2" },
-  { id: "0004", name: "Test Driver4" },
+  { id: "DRI0001", name: "Test Driver1", team: "Team Test" },
+  { id: "DRI0002", name: "Test Driver2", team: "Team Test" },
+  { id: "DRI0003", name: "Test Driver3", team: "Team Test 2" },
+  { id: "DRI0004", name: "Test Driver4" },
 ];
 
 export const teamData: Team[] = [
@@ -569,7 +569,7 @@ export const getSingleRaceReturn: IRaceDetails = {
   ],
   details: [
     {
-      driverId: "0001",
+      driverId: "DRI0001",
       driverName: "Test Driver",
       eventId: "0401",
       isReady: true,
@@ -580,7 +580,7 @@ export const getSingleRaceReturn: IRaceDetails = {
       seasonPoints: 100,
     },
     {
-      driverId: "0002",
+      driverId: "DRI0002",
       driverName: "Test Driver2",
       eventId: "0401",
       isReady: true,
