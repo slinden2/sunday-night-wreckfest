@@ -20,7 +20,7 @@ describe("steamService", () => {
             servers: [
               {
                 addr: "192.168.1.10",
-                gameport: 33544,
+                gameport: 33541,
                 steamid: "string",
                 name: "string",
                 appid: 1,

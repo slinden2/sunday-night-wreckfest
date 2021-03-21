@@ -54,7 +54,7 @@ const LABBE_DOMAIN: string | undefined = process.env.LABBE_DOMAIN;
 
 // Ports that LaBBe uses for his SNW servers. Used for filtering the server list
 // obtained from the Steam API.
-const WF_SERVER_PORT_ARRAY: number[] = [33544, 33541, 33542, 33543];
+const WF_SERVER_PORT_ARRAY: number[] = [33541, 33542, 33543];
 
 // REDIS CONFIG
 const REDIS_URL: string = process.env.REDIS_URL || "redis://127.0.0.1:6379";

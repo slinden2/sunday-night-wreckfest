@@ -45,11 +45,11 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "google-spreadsheet": "^3.0.11",
+    "google-spreadsheet": "^3.1.15",
     "ioredis": "^4.17.3",
     "marked": "^1.1.0",
     "morgan": "^1.10.0",
