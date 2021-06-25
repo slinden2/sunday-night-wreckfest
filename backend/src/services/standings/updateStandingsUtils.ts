@@ -63,7 +63,7 @@ export const addRaceToStandings = async (
     (r) => ({
       id: r.driverId,
       name: r.driverName,
-      teamName: r.team,
+      teamName: event.hasTeams ? r.team : undefined,
     })
   );
 
