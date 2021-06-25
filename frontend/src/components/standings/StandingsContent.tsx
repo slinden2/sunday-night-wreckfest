@@ -49,14 +49,14 @@ const StandingsContent = ({ standings, teamStandings }: Props) => {
     <Page>
       <HeaderH3>{standings[0].seasonName}</HeaderH3>
       <Table data={sortedStandings} headers={headers} headerMap={headerMap} />
-      {teamStandings && (
+      {(teamStandings && teamStandings.length) ? (
         <Table
           data={teamStandings}
           headers={teamHeaders}
           headerMap={teamHeaderMap}
           marginTop="3rem"
         />
-      )}
+      ) : null}
     </Page>
   );
 };
