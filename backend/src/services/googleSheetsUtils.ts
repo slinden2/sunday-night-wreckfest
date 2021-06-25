@@ -28,9 +28,9 @@ export interface ISheetAndRows {
 }
 
 const sheetMap: ISheetMap = {
-  raceCalendar: 0,
-  eventDetails: 1495986400,
-  standings: 1733156042,
+  raceCalendar: 1479967104,
+  eventDetails: 1980863370,
+  standings: 114166082,
   seasons: 1876267219,
   drivers: 1062100406,
   info: 609316978,
