@@ -33,7 +33,7 @@ describe("googleSheetsUtils", () => {
         .mockImplementation(() =>
           toPromise({
             sheetsById: {
-              0: { getRows: sheetGetRowsSpy },
+              1479967104: { getRows: sheetGetRowsSpy },
             },
           } as any)
         );
